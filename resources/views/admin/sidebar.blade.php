@@ -126,12 +126,7 @@
         <div data-i18n="Collections">Collections</div>
     </a>
 </li>
-<li class="menu-item {{ request()->routeIs('testimonials.*') ? 'active' : '' }}">
-    <a href="{{ route('testimonials.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-message-square-detail"></i>
-        <div data-i18n="Testimonials">Testimonials</div>
-    </a>
-</li>
+
 
 
 <li class="menu-item {{ request()->routeIs('blog.*') ? 'active open' : '' }}">
