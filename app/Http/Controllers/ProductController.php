@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -15,9 +16,13 @@ class ProductController extends Controller
     {
         $products = Product::when($request->search, function ($query) use ($request) {
 
-            $query->where('product_id', 'like', '%' . $request->search . '%')
+            $query->where(function ($q) use ($request) {
+
+                $q->where('product_id', 'like', '%' . $request->search . '%')
                   ->orWhere('name', 'like', '%' . $request->search . '%')
                   ->orWhere('category', 'like', '%' . $request->search . '%');
+
+            });
 
         })
         ->latest()
@@ -32,7 +37,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        $categories = Category::where('status', 1)
+            ->orderBy('name', 'asc')
+            ->get();
+
+        return view('admin.product.create', compact('categories'));
     }
 
 
@@ -56,6 +65,12 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
 
             'description' => 'nullable|string',
+
+            'featured' => 'nullable|boolean',
+
+            'home' => 'nullable|boolean',
+
+            'status' => 'nullable|boolean',
 
         ]);
 
@@ -120,16 +135,16 @@ class ProductController extends Controller
      * Show Edit Product Form
      */
     public function edit(Product $product)
-{
-    $categories = \App\Models\Category::where('status', 1)
-        ->orderBy('name', 'asc')
-        ->get();
+    {
+        $categories = Category::where('status', 1)
+            ->orderBy('name', 'asc')
+            ->get();
 
-    return view('admin.product.edit', compact(
-        'product',
-        'categories'
-    ));
-}
+        return view(
+            'admin.product.edit',
+            compact('product', 'categories')
+        );
+    }
 
 
     /**
@@ -152,6 +167,12 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
 
             'description' => 'nullable|string',
+
+            'featured' => 'nullable|boolean',
+
+            'home' => 'nullable|boolean',
+
+            'status' => 'nullable|boolean',
 
         ]);
 

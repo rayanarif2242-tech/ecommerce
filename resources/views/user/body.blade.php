@@ -117,56 +117,91 @@
     </div>
   </section>
 
-  <section class="categories overflow-hidden">
+
+<section class="categories overflow-hidden py-5">
+
     <div class="container">
-      <div class="open-up" data-aos="zoom-out">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="cat-item image-zoom-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="{{asset('homes/images/cat-item1.jpg')}}" alt="categories" class="product-image img-fluid">
-                </a>
-              </div>
-              <div class="category-content">
-                <div class="product-button">
-                  <a href="index.html" class="btn btn-common text-uppercase">Shop for men</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="cat-item image-zoom-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="{{asset('homes/images/cat-item2.jpg')}}" alt="categories" class="product-image img-fluid">
-                </a>
-              </div>
-              <div class="category-content">
-                <div class="product-button">
-                  <a href="index.html" class="btn btn-common text-uppercase">Shop for women</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="cat-item image-zoom-effect">
-              <div class="image-holder">
-                <a href="index.html">
-                  <img src="{{asset('homes/images/cat-item3.jpg')}}" alt="categories" class="product-image img-fluid">
-                </a>
-              </div>
-              <div class="category-content">
-                <div class="product-button">
-                  <a href="index.html" class="btn btn-common text-uppercase">Shop accessories</a>
-                </div>
-              </div>
-            </div>
-          </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <h4 class="text-uppercase">
+                Shop By Sub Category
+            </h4>
+
         </div>
-      </div>
+
+        <div class="open-up" data-aos="zoom-out">
+
+            <div class="row">
+
+                @forelse($subCategories as $subCategory)
+
+                    <div class="col-md-4 mb-4">
+
+                        <div class="cat-item image-zoom-effect">
+
+                            <div class="image-holder">
+
+                                <a href="#">
+
+                                    @if($subCategory->image)
+
+                                        <img
+                                            src="{{ asset('uploads/subcategories/' . $subCategory->image) }}"
+                                            alt="{{ $subCategory->name }}"
+                                            class="product-image img-fluid"
+                                        >
+
+                                    @else
+
+                                        <img
+                                            src="{{ asset('homes/images/cat-item1.jpg') }}"
+                                            alt="{{ $subCategory->name }}"
+                                            class="product-image img-fluid"
+                                        >
+
+                                    @endif
+
+                                </a>
+
+                            </div>
+
+                            <div class="category-content">
+
+                                <div class="product-button">
+
+                                    <a
+                                        href="#"
+                                        class="btn btn-common text-uppercase"
+                                    >
+                                        {{ $subCategory->name }}
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                @empty
+
+                    <div class="col-12 text-center">
+
+                        <p>No sub categories available.</p>
+
+                    </div>
+
+                @endforelse
+
+            </div>
+
+        </div>
+
     </div>
-  </section>
+
+</section>
 
   <section id="new-arrival" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
     <div class="container">
@@ -262,6 +297,8 @@
         </div>
 
     </div>
+    
+</section>
 <section id="collections"
          class="collection product-carousel py-5 position-relative overflow-hidden">
 
