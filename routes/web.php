@@ -13,6 +13,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BillboardController;
 use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\SignatureController;
 
 
 use App\Http\Controllers\BlogController;
@@ -146,3 +147,12 @@ Route::resource(
 
 
 Route::get('/', [IndexController::class, 'index'])->name('frontend.home');
+
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::resource('signature', SignatureController::class);
+
+    });

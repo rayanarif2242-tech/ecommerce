@@ -126,7 +126,19 @@
         <div data-i18n="Collections">Collections</div>
     </a>
 </li>
+<li class="menu-item {{ request()->routeIs('admin.signature.*') ? 'active open' : '' }}">
 
+    <a href="{{ route('admin.signature.index') }}" class="menu-link">
+
+        <i class="menu-icon tf-icons bx bx-star"></i>
+
+        <div data-i18n="Signatures">
+            Signatures
+        </div>
+
+    </a>
+
+</li>
 
 
 <li class="menu-item {{ request()->routeIs('blog.*') ? 'active open' : '' }}">
