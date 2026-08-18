@@ -1,0 +1,240 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class ProductController extends Controller
+{
+    /**
+     * Display Product List
+     */
+    public function index(Request $request)
+    {
+        $products = Product::when($request->search, function ($query) use ($request) {
+
+            $query->where('product_id', 'like', '%' . $request->search . '%')
+                  ->orWhere('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('category', 'like', '%' . $request->search . '%');
+
+        })
+        ->latest()
+        ->get();
+
+        return view('admin.product.index', compact('products'));
+    }
+
+
+    /**
+     * Show Create Product Form
+     */
+    public function create()
+    {
+        return view('admin.product.create');
+    }
+
+
+    /**
+     * Store Product
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+
+            'name' => 'required|string|max:255',
+
+            'category' => 'nullable|string|max:255',
+
+            'price' => 'required|numeric|min:0',
+
+            'discount_price' => 'nullable|numeric|min:0',
+
+            'stock' => 'required|integer|min:0',
+
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+
+            'description' => 'nullable|string',
+
+        ]);
+
+
+        $image = null;
+
+
+        if ($request->hasFile('image')) {
+
+            $image = time() . '.' . $request->image->extension();
+
+            $request->image->move(
+                public_path('uploads/products'),
+                $image
+            );
+        }
+
+
+        Product::create([
+
+            'product_id' => (string) Str::uuid(),
+
+            'name' => $request->name,
+
+            'category' => $request->category,
+
+            'price' => $request->price,
+
+            'discount_price' => $request->discount_price,
+
+            'stock' => $request->stock,
+
+            'image' => $image,
+
+            'description' => $request->description,
+
+            'featured' => $request->featured ?? 0,
+
+            'home' => $request->home ?? 0,
+
+            'status' => $request->status ?? 1,
+
+        ]);
+
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Product Created Successfully');
+    }
+
+
+    /**
+     * Display Single Product
+     */
+    public function show(Product $product)
+    {
+        return view('admin.product.show', compact('product'));
+    }
+
+
+    /**
+     * Show Edit Product Form
+     */
+    public function edit(Product $product)
+{
+    $categories = \App\Models\Category::where('status', 1)
+        ->orderBy('name', 'asc')
+        ->get();
+
+    return view('admin.product.edit', compact(
+        'product',
+        'categories'
+    ));
+}
+
+
+    /**
+     * Update Product
+     */
+    public function update(Request $request, Product $product)
+    {
+        $request->validate([
+
+            'name' => 'required|string|max:255',
+
+            'category' => 'nullable|string|max:255',
+
+            'price' => 'required|numeric|min:0',
+
+            'discount_price' => 'nullable|numeric|min:0',
+
+            'stock' => 'required|integer|min:0',
+
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+
+            'description' => 'nullable|string',
+
+        ]);
+
+
+        $image = $product->image;
+
+
+        if ($request->hasFile('image')) {
+
+            if (
+                $product->image &&
+                file_exists(
+                    public_path('uploads/products/' . $product->image)
+                )
+            ) {
+                unlink(
+                    public_path('uploads/products/' . $product->image)
+                );
+            }
+
+
+            $image = time() . '.' . $request->image->extension();
+
+            $request->image->move(
+                public_path('uploads/products'),
+                $image
+            );
+        }
+
+
+        $product->update([
+
+            'name' => $request->name,
+
+            'category' => $request->category,
+
+            'price' => $request->price,
+
+            'discount_price' => $request->discount_price,
+
+            'stock' => $request->stock,
+
+            'image' => $image,
+
+            'description' => $request->description,
+
+            'featured' => $request->featured ?? 0,
+
+            'home' => $request->home ?? 0,
+
+            'status' => $request->status ?? 1,
+
+        ]);
+
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Product Updated Successfully');
+    }
+
+
+    /**
+     * Delete Product
+     */
+    public function destroy(Product $product)
+    {
+        if (
+            $product->image &&
+            file_exists(
+                public_path('uploads/products/' . $product->image)
+            )
+        ) {
+            unlink(
+                public_path('uploads/products/' . $product->image)
+            );
+        }
+
+
+        $product->delete();
+
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Product Deleted Successfully');
+    }
+}
