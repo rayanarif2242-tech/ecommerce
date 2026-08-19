@@ -13,7 +13,6 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BillboardController;
 use App\Http\Controllers\CollectionController;
-use App\Http\Controllers\SignatureController;
 
 
 use App\Http\Controllers\BlogController;
@@ -23,6 +22,7 @@ use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\FAQController;
 
 use App\Http\Controllers\Home\IndexController;
+use App\Http\Controllers\SignatureController;
 
 
 
@@ -147,12 +147,7 @@ Route::resource(
 
 
 Route::get('/', [IndexController::class, 'index'])->name('frontend.home');
-
-
-Route::prefix('admin')
-    ->name('admin.')
-    ->group(function () {
-
-        Route::resource('signature', SignatureController::class);
-
-    });
+Route::middleware('auth:admin')->group(function () {
+    Route::resource('signature', SignatureController::class)
+        ->names('admin.signature');
+});

@@ -202,57 +202,72 @@
     </div>
 
 </section>
+<section id="new-arrival" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
 
-  <section id="new-arrival" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
     <div class="container">
 
         <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
+
             <h4 class="text-uppercase">Our New Arrivals</h4>
-            <a href="#" class="btn-link">View All Products</a>
+
+            <a href="#" class="btn-link">
+                View All Products
+            </a>
+
         </div>
 
         <div class="swiper product-swiper open-up" data-aos="zoom-out">
 
             <div class="swiper-wrapper d-flex">
 
-                @foreach($products as $product)
+                @forelse($products as $product)
 
                     <div class="swiper-slide">
 
                         <div class="product-item image-zoom-effect link-effect">
 
-                            <div class="image-holder position-relative">
+                            <div class="image-holder">
 
+                                {{-- Product Image --}}
                                 <a href="#">
 
                                     <img
                                         src="{{ asset('uploads/products/' . $product->image) }}"
                                         alt="{{ $product->name }}"
                                         class="product-image img-fluid"
-                                        style="width: 100%; height: 420px; object-fit: cover; display: block;"
                                     >
 
                                 </a>
 
+                                {{-- Wishlist --}}
                                 <a href="#" class="btn-icon btn-wishlist">
+
                                     <svg width="24" height="24" viewBox="0 0 24 24">
                                         <use xlink:href="#heart"></use>
                                     </svg>
+
                                 </a>
 
+                                {{-- Product Content --}}
                                 <div class="product-content">
 
-                                    <h5 class="element-title text-uppercase fs-5 mt-3">
+                                    <h5 class="text-uppercase fs-5 mt-3">
+
                                         <a href="#">
                                             {{ $product->name }}
                                         </a>
+
                                     </h5>
 
-                                    <a href="#"
-                                       class="text-decoration-none"
-                                       data-after="Add to cart">
+                                    {{-- Price / Add To Cart --}}
+                                    <a
+                                        href="#"
+                                        class="text-decoration-none"
+                                        data-after="Add to cart"
+                                    >
 
                                         @if($product->discount_price)
+
                                             <span>
                                                 ${{ number_format($product->discount_price, 2) }}
                                             </span>
@@ -260,10 +275,13 @@
                                             <del class="text-muted ms-2">
                                                 ${{ number_format($product->price, 2) }}
                                             </del>
+
                                         @else
+
                                             <span>
                                                 ${{ number_format($product->price, 2) }}
                                             </span>
+
                                         @endif
 
                                     </a>
@@ -276,7 +294,17 @@
 
                     </div>
 
-                @endforeach
+                @empty
+
+                    <div class="col-12 text-center">
+
+                        <p class="text-muted">
+                            No products available.
+                        </p>
+
+                    </div>
+
+                @endforelse
 
             </div>
 
@@ -284,20 +312,26 @@
 
         </div>
 
+        {{-- Previous --}}
         <div class="icon-arrow icon-arrow-left">
+
             <svg width="50" height="50" viewBox="0 0 24 24">
                 <use xlink:href="#arrow-left"></use>
             </svg>
+
         </div>
 
+        {{-- Next --}}
         <div class="icon-arrow icon-arrow-right">
+
             <svg width="50" height="50" viewBox="0 0 24 24">
                 <use xlink:href="#arrow-right"></use>
             </svg>
+
         </div>
 
     </div>
-    
+
 </section>
 <section id="collections"
          class="collection product-carousel py-5 position-relative overflow-hidden">
@@ -513,11 +547,9 @@
 
         <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
 
-            <h4 class="text-uppercase">
-                You May Also Like
-            </h4>
+            <h4 class="text-uppercase">You May Also Like</h4>
 
-            <a href="{{ url('/signatures') }}" class="btn-link">
+            <a href="{{ route('admin.signature.index') }}" class="btn-link">
                 View All Products
             </a>
 
@@ -535,20 +567,17 @@
 
                             <div class="image-holder">
 
-                                {{-- IMAGE --}}
+                                {{-- Product Image --}}
                                 <a href="#">
-
                                     <img
                                         src="{{ asset($signature->image) }}"
                                         alt="{{ $signature->product_name }}"
                                         class="product-image img-fluid"
                                     >
-
                                 </a>
 
-
-                                {{-- WISHLIST --}}
-                                <a href="javascript:void(0)" class="btn-icon btn-wishlist">
+                                {{-- Wishlist --}}
+                                <a href="#" class="btn-icon btn-wishlist">
 
                                     <svg width="24" height="24" viewBox="0 0 24 24">
                                         <use xlink:href="#heart"></use>
@@ -556,11 +585,9 @@
 
                                 </a>
 
-
-                                {{-- PRODUCT CONTENT --}}
+                                {{-- Product Content --}}
                                 <div class="product-content">
 
-                                    {{-- PRODUCT NAME --}}
                                     <h5 class="text-uppercase fs-5 mt-3">
 
                                         <a href="#">
@@ -569,57 +596,29 @@
 
                                     </h5>
 
+                                    <a href="#"
+                                       class="text-decoration-none"
+                                       data-after="Add to cart">
 
-                                    {{-- PRICE --}}
-                                    <div class="price">
+                                        @if($signature->discount_price)
 
-                                        @if($signature->discount_price > 0)
-
-                                            {{-- FINAL PRICE --}}
-                                            <span class="text-decoration-none">
-
-                                                Rs.
-                                                {{ number_format(
-                                                    $signature->price - $signature->discount_price,
-                                                    0
-                                                ) }}
-
+                                            <span class="text-muted text-decoration-line-through me-2">
+                                                ${{ number_format($signature->price, 2) }}
                                             </span>
 
-                                            {{-- ORIGINAL PRICE --}}
-                                            <del class="ms-2 text-muted">
-
-                                                Rs.
-                                                {{ number_format($signature->price, 0) }}
-
-                                            </del>
+                                            <span>
+                                                ${{ number_format($signature->discount_price, 2) }}
+                                            </span>
 
                                         @else
 
-                                            {{-- NORMAL PRICE --}}
                                             <span>
-
-                                                Rs.
-                                                {{ number_format($signature->price, 0) }}
-
+                                                ${{ number_format($signature->price, 2) }}
                                             </span>
 
                                         @endif
 
-                                    </div>
-
-
-                                    {{-- DISCOUNT --}}
-                                    @if($signature->discount_price > 0)
-
-                                        <small class="text-danger">
-
-                                            Save Rs.
-                                            {{ number_format($signature->discount_price, 0) }}
-
-                                        </small>
-
-                                    @endif
+                                    </a>
 
                                 </div>
 
@@ -631,10 +630,10 @@
 
                 @empty
 
-                    <div class="col-12">
+                    <div class="col-12 text-center">
 
-                        <p class="text-center">
-                            No signatures available.
+                        <p class="text-muted">
+                            No signature products available.
                         </p>
 
                     </div>
@@ -647,8 +646,7 @@
 
         </div>
 
-
-        {{-- LEFT ARROW --}}
+        {{-- Previous --}}
         <div class="icon-arrow icon-arrow-left">
 
             <svg width="50" height="50" viewBox="0 0 24 24">
@@ -657,8 +655,7 @@
 
         </div>
 
-
-        {{-- RIGHT ARROW --}}
+        {{-- Next --}}
         <div class="icon-arrow icon-arrow-right">
 
             <svg width="50" height="50" viewBox="0 0 24 24">

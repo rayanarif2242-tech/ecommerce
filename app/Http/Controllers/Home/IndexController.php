@@ -43,20 +43,20 @@ class IndexController extends Controller
             ->where('show_on_home', 1)
             ->orderBy('sort_order', 'asc')
             ->get();
+            // Signatures
+$signatures = Signature::where('status', 1)
+    ->where('show_on_home', 1)
+    ->orderBy('sort_order', 'asc')
+    ->get();
 
-        // Signatures
-        $signatures = Signature::where('status', 1)
-            ->where('show_on_home', 1)
-            ->orderBy('sort_order', 'asc')
-            ->get();
-
-        return view('user.index', compact(
-            'categories',
-            'subCategories',
-            'products',
-            'collections',
-            'blogs',
-            'signatures'
-        ));
+       return view('user.index', compact(
+    'categories',
+    'subCategories',
+    'products',
+    'collections',
+    'blogs',
+    'signatures'
+));
+        
     }
 }
