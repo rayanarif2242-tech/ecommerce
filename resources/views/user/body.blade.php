@@ -202,72 +202,57 @@
     </div>
 
 </section>
-<section id="new-arrival" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
 
+  <section id="new-arrival" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
     <div class="container">
 
         <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
-
             <h4 class="text-uppercase">Our New Arrivals</h4>
-
-            <a href="#" class="btn-link">
-                View All Products
-            </a>
-
+            <a href="#" class="btn-link">View All Products</a>
         </div>
 
         <div class="swiper product-swiper open-up" data-aos="zoom-out">
 
             <div class="swiper-wrapper d-flex">
 
-                @forelse($products as $product)
+                @foreach($products as $product)
 
                     <div class="swiper-slide">
 
                         <div class="product-item image-zoom-effect link-effect">
 
-                            <div class="image-holder">
+                            <div class="image-holder position-relative">
 
-                                {{-- Product Image --}}
                                 <a href="#">
 
                                     <img
                                         src="{{ asset('uploads/products/' . $product->image) }}"
                                         alt="{{ $product->name }}"
                                         class="product-image img-fluid"
+                                        style="width: 100%; height: 420px; object-fit: cover; display: block;"
                                     >
 
                                 </a>
 
-                                {{-- Wishlist --}}
                                 <a href="#" class="btn-icon btn-wishlist">
-
                                     <svg width="24" height="24" viewBox="0 0 24 24">
                                         <use xlink:href="#heart"></use>
                                     </svg>
-
                                 </a>
 
-                                {{-- Product Content --}}
                                 <div class="product-content">
 
-                                    <h5 class="text-uppercase fs-5 mt-3">
-
+                                    <h5 class="element-title text-uppercase fs-5 mt-3">
                                         <a href="#">
                                             {{ $product->name }}
                                         </a>
-
                                     </h5>
 
-                                    {{-- Price / Add To Cart --}}
-                                    <a
-                                        href="#"
-                                        class="text-decoration-none"
-                                        data-after="Add to cart"
-                                    >
+                                    <a href="#"
+                                       class="text-decoration-none"
+                                       data-after="Add to cart">
 
                                         @if($product->discount_price)
-
                                             <span>
                                                 ${{ number_format($product->discount_price, 2) }}
                                             </span>
@@ -275,13 +260,10 @@
                                             <del class="text-muted ms-2">
                                                 ${{ number_format($product->price, 2) }}
                                             </del>
-
                                         @else
-
                                             <span>
                                                 ${{ number_format($product->price, 2) }}
                                             </span>
-
                                         @endif
 
                                     </a>
@@ -294,17 +276,7 @@
 
                     </div>
 
-                @empty
-
-                    <div class="col-12 text-center">
-
-                        <p class="text-muted">
-                            No products available.
-                        </p>
-
-                    </div>
-
-                @endforelse
+                @endforeach
 
             </div>
 
@@ -312,26 +284,20 @@
 
         </div>
 
-        {{-- Previous --}}
         <div class="icon-arrow icon-arrow-left">
-
             <svg width="50" height="50" viewBox="0 0 24 24">
                 <use xlink:href="#arrow-left"></use>
             </svg>
-
         </div>
 
-        {{-- Next --}}
         <div class="icon-arrow icon-arrow-right">
-
             <svg width="50" height="50" viewBox="0 0 24 24">
                 <use xlink:href="#arrow-right"></use>
             </svg>
-
         </div>
 
     </div>
-
+    
 </section>
 <section id="collections"
          class="collection product-carousel py-5 position-relative overflow-hidden">
@@ -541,132 +507,125 @@
     <div class="testimonial-swiper-pagination d-flex justify-content-center mb-5"></div>
   </section>
 
-<section id="related-products" class="related-products product-carousel py-5 position-relative overflow-hidden">
-
+  <section id="related-products" class="related-products product-carousel py-5 position-relative overflow-hidden">
     <div class="container">
-
-        <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
-
-            <h4 class="text-uppercase">You May Also Like</h4>
-
-            <a href="{{ route('admin.signature.index') }}" class="btn-link">
-                View All Products
-            </a>
-
-        </div>
-
-        <div class="swiper product-swiper open-up" data-aos="zoom-out">
-
-            <div class="swiper-wrapper d-flex">
-
-                @forelse($signatures as $signature)
-
-                    <div class="swiper-slide">
-
-                        <div class="product-item image-zoom-effect link-effect">
-
-                            <div class="image-holder">
-
-                                {{-- Product Image --}}
-                                <a href="#">
-                                    <img
-                                        src="{{ asset($signature->image) }}"
-                                        alt="{{ $signature->product_name }}"
-                                        class="product-image img-fluid"
-                                    >
-                                </a>
-
-                                {{-- Wishlist --}}
-                                <a href="#" class="btn-icon btn-wishlist">
-
-                                    <svg width="24" height="24" viewBox="0 0 24 24">
-                                        <use xlink:href="#heart"></use>
-                                    </svg>
-
-                                </a>
-
-                                {{-- Product Content --}}
-                                <div class="product-content">
-
-                                    <h5 class="text-uppercase fs-5 mt-3">
-
-                                        <a href="#">
-                                            {{ $signature->product_name }}
-                                        </a>
-
-                                    </h5>
-
-                                    <a href="#"
-                                       class="text-decoration-none"
-                                       data-after="Add to cart">
-
-                                        @if($signature->discount_price)
-
-                                            <span class="text-muted text-decoration-line-through me-2">
-                                                ${{ number_format($signature->price, 2) }}
-                                            </span>
-
-                                            <span>
-                                                ${{ number_format($signature->discount_price, 2) }}
-                                            </span>
-
-                                        @else
-
-                                            <span>
-                                                ${{ number_format($signature->price, 2) }}
-                                            </span>
-
-                                        @endif
-
-                                    </a>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                @empty
-
-                    <div class="col-12 text-center">
-
-                        <p class="text-muted">
-                            No signature products available.
-                        </p>
-
-                    </div>
-
-                @endforelse
-
+      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
+        <h4 class="text-uppercase">You May Also Like</h4>
+        <a href="index.html" class="btn-link">View All Products</a>
+      </div>
+      <div class="swiper product-swiper open-up" data-aos="zoom-out">
+        <div class="swiper-wrapper d-flex">
+          <div class="swiper-slide">
+            <div class="product-item image-zoom-effect link-effect">
+              <div class="image-holder">
+                <a href="index.html">
+                  <img src="{{asset('homes/images/product-item-5.jpg')}}" alt="product" class="product-image img-fluid">
+                </a>
+                <a href="index.html" class="btn-icon btn-wishlist">
+                  <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#heart"></use>
+                  </svg>
+                </a>
+                <div class="product-content">
+                  <h5 class="text-uppercase fs-5 mt-3">
+                    <a href="index.html">Dark florish onepiece</a>
+                  </h5>
+                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$95.00</span></a>
+                </div>
+              </div>
             </div>
-
-            <div class="swiper-pagination"></div>
-
+          </div>
+          <div class="swiper-slide">
+            <div class="product-item image-zoom-effect link-effect">
+              <div class="image-holder">
+                <a href="index.html">
+                  <img src="{{asset('homes/images/product-item-6.jpg')}}" alt="product" class="product-image img-fluid">
+                </a>
+                <a href="index.html" class="btn-icon btn-wishlist">
+                  <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#heart"></use>
+                  </svg>
+                </a>
+                <div class="product-content">
+                  <h5 class="text-uppercase fs-5 mt-3">
+                    <a href="index.html">Baggy Shirt</a>
+                  </h5>
+                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$55.00</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="product-item image-zoom-effect link-effect">
+              <div class="image-holder">
+                <a href="index.html">
+                  <img src="{{asset('homes/images/product-item-7.jpg')}}" alt="product" class="product-image img-fluid">
+                </a>
+                <a href="index.html" class="btn-icon btn-wishlist">
+                  <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#heart"></use>
+                  </svg>
+                </a>
+                <div class="product-content">
+                  <h5 class="text-uppercase fs-5 mt-3">
+                    <a href="index.html">Cotton off-white shirt</a>
+                  </h5>
+                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$65.00</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="product-item image-zoom-effect link-effect">
+              <div class="image-holder">
+                <a href="index.html">
+                  <img src="{{asset('homes/images/product-item-8.jpg')}}" alt="product" class="product-image img-fluid">
+                </a>
+                <a href="index.html" class="btn-icon btn-wishlist">
+                  <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#heart"></use>
+                  </svg>
+                </a>
+                <div class="product-content">
+                  <h5 class="text-uppercase fs-5 mt-3">
+                    <a href="index.html">Handmade crop sweater</a>
+                  </h5>
+                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$50.00</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="product-item image-zoom-effect link-effect">
+              <div class="image-holder">
+                <a href="index.html">
+                  <img src="{{asset('homes/images/product-item-1.jpg')}}" alt="product" class="product-image img-fluid">
+                </a>
+                <a href="index.html" class="btn-icon btn-wishlist">
+                  <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#heart"></use>
+                  </svg>
+                </a>
+                <div class="product-content">
+                  <h5 class="text-uppercase fs-5 mt-3">
+                    <a href="index.html">Handmade crop sweater</a>
+                  </h5>
+                  <a href="index.html" class="text-decoration-none" data-after="Add to cart"><span>$70.00</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        {{-- Previous --}}
-        <div class="icon-arrow icon-arrow-left">
-
-            <svg width="50" height="50" viewBox="0 0 24 24">
-                <use xlink:href="#arrow-left"></use>
-            </svg>
-
-        </div>
-
-        {{-- Next --}}
-        <div class="icon-arrow icon-arrow-right">
-
-            <svg width="50" height="50" viewBox="0 0 24 24">
-                <use xlink:href="#arrow-right"></use>
-            </svg>
-
-        </div>
-
+        <div class="swiper-pagination"></div>
+      </div>
+      <div class="icon-arrow icon-arrow-left"><svg width="50" height="50" viewBox="0 0 24 24">
+          <use xlink:href="#arrow-left"></use>
+        </svg></div>
+      <div class="icon-arrow icon-arrow-right"><svg width="50" height="50" viewBox="0 0 24 24">
+          <use xlink:href="#arrow-right"></use>
+        </svg></div>
     </div>
-
-</section>
+  </section>
 
   <section class="blog py-5">
 

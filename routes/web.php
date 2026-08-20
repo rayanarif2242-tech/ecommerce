@@ -111,7 +111,14 @@ Route::resource('collections', CollectionController::class);
 
 
 
+Route::middleware('auth:admin')
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
+        Route::resource('signature', SignatureController::class);
+
+    });
 
 Route::resource('blog', BlogController::class);
 
@@ -147,7 +154,3 @@ Route::resource(
 
 
 Route::get('/', [IndexController::class, 'index'])->name('frontend.home');
-Route::middleware('auth:admin')->group(function () {
-    Route::resource('signature', SignatureController::class)
-        ->names('admin.signature');
-});
