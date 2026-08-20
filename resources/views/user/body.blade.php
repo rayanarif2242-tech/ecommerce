@@ -208,7 +208,9 @@
 
         <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
             <h4 class="text-uppercase">Our New Arrivals</h4>
-            <a href="#" class="btn-link">View All Products</a>
+           <a href="{{ route('user.products') }}">
+    VIEW ALL PRODUCTS
+</a>
         </div>
 
         <div class="swiper product-swiper open-up" data-aos="zoom-out">

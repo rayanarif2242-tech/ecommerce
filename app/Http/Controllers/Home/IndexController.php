@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Collection;
 use App\Models\Blog;
 
+
 class IndexController extends Controller
 {
     public function index()
@@ -51,4 +52,12 @@ class IndexController extends Controller
             'blogs'
         ));
     }
+    public function allProducts()
+{
+    $products = Product::where('status', 1)
+        ->latest()
+        ->get();
+
+    return view('user.products', compact('products'));
+}
 }

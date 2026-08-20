@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\FAQController;
 
 use App\Http\Controllers\Home\IndexController;
 use App\Http\Controllers\SignatureController;
+use App\Http\Controllers\CartController;
 
 
 
@@ -154,3 +155,14 @@ Route::resource(
 
 
 Route::get('/', [IndexController::class, 'index'])->name('frontend.home');
+
+
+
+
+
+
+Route::get('/products', [IndexController::class, 'allProducts'])
+    ->name('user.products');
+
+    Route::post('/cart/add', [CartController::class, 'add'])
+    ->name('cart.add');
