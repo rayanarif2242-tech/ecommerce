@@ -63,7 +63,7 @@ Add Contact Message
 <div class="card-body">
 
 
-<form action="{{route('contact-messages.store')}}" method="POST">
+<form action="{{ route('admin.contact-messages.store') }}" method="POST">
 
 @csrf
 
@@ -193,8 +193,7 @@ Save Message
 </button>
 
 
-
-<a href="{{route('contact-messages.index')}}"
+<a href="{{ route('admin.contact-messages.index') }}"
 class="btn btn-secondary">
 
 Back

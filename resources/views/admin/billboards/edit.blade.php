@@ -55,7 +55,7 @@
 
         <div class="card-body">
 
-            <form action="{{ route('billboards.update', $billboard) }}"
+            <form action="{{ route('admin.billboards.update', $billboard) }}"
                   method="POST"
                   enctype="multipart/form-data">
 
@@ -80,7 +80,7 @@
                         Update Billboard
                     </button>
 
-                    <a href="{{ route('billboards.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('admin.billboards.index') }}" class="btn btn-secondary">
                         Back
                     </a>
 

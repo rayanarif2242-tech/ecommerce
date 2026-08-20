@@ -55,7 +55,7 @@
 <div class="card-body">
 
 
-<form action="{{route('products.update',$product->product_id)}}"
+<form action="{{route('admin.products.update',$product->product_id)}}"
 method="POST"
 enctype="multipart/form-data">
 
@@ -399,7 +399,7 @@ Update Product
 
 
 
-<a href="{{route('products.index')}}"
+<a href="{{route('admin.products.index')}}"
 class="btn btn-secondary">
 
 Back

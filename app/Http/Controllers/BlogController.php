@@ -100,7 +100,7 @@ class BlogController extends Controller
 
 
         return redirect()
-            ->route('blog.index')
+            ->route('admin.blog.index')
             ->with('success','Blog Created Successfully');
     }
 
@@ -194,7 +194,7 @@ class BlogController extends Controller
 
 
         return redirect()
-            ->route('blog.index')
+            ->route('admin.blog.index')
             ->with('success','Blog Updated Successfully');
 
     }
@@ -221,7 +221,7 @@ class BlogController extends Controller
 
 
         return redirect()
-            ->route('blog.index')
+            ->route('admin.blog.index')
             ->with('success','Blog Deleted Successfully');
     }
 

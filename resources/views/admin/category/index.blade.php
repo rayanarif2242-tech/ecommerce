@@ -58,7 +58,7 @@
                 Category List
             </h4>
 
-            <a href="{{ route('category.create') }}" class="btn btn-primary">
+            <a href="{{ route('admin.category.create') }}" class="btn btn-primary">
                 <i class="bx bx-plus"></i>
                 Add Category
             </a>
@@ -202,12 +202,12 @@
 <td>
     <div class="d-flex align-items-center gap-2">
 
-       <a href="{{ route('category.edit', $category->category_id) }}"
+       <a href="{{ route('admin.category.edit', $category->category_id) }}"
            class="btn btn-warning btn-sm">
             <i class="bx bx-edit"></i>
         </a>
 
-        <form action="{{ route('category.destroy', $category->category_id) }}"
+        <form action="{{ route('admin.category.destroy', $category->category_id) }}"
               method="POST"
               onsubmit="return confirm('Delete this category?');"
               class="m-0">

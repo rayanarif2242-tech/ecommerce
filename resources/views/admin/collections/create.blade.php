@@ -55,7 +55,7 @@
 
         <div class="card-body">
 
-            <form action="{{ route('collections.store') }}"
+            <form action="{{ route('admin.collections.store') }}"
                   method="POST"
                   enctype="multipart/form-data">
 
@@ -70,7 +70,7 @@
                         Save Collection
                     </button>
 
-                    <a href="{{ route('collections.index') }}"
+                    <a href="{{ route('admin.collections.index') }}"
                        class="btn btn-secondary">
 
                         Cancel

@@ -104,7 +104,7 @@ class CategoryController extends Controller
             'meta_description' => $request->meta_description,
         ]);
 
-        return redirect()->route('category.index')
+        return redirect()->route('admin.category.index')
             ->with('success', 'Category updated successfully.');
     }
 
@@ -120,7 +120,7 @@ class CategoryController extends Controller
 
         $category->delete();
 
-        return redirect()->route('category.index')
+        return redirect()->route('admin.category.index')
             ->with('success', 'Category deleted successfully.');
     }
 }

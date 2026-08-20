@@ -57,7 +57,7 @@
 <div class="card-body">
 
 
-<form action="{{ route('blog.store') }}"
+<form action="{{ route('admin.blog.store') }}"
       method="POST"
       enctype="multipart/form-data">
 
@@ -302,7 +302,7 @@ Save Blog
 </button>
 
 
-<a href="{{route('blog.index')}}"
+<a href="{{route('admin.blog.index')}}"
 class="btn btn-secondary">
 
 Cancel

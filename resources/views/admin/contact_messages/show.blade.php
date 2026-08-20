@@ -57,7 +57,7 @@ Message Details
 </h4>
 
 
-<a href="{{route('contact-messages.index')}}" 
+<a href="{{route('admin.contact-messages.index')}}" 
 class="btn btn-secondary">
 
 Back
@@ -253,7 +253,7 @@ Updated At
 
 
 
-<a href="{{ route('contact-messages.edit', $contactMessage) }}"
+<a href="{{ route('admin.contact-messages.edit', $contactMessage) }}"
 class="btn btn-warning">
 
 <i class="bx bx-edit"></i>

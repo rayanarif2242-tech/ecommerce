@@ -66,7 +66,7 @@
 Contact Messages
 </h4>
 
-<a href="{{route('contact-messages.create')}}" 
+<a href="{{route('admin.contact-messages.create')}}" 
 class="btn btn-primary">
 
 <i class="bx bx-plus"></i>
@@ -106,7 +106,7 @@ Search
 </button>
 
 
-<a href="{{route('contact-messages.index')}}" 
+<a href="{{route('admin.contact-messages.index')}}" 
 class="btn btn-secondary">
 Reset
 </a>
@@ -207,7 +207,7 @@ Replied
 
 <td>
 
-<a href="{{route('contact-messages.show',$message)}}" 
+<a href="{{route('admin.contact-messages.show',$message)}}" 
 class="btn btn-info btn-sm">
 
 <i class="bx bx-show"></i>
@@ -215,7 +215,7 @@ class="btn btn-info btn-sm">
 </a>
 
 
-<a href="{{route('contact-messages.edit',$message)}}" 
+<a href="{{route('admin.contact-messages.edit',$message)}}" 
 class="btn btn-warning btn-sm">
 
 <i class="bx bx-edit"></i>
@@ -223,7 +223,7 @@ class="btn btn-warning btn-sm">
 </a>
 
 
-<form action="{{ route('contact-messages.destroy', $message) }}"
+<form action="{{ route('admin.contact-messages.destroy', $message) }}"
       method="POST"
       style="display:inline;">
 

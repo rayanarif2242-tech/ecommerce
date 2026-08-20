@@ -58,7 +58,7 @@
                 Sub Category List
             </h4>
 
-            <a href="{{ route('subcategory.create') }}" class="btn btn-primary">
+            <a href="{{ route('admin.subcategory.create') }}" class="btn btn-primary">
                 <i class="bx bx-plus"></i>
                 Add Sub Category
             </a>
@@ -219,13 +219,13 @@
 
                         <div class="d-flex gap-2">
 
-                           <a href="{{ route('subcategory.edit',$subcategory->subcategory_id) }}"
+                           <a href="{{ route('admin.subcategory.edit',$subcategory->subcategory_id) }}"
                                class="btn btn-warning btn-sm">
 
                                 <i class="bx bx-edit"></i>
 
                             </a>
-<form action="{{ route('subcategory.destroy',$subcategory->subcategory_id) }}"
+<form action="{{ route('admin.subcategory.destroy',$subcategory->subcategory_id) }}"
                                   method="POST"
                                   onsubmit="return confirm('Delete this sub category?')">
 

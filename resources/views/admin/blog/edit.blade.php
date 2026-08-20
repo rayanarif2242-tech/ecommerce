@@ -62,7 +62,7 @@ Edit Blog
 <div class="card-body">
 
 
-<form action="{{ route('blog.update',$blog->blog_id) }}"
+<form action="{{ route('admin.blog.update',$blog->blog_id) }}"
 method="POST"
 enctype="multipart/form-data">
 
@@ -387,7 +387,7 @@ Update Blog
 
 
 
-<a href="{{route('blog.index')}}"
+<a href="{{route('admin.blog.index')}}"
 class="btn btn-secondary">
 
 Cancel

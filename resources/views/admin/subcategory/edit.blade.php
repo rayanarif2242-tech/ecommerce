@@ -64,7 +64,7 @@
         </div>
 
         <div class="card-body">
-<form action="{{ route('subcategory.update',$subcategory->subcategory_id) }}"
+<form action="{{ route('admin.subcategory.update',$subcategory->subcategory_id) }}"
                   method="POST"
                   enctype="multipart/form-data">
 
@@ -270,7 +270,7 @@
 
                         </button>
 
-                        <a href="{{ route('subcategory.index') }}"
+                        <a href="{{ route('admin.subcategory.index') }}"
                            class="btn btn-secondary">
 
                             Cancel

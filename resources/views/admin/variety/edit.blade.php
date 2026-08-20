@@ -54,7 +54,7 @@
 
 <div class="card-body">
 
-<form action="{{ route('variety.update',$variety) }}" method="POST">
+<form action="{{ route('admin.variety.update',$variety) }}" method="POST">
 
 @csrf
 @method('PUT')
@@ -104,7 +104,7 @@ Update
 
 </button>
 
-<a href="{{ route('variety.index') }}"
+<a href="{{ route('admin.variety.index') }}"
 class="btn btn-secondary">
 
 Back

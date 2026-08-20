@@ -50,7 +50,7 @@ Product Management
 </h4>
 
 
-<a href="{{route('products.create')}}" 
+<a href="{{route('admin.products.create')}}" 
 class="btn btn-primary">
 
 <i class="bx bx-plus"></i>
@@ -256,7 +256,7 @@ Inactive
 <td>
 
 
-<a href="{{route('products.edit',$product->product_id)}}"
+<a href="{{route('admin.products.edit',$product->product_id)}}"
 class="btn btn-sm btn-warning">
 
 <i class="bx bx-edit"></i>
@@ -264,7 +264,7 @@ class="btn btn-sm btn-warning">
 </a>
 
 
-<form action="{{route('products.destroy',$product->product_id)}}"
+<form action="{{route('admin.products.destroy',$product->product_id)}}"
 method="POST"
 class="d-inline">
 

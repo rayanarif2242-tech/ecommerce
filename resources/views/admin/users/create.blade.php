@@ -57,7 +57,7 @@
                         Create User
                     </h4>
 
-                    <a href="{{ route('users.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
                         <i class="bx bx-arrow-back"></i>
                         Back
                     </a>
@@ -66,7 +66,7 @@
 
                 <div class="card-body">
 
-                    <form action="{{ route('users.store') }}" method="POST">
+                    <form action="{{ route('admin.users.store') }}" method="POST">
 
                         @csrf
 

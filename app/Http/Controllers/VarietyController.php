@@ -33,7 +33,7 @@ class VarietyController extends Controller
             'status'=>$request->status ?? 1,
         ]);
 
-        return redirect()->route('variety.index')
+        return redirect()->route('admin.variety.index')
             ->with('success','Variety Added Successfully');
     }
 
@@ -54,7 +54,7 @@ class VarietyController extends Controller
             'status'=>$request->status,
         ]);
 
-        return redirect()->route('variety.index')
+        return redirect()->route('admin.variety.index')
             ->with('success','Variety Updated Successfully');
     }
 
@@ -62,7 +62,7 @@ class VarietyController extends Controller
     {
         $variety->delete();
 
-        return redirect()->route('variety.index')
+        return redirect()->route('admin.variety.index')
             ->with('success','Variety Deleted Successfully');
     }
 }

@@ -56,7 +56,7 @@ Add Product
 <div class="card-body">
 
 
-<form action="{{route('products.store')}}"
+<form action="{{route('admin.products.store')}}"
 method="POST"
 enctype="multipart/form-data">
 
@@ -296,7 +296,7 @@ Save Product
 </button>
 
 
-<a href="{{route('products.index')}}"
+<a href="{{route('admin.products.index')}}"
 class="btn btn-secondary">
 
 Back

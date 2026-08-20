@@ -30,26 +30,73 @@ class Product extends Model
     {
         parent::boot();
 
+        /*
+        |--------------------------------------------------------------------------
+        | Creating Product
+        |--------------------------------------------------------------------------
+        */
         static::creating(function ($product) {
 
-            $product->product_id = (string) Str::uuid();
+            // Generate UUID
+            $product->product_id = $product->product_id ?? (string) Str::uuid();
 
-            // Generate slug when creating
-            $product->slug = Str::slug($product->name);
+            // Generate unique slug
+            $originalSlug = Str::slug($product->name);
+            $slug = $originalSlug;
+            $counter = 1;
+
+            while (static::where('slug', $slug)->exists()) {
+                $slug = $originalSlug . '-' . $counter;
+                $counter++;
+            }
+
+            $product->slug = $slug;
         });
 
+        /*
+        |--------------------------------------------------------------------------
+        | Updating Product
+        |--------------------------------------------------------------------------
+        */
         static::updating(function ($product) {
 
-            // Update slug when name changes
-            $product->slug = Str::slug($product->name);
+            // Only regenerate slug when the product name changes
+            if ($product->isDirty('name')) {
+
+                $originalSlug = Str::slug($product->name);
+                $slug = $originalSlug;
+                $counter = 1;
+
+                // Ignore the current product when checking slug
+                while (
+                    static::where('slug', $slug)
+                        ->where('product_id', '!=', $product->product_id)
+                        ->exists()
+                ) {
+                    $slug = $originalSlug . '-' . $counter;
+                    $counter++;
+                }
+
+                $product->slug = $slug;
+            }
         });
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Category Relationship
+    |--------------------------------------------------------------------------
+    */
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Route Model Binding
+    |--------------------------------------------------------------------------
+    */
     public function getRouteKeyName()
     {
         return 'product_id';

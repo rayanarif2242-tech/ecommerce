@@ -95,7 +95,7 @@ class SubCategoryController extends Controller
 
     ]);
 
-    return redirect()->route('subcategory.index')
+    return redirect()->route('admin.subcategory.index')
         ->with('success', 'Sub Category Added Successfully.');
 }
 
@@ -193,7 +193,7 @@ class SubCategoryController extends Controller
 
 
     return redirect()
-        ->route('subcategory.index')
+        ->route('admin.subcategory.index')
         ->with('success','Sub Category Updated Successfully');
 
 }
@@ -225,7 +225,7 @@ public function destroy(SubCategory $subcategory)
 
 
     return redirect()
-        ->route('subcategory.index')
+        ->route('admin.subcategory.index')
         ->with('success','Sub Category Deleted Successfully');
 
 }

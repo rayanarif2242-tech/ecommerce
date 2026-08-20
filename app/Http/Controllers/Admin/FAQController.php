@@ -77,7 +77,7 @@ class FAQController extends Controller
 
 
         return redirect()
-        ->route('faq.index')
+        ->route('admin.faq.index')
         ->with('success','FAQ Added Successfully');
 
     }
@@ -111,7 +111,7 @@ class FAQController extends Controller
 
 
         return redirect()
-        ->route('faq.index')
+        ->route('admin.faq.index')
         ->with('success','FAQ Updated Successfully');
 
     }

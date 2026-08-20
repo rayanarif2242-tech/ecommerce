@@ -52,7 +52,7 @@
 
 <div class="card-body">
 
-<form action="{{ route('variety.store') }}" method="POST">
+<form action="{{ route('admin.variety.store') }}" method="POST">
 
 @csrf
 
@@ -99,7 +99,7 @@ placeholder="Description"></textarea>
 Save
 </button>
 
-<a href="{{ route('variety.index') }}"
+<a href="{{ route('admin.variety.index') }}"
 class="btn btn-secondary">
 
 Cancel

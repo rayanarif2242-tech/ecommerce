@@ -55,7 +55,7 @@
                 Users Management
             </h4>
 
-            <a href="{{ route('users.create') }}" class="btn btn-primary">
+            <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
                 <i class="bx bx-user-plus"></i>
                 Add User
             </a>
@@ -98,12 +98,12 @@
                            <td>
     <div class="d-flex align-items-center gap-2">
 
-        <a href="{{ route('users.edit', $user->uuid) }}"
+        <a href="{{ route('admin.users.edit', $user->uuid) }}"
    class="btn btn-warning btn-sm">
             <i class="bx bx-edit"></i> Edit
         </a>
 
-      <form action="{{ route('users.destroy', $user->uuid) }}"
+        <form action="{{ route('admin.users.destroy', $user->uuid) }}"
               method="POST"
               class="m-0">
 

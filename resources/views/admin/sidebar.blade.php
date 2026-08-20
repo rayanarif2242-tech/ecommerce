@@ -74,33 +74,33 @@
     <div>Dashboard</div>
 </a>
             </li>
-            <li class="menu-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
-    <a href="{{ route('users.index') }}" class="menu-link">
+            <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+    <a href="{{ route('admin.users.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-user"></i>
         <div>Users</div>
     </a>
 </li>
 <li class="menu-item">
-    <a href="{{ route('variety.index') }}" class="menu-link">
+    <a href="{{ route('admin.variety.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-category"></i>
         <div>Variety</div>
     </a>
 </li>
 <li class="menu-item">
-    <a href="{{ route('category.index') }}" class="menu-link">
+    <a href="{{ route('admin.category.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-grid-alt"></i>
         <div>Categories</div>
     </a>
 </li>
 <li class="menu-item">
-    <a href="{{ route('subcategory.index') }}" class="menu-link">
+    <a href="{{ route('admin.subcategory.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-sitemap"></i>
         <div>Sub Categories</div>
     </a>
 </li>
-<li class="menu-item {{ request()->routeIs('products.*') ? 'active' : '' }}">
+<li class="menu-item {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
 
-    <a href="{{ route('products.index') }}" class="menu-link">
+    <a href="{{ route('admin.products.index') }}" class="menu-link">
 
         <i class="menu-icon tf-icons bx bx-package"></i>
 
@@ -112,7 +112,7 @@
 
 </li>
 <li class="menu-item">
-    <a href="{{ route('billboards.index') }}" class="menu-link">
+    <a href="{{ route('admin.billboards.index') }}" class="menu-link">
 
         <i class="menu-icon tf-icons bx bx-images"></i>
 
@@ -120,8 +120,8 @@
 
     </a>
 </li>
-<li class="menu-item {{ request()->routeIs('collections.*') ? 'active' : '' }}">
-    <a href="{{ route('collections.index') }}" class="menu-link">
+<li class="menu-item {{ request()->routeIs('admin.collections.*') ? 'active' : '' }}">
+    <a href="{{ route('admin.collections.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-collection"></i>
         <div data-i18n="Collections">Collections</div>
     </a>
@@ -141,15 +141,15 @@
 </li>
 
 
-<li class="menu-item {{ request()->routeIs('blog.*') ? 'active open' : '' }}">
-    <a href="{{ route('blog.index') }}" class="menu-link">
+<li class="menu-item {{ request()->routeIs('admin.blog.*') ? 'active open' : '' }}">
+    <a href="{{ route('admin.blog.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-news"></i>
         <div>Blog</div>
     </a>
 </li>
 <li class="menu-item">
 
-<a href="{{route('contact-messages.index')}}" 
+<a href="{{route('admin.contact-messages.index')}}" 
 class="menu-link">
 
 
@@ -166,7 +166,7 @@ Contact Messages
 </li>
           <li class="menu-item">
 
-<a href="{{route('faq.index')}}" 
+<a href="{{route('admin.faq.index')}}" 
 class="menu-link">
 
 <i class="menu-icon bx bx-help-circle"></i>

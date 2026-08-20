@@ -208,7 +208,7 @@
 
         <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
             <h4 class="text-uppercase">Our New Arrivals</h4>
-           <a href="{{ route('user.products') }}">
+           <a href="{{ route('user.products') }}"class="btn-link">
     VIEW ALL PRODUCTS
 </a>
         </div>
@@ -313,9 +313,10 @@
                 Our Collections
             </h4>
 
-            <a href="#" class="btn-link">
-                View All Collections
-            </a>
+            
+            <a href="{{ route('user.collections') }}" class="btn-link">
+    VIEW ALL COLLECTIONS
+</a>
 
         </div>
 

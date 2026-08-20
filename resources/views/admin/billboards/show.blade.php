@@ -149,7 +149,7 @@
 
             </table>
 
-            <a href="{{ route('billboards.index') }}"
+            <a href="{{ route('admin.billboards.index') }}"
                class="btn btn-secondary">
 
                 <i class="bx bx-arrow-back"></i>

@@ -54,7 +54,7 @@
 
         <div class="card-body">
 
-            <form action="{{ route('billboards.store') }}"
+            <form action="{{ route('admin.billboards.store') }}"
                   method="POST"
                   enctype="multipart/form-data">
 
@@ -69,7 +69,7 @@
                         Save Billboard
                     </button>
 
-                    <a href="{{ route('billboards.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('admin.billboards.index') }}" class="btn btn-secondary">
                         Cancel
                     </a>
 

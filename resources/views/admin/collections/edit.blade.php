@@ -59,7 +59,7 @@
 
         <div class="card-body">
 
-            <form action="{{ route('collections.update',$collection) }}"
+            <form action="{{ route('admin.collections.update',$collection) }}"
                   method="POST"
                   enctype="multipart/form-data">
 
@@ -97,7 +97,7 @@
 
                     </button>
 
-                    <a href="{{ route('collections.index') }}"
+                    <a href="{{ route('admin.collections.index') }}"
                        class="btn btn-secondary">
 
                         Back

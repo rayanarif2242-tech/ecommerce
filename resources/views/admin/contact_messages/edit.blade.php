@@ -64,7 +64,7 @@ Edit Contact Message
 
 
 
-<form action="{{ route('contact-messages.update', $contactMessage) }}" method="POST">
+<form action="{{ route('admin.contact-messages.update', $contactMessage) }}" method="POST">
 
 
 @csrf
@@ -238,7 +238,7 @@ Update Message
 
 
 
-<a href="{{route('contact-messages.index')}}"
+<a href="{{route('admin.contact-messages.index')}}"
 class="btn btn-secondary">
 
 Back

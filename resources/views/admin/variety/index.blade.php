@@ -54,7 +54,7 @@
 
             <h4 class="mb-0">Variety List</h4>
 
-            <a href="{{ route('variety.create') }}" class="btn btn-primary">
+            <a href="{{ route('admin.variety.create') }}" class="btn btn-primary">
                 <i class="bx bx-plus"></i> Add Variety
             </a>
 
@@ -96,14 +96,14 @@
 
                         <td>
 
-                            <a href="{{ route('variety.edit',$variety->variety_id) }}"
+                            <a href="{{ route('admin.variety.edit',$variety->variety_id) }}"
                                 class="btn btn-sm btn-warning">
 
                                 <i class="bx bx-edit"></i>
 
                             </a>
 
-                           <form action="{{ route('variety.destroy',$variety->variety_id) }}"
+                           <form action="{{ route('admin.variety.destroy',$variety->variety_id) }}"
                                 method="POST"
                                 style="display:inline;">
 

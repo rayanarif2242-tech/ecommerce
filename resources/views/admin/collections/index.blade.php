@@ -57,7 +57,7 @@
                 Collections
             </h4>
 
-            <a href="{{ route('collections.create') }}" class="btn btn-primary">
+            <a href="{{ route('admin.collections.create') }}" class="btn btn-primary">
                 <i class="bx bx-plus"></i>
                 Add Collection
             </a>
@@ -73,7 +73,7 @@
             @endif
 
             <!-- Search -->
-            <form action="{{ route('collections.index') }}" method="GET">
+            <form action="{{ route('admin.collections.index') }}" method="GET">
 
                 <div class="row mb-3">
 
@@ -266,7 +266,7 @@
 
                                 <!-- View -->
 
-                                <a href="{{ route('collections.show',$collection) }}"
+                                <a href="{{ route('admin.collections.show',$collection) }}"
                                    class="btn btn-info btn-sm">
 
                                     <i class="bx bx-show"></i>
@@ -275,7 +275,7 @@
 
                                 <!-- Edit -->
 
-                                <a href="{{ route('collections.edit',$collection) }}"
+                                <a href="{{ route('admin.collections.edit',$collection) }}"
                                    class="btn btn-warning btn-sm">
 
                                     <i class="bx bx-edit"></i>
@@ -285,7 +285,7 @@
                                 <!-- Delete -->
 
                                 <form
-                                    action="{{ route('collections.destroy',$collection) }}"
+                                    action="{{ route('admin.collections.destroy',$collection) }}"
                                     method="POST"
                                     class="d-inline">
 

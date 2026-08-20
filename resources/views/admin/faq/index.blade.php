@@ -53,7 +53,7 @@ FAQ Management
 </h4>
 
 
-<a href="{{route('faq.create')}}"
+<a href="{{route('admin.faq.create')}}"
 class="btn btn-primary">
 
 Add FAQ
@@ -69,7 +69,7 @@ Add FAQ
 
 
 <form method="GET"
-action="{{route('faq.index')}}">
+action="{{route('admin.faq.index')}}">
 
 
 <div class="row mb-3">
@@ -214,7 +214,7 @@ Inactive
 <td>
 
 
-<a href="{{route('faq.edit',$faq->uuid)}}"
+<a href="{{route('admin.faq.edit',$faq->uuid)}}"
 class="btn btn-warning btn-sm">
 
 <i class="bx bx-edit"></i>
@@ -224,7 +224,7 @@ class="btn btn-warning btn-sm">
 
 
 
-<form action="{{route('faq.destroy',$faq->uuid)}}"
+<form action="{{route('admin.faq.destroy',$faq->uuid)}}"
 method="POST"
 class="delete-form d-inline">
 

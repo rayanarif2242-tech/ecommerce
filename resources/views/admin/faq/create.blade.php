@@ -54,7 +54,7 @@ Create FAQ
 </h4>
 
 
-<a href="{{route('faq.index')}}" 
+<a href="{{route('admin.faq.index')}}" 
 class="btn btn-secondary">
 
 Back
@@ -91,7 +91,7 @@ Back
 
 
 
-<form action="{{route('faq.store')}}" method="POST">
+<form action="{{route('admin.faq.store')}}" method="POST">
 
 @csrf
 

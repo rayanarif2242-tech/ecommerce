@@ -69,7 +69,7 @@ Blog Management
 </h4>
 
 
-<a href="{{route('blog.create')}}" class="btn btn-primary">
+<a href="{{route('admin.blog.create')}}" class="btn btn-primary">
 
 <i class="bx bx-plus"></i>
 Add Blog
@@ -225,7 +225,7 @@ Inactive
 <td>
 
 
-<a href="{{route('blog.edit',$blog->blog_id)}}"
+<a href="{{route('admin.blog.edit',$blog->blog_id)}}"
 class="btn btn-warning btn-sm">
 
 <i class="bx bx-edit"></i>
@@ -234,7 +234,7 @@ class="btn btn-warning btn-sm">
 
 
 
-<form action="{{route('blog.destroy',$blog->blog_id)}}"
+<form action="{{route('admin.blog.destroy',$blog->blog_id)}}"
 method="POST"
 class="d-inline">
 

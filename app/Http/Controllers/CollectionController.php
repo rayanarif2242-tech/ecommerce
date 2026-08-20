@@ -108,7 +108,7 @@ class CollectionController extends Controller
         $collection->save();
 
         return redirect()
-            ->route('collections.index')
+            ->route('admin.collections.index')
             ->with('success', 'Collection created successfully.');
     }
 
@@ -210,7 +210,7 @@ class CollectionController extends Controller
         $collection->save();
 
         return redirect()
-            ->route('collections.index')
+            ->route('admin.collections.index')
             ->with('success', 'Collection updated successfully.');
     }
 
@@ -231,7 +231,15 @@ class CollectionController extends Controller
         $collection->delete();
 
         return redirect()
-            ->route('collections.index')
+            ->route('admin.collections.index')
             ->with('success', 'Collection deleted successfully.');
     }
+    public function frontendIndex()
+{
+    $collections = \App\Models\Collection::where('status', 1)
+        ->orderBy('sort_order', 'asc')
+        ->get();
+
+    return view('user.collections', compact('collections'));
+}
 }

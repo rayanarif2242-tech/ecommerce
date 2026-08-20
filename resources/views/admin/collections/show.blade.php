@@ -266,7 +266,7 @@ Inactive
 
 </table>
 
-<a href="{{ route('collections.index') }}"
+<a href="{{ route('admin.collections.index') }}"
 class="btn btn-secondary">
 
 <i class="bx bx-arrow-back"></i>

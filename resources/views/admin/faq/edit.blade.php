@@ -56,7 +56,7 @@ Edit FAQ
 </h4>
 
 
-<a href="{{route('faq.index')}}"
+<a href="{{route('admin.faq.index')}}"
 class="btn btn-secondary">
 
 Back
@@ -72,7 +72,7 @@ Back
 
 
 
-<form action="{{route('faq.update',$faq->uuid)}}"
+<form action="{{route('admin.faq.update',$faq->uuid)}}"
 method="POST">
 
 

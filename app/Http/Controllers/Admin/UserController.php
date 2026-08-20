@@ -35,7 +35,7 @@ class UserController extends Controller
             'password'=>Hash::make($request->password)
         ]);
 
-        return redirect()->route('users.index')
+        return redirect()->route('admin.users.index')
                 ->with('success','User Created Successfully');
     }
 
@@ -60,7 +60,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('users.index')
+        return redirect()->route('admin.users.index')
                 ->with('success','User Updated');
     }
 
@@ -68,7 +68,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('users.index')
+        return redirect()->route('admin.users.index')
                 ->with('success','User Deleted');
     }
 }

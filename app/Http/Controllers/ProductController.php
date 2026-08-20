@@ -54,7 +54,7 @@ class ProductController extends Controller
 
             'name' => 'required|string|max:255',
 
-            'category' => 'nullable|string|max:255',
+          'category_id' => 'required|exists:categories,id',
 
             'price' => 'required|numeric|min:0',
 
@@ -95,7 +95,7 @@ class ProductController extends Controller
 
             'name' => $request->name,
 
-            'category' => $request->category,
+          'category_id' => $request->category_id,
 
             'price' => $request->price,
 
@@ -117,7 +117,7 @@ class ProductController extends Controller
 
 
         return redirect()
-            ->route('products.index')
+            ->route('admin.products.index')
             ->with('success', 'Product Created Successfully');
     }
 
@@ -156,7 +156,7 @@ class ProductController extends Controller
 
             'name' => 'required|string|max:255',
 
-            'category' => 'nullable|string|max:255',
+            'category_id' => 'required|exists:categories,id',
 
             'price' => 'required|numeric|min:0',
 
@@ -207,7 +207,7 @@ class ProductController extends Controller
 
             'name' => $request->name,
 
-            'category' => $request->category,
+            'category_id' => $request->category_id,
 
             'price' => $request->price,
 
@@ -229,7 +229,7 @@ class ProductController extends Controller
 
 
         return redirect()
-            ->route('products.index')
+            ->route('admin.products.index')
             ->with('success', 'Product Updated Successfully');
     }
 
@@ -255,7 +255,7 @@ class ProductController extends Controller
 
 
         return redirect()
-            ->route('products.index')
+            ->route('admin.products.index')
             ->with('success', 'Product Deleted Successfully');
     }
 }

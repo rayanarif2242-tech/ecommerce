@@ -52,7 +52,7 @@
                 Billboards
             </h4>
 
-            <a href="{{ route('billboards.create') }}" class="btn btn-primary">
+            <a href="{{ route('admin.billboards.create') }}" class="btn btn-primary">
                 <i class="bx bx-plus"></i>
                 Add Billboard
             </a>
@@ -72,7 +72,7 @@
 
             @endif
 
-            <form method="GET" action="{{ route('billboards.index') }}">
+            <form method="GET" action="{{ route('admin.billboards.index') }}">
 
                 <div class="row mb-3">
 
@@ -244,7 +244,7 @@
 
                                 <!-- View -->
 
-                                <a href="{{ route('billboards.show',$billboard) }}"
+                                <a href="{{ route('admin.billboards.show',$billboard) }}"
                                    class="btn btn-info btn-sm">
 
                                     <i class="bx bx-show"></i>
@@ -253,7 +253,7 @@
 
                                 <!-- Edit -->
 
-                                <a href="{{ route('billboards.edit',$billboard) }}"
+                                <a href="{{ route('admin.billboards.edit',$billboard) }}"
                                    class="btn btn-warning btn-sm">
 
                                     <i class="bx bx-edit"></i>
@@ -262,7 +262,7 @@
 
                                 <!-- Delete -->
 
-                              <form action="{{ route('billboards.destroy',$billboard) }}"
+                              <form action="{{ route('admin.billboards.destroy',$billboard) }}"
       method="POST"
       class="d-inline">
 
