@@ -220,3 +220,23 @@ Route::get('/collections', [CollectionController::class, 'frontendIndex'])
 
 Route::post('/cart/add', [CartController::class, 'add'])
     ->name('cart.add');
+
+
+
+
+
+
+
+
+
+
+Route::get('/blogs', [BlogController::class, 'frontendIndex'])
+    ->name('blogs');
+
+Route::get('/blog/{slug}', [BlogController::class, 'frontendShow'])
+    ->name('blog.show');
+    Route::get('/signatures', [SignatureController::class, 'frontendIndex'])
+    ->name('signatures');
+
+Route::get('/signature/{signature_id}', [SignatureController::class, 'frontendShow'])
+    ->name('signature.show');

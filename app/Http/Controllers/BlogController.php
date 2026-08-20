@@ -224,5 +224,22 @@ class BlogController extends Controller
             ->route('admin.blog.index')
             ->with('success','Blog Deleted Successfully');
     }
+public function frontendIndex()
+{
+    $blogs = Blog::where('status', 1)
+        ->orderBy('created_at', 'desc')
+        ->get();
 
+    return view('user.blog', compact('blogs'));
+}
+
+
+public function frontendShow($slug)
+{
+    $blog = Blog::where('slug', $slug)
+        ->where('status', 1)
+        ->firstOrFail();
+
+    return view('user.blog-detail', compact('blog'));
+}
 }

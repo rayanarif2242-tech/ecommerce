@@ -125,7 +125,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
 
             <h4 class="text-uppercase">
-                Shop By Sub Category
+                Shop By Collection
             </h4>
 
         </div>
@@ -310,7 +310,7 @@
         <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
 
             <h4 class="text-uppercase">
-                Our Collections
+                Our Best Sellers
             </h4>
 
             
@@ -514,7 +514,9 @@
     <div class="container">
       <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
         <h4 class="text-uppercase">You May Also Like</h4>
-        <a href="index.html" class="btn-link">View All Products</a>
+       <a href="{{ route('signatures') }}" class="btn-link">
+    View All Products
+</a>
       </div>
       <div class="swiper product-swiper open-up" data-aos="zoom-out">
         <div class="swiper-wrapper d-flex">
@@ -640,9 +642,11 @@
                 Read Blog Posts
             </h4>
 
-            <a href="#" class="btn-link">
-                View All
-            </a>
+           
+<a href="{{ route('blogs') }}" class="view-all-btn">
+    View All
+    <i class="bi bi-arrow-right ms-2"></i>
+</a>
 
         </div>
 

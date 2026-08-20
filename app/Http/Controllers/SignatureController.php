@@ -177,4 +177,22 @@ class SignatureController extends Controller
             ->route('admin.signature.index')
             ->with('success', 'Signature deleted successfully.');
     }
+  public function frontendIndex()
+{
+    $signatures = Signature::where('status', 'Active')
+        ->orderBy('sort_order', 'asc')
+        ->get();
+
+    return view('user.signatures', compact('signatures'));
+}
+
+
+public function frontendShow($signature_id)
+{
+    $signature = Signature::where('signature_id', $signature_id)
+        ->where('status', 'Active')
+        ->firstOrFail();
+
+    return view('user.signature-detail', compact('signature'));
+}
 }
