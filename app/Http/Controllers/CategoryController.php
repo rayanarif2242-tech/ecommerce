@@ -6,6 +6,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+use App\Models\SubCategory;
+
 class CategoryController extends Controller
 {
     // Display all categories
@@ -54,7 +56,7 @@ class CategoryController extends Controller
             'meta_description' => $request->meta_description,
         ]);
 
-        return redirect()->route('category.index')
+        return redirect()->route('admin.category.index')
             ->with('success', 'Category added successfully.');
     }
 
@@ -123,4 +125,21 @@ class CategoryController extends Controller
         return redirect()->route('admin.category.index')
             ->with('success', 'Category deleted successfully.');
     }
+
+    public function frontendShow($slug)
+{
+    $category = Category::where('slug', $slug)
+        ->where('status', 1)
+        ->firstOrFail();
+
+    $subCategories = SubCategory::where('category_id', $category->id)
+        ->where('status', 1)
+        ->orderBy('sort_order', 'asc')
+        ->get();
+
+    return view('user.category', compact(
+        'category',
+        'subCategories'
+    ));
+}
 }

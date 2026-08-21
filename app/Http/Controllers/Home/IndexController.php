@@ -8,7 +8,7 @@ use App\Models\SubCategory;
 use App\Models\Product;
 use App\Models\Collection;
 use App\Models\Blog;
-
+use App\Models\Billboard;
 
 class IndexController extends Controller
 {
@@ -44,20 +44,36 @@ class IndexController extends Controller
             ->orderBy('sort_order', 'asc')
             ->get();
 
+        // Billboards
+        $billboards = Billboard::where('status', 1)
+            ->where('featured', 1)
+            ->where(function ($query) {
+                $query->whereNull('start_date')
+                    ->orWhereDate('start_date', '<=', now());
+            })
+            ->where(function ($query) {
+                $query->whereNull('end_date')
+                    ->orWhereDate('end_date', '>=', now());
+            })
+            ->orderBy('sort_order', 'asc')
+            ->get();
+
         return view('user.index', compact(
             'categories',
             'subCategories',
             'products',
             'collections',
-            'blogs'
+            'blogs',
+            'billboards'
         ));
     }
-    public function allProducts()
-{
-    $products = Product::where('status', 1)
-        ->latest()
-        ->get();
 
-    return view('user.products', compact('products'));
-}
+    public function allProducts()
+    {
+        $products = Product::where('status', 1)
+            ->latest()
+            ->get();
+
+        return view('user.products', compact('products'));
+    }
 }

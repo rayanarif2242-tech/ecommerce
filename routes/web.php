@@ -26,6 +26,7 @@ use App\Http\Controllers\Home\IndexController;
 use App\Http\Controllers\CartController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Authentication
@@ -196,47 +197,73 @@ Route::middleware('auth:admin')
     });
 
 
-/*
+
+
+/* 
 |--------------------------------------------------------------------------
 | USER FRONTEND
 |--------------------------------------------------------------------------
 */
 
-// All Products Page
+// Home
+Route::get('/', [IndexController::class, 'index'])
+    ->name('frontend.home');
+
+
+// All Products
 Route::get('/products', [IndexController::class, 'allProducts'])
     ->name('user.products');
 
 
-// All Collections Page
+// All Collections
 Route::get('/collections', [CollectionController::class, 'frontendIndex'])
     ->name('user.collections');
 
 
-/*
-|--------------------------------------------------------------------------
-| CART
-|--------------------------------------------------------------------------
-*/
+// CATEGORY
+// Example: /category/men
+// Example: /category/women
+// Example: /category/perfumes
+Route::get('/category/{slug}', [CategoryController::class, 'frontendShow'])
+    ->name('category.show');
 
+
+// SUB CATEGORY
+// Example: /subcategory/mens-t-shirts
+// Example: /subcategory/womens-jackets
+Route::get('/subcategory/{slug}', [SubCategoryController::class, 'frontendShow'])
+    ->name('subcategory.show');
+
+
+// SINGLE PRODUCT
+// Example: /product/black-cotton-t-shirt
+Route::get('/product/{slug}', [ProductController::class, 'frontendShow'])
+    ->name('product.show');
+
+
+// CART
 Route::post('/cart/add', [CartController::class, 'add'])
     ->name('cart.add');
 
 
-
-
-
-
-
-
-
-
+// BLOG
 Route::get('/blogs', [BlogController::class, 'frontendIndex'])
     ->name('blogs');
 
 Route::get('/blog/{slug}', [BlogController::class, 'frontendShow'])
     ->name('blog.show');
-    Route::get('/signatures', [SignatureController::class, 'frontendIndex'])
+
+
+// SIGNATURES
+Route::get('/signatures', [SignatureController::class, 'frontendIndex'])
     ->name('signatures');
 
 Route::get('/signature/{signature_id}', [SignatureController::class, 'frontendShow'])
     ->name('signature.show');
+
+
+
+
+    Route::get('/billboard/{billboard_id}', 
+    [BillboardController::class, 'detail']
+)->name('billboard.detail');

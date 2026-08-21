@@ -12,17 +12,18 @@ class Billboard extends Model
 
     protected $fillable = [
         'billboard_id',
-        'name',
         'title',
         'subtitle',
-        'description',
-        'image',
         'button_text',
         'button_link',
+        'image',
+        'mobile_image',
+        'position',
         'featured',
-        'show_home',
         'status',
         'sort_order',
+        'start_date',
+        'end_date',
     ];
 
     protected static function boot()
@@ -30,12 +31,9 @@ class Billboard extends Model
         parent::boot();
 
         static::creating(function ($billboard) {
-            $billboard->billboard_id = Str::uuid();
+            if (!$billboard->billboard_id) {
+                $billboard->billboard_id = Str::uuid();
+            }
         });
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'billboard_id';
     }
 }

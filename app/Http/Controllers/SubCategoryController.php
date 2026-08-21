@@ -6,6 +6,7 @@ use App\Models\SubCategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\Product;
 
 
 class SubCategoryController extends Controller
@@ -228,5 +229,21 @@ public function destroy(SubCategory $subcategory)
         ->route('admin.subcategory.index')
         ->with('success','Sub Category Deleted Successfully');
 
+}
+public function frontendShow($slug)
+{
+    $subCategory = SubCategory::where('slug', $slug)
+        ->where('status', 1)
+        ->firstOrFail();
+
+    $products = Product::where('status', 1)
+        ->where('subcategory_id', $subCategory->id)
+        ->latest()
+        ->get();
+
+    return view('user.subcategory', compact(
+        'subCategory',
+        'products'
+    ));
 }
 }

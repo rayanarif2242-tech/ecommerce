@@ -4,10 +4,9 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <title>{{ $signature->product_name }} | Kaira</title>
+    <title>{{ $billboard->title }} | Kaira</title>
 
     {{-- Bootstrap --}}
     <link
@@ -39,6 +38,7 @@
             color: #111;
             font-family: 'Montserrat', sans-serif;
         }
+
 
         /* =========================
            NAVBAR
@@ -92,99 +92,28 @@
             color: #111;
             font-size: 20px;
             text-decoration: none;
-        }
-
-        /* =========================
-           PRODUCT DETAIL
-        ========================= */
-
-        .product-detail-section {
-            padding: 70px 0 100px;
-        }
-
-        .product-image-wrapper {
-            position: relative;
-            overflow: hidden;
-            background: #f5f5f5;
-        }
-
-        .product-image-wrapper img {
-            width: 100%;
-            height: 650px;
-            object-fit: cover;
-            display: block;
-            transition: transform .7s ease;
-        }
-
-        .product-image-wrapper:hover img {
-            transform: scale(1.03);
-        }
-
-        /* =========================
-           PRODUCT INFO
-        ========================= */
-
-        .product-info {
-            padding: 20px 30px 20px 55px;
-        }
-
-        .product-label {
-            font-size: 11px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #888;
-            margin-bottom: 15px;
-        }
-
-        .product-title {
-            
-            font-size: 52px;
-            line-height: 1.1;
-            font-weight: 200;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .product-price {
-            font-size: 18px;
-            letter-spacing: 1px;
-            margin-bottom: 25px;
-        }
-
-        .product-description {
-            color: #777;
-            font-size: 14px;
-            line-height: 1.9;
-            margin-bottom: 30px;
-        }
-
-        /* =========================
-           ADD TO CART
-        ========================= */
-
-        .add-cart-btn {
-            width: 100%;
-            border: none;
-            background: #111;
-            color: #fff;
-            padding: 17px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
             transition: .3s;
         }
 
-        .add-cart-btn:hover {
-            background: #333;
+        .nav-icons a:hover {
+            color: #888;
         }
+
+
+        /* =========================
+           BILLBOARD DETAIL
+        ========================= */
+
+        .billboard-detail-section {
+            padding: 70px 0 100px;
+        }
+
 
         /* =========================
            BACK BUTTON
         ========================= */
 
-        .back-products {
+        .back-home {
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -201,17 +130,152 @@
             transition: .3s;
         }
 
-        .back-products i {
+        .back-home i {
             transition: .3s;
         }
 
-        .back-products:hover {
+        .back-home:hover {
             color: #777;
         }
 
-        .back-products:hover i {
+        .back-home:hover i {
             transform: translateX(-4px);
         }
+
+
+        /* =========================
+           BILLBOARD IMAGE
+        ========================= */
+
+        .billboard-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .billboard-image-wrapper img {
+            width: 100%;
+            height: 650px;
+            object-fit: cover;
+            display: block;
+
+            transition: transform .7s ease;
+        }
+
+        .billboard-image-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+
+        /* =========================
+           BILLBOARD INFORMATION
+        ========================= */
+
+        .billboard-info {
+            padding: 20px 30px 20px 55px;
+        }
+
+        .billboard-label {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .billboard-title {
+            font-family: 'Montserrat', sans-serif;
+
+            font-size: 52px;
+            line-height: 1.1;
+
+            font-weight: 300;
+
+            letter-spacing: 1px;
+            text-transform: uppercase;
+
+            margin-bottom: 25px;
+        }
+
+        .billboard-subtitle {
+            color: #777;
+
+            font-size: 14px;
+            line-height: 1.9;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           SHOP BUTTON
+        ========================= */
+
+        .billboard-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            width: 100%;
+
+            border: none;
+
+            background: #111;
+            color: #fff;
+
+            padding: 17px;
+
+            font-family: 'Montserrat', sans-serif;
+
+            font-size: 12px;
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            text-decoration: none;
+
+            transition: .3s;
+        }
+
+        .billboard-btn:hover {
+            background: #333;
+            color: #fff;
+        }
+
+
+        /* =========================
+           BILLBOARD META
+        ========================= */
+
+        .billboard-meta {
+            margin-top: 30px;
+            padding-top: 25px;
+
+            border-top: 1px solid #ddd;
+        }
+
+        .billboard-meta-item {
+            font-size: 13px;
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            color: #222;
+
+            margin-bottom: 15px;
+
+            font-weight: 600;
+        }
+
+        .billboard-meta-item span {
+            color: #000;
+
+            margin-left: 8px;
+
+            font-weight: 700;
+        }
+
 
         /* =========================
            FOOTER
@@ -235,6 +299,7 @@
             font-size: 14px;
         }
 
+
         /* =========================
            RESPONSIVE
         ========================= */
@@ -245,15 +310,16 @@
                 display: none;
             }
 
-            .product-info {
+            .billboard-info {
                 padding: 40px 10px;
             }
 
-            .product-image-wrapper img {
+            .billboard-image-wrapper img {
                 height: 550px;
             }
 
         }
+
 
         @media (max-width: 767px) {
 
@@ -265,16 +331,21 @@
                 font-size: 28px;
             }
 
-            .product-detail-section {
+            .billboard-detail-section {
                 padding: 40px 0 70px;
             }
 
-            .product-image-wrapper img {
+            .billboard-image-wrapper img {
                 height: 450px;
             }
 
-            .product-title {
+            .billboard-title {
                 font-size: 40px;
+            }
+
+            .billboard-meta-item {
+                font-size: 12px;
+                letter-spacing: 1.2px;
             }
 
         }
@@ -371,10 +442,10 @@
 
 
 {{-- =========================
-     PRODUCT DETAIL
+     BILLBOARD DETAIL
 ========================= --}}
 
-<section class="product-detail-section">
+<section class="billboard-detail-section">
 
     <div class="container">
 
@@ -382,13 +453,13 @@
         {{-- BACK --}}
 
         <a
-            href="{{ route('signatures') }}"
-            class="back-products"
+            href="{{ url('/') }}"
+            class="back-home"
         >
 
             <i class="bi bi-arrow-left"></i>
 
-            Back To Products
+            Back To Home
 
         </a>
 
@@ -398,20 +469,19 @@
 
 
             {{-- =========================
-                 PRODUCT IMAGE
+                 BILLBOARD IMAGE
             ========================= --}}
 
             <div class="col-lg-7">
 
-                <div class="product-image-wrapper">
+                <div class="billboard-image-wrapper">
 
-                    @if($signature->image)
+                    @if($billboard->image)
 
-                <img
-    src="{{ asset($signature->image) }}"
-    alt="{{ $signature->product_name }}"
-    class="product-detail-image"
->
+                        <img
+                            src="{{ asset('uploads/billboards/' . $billboard->image) }}"
+                            alt="{{ $billboard->title }}"
+                        >
 
                     @else
 
@@ -436,75 +506,126 @@
 
 
             {{-- =========================
-                 PRODUCT INFORMATION
+                 BILLBOARD INFORMATION
             ========================= --}}
 
             <div class="col-lg-5">
 
-                <div class="product-info">
+                <div class="billboard-info">
 
 
-                    <div class="product-label">
-                        Kaira Signature
+                    {{-- LABEL --}}
+
+                    <div class="billboard-label">
+                        Kaira Collection
                     </div>
 
 
-                    <h1 class="product-title">
+                    {{-- TITLE --}}
 
-    {{ $signature->product_name }}
+                    <h1 class="billboard-title">
 
-</h1>
+                        {{ $billboard->title }}
 
-
-                    @if(isset($signature->price))
-
-                        <div class="product-price">
-
-                            Rs. {{ number_format($signature->price, 2) }}
-
-                        </div>
-
-                    @endif
+                    </h1>
 
 
-                    @if($signature->description)
+                    {{-- SUBTITLE --}}
 
-                        <div class="product-description">
+                    @if($billboard->subtitle)
 
-                            {!! $signature->description !!}
+                        <div class="billboard-subtitle">
+
+                            {{ $billboard->subtitle }}
 
                         </div>
 
                     @endif
 
 
-{{-- ADD TO CART --}}
+                    {{-- SHOP BUTTON --}}
 
-<form
-    action="{{ route('cart.add') }}"
-    method="POST"
->
+                    @if($billboard->button_text)
 
-    @csrf
+                        <a
+                            href="{{ $billboard->button_link ?? url('/') }}"
+                            class="billboard-btn"
+                        >
 
-    <input
-        type="hidden"
-        name="product_id"
-        value="{{ $signature->signature_id }}"
-    >
+                            <i class="bi bi-bag"></i>
 
-    <button
-        type="submit"
-        class="add-cart-btn"
-    >
+                            {{ $billboard->button_text }}
 
-        <i class="bi bi-bag me-2"></i>
+                        </a>
 
-        Add To Cart
+                    @endif
 
-    </button>
 
-</form>
+                    {{-- META INFORMATION --}}
+
+                    @if(
+                        $billboard->position ||
+                        $billboard->start_date ||
+                        $billboard->end_date
+                    )
+
+                        <div class="billboard-meta">
+
+
+                            {{-- POSITION --}}
+
+                            @if($billboard->position)
+
+                                <div class="billboard-meta-item">
+
+                                    Position:
+
+                                    <span>
+                                        {{ $billboard->position }}
+                                    </span>
+
+                                </div>
+
+                            @endif
+
+
+                            {{-- AVAILABLE FROM --}}
+
+                            @if($billboard->start_date)
+
+                                <div class="billboard-meta-item">
+
+                                    Available From:
+
+                                    <span>
+                                        {{ \Carbon\Carbon::parse($billboard->start_date)->format('d M Y') }}
+                                    </span>
+
+                                </div>
+
+                            @endif
+
+
+                            {{-- AVAILABLE UNTIL --}}
+
+                            @if($billboard->end_date)
+
+                                <div class="billboard-meta-item">
+
+                                    Available Until:
+
+                                    <span>
+                                        {{ \Carbon\Carbon::parse($billboard->end_date)->format('d M Y') }}
+                                    </span>
+
+                                </div>
+
+                            @endif
+
+
+                        </div>
+
+                    @endif
 
 
                 </div>
@@ -529,7 +650,6 @@
     <div class="container">
 
         <div class="row">
-
 
             <div class="col-md-6">
 
@@ -556,12 +676,12 @@
 
             </div>
 
-
         </div>
 
     </div>
 
 </footer>
+
 
 
 <script

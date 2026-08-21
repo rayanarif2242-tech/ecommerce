@@ -1,17 +1,35 @@
- <section id="billboard" class="bg-light py-5">
+<section id="billboard" class="bg-light py-5">
     <div class="container">
-      <div class="row justify-content-center">
-        <h1 class="section-title text-center mt-4" data-aos="fade-up">New Collections</h1>
-        <div class="col-md-6 text-center" data-aos="fade-up" data-aos-delay="300">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe voluptas ut dolorum consequuntur, adipisci
-            repellat! Eveniet commodi voluptatem voluptate, eum minima, in suscipit explicabo voluptatibus harum,
-            quibusdam ex repellat eaque!</p>
+
+        <div class="row justify-content-center">
+
+            <h1 class="section-title text-center mt-4" data-aos="fade-up">
+                New Collections
+            </h1>
+
+            <div class="col-md-6 text-center"
+                 data-aos="fade-up"
+                 data-aos-delay="300">
+
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe voluptas ut dolorum consequuntur, adipisci
+                    repellat! Eveniet commodi voluptatem voluptate, eum minima, in suscipit explicabo voluptatibus harum,
+                    quibusdam ex repellat eaque!
+                </p>
+
+            </div>
+
         </div>
-      </div>
-      <div class="row">
-        <div class="swiper main-swiper py-4" data-aos="fade-up" data-aos-delay="600">
-          <div class="swiper-wrapper d-flex border-animation-left">
-         @foreach($categories as $category)
+
+        <div class="row">
+
+            <div class="swiper main-swiper py-4"
+                 data-aos="fade-up"
+                 data-aos-delay="600">
+
+                <div class="swiper-wrapper d-flex border-animation-left">
+
+                @foreach($billboards as $billboard)
 
     <div class="swiper-slide">
 
@@ -19,12 +37,14 @@
 
             <div class="image-holder">
 
-                <a href="#">
+                <a href="{{ route('billboard.detail', $billboard->billboard_id) }}">
+
                     <img
-                        src="{{ asset('uploads/categories/' . $category->image) }}"
-                        alt="{{ $category->name }}"
+                        src="{{ asset('uploads/billboards/' . $billboard->image) }}"
+                        alt="{{ $billboard->title }}"
                         class="img-fluid"
                     >
+
                 </a>
 
             </div>
@@ -33,23 +53,26 @@
 
                 <h5 class="element-title text-uppercase">
 
-                    <a href="#" class="item-anchor">
-                        {{ $category->name }}
+                    <a href="{{ route('billboard.detail', $billboard->billboard_id) }}"
+                       class="item-anchor">
+
+                        {{ $billboard->title }}
+
                     </a>
 
                 </h5>
 
                 <p>
-                    {{ $category->description }}
+                    {{ $billboard->subtitle }}
                 </p>
 
                 <div class="btn-left">
 
                     <a
-                        href="#"
+                        href="{{ route('billboard.detail', $billboard->billboard_id) }}"
                         class="btn-link fs-6 text-uppercase item-anchor text-decoration-none"
                     >
-                        Discover Now
+                        {{ $billboard->button_text }}
                     </a>
 
                 </div>
@@ -61,18 +84,29 @@
     </div>
 
 @endforeach
-          </div>
-          <div class="swiper-pagination"></div>
+
+                </div>
+
+                <div class="swiper-pagination"></div>
+
+            </div>
+
+            <div class="icon-arrow icon-arrow-left">
+                <svg width="50" height="50" viewBox="0 0 24 24">
+                    <use xlink:href="#arrow-left"></use>
+                </svg>
+            </div>
+
+            <div class="icon-arrow icon-arrow-right">
+                <svg width="50" height="50" viewBox="0 0 24 24">
+                    <use xlink:href="#arrow-right"></use>
+                </svg>
+            </div>
+
         </div>
-        <div class="icon-arrow icon-arrow-left"><svg width="50" height="50" viewBox="0 0 24 24">
-            <use xlink:href="#arrow-left"></use>
-          </svg></div>
-        <div class="icon-arrow icon-arrow-right"><svg width="50" height="50" viewBox="0 0 24 24">
-            <use xlink:href="#arrow-right"></use>
-          </svg></div>
-      </div>
+
     </div>
-  </section>
+</section>
 
   <section class="features py-5">
     <div class="container">
@@ -125,7 +159,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
 
             <h4 class="text-uppercase">
-                Shop By Collection
+                Shop By CATEGORY
             </h4>
 
         </div>
@@ -134,7 +168,7 @@
 
             <div class="row">
 
-                @forelse($subCategories as $subCategory)
+                @forelse($categories as $category)
 
                     <div class="col-md-4 mb-4">
 
@@ -142,13 +176,13 @@
 
                             <div class="image-holder">
 
-                                <a href="#">
+                                <a href="{{ route('category.show', $category->slug) }}">
 
-                                    @if($subCategory->image)
+                                    @if($category->image)
 
                                         <img
-                                            src="{{ asset('uploads/subcategories/' . $subCategory->image) }}"
-                                            alt="{{ $subCategory->name }}"
+                                            src="{{ asset('uploads/categories/' . $category->image) }}"
+                                            alt="{{ $category->name }}"
                                             class="product-image img-fluid"
                                         >
 
@@ -156,7 +190,7 @@
 
                                         <img
                                             src="{{ asset('homes/images/cat-item1.jpg') }}"
-                                            alt="{{ $subCategory->name }}"
+                                            alt="{{ $category->name }}"
                                             class="product-image img-fluid"
                                         >
 
@@ -171,10 +205,10 @@
                                 <div class="product-button">
 
                                     <a
-                                        href="#"
+                                        href="{{ route('category.show', $category->slug) }}"
                                         class="btn btn-common text-uppercase"
                                     >
-                                        {{ $subCategory->name }}
+                                        {{ $category->name }}
                                     </a>
 
                                 </div>
@@ -189,7 +223,7 @@
 
                     <div class="col-12 text-center">
 
-                        <p>No sub categories available.</p>
+                        <p>No categories available.</p>
 
                     </div>
 

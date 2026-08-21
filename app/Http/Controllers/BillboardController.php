@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Billboard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class BillboardController extends Controller
 {
@@ -17,9 +18,11 @@ class BillboardController extends Controller
 
         $billboards = Billboard::when($search, function ($query) use ($search) {
 
-            $query->where('billboard_id', 'LIKE', "%{$search}%")
-                  ->orWhere('name', 'LIKE', "%{$search}%")
-                  ->orWhere('title', 'LIKE', "%{$search}%");
+            $query->where(function ($q) use ($search) {
+                $q->where('billboard_id', 'LIKE', "%{$search}%")
+                  ->orWhere('title', 'LIKE', "%{$search}%")
+                  ->orWhere('subtitle', 'LIKE', "%{$search}%");
+            });
 
         })
         ->latest()
@@ -49,51 +52,71 @@ class BillboardController extends Controller
     {
         $request->validate([
 
-            'name' => 'required|string|max:255',
-
-            'title' => 'nullable|string|max:255',
+            'title' => 'required|string|max:255',
 
             'subtitle' => 'nullable|string|max:255',
-
-            'description' => 'nullable|string',
-
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,svg|max:2048',
 
             'button_text' => 'nullable|string|max:100',
 
             'button_link' => 'nullable|string|max:255',
 
+            'position' => 'required|string|max:100',
+
+            'featured' => 'required|boolean',
+
+            'status' => 'required|boolean',
+
             'sort_order' => 'nullable|integer',
+
+            'start_date' => 'nullable|date',
+
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+
+            'image' => 'required|image|mimes:jpg,jpeg,png,webp,svg|max:2048',
+
+            'mobile_image' => 'nullable|image|mimes:jpg,jpeg,png,webp,svg|max:2048',
 
         ]);
 
 
         $billboard = new Billboard();
 
-        $billboard->name = $request->name;
+        // Generate UUID
+        $billboard->billboard_id = (string) Str::uuid();
 
+        // Basic information
         $billboard->title = $request->title;
-
         $billboard->subtitle = $request->subtitle;
-
-        $billboard->description = $request->description;
-
         $billboard->button_text = $request->button_text;
-
         $billboard->button_link = $request->button_link;
 
+        // Settings
+        $billboard->position = $request->position;
         $billboard->featured = $request->featured ?? 0;
-
-        $billboard->show_home = $request->show_home ?? 0;
-
         $billboard->status = $request->status ?? 1;
-
         $billboard->sort_order = $request->sort_order ?? 0;
+
+        // Dates
+        $billboard->start_date = $request->start_date;
+        $billboard->end_date = $request->end_date;
 
 
         /*
         |--------------------------------------------------------------------------
-        | Upload Image
+        | Create Billboard Upload Directory
+        |--------------------------------------------------------------------------
+        */
+
+        $uploadPath = public_path('uploads/billboards');
+
+        if (!File::exists($uploadPath)) {
+            File::makeDirectory($uploadPath, 0755, true);
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Desktop Image
         |--------------------------------------------------------------------------
         */
 
@@ -101,14 +124,29 @@ class BillboardController extends Controller
 
             $image = $request->file('image');
 
-            $name = time() . '_' . $image->getClientOriginalName();
+            $fileName = time() . '_desktop_' . $image->getClientOriginalName();
 
-            $image->move(
-                public_path('uploads/billboards'),
-                $name
-            );
+            $image->move($uploadPath, $fileName);
 
-            $billboard->image = $name;
+            $billboard->image = $fileName;
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Mobile Image
+        |--------------------------------------------------------------------------
+        */
+
+        if ($request->hasFile('mobile_image')) {
+
+            $mobileImage = $request->file('mobile_image');
+
+            $mobileFileName = time() . '_mobile_' . $mobileImage->getClientOriginalName();
+
+            $mobileImage->move($uploadPath, $mobileFileName);
+
+            $billboard->mobile_image = $mobileFileName;
         }
 
 
@@ -116,13 +154,13 @@ class BillboardController extends Controller
 
 
         return redirect()
-            ->route('billboards.index')
+            ->route('admin.billboards.index')
             ->with('success', 'Billboard created successfully.');
     }
 
 
     /**
-     * Display billboard details.
+     * Display billboard details in admin.
      */
     public function show(Billboard $billboard)
     {
@@ -148,94 +186,121 @@ class BillboardController extends Controller
     /**
      * Update billboard.
      */
-    public function update(
-        Request $request,
-        Billboard $billboard
-    ) {
-
+    public function update(Request $request, Billboard $billboard)
+    {
         $request->validate([
 
-            'name' => 'required|string|max:255',
-
-            'title' => 'nullable|string|max:255',
+            'title' => 'required|string|max:255',
 
             'subtitle' => 'nullable|string|max:255',
-
-            'description' => 'nullable|string',
-
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,svg|max:2048',
 
             'button_text' => 'nullable|string|max:100',
 
             'button_link' => 'nullable|string|max:255',
 
+            'position' => 'required|string|max:100',
+
+            'featured' => 'required|boolean',
+
+            'status' => 'required|boolean',
+
             'sort_order' => 'nullable|integer',
+
+            'start_date' => 'nullable|date',
+
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,svg|max:2048',
+
+            'mobile_image' => 'nullable|image|mimes:jpg,jpeg,png,webp,svg|max:2048',
 
         ]);
 
 
-        $billboard->name = $request->name;
-
         $billboard->title = $request->title;
-
         $billboard->subtitle = $request->subtitle;
-
-        $billboard->description = $request->description;
-
         $billboard->button_text = $request->button_text;
-
         $billboard->button_link = $request->button_link;
 
+        $billboard->position = $request->position;
         $billboard->featured = $request->featured ?? 0;
-
-        $billboard->show_home = $request->show_home ?? 0;
-
         $billboard->status = $request->status ?? 1;
-
         $billboard->sort_order = $request->sort_order ?? 0;
+
+        $billboard->start_date = $request->start_date;
+        $billboard->end_date = $request->end_date;
 
 
         /*
         |--------------------------------------------------------------------------
-        | Replace Image
+        | Upload Directory
+        |--------------------------------------------------------------------------
+        */
+
+        $uploadPath = public_path('uploads/billboards');
+
+        if (!File::exists($uploadPath)) {
+            File::makeDirectory($uploadPath, 0755, true);
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Replace Desktop Image
         |--------------------------------------------------------------------------
         */
 
         if ($request->hasFile('image')) {
 
-            // Delete old image
-
             if (
                 $billboard->image &&
                 File::exists(
-                    public_path(
-                        'uploads/billboards/' .
-                        $billboard->image
-                    )
+                    $uploadPath . '/' . $billboard->image
                 )
             ) {
-
                 File::delete(
-                    public_path(
-                        'uploads/billboards/' .
-                        $billboard->image
-                    )
+                    $uploadPath . '/' . $billboard->image
                 );
             }
 
 
-            // Upload new image
-
             $image = $request->file('image');
 
-            $name = time() . '_' . $image->getClientOriginalName();
+            $fileName = time() . '_desktop_' . $image->getClientOriginalName();
 
-            $image->move(
-                public_path('uploads/billboards'),
-                $name
-            );
+            $image->move($uploadPath, $fileName);
 
-            $billboard->image = $name;
+            $billboard->image = $fileName;
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Replace Mobile Image
+        |--------------------------------------------------------------------------
+        */
+
+        if ($request->hasFile('mobile_image')) {
+
+            if (
+                $billboard->mobile_image &&
+                File::exists(
+                    $uploadPath . '/' . $billboard->mobile_image
+                )
+            ) {
+                File::delete(
+                    $uploadPath . '/' . $billboard->mobile_image
+                );
+            }
+
+
+            $mobileImage = $request->file('mobile_image');
+
+            $mobileFileName = time() . '_mobile_' . $mobileImage->getClientOriginalName();
+
+            $mobileImage->move($uploadPath, $mobileFileName);
+
+            $billboard->mobile_image = $mobileFileName;
         }
 
 
@@ -243,7 +308,7 @@ class BillboardController extends Controller
 
 
         return redirect()
-            ->route('billboards.index')
+            ->route('admin.billboards.index')
             ->with('success', 'Billboard updated successfully.');
     }
 
@@ -253,42 +318,56 @@ class BillboardController extends Controller
      */
     public function destroy(Billboard $billboard)
     {
-        /*
-        |--------------------------------------------------------------------------
-        | Delete Image
-        |--------------------------------------------------------------------------
-        */
+        $uploadPath = public_path('uploads/billboards');
 
+
+        // Delete desktop image
         if (
             $billboard->image &&
             File::exists(
-                public_path(
-                    'uploads/billboards/' .
-                    $billboard->image
-                )
+                $uploadPath . '/' . $billboard->image
             )
         ) {
-
             File::delete(
-                public_path(
-                    'uploads/billboards/' .
-                    $billboard->image
-                )
+                $uploadPath . '/' . $billboard->image
             );
         }
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | Delete Billboard
-        |--------------------------------------------------------------------------
-        */
+        // Delete mobile image
+        if (
+            $billboard->mobile_image &&
+            File::exists(
+                $uploadPath . '/' . $billboard->mobile_image
+            )
+        ) {
+            File::delete(
+                $uploadPath . '/' . $billboard->mobile_image
+            );
+        }
+
 
         $billboard->delete();
 
 
         return redirect()
-            ->route('billboards.index')
+            ->route('admin.billboards.index')
             ->with('success', 'Billboard deleted successfully.');
+    }
+
+
+    /**
+     * Display billboard detail on frontend.
+     */
+    public function detail($billboard_id)
+    {
+        $billboard = Billboard::where('billboard_id', $billboard_id)
+            ->where('status', 1)
+            ->firstOrFail();
+
+        return view(
+            'user.billboard-detail',
+            compact('billboard')
+        );
     }
 }

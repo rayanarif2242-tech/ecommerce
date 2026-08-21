@@ -258,4 +258,12 @@ class ProductController extends Controller
             ->route('admin.products.index')
             ->with('success', 'Product Deleted Successfully');
     }
+    public function frontendShow($slug)
+{
+    $product = Product::where('slug', $slug)
+        ->where('status', 1)
+        ->firstOrFail();
+
+    return view('user.product-detail', compact('product'));
+}
 }

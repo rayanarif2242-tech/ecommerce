@@ -245,9 +245,9 @@
             color: #111;
             text-decoration: none;
 
-            font-family: 'Cormorant Garamond', serif;
+        
 
-            font-size: 30px;
+            font-size: 24px;
             line-height: 1.15;
 
             letter-spacing: 1px;
