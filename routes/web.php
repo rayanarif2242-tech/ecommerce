@@ -210,7 +210,8 @@ Route::get('/', [IndexController::class, 'index'])
     ->name('frontend.home');
 
 // All Products
-
+Route::get('/products', [ProductController::class, 'frontendIndex'])
+    ->name('user.products');
     // Contact
 Route::get('/contact', [IndexController::class, 'contact'])
     ->name('contact');

@@ -113,15 +113,7 @@
                       <a href="index.html" class="dropdown-item item-anchor">Wishlist </a>
                     </li>
                   </ul>
-                <li  >
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit" class="dropdown-item border-0 bg-transparent w-100 text-start">
-            <i class="bx bx-power-off me-2"></i>
-            <span class="align-middle">LOG OUT</span>
-        </button>
-    </form>
-</li>
+     
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('contact') }}">Contact</a>
                 </li>
@@ -137,10 +129,11 @@
               </a>
             </li>
             <li class="d-none d-lg-block">
-              <a href="index.html" class="text-uppercase mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                aria-controls="offcanvasCart">Cart <span class="cart-count">(0)</span>
-              </a>
-            </li>
+    <a href="{{ route('cart.show') }}"
+       class="text-uppercase mx-3">
+        Cart <span class="cart-count">(0)</span>
+    </a>
+</li>
             <li class="d-lg-none">
               <a href="#" class="mx-2">
                 <svg width="24" height="24" viewBox="0 0 24 24">
