@@ -1,440 +1,446 @@
-
 <!DOCTYPE html>
 
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
-
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
 <html
-  lang="en"
-  class="light-style layout-menu-fixed"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="../assets/"
-  data-template="vertical-menu-template-free"
+    lang="en"
+    class="light-style layout-menu-fixed"
+    dir="ltr"
+    data-theme="theme-default"
+    data-assets-path="../assets/"
+    data-template="vertical-menu-template-free"
 >
-  <head>
-   @include('admin.header')
-   
-  </head>
 
-  <body>
+<head>
+    @include('admin.header')
+</head>
+
+<body>
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
-        <!-- Menu -->
- @include('admin.sidebar')
-        <!-- / Menu -->
 
-        <!-- Layout container -->
-        <div class="layout-page">
-          <!-- Navbar -->
+        <div class="layout-container">
 
-        @include('admin.nav')
+            <!-- Sidebar -->
+            @include('admin.sidebar')
+            <!-- / Sidebar -->
 
-          <!-- Content wrapper -->
-        <div class="container-xxl container-p-y">
 
+            <!-- Layout container -->
+            <div class="layout-page">
 
-<h4 class="fw-bold mb-4">
-    Edit Product
-</h4>
+                <!-- Navbar -->
+                @include('admin.nav')
+                <!-- / Navbar -->
 
 
+                <!-- Content wrapper -->
+                <div class="container-xxl container-p-y">
 
-<div class="card">
+                    <!-- Page Title -->
+                    <h4 class="fw-bold mb-4">
+                        Edit Product
+                    </h4>
 
-<div class="card-body">
 
+                    <!-- Success Message -->
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
 
-<form action="{{route('admin.products.update',$product->product_id)}}"
-method="POST"
-enctype="multipart/form-data">
+                            {{ session('success') }}
 
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert">
+                            </button>
 
-@csrf
+                        </div>
+                    @endif
 
-@method('PUT')
 
+                    <!-- Validation Errors -->
+                    @if($errors->any())
 
+                        <div class="alert alert-danger">
 
-<div class="row">
+                            <strong>Please fix the following errors:</strong>
 
+                            <ul class="mb-0 mt-2">
 
-{{-- Product Name --}}
-<div class="col-md-6 mb-3">
+                                @foreach($errors->all() as $error)
 
-<label class="form-label">
-Product Name
-</label>
+                                    <li>
+                                        {{ $error }}
+                                    </li>
 
-<input 
-type="text"
-name="name"
-value="{{$product->name}}"
-class="form-control"
-required>
+                                @endforeach
 
-</div>
+                            </ul>
 
+                        </div>
 
+                    @endif
 
 
-{{-- Category --}}
-<div class="col-md-6 mb-3">
+                    <!-- Product Card -->
+                    <div class="card">
 
-<label class="form-label">
-Category
-</label>
+                        <div class="card-body">
 
 
-<select name="category_id"
-class="form-control">
+                            <!-- IMPORTANT: UPDATE FORM -->
 
+                            <form
+                                action="{{ route('admin.products.update', ['product' => $product->product_id]) }}"
+                                method="POST"
+                                enctype="multipart/form-data"
+                            >
 
-<option>
-Select Category
-</option>
+                                @csrf
 
+                                @method('PUT')
 
-@foreach($categories as $category)
 
-<option value="{{$category->id}}"
-@if($product->category_id == $category->id)
-selected
-@endif
->
+                                <div class="row">
 
-{{$category->name}}
 
-</option>
+                                    <!-- Product Name -->
+                                    <div class="col-md-6 mb-3">
 
+                                        <label class="form-label">
+                                            Product Name
+                                        </label>
 
-@endforeach
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            value="{{ old('name', $product->name) }}"
+                                            class="form-control"
+                                            placeholder="Enter product name"
+                                            required
+                                        >
 
+                                    </div>
 
-</select>
 
+                                    <!-- Category -->
+                                    <div class="col-md-6 mb-3">
 
-</div>
+                                        <label class="form-label">
+                                            Category
+                                        </label>
 
+                                        <select
+                                            name="category_id"
+                                            class="form-control"
+                                            required
+                                        >
 
+                                            <option value="">
+                                                Select Category
+                                            </option>
 
 
+                                            @foreach($categories as $category)
 
-{{-- Price --}}
-<div class="col-md-6 mb-3">
+                                                <option
+                                                    value="{{ $category->id }}"
+                                                    {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}
+                                                >
 
-<label class="form-label">
-Price
-</label>
+                                                    {{ $category->name }}
 
+                                                </option>
 
-<input 
-type="number"
-name="price"
-value="{{$product->price}}"
-class="form-control">
+                                            @endforeach
 
-</div>
+                                        </select>
 
+                                    </div>
 
 
+                                    <!-- Price -->
+                                    <div class="col-md-6 mb-3">
 
+                                        <label class="form-label">
+                                            Price
+                                        </label>
 
-{{-- Discount Price --}}
-<div class="col-md-6 mb-3">
+                                        <input
+                                            type="number"
+                                            name="price"
+                                            value="{{ old('price', $product->price) }}"
+                                            class="form-control"
+                                            min="0"
+                                            step="0.01"
+                                            required
+                                        >
 
-<label class="form-label">
-Discount Price
-</label>
+                                    </div>
 
 
-<input 
-type="number"
-name="discount_price"
-value="{{$product->discount_price}}"
-class="form-control">
+                                    <!-- Discount Price -->
+                                    <div class="col-md-6 mb-3">
 
-</div>
+                                        <label class="form-label">
+                                            Discount Price
+                                        </label>
 
+                                        <input
+                                            type="number"
+                                            name="discount_price"
+                                            value="{{ old('discount_price', $product->discount_price) }}"
+                                            class="form-control"
+                                            min="0"
+                                            step="0.01"
+                                        >
 
+                                    </div>
 
 
+                                    <!-- Stock -->
+                                    <div class="col-md-6 mb-3">
 
-{{-- Stock --}}
-<div class="col-md-6 mb-3">
+                                        <label class="form-label">
+                                            Stock
+                                        </label>
 
-<label class="form-label">
-Stock
-</label>
+                                        <input
+                                            type="number"
+                                            name="stock"
+                                            value="{{ old('stock', $product->stock) }}"
+                                            class="form-control"
+                                            min="0"
+                                            required
+                                        >
 
+                                    </div>
 
-<input 
-type="number"
-name="stock"
-value="{{$product->stock}}"
-class="form-control">
 
-</div>
+                                    <!-- Product Image -->
+                                    <div class="col-md-6 mb-3">
 
+                                        <label class="form-label">
+                                            Product Image
+                                        </label>
 
 
+                                        @if($product->image)
 
+                                            <div class="mb-3">
 
-{{-- Image --}}
-<div class="col-md-6 mb-3">
+                                                <img
+                                                    src="{{ asset('uploads/products/' . $product->image) }}"
+                                                    alt="{{ $product->name }}"
+                                                    width="120"
+                                                    height="120"
+                                                    style="object-fit: cover;"
+                                                    class="rounded border"
+                                                >
 
-<label class="form-label">
-Product Image
-</label>
+                                            </div>
 
+                                        @endif
 
-@if($product->image)
 
-<div class="mb-2">
+                                        <input
+                                            type="file"
+                                            name="image"
+                                            class="form-control"
+                                            accept=".jpg,.jpeg,.png,.webp"
+                                        >
 
-<img src="{{asset('uploads/products/'.$product->image)}}"
-width="100"
-height="100"
-class="rounded">
+                                        <small class="text-muted">
+                                            Leave empty if you don't want to change the image.
+                                        </small>
 
-</div>
+                                    </div>
 
-@endif
 
+                                    <!-- Description -->
+                                    <div class="col-md-12 mb-3">
 
-<input 
-type="file"
-name="image"
-class="form-control">
+                                        <label class="form-label">
+                                            Description
+                                        </label>
 
+                                        <textarea
+                                            name="description"
+                                            class="form-control"
+                                            rows="5"
+                                            placeholder="Enter product description"
+                                        >{{ old('description', $product->description) }}</textarea>
 
-</div>
+                                    </div>
 
 
+                                    <!-- Featured -->
+                                    <div class="col-md-4 mb-3">
 
+                                        <label class="form-label">
+                                            Featured
+                                        </label>
 
+                                        <select
+                                            name="featured"
+                                            class="form-control"
+                                        >
 
-{{-- Description --}}
-<div class="col-md-12 mb-3">
+                                            <option
+                                                value="1"
+                                                {{ old('featured', $product->featured) == 1 ? 'selected' : '' }}
+                                            >
+                                                Yes
+                                            </option>
 
+                                            <option
+                                                value="0"
+                                                {{ old('featured', $product->featured) == 0 ? 'selected' : '' }}
+                                            >
+                                                No
+                                            </option>
 
-<label class="form-label">
-Description
-</label>
+                                        </select>
 
+                                    </div>
 
-<textarea 
-name="description"
-class="form-control"
-rows="4">{{$product->description}}</textarea>
 
+                                    <!-- Show On Home -->
+                                    <div class="col-md-4 mb-3">
 
-</div>
+                                        <label class="form-label">
+                                            Show On Home
+                                        </label>
 
+                                        <select
+                                            name="home"
+                                            class="form-control"
+                                        >
 
+                                            <option
+                                                value="1"
+                                                {{ old('home', $product->home) == 1 ? 'selected' : '' }}
+                                            >
+                                                Yes
+                                            </option>
 
+                                            <option
+                                                value="0"
+                                                {{ old('home', $product->home) == 0 ? 'selected' : '' }}
+                                            >
+                                                No
+                                            </option>
 
+                                        </select>
 
-{{-- Featured --}}
-<div class="col-md-4 mb-3">
+                                    </div>
 
 
-<label>
-Featured
-</label>
+                                    <!-- Status -->
+                                    <div class="col-md-4 mb-3">
 
+                                        <label class="form-label">
+                                            Status
+                                        </label>
 
-<select name="featured"
-class="form-control">
+                                        <select
+                                            name="status"
+                                            class="form-control"
+                                        >
 
+                                            <option
+                                                value="1"
+                                                {{ old('status', $product->status) == 1 ? 'selected' : '' }}
+                                            >
+                                                Active
+                                            </option>
 
-<option value="1"
-@if($product->featured == 1)
-selected
-@endif
->
-Yes
-</option>
+                                            <option
+                                                value="0"
+                                                {{ old('status', $product->status) == 0 ? 'selected' : '' }}
+                                            >
+                                                Inactive
+                                            </option>
 
+                                        </select>
 
-<option value="0"
-@if($product->featured == 0)
-selected
-@endif
->
-No
-</option>
+                                    </div>
 
 
-</select>
+                                    <!-- Sort Order -->
+                                    <div class="col-md-6 mb-3">
 
+                                        <label class="form-label">
+                                            Sort Order
+                                        </label>
 
-</div>
+                                        <input
+                                            type="number"
+                                            name="sort"
+                                            value="{{ old('sort', $product->sort) }}"
+                                            class="form-control"
+                                            min="0"
+                                        >
 
+                                    </div>
 
 
+                                    <!-- Buttons -->
+                                    <div class="col-12 mt-4">
 
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary"
+                                        >
 
-{{-- Home --}}
-<div class="col-md-4 mb-3">
+                                            <i class="bx bx-save me-1"></i>
 
+                                            Update Product
 
-<label>
-Show On Home
-</label>
+                                        </button>
 
 
-<select name="home"
-class="form-control">
+                                        <a
+                                            href="{{ route('admin.products.index') }}"
+                                            class="btn btn-secondary"
+                                        >
 
+                                            <i class="bx bx-arrow-back me-1"></i>
 
-<option value="1"
-@if($product->home == 1)
-selected
-@endif
->
-Yes
-</option>
+                                            Back
 
+                                        </a>
 
-<option value="0"
-@if($product->home == 0)
-selected
-@endif
->
-No
-</option>
+                                    </div>
 
 
-</select>
+                                </div>
 
+                            </form>
 
-</div>
+                        </div>
 
+                    </div>
 
+                </div>
+                <!-- / Content -->
 
 
+                <!-- Footer -->
+                @include('admin.footer')
+                <!-- / Footer -->
 
-{{-- Status --}}
-<div class="col-md-4 mb-3">
+            </div>
+            <!-- / Layout container -->
 
-
-<label>
-Status
-</label>
-
-
-<select name="status"
-class="form-control">
-
-
-<option value="1"
-@if($product->status == 1)
-selected
-@endif
->
-Active
-</option>
-
-
-<option value="0"
-@if($product->status == 0)
-selected
-@endif
->
-Inactive
-</option>
-
-
-</select>
-
-
-</div>
-
-
-
-
-
-{{-- Sort --}}
-<div class="col-md-6 mb-3">
-
-
-<label>
-Sort Order
-</label>
-
-
-<input 
-type="number"
-name="sort"
-value="{{$product->sort}}"
-class="form-control">
-
-
-</div>
-
-
-
-
-
-<div class="mt-4">
-
-
-<button type="submit"
-class="btn btn-primary">
-
-Update Product
-
-</button>
-
-
-
-<a href="{{route('admin.products.index')}}"
-class="btn btn-secondary">
-
-Back
-
-</a>
-
-
-</div>
-
-
-
-</div>
-
-
-</form>
-
-
-
-</div>
-
-</div>
-
-
-
-</div>
-            <!-- / Content -->
-
-          
-           @include('admin.footer')
-            <!-- / Footer -->
+        </div>
 
     </div>
     <!-- / Layout wrapper -->
 
 
     @include('admin.js')
-  </body>
+
+</body>
+
 </html>

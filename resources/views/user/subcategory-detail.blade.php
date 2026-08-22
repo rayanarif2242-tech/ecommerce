@@ -5,27 +5,37 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>{{ $product->name }} | Kaira</title>
+    <title>{{ $subCategory->name }} | Kaira</title>
+
 
     {{-- Bootstrap --}}
+
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
+
     {{-- Bootstrap Icons --}}
+
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
 
+
     {{-- Fonts --}}
+
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
         rel="stylesheet"
     >
+
 
     <style>
 
@@ -33,12 +43,14 @@
             box-sizing: border-box;
         }
 
+
         body {
             margin: 0;
             background: #fff;
             color: #111;
             font-family: 'Montserrat', sans-serif;
         }
+
 
         /* =========================
            NAVBAR
@@ -52,6 +64,7 @@
             align-items: center;
         }
 
+
         .brand {
             font-family: 'Cormorant Garamond', serif;
             font-size: 34px;
@@ -61,6 +74,7 @@
             text-decoration: none;
         }
 
+
         .nav-links {
             display: flex;
             gap: 38px;
@@ -68,6 +82,7 @@
             margin: 0;
             padding: 0;
         }
+
 
         .nav-links a {
             text-decoration: none;
@@ -78,9 +93,11 @@
             transition: .3s;
         }
 
+
         .nav-links a:hover {
             color: #888;
         }
+
 
         .nav-icons {
             display: flex;
@@ -88,33 +105,32 @@
             gap: 22px;
         }
 
+
         .nav-icons a {
             color: #111;
             font-size: 20px;
             text-decoration: none;
-            transition: .3s;
-        }
-
-        .nav-icons a:hover {
-            color: #777;
         }
 
 
         /* =========================
-           PRODUCT DETAIL
+           SUBCATEGORY DETAIL
+           SAME AS PRODUCT DETAIL
         ========================= */
 
-        .product-detail-section {
+        .subcategory-detail-section {
             padding: 70px 0 100px;
         }
 
-        .product-image-wrapper {
+
+        .subcategory-image-wrapper {
             position: relative;
             overflow: hidden;
             background: #f5f5f5;
         }
 
-        .product-image-wrapper img {
+
+        .subcategory-image-wrapper img {
             width: 100%;
             height: 650px;
             object-fit: cover;
@@ -122,20 +138,22 @@
             transition: transform .7s ease;
         }
 
-        .product-image-wrapper:hover img {
+
+        .subcategory-image-wrapper:hover img {
             transform: scale(1.03);
         }
 
 
         /* =========================
-           PRODUCT INFORMATION
+           SUBCATEGORY INFO
         ========================= */
 
-        .product-info {
+        .subcategory-info {
             padding: 20px 30px 20px 55px;
         }
 
-        .product-label {
+
+        .subcategory-label {
             font-size: 11px;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -143,7 +161,8 @@
             margin-bottom: 15px;
         }
 
-        .product-title {
+
+        .subcategory-title {
             font-size: 52px;
             line-height: 1.1;
             font-weight: 200;
@@ -152,24 +171,8 @@
             margin-bottom: 20px;
         }
 
-        .product-price {
-            font-size: 18px;
-            letter-spacing: 1px;
-            margin-bottom: 25px;
-        }
 
-        .old-price {
-            color: #999;
-            text-decoration: line-through;
-            margin-right: 12px;
-        }
-
-        .discount-price {
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        .product-description {
+        .subcategory-description {
             color: #777;
             font-size: 14px;
             line-height: 1.9;
@@ -178,87 +181,67 @@
 
 
         /* =========================
-           STOCK
+           CATEGORY
         ========================= */
 
-        .stock-status {
-            font-size: 11px;
-            letter-spacing: 2px;
+        .category-box {
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+
+            padding: 18px 0;
+
+            margin-bottom: 30px;
+        }
+
+
+        .category-label {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 6px;
+}
+
+
+        .category-name {
+            
+            font-size: 25px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 25px;
-        }
-
-        .stock-in {
-            color: #333;
-        }
-
-        .stock-out {
-            color: #999;
         }
 
 
         /* =========================
-           QUANTITY
+           EXPLORE BUTTON
         ========================= */
 
-        .quantity-wrapper {
-            margin-bottom: 20px;
-        }
-
-        .quantity-label {
-            display: block;
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .quantity-input {
-            width: 100px;
-            height: 48px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .quantity-input:focus {
-            outline: none;
-            border-color: #111;
-        }
-
-
-        /* =========================
-           ADD TO CART
-        ========================= */
-
-        .add-cart-btn {
+        .explore-btn {
             width: 100%;
             border: none;
             background: #111;
             color: #fff;
+
             padding: 17px;
+
             font-family: 'Montserrat', sans-serif;
             font-size: 12px;
             letter-spacing: 2px;
             text-transform: uppercase;
+
+            text-decoration: none;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
             transition: .3s;
         }
 
-        .add-cart-btn:hover {
-            background: #333;
-        }
 
-        .out-cart-btn {
-            width: 100%;
-            border: none;
-            background: #aaa;
+        .explore-btn:hover {
+            background: #333;
             color: #fff;
-            padding: 17px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
         }
 
 
@@ -266,7 +249,7 @@
            BACK BUTTON
         ========================= */
 
-        .back-products {
+        .back-subcategory {
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -283,16 +266,50 @@
             transition: .3s;
         }
 
-        .back-products i {
+
+        .back-subcategory i {
             transition: .3s;
         }
 
-        .back-products:hover {
+
+        .back-subcategory:hover {
             color: #777;
         }
 
-        .back-products:hover i {
+
+        .back-subcategory:hover i {
             transform: translateX(-4px);
+        }
+
+
+        /* =========================
+           BANNER
+        ========================= */
+
+        .subcategory-banner-section {
+            margin-top: 90px;
+        }
+
+
+        .subcategory-banner-wrapper {
+            position: relative;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+
+        .subcategory-banner-wrapper img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+
+            transition: transform .7s ease;
+        }
+
+
+        .subcategory-banner-wrapper:hover img {
+            transform: scale(1.03);
         }
 
 
@@ -306,12 +323,14 @@
             padding: 55px 0;
         }
 
+
         .footer-brand {
             font-family: 'Cormorant Garamond', serif;
             font-size: 34px;
             font-weight: 600;
             letter-spacing: 4px;
         }
+
 
         .footer p {
             color: #aaa;
@@ -329,12 +348,19 @@
                 display: none;
             }
 
-            .product-info {
+
+            .subcategory-info {
                 padding: 40px 10px;
             }
 
-            .product-image-wrapper img {
+
+            .subcategory-image-wrapper img {
                 height: 550px;
+            }
+
+
+            .subcategory-title {
+                font-size: 48px;
             }
 
         }
@@ -346,24 +372,34 @@
                 height: 70px;
             }
 
+
             .brand {
                 font-size: 28px;
             }
 
-            .product-detail-section {
+
+            .subcategory-detail-section {
                 padding: 40px 0 70px;
             }
 
-            .product-image-wrapper img {
+
+            .subcategory-image-wrapper img {
                 height: 450px;
             }
 
-            .product-title {
+
+            .subcategory-title {
                 font-size: 40px;
             }
 
-            .nav-icons {
-                gap: 15px;
+
+            .subcategory-banner-section {
+                margin-top: 60px;
+            }
+
+
+            .subcategory-banner-wrapper img {
+                height: 350px;
             }
 
         }
@@ -386,6 +422,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
 
+
             {{-- LOGO --}}
 
             <a
@@ -401,33 +438,47 @@
             <ul class="nav-links">
 
                 <li>
+
                     <a href="{{ url('/') }}">
                         Home
                     </a>
+
                 </li>
 
+
                 <li>
-                    <a href="{{ route('user.products') }}">
+
+                    <a href="{{ route('signatures') }}">
                         Shop
                     </a>
+
                 </li>
 
+
                 <li>
+
                     <a href="{{ url('/collections') }}">
                         Collections
                     </a>
+
                 </li>
 
+
                 <li>
+
                     <a href="{{ route('blogs') }}">
                         Blog
                     </a>
+
                 </li>
 
+
                 <li>
+
                     <a href="{{ url('/') }}#contact">
                         Contact
                     </a>
+
                 </li>
 
             </ul>
@@ -438,15 +489,23 @@
             <div class="nav-icons">
 
                 <a href="#">
+
                     <i class="bi bi-search"></i>
+
                 </a>
 
+
                 <a href="#">
+
                     <i class="bi bi-person"></i>
+
                 </a>
 
+
                 <a href="#">
+
                     <i class="bi bi-bag"></i>
+
                 </a>
 
             </div>
@@ -460,24 +519,24 @@
 
 
 {{-- =========================
-     PRODUCT DETAIL
+     SUBCATEGORY DETAIL
 ========================= --}}
 
-<section class="product-detail-section">
+<section class="subcategory-detail-section">
 
     <div class="container">
 
 
-        {{-- BACK TO PRODUCTS --}}
+        {{-- BACK --}}
 
         <a
-            href="{{ route('user.products') }}"
-            class="back-products"
+            href="{{ url()->previous() }}"
+            class="back-subcategory"
         >
 
             <i class="bi bi-arrow-left"></i>
 
-            Back To Products
+            Back
 
         </a>
 
@@ -487,18 +546,26 @@
 
 
             {{-- =========================
-                 PRODUCT IMAGE
+                 SUBCATEGORY IMAGE
             ========================= --}}
 
             <div class="col-lg-7">
 
-                <div class="product-image-wrapper">
+                <div class="subcategory-image-wrapper">
 
-                    @if($product->image)
+
+                    @if($subCategory->image)
 
                         <img
-                            src="{{ asset('uploads/products/' . $product->image) }}"
-                            alt="{{ $product->name }}"
+                            src="{{ asset('uploads/subcategories/' . $subCategory->image) }}"
+                            alt="{{ $subCategory->name }}"
+                        >
+
+                    @elseif($subCategory->banner)
+
+                        <img
+                            src="{{ asset('uploads/subcategories/' . $subCategory->banner) }}"
+                            alt="{{ $subCategory->name }}"
                         >
 
                     @else
@@ -517,6 +584,7 @@
 
                     @endif
 
+
                 </div>
 
             </div>
@@ -524,155 +592,145 @@
 
 
             {{-- =========================
-                 PRODUCT INFORMATION
+                 SUBCATEGORY INFORMATION
             ========================= --}}
 
             <div class="col-lg-5">
 
-                <div class="product-info">
+                <div class="subcategory-info">
 
 
-                    {{-- PRODUCT LABEL --}}
+                    {{-- LABEL --}}
 
-                    <div class="product-label">
+                    <div class="subcategory-label">
+
                         Kaira Collection
+
                     </div>
 
 
-                    {{-- PRODUCT NAME --}}
 
-                    <h1 class="product-title">
-                        {{ $product->name }}
+                    {{-- TITLE --}}
+
+                    <h1 class="subcategory-title">
+
+                        {{ $subCategory->name }}
+
                     </h1>
 
-
-                    {{-- PRICE --}}
-
-                   <div class="product-price">
-
-    @if($product->discount_price)
-
-        {{-- Actual Price --}}
-        <span class="old-price">
-            Rs. {{ number_format($product->price, 2) }}
-        </span>
-
-        {{-- Discount Price --}}
-        <span class="discount-price">
-            Rs. {{ number_format($product->discount_price, 2) }}
-        </span>
-
-    @else
-
-        <span class="discount-price">
-            Rs. {{ number_format($product->price, 2) }}
-        </span>
-
-    @endif
-
-</div>
 
 
                     {{-- DESCRIPTION --}}
 
-                    @if($product->description)
+                    @if($subCategory->description)
 
-                        <div class="product-description">
+                        <div class="subcategory-description">
 
-                            {!! $product->description !!}
+                            {!! $subCategory->description !!}
+
+                        </div>
+
+                    @else
+
+                        <div class="subcategory-description">
+
+                            Discover the timeless style and
+                            carefully selected designs of our
+                            {{ $subCategory->name }} collection.
 
                         </div>
 
                     @endif
 
 
-                    {{-- STOCK STATUS --}}
 
-                  
+                 {{-- PRICE --}}
+{{-- PRICE --}}
 
-                    {{-- =========================
-                         ADD TO CART
-                    ========================= --}}
+<div class="category-box">
 
-                    @if($product->stock > 0)
+    <div class="category-label">
+        Price
+    </div>
 
-                        <form
-                            action="{{ route('cart.add.product') }}"
-                            method="POST"
-                        >
+    <div class="category-name">
 
-                            @csrf
+        @if($subCategory->discount_price)
 
+            {{-- Original / Actual Price --}}
+            <span style="
+                color:#999;
+                text-decoration:line-through;
+                font-size:18px;
+                margin-right:10px;
+            ">
+                ${{ number_format($subCategory->price, 2) }}
+            </span>
 
-                            <input
-                                type="hidden"
-                                name="product_id"
-                                value="{{ $product->product_id }}"
-                            >
+            {{-- Discount Price --}}
+            <span style="
+                color:#111;
+                font-size:25px;
+                font-weight:600;
+            ">
+                ${{ number_format($subCategory->discount_price, 2) }}
+            </span>
 
+        @else
 
-                            {{-- QUANTITY --}}
+            {{-- Regular Price --}}
+            <span style="
+                color:#111;
+                font-size:25px;
+                font-weight:600;
+            ">
+                ${{ number_format($subCategory->price, 2) }}
+            </span>
 
-                            <div class="quantity-wrapper">
+        @endif
 
-                                <label
-                                    for="quantity"
-                                    class="quantity-label"
-                                >
-                                    Quantity
-                                </label>
+    </div>
 
-                                <input
-                                    type="number"
-                                    id="quantity"
-                                    name="quantity"
-                                    value="1"
-                                    min="1"
-                                    max="{{ $product->stock }}"
-                                    class="quantity-input"
-                                >
-
-                            </div>
-
-
-                            {{-- ADD BUTTON --}}
-
-                            <button
-                                type="submit"
-                                class="add-cart-btn"
-                            >
-
-                                <i class="bi bi-bag me-2"></i>
-
-                                Add To Cart
-
-                            </button>
-
-                        </form>
-
-                    @else
-
-                        <button
-                            type="button"
-                            class="out-cart-btn"
-                            disabled
-                        >
-
-                            <i class="bi bi-bag me-2"></i>
-
-                            Out of Stock
-
-                        </button>
-
-                    @endif
+</div>
 
 
+                    {{-- EXPLORE --}}
+
+<form
+    action="{{ route('cart.add.subcategory') }}"
+    method="POST"
+>
+    @csrf
+
+    <input
+        type="hidden"
+        name="subcategory_id"
+        value="{{ $subCategory->subcategory_id }}"
+    >
+
+    <button
+        type="submit"
+        class="explore-btn"
+    >
+        <i class="bi bi-bag me-2"></i>
+        Add To Cart
+    </button>
+
+</form>
                 </div>
 
             </div>
 
 
         </div>
+
+
+
+        {{-- =========================
+             BANNER
+        ========================= --}}
+
+      
 
     </div>
 
@@ -690,15 +748,21 @@
 
         <div class="row">
 
+
             <div class="col-md-6">
 
                 <div class="footer-brand">
+
                     KAIRA
+
                 </div>
 
+
                 <p class="mt-3">
+
                     Discover timeless fashion designed
                     for modern living.
+
                 </p>
 
             </div>
@@ -707,11 +771,14 @@
             <div class="col-md-6 text-md-end">
 
                 <p>
+
                     © {{ date('Y') }} Kaira.
                     All Rights Reserved.
+
                 </p>
 
             </div>
+
 
         </div>
 

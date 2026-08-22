@@ -479,17 +479,15 @@
 
 
 {{-- ADD TO CART --}}
-
 <form
-    action="{{ route('cart.add') }}"
+    action="{{ route('cart.add.signature') }}"
     method="POST"
 >
-
     @csrf
 
     <input
         type="hidden"
-        name="product_id"
+        name="signature_id"
         value="{{ $signature->signature_id }}"
     >
 
@@ -497,11 +495,8 @@
         type="submit"
         class="add-cart-btn"
     >
-
         <i class="bi bi-bag me-2"></i>
-
         Add To Cart
-
     </button>
 
 </form>

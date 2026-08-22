@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('sub_categories', function (Blueprint $table) {
 
             $table->id();
-            
 
             $table->uuid('subcategory_id')->unique();
 
@@ -27,6 +26,12 @@ return new class extends Migration
             $table->string('slug')->unique();
 
             $table->text('description')->nullable();
+
+            // Price
+            $table->decimal('price', 10, 2)->nullable();
+
+            // Discount Price
+            $table->decimal('discount_price', 10, 2)->nullable();
 
             $table->string('image')->nullable();
 

@@ -565,7 +565,7 @@
                         @endif
 
 
-                       <form action="{{ route('cart.add') }}" method="POST">
+                       <form action="{{ route('cart.add.product') }}" method="POST">
     @csrf
 
     <input

@@ -259,6 +259,51 @@
                                   class="form-control">{{ old('meta_description',$subcategory->meta_description) }}</textarea>
 
                     </div>
+                    {{-- Price --}}
+
+<div class="col-md-6 mb-3">
+
+    <label class="form-label">
+        Price <span class="text-danger">*</span>
+    </label>
+
+    <input
+        type="number"
+        name="price"
+        class="form-control"
+        placeholder="Enter Price"
+        value="{{ old('price', $subcategory->price) }}"
+        min="0"
+        step="0.01"
+        required
+    >
+
+</div>
+
+
+{{-- Discount Price --}}
+
+<div class="col-md-6 mb-3">
+
+    <label class="form-label">
+        Discount Price
+    </label>
+
+    <input
+        type="number"
+        name="discount_price"
+        class="form-control"
+        placeholder="Enter Discount Price"
+        value="{{ old('discount_price', $subcategory->discount_price) }}"
+        min="0"
+        step="0.01"
+    >
+
+    <small class="text-muted">
+        Leave empty if there is no discount.
+    </small>
+
+</div>
 
                     <div class="col-12 mt-3">
 

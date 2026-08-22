@@ -8,45 +8,65 @@ use Illuminate\Database\Eloquent\Model;
 class SubCategory extends Model
 {
     use HasFactory;
+
     protected $fillable = [
 
-    'subcategory_id',
+        'subcategory_id',
 
-    'category_id',
+        'category_id',
 
-    'name',
+        'name',
 
-    'slug',
+        'slug',
 
-    'description',
+        'description',
 
-    'image',
+        'price',
 
-    'banner',
+        'discount_price',
 
-    'icon',
+        'image',
 
-    'featured',
+        'banner',
 
-    'show_on_home',
+        'icon',
 
-    'status',
+        'featured',
 
-    'sort_order',
+        'show_on_home',
 
-    'meta_title',
+        'status',
 
-    'meta_description'
+        'sort_order',
 
-];
+        'meta_title',
 
-public function category()
-{
-    return $this->belongsTo(Category::class);
+        'meta_description',
+
+    ];
+
+    protected $casts = [
+        'price' => 'decimal:2',
+        'discount_price' => 'decimal:2',
+
+        'featured' => 'boolean',
+        'show_on_home' => 'boolean',
+        'status' => 'boolean',
+    ];
+
+    /**
+     * Sub Category belongs to Category
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Use subcategory_id instead of id in URLs
+     */
+    public function getRouteKeyName()
+    {
+        return 'subcategory_id';
+    }
 }
-public function getRouteKeyName()
-{
-    return 'subcategory_id';
-}
-}
-

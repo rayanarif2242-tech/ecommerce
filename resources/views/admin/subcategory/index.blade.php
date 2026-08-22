@@ -83,6 +83,10 @@
 
                     <th>Sub Category</th>
 
+                    <th>Price</th>
+
+                   <th>Discount Price</th>
+
                     <th>Featured</th>
 
                     <th>Home</th>
@@ -154,6 +158,46 @@
                         </small>
 
                     </td>
+                    {{-- Price --}}
+
+<td>
+
+    @if($subcategory->price !== null)
+
+        <strong>
+            ${{ number_format($subcategory->price, 2) }}
+        </strong>
+
+    @else
+
+        <span class="text-muted">
+            Not Set
+        </span>
+
+    @endif
+
+</td>
+
+
+{{-- Discount Price --}}
+
+<td>
+
+    @if($subcategory->discount_price !== null)
+
+        <strong class="text-success">
+            ${{ number_format($subcategory->discount_price, 2) }}
+        </strong>
+
+    @else
+
+        <span class="text-muted">
+            —
+        </span>
+
+    @endif
+
+</td>
 
                     <td>
 
@@ -250,7 +294,7 @@
 
                 <tr>
 
-                    <td colspan="10" class="text-center py-4">
+                    <td colspan="12" class="text-center py-4">
 
                         No Sub Categories Found
 

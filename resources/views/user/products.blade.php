@@ -9,64 +9,36 @@
 
     <title>All Products | Kaira</title>
 
-    {{-- Bootstrap --}}
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
-    {{-- Bootstrap Icons --}}
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
 
-    {{-- Google Fonts --}}
-   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
 
     <style>
-
         * {
             box-sizing: border-box;
         }
 
-       body {
-    margin: 0;
-    background: #fff;
-    color: #111;
-    font-family: 'Montserrat', sans-serif;
-}
-.product-name {
-    color: #111;
-    text-decoration: none;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 500;
-    display: block;
-    margin-bottom: 9px;
-}
-.product-price {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    color: #111;
-}
-.products-hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 64px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    margin: 0 0 18px;
-}
+        body {
+            margin: 0;
+            background: #fff;
+            color: #111;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-        /* =========================
-           NAVBAR
-        ========================= */
+        a {
+            text-decoration: none;
+        }
 
         .main-navbar {
             height: 82px;
@@ -77,13 +49,12 @@
         }
 
         .brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 34px;
-    font-weight: 600;
-    letter-spacing: 4px;
-    color: #111;
-    text-decoration: none;
-}
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 34px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: #111;
+        }
 
         .nav-links {
             display: flex;
@@ -94,16 +65,10 @@
         }
 
         .nav-links a {
-            text-decoration: none;
             color: #222;
             font-size: 14px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #888;
         }
 
         .nav-icons {
@@ -115,70 +80,73 @@
         .nav-icons a {
             color: #111;
             font-size: 20px;
-            text-decoration: none;
         }
 
-        /* =========================
-           HERO
-        ========================= */
-.products-hero {
-    /* background: #f5f4f1; */
-    text-align: center;
-    padding-top: 25px;
-    margin-top: 25px;
-}
+        .products-hero {
+            text-align: center;
+            padding: 55px 15px 45px;
+        }
 
         .products-hero small {
-    display: block;
-    font-size: 33px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 0px;
-    color: #0d0d0d;
-}
+            display: block;
+            font-size: 13px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #777;
+            margin-bottom: 12px;
+        }
 
-       
+        .products-hero h1 {
+            font-size: 60px;
+            font-weight: 390;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0;
+        }
 
-        
-
-        /* =========================
-           PRODUCTS HEADER
-        ========================= */
+        .products-hero p {
+            color: #888;
+            font-size: 13px;
+            margin-top: 12px;
+        }
 
         .products-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #e5e5e5;
         }
 
         .products-count {
-            font-size: 14px;
+            font-size: 13px;
             color: #777;
             letter-spacing: 1px;
+        }
+
+        .products-count strong {
+            color: #111;
+            font-weight: 500;
         }
 
         .sort-box {
             border: 1px solid #ddd;
             padding: 10px 15px;
-            font-family: 'Jost', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             background: #fff;
+            color: #111;
         }
-
-        /* =========================
-           PRODUCT CARD
-        ========================= */
 
         .product-card {
             position: relative;
             height: 100%;
             background: #fff;
-            transition: transform 0.3s ease;
+            transition: transform .3s ease;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
         }
 
         .product-image-wrapper {
@@ -189,19 +157,15 @@
 
         .product-image-wrapper img {
             width: 100%;
-            height: 450px;
+            height: 460px;
             object-fit: cover;
             display: block;
-            transition: transform 0.6s ease;
+            transition: transform .6s ease;
         }
 
-      .product-card:hover .product-image-wrapper img {
-    transform: scale(1.04);
-}
-
-        /* =========================
-           WISHLIST
-        ========================= */
+        .product-card:hover .product-image-wrapper img {
+            transform: scale(1.04);
+        }
 
         .wishlist-btn {
             position: absolute;
@@ -210,147 +174,131 @@
             width: 44px;
             height: 44px;
             border: none;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255,255,255,.95);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 19px;
+            font-size: 18px;
             color: #111;
             z-index: 2;
-            transition: 0.3s;
+            cursor: pointer;
         }
 
-        .wishlist-btn:hover {
+        .sale-badge {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            z-index: 2;
             background: #111;
             color: #fff;
+            padding: 7px 12px;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        /* =========================
-           QUICK ADD
-        ========================= */
-
-      
-
-    
-
-     
-      
-
-        /* =========================
-           PRODUCT DETAILS
-        ========================= */
-
         .product-details {
-            padding: 18px 2px 35px;
+            padding: 20px 2px 35px;
         }
 
         .product-name {
             color: #111;
-            text-decoration: none;
-            font-size: 17px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            font-weight: 400;
+            font-weight: 500;
             display: block;
             margin-bottom: 9px;
         }
 
-        .product-name:hover {
-            color: #777;
-        }
-
         .product-price {
-            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
             color: #111;
         }
 
         .old-price {
             color: #999;
             text-decoration: line-through;
-            margin-left: 8px;
+            font-size: 12px;
         }
 
-        /* =========================
-           ADD TO CART
-        ========================= */
+        .stock-status {
+            margin-top: 10px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .in-stock {
+            color: #555;
+        }
+
+        .out-stock {
+            color: #999;
+        }
+
+        .add-cart-btn,
+        .out-stock-btn {
+            width: 100%;
+            height: 48px;
+            margin-top: 14px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
         .add-cart-btn {
-            width: 100%;
             border: 1px solid #111;
             background: #111;
-            color: white;
-            padding: 13px 15px;
-            margin-top: 13px;
-            font-size: 12px;
-            letter-spacing: 2px;
-            transition: 0.3s;
+            color: #fff;
         }
 
         .add-cart-btn:hover {
-            background: white;
+            background: #fff;
             color: #111;
         }
 
-        /* =========================
-           FOOTER
-        ========================= */
+        .out-stock-btn {
+            border: 1px solid #ddd;
+            background: #eee;
+            color: #777;
+        }
 
         .footer {
             margin-top: 80px;
             background: #111;
-            color: white;
+            color: #fff;
             padding: 55px 0;
         }
 
         .footer-brand {
-            font-family: 'Playfair Display', serif;
-            font-size: 30px;
-            letter-spacing: 3px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 34px;
+            letter-spacing: 4px;
         }
 
         .footer p {
             color: #aaa;
-            font-size: 14px;
         }
 
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
         @media (max-width: 991px) {
-
             .nav-links {
                 display: none;
             }
 
             .products-hero h1 {
-                font-size: 45px;
+                font-size: 48px;
             }
-
-            .product-image-wrapper img {
-                height: 390px;
-            }
-
         }
 
         @media (max-width: 767px) {
-
-            .main-navbar {
-                height: 70px;
-            }
-
-            .brand {
-                font-size: 25px;
-            }
-
-            .products-hero {
-                padding: 60px 15px;
-                margin-bottom: 45px;
-            }
-
             .products-hero h1 {
-                font-size: 38px;
+                font-size: 40px;
             }
 
             .products-top {
@@ -358,31 +306,15 @@
             }
 
             .sort-box {
-    border: 1px solid #ddd;
-    padding: 10px 15px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    background: #fff;
-}
-
-            .product-image-wrapper img {
-                height: 400px;
+                margin-top: 15px;
+                width: 100%;
             }
-
-
         }
-
     </style>
 
 </head>
 
-
 <body>
-
-
-{{-- =========================
-     NAVBAR
-========================= --}}
 
 <nav class="main-navbar">
 
@@ -390,13 +322,10 @@
 
         <div class="d-flex align-items-center justify-content-between">
 
-            {{-- Logo --}}
             <a href="{{ url('/') }}" class="brand">
                 KAIRA
             </a>
 
-
-            {{-- Navigation --}}
             <ul class="nav-links">
 
                 <li>
@@ -404,25 +333,19 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('/products') }}">Shop</a>
+                    <a href="{{ route('user.products') }}">Shop</a>
                 </li>
 
                 <li>
-                    <a href="{{ url('/') }}#collections">
-                        Collections
-                    </a>
+                    <a href="{{ url('/') }}#collections">Collections</a>
                 </li>
 
                 <li>
-                    <a href="{{ url('/') }}#contact">
-                        Contact
-                    </a>
+                    <a href="{{ url('/') }}#contact">Contact</a>
                 </li>
 
             </ul>
 
-
-            {{-- Icons --}}
             <div class="nav-icons">
 
                 <a href="#">
@@ -433,7 +356,7 @@
                     <i class="bi bi-person"></i>
                 </a>
 
-                <a href="#">
+                <a href="{{ route('cart.show') }}">
                     <i class="bi bi-bag"></i>
                 </a>
 
@@ -446,46 +369,44 @@
 </nav>
 
 
-
-{{-- =========================
-     HERO
-========================= --}}
-
 <section class="products-hero">
 
-    <small>Discover New Arrival</small>
+    <small>
+        Discover New Arrivals
+    </small>
 
-  
+    <h1>
+        All Products
+    </h1>
+
+    <p>
+        Explore our carefully selected collection
+    </p>
 
 </section>
 
 
-
-{{-- =========================
-     PRODUCTS
-========================= --}}
-
-<section class="container pb-5 mt-5">
+<section class="container pb-5">
 
     <div class="products-top">
 
         <div class="products-count">
 
             Showing
-            <strong>{{ $products->count() }}</strong>
+
+            <strong>
+                {{ $products->count() }}
+            </strong>
+
             Products
 
         </div>
 
-
         <select class="sort-box">
 
             <option>Sort by Latest</option>
-
             <option>Price: Low to High</option>
-
             <option>Price: High to Low</option>
-
             <option>Featured</option>
 
         </select>
@@ -493,94 +414,95 @@
     </div>
 
 
-
-    <div class="row g-4">
-
+    <div class="row g-5">
 
         @forelse($products as $product)
 
-
-            <div class="col-12 col-sm-6 col-lg-3">
-
+            <div class="col-12 col-md-6 col-lg-4">
 
                 <div class="product-card">
 
-
                     {{-- IMAGE --}}
-
                     <div class="product-image-wrapper">
 
+                        <a href="{{ route('product.show', $product->slug) }}">
 
-                        <a href="{{ url('/product/' . $product->product_id) }}">
+                            @if($product->image)
 
-                            <img
-                                src="{{ asset('uploads/products/' . $product->image) }}"
-                                alt="{{ $product->name }}"
-                                loading="lazy"
-                            >
+                                <img
+                                    src="{{ asset('uploads/products/' . $product->image) }}"
+                                    alt="{{ $product->name }}"
+                                    loading="lazy"
+                                >
+
+                            @else
+
+                                <div
+                                    class="d-flex align-items-center justify-content-center"
+                                    style="height:460px;"
+                                >
+                                    <i
+                                        class="bi bi-image"
+                                        style="font-size:70px;color:#aaa;"
+                                    ></i>
+                                </div>
+
+                            @endif
 
                         </a>
 
 
-                        {{-- Wishlist --}}
+                        {{-- SALE --}}
+                        @if($product->discount_price)
 
+                            <div class="sale-badge">
+                                Sale
+                            </div>
+
+                        @endif
+
+
+                        {{-- WISHLIST --}}
                         <button
                             type="button"
                             class="wishlist-btn"
+                            title="Add to Wishlist"
                         >
-
                             <i class="bi bi-heart"></i>
-
                         </button>
-
-
-                        {{-- Hover Add --}}
-
-                       
-
 
                     </div>
 
 
-
                     {{-- DETAILS --}}
-
                     <div class="product-details">
 
-
+                        {{-- NAME --}}
                         <a
-                            href="{{ url('/product/' . $product->product_id) }}"
+                            href="{{ route('product.show', $product->slug) }}"
                             class="product-name"
                         >
-
                             {{ $product->name }}
-
                         </a>
 
 
-
+                        {{-- PRICE --}}
                         <div class="product-price">
 
                             @if($product->discount_price)
 
                                 <span>
-
-                                    ${{ number_format($product->discount_price, 2) }}
-
+                                    Rs. {{ number_format($product->discount_price) }}
                                 </span>
 
                                 <span class="old-price">
-
-                                    ${{ number_format($product->price, 2) }}
-
+                                    Rs. {{ number_format($product->price) }}
                                 </span>
 
                             @else
 
                                 <span>
-
-                                    ${{ number_format($product->price, 2) }}
-
+                                    Rs. {{ number_format($product->price) }}
                                 </span>
 
                             @endif
@@ -588,13 +510,29 @@
                         </div>
 
 
+                        {{-- STOCK --}}
+                        @if($product->stock > 0)
 
-                        {{-- Normal Add To Cart --}}
+                            <div class="stock-status in-stock">
+                                <i class="bi bi-check2"></i>
+                                In Stock
+                            </div>
 
+                        @else
+
+                            <div class="stock-status out-stock">
+                                <i class="bi bi-x"></i>
+                                Out of Stock
+                            </div>
+
+                        @endif
+
+
+                        {{-- CART --}}
                         @if($product->stock > 0)
 
                             <form
-                                action="{{ route('cart.add') }}"
+                                action="{{ route('cart.add.product') }}"
                                 method="POST"
                             >
 
@@ -606,13 +544,18 @@
                                     value="{{ $product->product_id }}"
                                 >
 
+                                <input
+                                    type="hidden"
+                                    name="quantity"
+                                    value="1"
+                                >
+
                                 <button
                                     type="submit"
                                     class="add-cart-btn"
                                 >
-
-                                    ADD TO CART
-
+                                    <i class="bi bi-bag"></i>
+                                    Add To Cart
                                 </button>
 
                             </form>
@@ -620,28 +563,22 @@
                         @else
 
                             <button
-                                class="add-cart-btn"
+                                type="button"
+                                class="out-stock-btn"
                                 disabled
                             >
-
-                                OUT OF STOCK
-
+                                Out of Stock
                             </button>
 
                         @endif
 
-
                     </div>
-
 
                 </div>
 
-
             </div>
 
-
         @empty
-
 
             <div class="col-12">
 
@@ -649,7 +586,7 @@
 
                     <i
                         class="bi bi-bag-x"
-                        style="font-size:60px;"
+                        style="font-size:60px;color:#aaa;"
                     ></i>
 
                     <h3 class="mt-4">
@@ -664,19 +601,12 @@
 
             </div>
 
-
         @endforelse
-
 
     </div>
 
 </section>
 
-
-
-{{-- =========================
-     FOOTER
-========================= --}}
 
 <footer class="footer">
 
@@ -713,12 +643,7 @@
 </footer>
 
 
-
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-</script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>

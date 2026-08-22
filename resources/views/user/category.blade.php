@@ -119,9 +119,9 @@
         }
 
         .category-title {
-            font-family: 'Cormorant Garamond', serif;
+           
             font-size: 64px;
-            font-weight: 500;
+            font-weight: 390;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin: 0 0 15px;
@@ -267,9 +267,9 @@
         }
 
         .subcategory-name {
-            font-family: 'Cormorant Garamond', serif;
+         
             font-size: 30px;
-            font-weight: 500;
+            font-weight: 390;
             letter-spacing: 1px;
             text-transform: uppercase;
             margin: 0 0 7px;
@@ -491,16 +491,7 @@
 
         {{-- BACK BUTTON --}}
 
-        <a
-            href="{{ url('/') }}"
-            class="back-home"
-        >
-
-            <i class="bi bi-arrow-left"></i>
-
-            Back To Categories
-
-        </a>
+        
 
 
         <div class="category-label">

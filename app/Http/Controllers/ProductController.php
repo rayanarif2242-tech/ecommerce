@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -14,19 +13,26 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::when($request->search, function ($query) use ($request) {
+        $products = Product::with('category')
+            ->when($request->search, function ($query) use ($request) {
 
-            $query->where(function ($q) use ($request) {
+                $query->where(function ($q) use ($request) {
 
-                $q->where('product_id', 'like', '%' . $request->search . '%')
-                  ->orWhere('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('category', 'like', '%' . $request->search . '%');
+                    $q->where('product_id', 'like', '%' . $request->search . '%')
+                        ->orWhere('name', 'like', '%' . $request->search . '%')
+                        ->orWhereHas('category', function ($categoryQuery) use ($request) {
+                            $categoryQuery->where(
+                                'name',
+                                'like',
+                                '%' . $request->search . '%'
+                            );
+                        });
 
-            });
+                });
 
-        })
-        ->latest()
-        ->get();
+            })
+            ->latest()
+            ->get();
 
         return view('admin.product.index', compact('products'));
     }
@@ -51,32 +57,27 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
             'name' => 'required|string|max:255',
-
-          'category_id' => 'required|exists:categories,id',
-
+            'category_id' => 'required|exists:categories,id',
             'price' => 'required|numeric|min:0',
-
             'discount_price' => 'nullable|numeric|min:0',
-
             'stock' => 'required|integer|min:0',
-
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-
             'description' => 'nullable|string',
-
             'featured' => 'nullable|boolean',
-
             'home' => 'nullable|boolean',
-
             'status' => 'nullable|boolean',
-
+            'sort' => 'nullable|integer',
         ]);
 
 
-        $image = null;
+        /*
+        |--------------------------------------------------------------------------
+        | Upload Product Image
+        |--------------------------------------------------------------------------
+        */
 
+        $image = null;
 
         if ($request->hasFile('image')) {
 
@@ -89,30 +90,24 @@ class ProductController extends Controller
         }
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Create Product
+        |--------------------------------------------------------------------------
+        */
+
         Product::create([
-
-            'product_id' => (string) Str::uuid(),
-
             'name' => $request->name,
-
-          'category_id' => $request->category_id,
-
+            'category_id' => $request->category_id,
             'price' => $request->price,
-
             'discount_price' => $request->discount_price,
-
             'stock' => $request->stock,
-
             'image' => $image,
-
             'description' => $request->description,
-
             'featured' => $request->featured ?? 0,
-
             'home' => $request->home ?? 0,
-
             'status' => $request->status ?? 1,
-
+            'sort' => $request->sort ?? 0,
         ]);
 
 
@@ -152,36 +147,45 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Validation
+        |--------------------------------------------------------------------------
+        */
+
         $request->validate([
-
             'name' => 'required|string|max:255',
-
             'category_id' => 'required|exists:categories,id',
-
             'price' => 'required|numeric|min:0',
-
             'discount_price' => 'nullable|numeric|min:0',
-
             'stock' => 'required|integer|min:0',
-
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-
             'description' => 'nullable|string',
-
             'featured' => 'nullable|boolean',
-
             'home' => 'nullable|boolean',
-
             'status' => 'nullable|boolean',
-
+            'sort' => 'nullable|integer',
         ]);
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Keep Existing Image
+        |--------------------------------------------------------------------------
+        */
 
         $image = $product->image;
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Upload New Image
+        |--------------------------------------------------------------------------
+        */
+
         if ($request->hasFile('image')) {
 
+            // Delete old image
             if (
                 $product->image &&
                 file_exists(
@@ -194,8 +198,11 @@ class ProductController extends Controller
             }
 
 
+            // Generate new image name
             $image = time() . '.' . $request->image->extension();
 
+
+            // Move new image
             $request->image->move(
                 public_path('uploads/products'),
                 $image
@@ -203,30 +210,32 @@ class ProductController extends Controller
         }
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Update Product
+        |--------------------------------------------------------------------------
+        */
+
         $product->update([
-
             'name' => $request->name,
-
             'category_id' => $request->category_id,
-
             'price' => $request->price,
-
             'discount_price' => $request->discount_price,
-
             'stock' => $request->stock,
-
             'image' => $image,
-
             'description' => $request->description,
-
             'featured' => $request->featured ?? 0,
-
             'home' => $request->home ?? 0,
-
             'status' => $request->status ?? 1,
-
+            'sort' => $request->sort ?? 0,
         ]);
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Redirect
+        |--------------------------------------------------------------------------
+        */
 
         return redirect()
             ->route('admin.products.index')
@@ -239,6 +248,12 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Product Image
+        |--------------------------------------------------------------------------
+        */
+
         if (
             $product->image &&
             file_exists(
@@ -251,6 +266,12 @@ class ProductController extends Controller
         }
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Product
+        |--------------------------------------------------------------------------
+        */
+
         $product->delete();
 
 
@@ -258,12 +279,20 @@ class ProductController extends Controller
             ->route('admin.products.index')
             ->with('success', 'Product Deleted Successfully');
     }
-    public function frontendShow($slug)
-{
-    $product = Product::where('slug', $slug)
-        ->where('status', 1)
-        ->firstOrFail();
 
-    return view('user.product-detail', compact('product'));
-}
+
+    /**
+     * Frontend Product Detail
+     */
+    public function frontendShow($slug)
+    {
+        $product = Product::where('slug', $slug)
+            ->where('status', 1)
+            ->firstOrFail();
+
+        return view(
+            'user.product-detail',
+            compact('product')
+        );
+    }
 }
