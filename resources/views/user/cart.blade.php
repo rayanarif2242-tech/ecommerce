@@ -1316,14 +1316,9 @@
 
                         {{-- CHECKOUT --}}
 
-                        <a
-                            href="#"
-                            class="checkout-btn"
-                        >
-
-                            Proceed To Checkout
-
-                        </a>
+                        <a href="{{ route('checkout') }}" class="checkout-btn">
+    Proceed To Checkout
+</a>
 
 
 

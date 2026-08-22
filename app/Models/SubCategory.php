@@ -57,10 +57,10 @@ class SubCategory extends Model
     /**
      * Sub Category belongs to Category
      */
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
+   public function category()
+{
+    return $this->belongsTo(Category::class, 'category_id', 'id');
+}
 
     /**
      * Use subcategory_id instead of id in URLs

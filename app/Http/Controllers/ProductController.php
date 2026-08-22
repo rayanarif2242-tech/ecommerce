@@ -284,15 +284,32 @@ class ProductController extends Controller
     /**
      * Frontend Product Detail
      */
-    public function frontendShow($slug)
-    {
-        $product = Product::where('slug', $slug)
-            ->where('status', 1)
-            ->firstOrFail();
+   /**
+ * Frontend Product Listing
+ */
+public function frontendIndex()
+{
+    $products = Product::with('category')
+        ->where('status', 1)
+        ->latest()
+        ->get();
 
-        return view(
-            'user.product-detail',
-            compact('product')
-        );
-    }
+    return view('user.products', compact('products'));
+}
+
+
+/**
+ * Frontend Product Detail
+ */
+public function frontendShow($slug)
+{
+    $product = Product::where('slug', $slug)
+        ->where('status', 1)
+        ->firstOrFail();
+
+    return view(
+        'user.product-detail',
+        compact('product')
+    );
+}
 }

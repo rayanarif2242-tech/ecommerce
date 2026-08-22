@@ -24,6 +24,7 @@ use App\Http\Controllers\SignatureController;
 
 use App\Http\Controllers\Home\IndexController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 
 
@@ -288,3 +289,15 @@ Route::get('/cart/remove/{id}', [CartController::class, 'remove'])
 // Clear Cart
 Route::get('/cart/clear', [CartController::class, 'clear'])
     ->name('cart.clear');
+
+
+    // Checkout
+Route::get('/checkout', [CheckoutController::class, 'index'])
+    ->name('checkout');
+
+Route::post('/checkout', [CheckoutController::class, 'store'])
+    ->name('checkout.store');
+
+// Order Success
+Route::get('/order-success/{order_id}', [CheckoutController::class, 'success'])
+    ->name('order.success');

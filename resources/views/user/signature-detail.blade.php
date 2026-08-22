@@ -336,7 +336,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('/') }}#contact">
+                    <a href="{{ route('contact') }}">
                         Contact
                     </a>
                 </li>

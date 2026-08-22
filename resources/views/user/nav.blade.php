@@ -29,45 +29,65 @@
               <ul class="navbar-nav justify-content-end flex-grow-1 gap-1 gap-md-5 pe-3">
                <li class="nav-item">
     <a
-        class="nav-link active"
+        class="nav-link "
         href="{{ route('frontend.home') }}"
     >
         Home
     </a>
 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="dropdownShop" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Shop</a>
-                  <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownShop">
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Sidebar </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Three Column </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Three Column Wide </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Four Column </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Four Column Wide </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Six Column </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Six Column Wide </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Single Product </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Single Product V2 </a>
-                    </li>
-                  </ul>
-                </li>
+             <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle"
+       href="#"
+       id="dropdownShop"
+       data-bs-toggle="dropdown"
+       aria-haspopup="true"
+       aria-expanded="false">
+        Shop
+    </a>
+
+    <ul class="dropdown-menu list-unstyled"
+        aria-labelledby="dropdownShop">
+
+        @foreach($categories as $category)
+
+            <li class="dropdown-submenu">
+
+                <a href="{{ route('category.show', $category->slug) }}"
+                   class="dropdown-item item-anchor d-flex justify-content-between align-items-center">
+
+                    {{ $category->name }}
+
+                    @if($category->subCategories && $category->subCategories->count() > 0)
+                        <span class="submenu-arrow">›</span>
+                    @endif
+
+                </a>
+
+                @if($category->subCategories && $category->subCategories->count() > 0)
+
+                    <ul class="dropdown-menu list-unstyled">
+
+                        @foreach($category->subCategories as $subcategory)
+
+                            <li>
+                                <a href="{{ route('subcategory.show', $subcategory->slug) }}"
+                                   class="dropdown-item item-anchor">
+                                    {{ $subcategory->name }}
+                                </a>
+                            </li>
+
+                        @endforeach
+
+                    </ul>
+
+                @endif
+
+            </li>
+
+        @endforeach
+
+    </ul>
+</li>
                 <li class="nav-item">
     <a
         class="nav-link"
@@ -80,38 +100,24 @@
                   <a class="nav-link dropdown-toggle" href="#" id="dropdownPages" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Pages</a>
                   <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownPages">
+                    
                     <li>
-                      <a href="index.html" class="dropdown-item item-anchor">About </a>
+                      <a href="{{ route('cart.show') }}" class="dropdown-item item-anchor">Cart </a>
                     </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Cart </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Checkout </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Coming Soon </a>
-                    </li>
+                   
+                   
                     <li>
                       <a href="{{ route('contact') }}" class="dropdown-item item-anchor">
     Contact
 </a>
                     </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Error Page </a>
-                    </li>
+                   
                     <li>
                       <a href="index.html" class="dropdown-item item-anchor">FAQs </a>
                     </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">My Account </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Order Tracking </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Wishlist </a>
-                    </li>
+                   
+                   
+                   
                   </ul>
      
                 <li class="nav-item">
@@ -124,10 +130,7 @@
 
         <div class="col-3 col-lg-auto">
           <ul class="list-unstyled d-flex m-0">
-            <li class="d-none d-lg-block">
-              <a href="index.html" class="text-uppercase mx-3">Wishlist <span class="wishlist-count">(0)</span>
-              </a>
-            </li>
+          
             <li class="d-none d-lg-block">
     <a href="{{ route('cart.show') }}"
        class="text-uppercase mx-3">
