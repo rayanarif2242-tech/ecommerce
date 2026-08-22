@@ -695,32 +695,32 @@
 
                     <article class="post-item">
 
-                        {{-- Blog Image --}}
-                        <div class="post-image">
+                      {{-- Blog Image --}}
+<div class="post-image">
 
-                            <a href="#">
+    <a href="{{ route('blogs') }}">
 
-                                @if($blog->image)
+        @if($blog->image)
 
-                                    <img
-                                        src="{{ asset('uploads/blogs/' . $blog->image) }}"
-                                        alt="{{ $blog->title }}"
-                                        class="post-grid-image img-fluid"
-                                    >
+            <img 
+                src="{{ asset('uploads/blogs/' . $blog->image) }}"
+                alt="{{ $blog->title }}"
+                class="post-grid-image img-fluid"
+            >
 
-                                @else
+        @else
 
-                                    <img
-                                        src="{{ asset('homes/images/post-image1.jpg') }}"
-                                        alt="{{ $blog->title }}"
-                                        class="post-grid-image img-fluid"
-                                    >
+            <img 
+                src="{{ asset('homes/images/post-image1.jpg') }}"
+                alt="{{ $blog->title }}"
+                class="post-grid-image img-fluid"
+            >
 
-                                @endif
+        @endif
 
-                            </a>
+    </a>
 
-                        </div>
+</div>
 
 
                         {{-- Blog Content --}}
@@ -742,7 +742,7 @@
 
                             <h5 class="post-title text-uppercase">
 
-                                <a href="#">
+                                <a href="{{ route('blogs') }}">
 
                                     {{ $blog->title }}
 

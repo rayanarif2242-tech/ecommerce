@@ -210,8 +210,13 @@ Route::get('/', [IndexController::class, 'index'])
     ->name('frontend.home');
 
 // All Products
-Route::get('/products', [IndexController::class, 'allProducts'])
-    ->name('user.products');
+
+    // Contact
+Route::get('/contact', [IndexController::class, 'contact'])
+    ->name('contact');
+
+Route::post('/contact', [IndexController::class, 'storeContact'])
+    ->name('contact.store');
 
 // All Collections
 Route::get('/collections', [CollectionController::class, 'frontendIndex'])
@@ -259,3 +264,26 @@ Route::get('/signature/{signature_id}', [SignatureController::class, 'frontendSh
 // Billboard
 Route::get('/billboard/{billboard_id}', [BillboardController::class, 'detail'])
     ->name('billboard.detail');
+
+
+
+
+
+
+
+
+
+    // Cart Quantity
+Route::get('/cart/increase/{id}', [CartController::class, 'increase'])
+    ->name('cart.increase');
+
+Route::get('/cart/decrease/{id}', [CartController::class, 'decrease'])
+    ->name('cart.decrease');
+
+// Remove Cart Item
+Route::get('/cart/remove/{id}', [CartController::class, 'remove'])
+    ->name('cart.remove');
+
+// Clear Cart
+Route::get('/cart/clear', [CartController::class, 'clear'])
+    ->name('cart.clear');

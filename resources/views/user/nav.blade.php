@@ -27,24 +27,14 @@
 
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 gap-1 gap-md-5 pe-3">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle active" href="#" id="dropdownHome" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Home</a>
-                  <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownHome">
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Home Layout 1</a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Home Layout 2 </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Home Layout 3 </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Home Layout 4 </a>
-                    </li>
-                  </ul>
-                </li>
+               <li class="nav-item">
+    <a
+        class="nav-link active"
+        href="{{ route('frontend.home') }}"
+    >
+        Home
+    </a>
+</li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="dropdownShop" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Shop</a>
@@ -78,33 +68,14 @@
                     </li>
                   </ul>
                 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="dropdownBlog" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Blog</a>
-                  <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownBlog">
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Blog Classic </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Blog Grid with Sidebar </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Blog Grid Four Column </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Blog No Sidebar </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Blog Right Sidebar </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Single Post </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Single Post No Sidebar </a>
-                    </li>
-                  </ul>
-                </li>
+                <li class="nav-item">
+    <a
+        class="nav-link"
+        href="{{ route('blogs') }}"
+    >
+        Blog
+    </a>
+</li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="dropdownPages" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Pages</a>
@@ -122,7 +93,9 @@
                       <a href="index.html" class="dropdown-item item-anchor">Coming Soon </a>
                     </li>
                     <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Contact </a>
+                      <a href="{{ route('contact') }}" class="dropdown-item item-anchor">
+    Contact
+</a>
                     </li>
                     <li>
                       <a href="index.html" class="dropdown-item item-anchor">Error Page </a>
@@ -140,7 +113,7 @@
                       <a href="index.html" class="dropdown-item item-anchor">Wishlist </a>
                     </li>
                   </ul>
-                <li>
+                <li  >
     <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button type="submit" class="dropdown-item border-0 bg-transparent w-100 text-start">
@@ -150,7 +123,7 @@
     </form>
 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Contact</a>
+                  <a class="nav-link" href="{{ route('contact') }}">Contact</a>
                 </li>
               </ul>
             </div>

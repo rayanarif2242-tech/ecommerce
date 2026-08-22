@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Kaira | Blog</title>
+    <title>{{ $blog->title }} | Kaira</title>
 
 
     {{-- Bootstrap --}}
@@ -29,7 +29,7 @@
 
     {{-- Fonts --}}
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
         rel="stylesheet"
     >
 
@@ -59,8 +59,6 @@
             background: #fff;
             display: flex;
             align-items: center;
-            position: relative;
-            z-index: 10;
         }
 
 
@@ -122,24 +120,16 @@
            BLOG DETAIL
         ========================= */
 
-        .blog-detail-page {
-            padding: 45px 0 90px;
+        .blog-detail-section {
+            padding: 70px 0 100px;
         }
 
 
         /* =========================
-           TOP BAR
+           BACK BUTTON
         ========================= */
 
-        .blog-top-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 35px;
-        }
-
-
-        .back-blog {
+        .back-blogs {
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -151,23 +141,58 @@
             letter-spacing: 2px;
             text-transform: uppercase;
 
+            margin-bottom: 35px;
+
             transition: .3s;
         }
 
 
-        .back-blog i {
-            font-size: 16px;
+        .back-blogs i {
             transition: .3s;
         }
 
 
-        .back-blog:hover {
+        .back-blogs:hover {
             color: #777;
         }
 
 
-        .back-blog:hover i {
+        .back-blogs:hover i {
             transform: translateX(-4px);
+        }
+
+
+        /* =========================
+           BLOG IMAGE
+        ========================= */
+
+        .blog-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+
+        .blog-image-wrapper img {
+            width: 100%;
+            height: 650px;
+            object-fit: cover;
+            display: block;
+            transition: transform .7s ease;
+        }
+
+
+        .blog-image-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+
+        /* =========================
+           BLOG INFORMATION
+        ========================= */
+
+        .blog-info {
+            padding: 20px 30px 20px 55px;
         }
 
 
@@ -176,115 +201,163 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             color: #888;
+            margin-bottom: 15px;
+        }
+
+
+        .blog-title {
+           
+            font-size: 52px;
+            line-height: 1.1;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
         }
 
 
         /* =========================
-           IMAGE CONTAINER
+           META
         ========================= */
 
-        .blog-image-container {
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            background: #f4f4f4;
-        }
-
-
-        .blog-image-container img {
-            width: 100%;
-            height: 78vh;
-            min-height: 500px;
-            object-fit: cover;
-            display: block;
-
-            transition: transform 1s ease;
-        }
-
-
-        .blog-image-container:hover img {
-            transform: scale(1.015);
-        }
-
-
-        /* =========================
-           IMAGE OVERLAY
-        ========================= */
-
-        .image-overlay {
-            position: absolute;
-            inset: 0;
-
-            background: linear-gradient(
-                to bottom,
-                rgba(0,0,0,0.05),
-                rgba(0,0,0,0.02)
-            );
-
-            pointer-events: none;
-        }
-
-
-        /* =========================
-           IMAGE NUMBER
-        ========================= */
-
-        .image-number {
-            position: absolute;
-            bottom: 25px;
-            right: 25px;
-
-            background: rgba(255,255,255,.92);
-
-            padding: 10px 15px;
-
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: #111;
-        }
-
-
-        /* =========================
-           BOTTOM SECTION
-        ========================= */
-
-        .blog-bottom {
-            margin-top: 30px;
-
+        .blog-meta {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
-            justify-content: space-between;
-
-            border-top: 1px solid #e8e8e8;
-            padding-top: 22px;
+            gap: 10px;
+            margin-bottom: 25px;
         }
 
 
-        .blog-bottom-text {
+        .blog-meta span {
             font-size: 11px;
-            letter-spacing: 2px;
+            letter-spacing: 1.8px;
             text-transform: uppercase;
             color: #888;
         }
 
 
-        .all-blogs-link {
+        .blog-meta .separator {
+            color: #ccc;
+        }
+
+
+        /* =========================
+           SHORT DESCRIPTION
+        ========================= */
+
+        .blog-short-description {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           FULL CONTENT
+        ========================= */
+
+        .blog-content-wrapper {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #e8e8e8;
+        }
+
+
+        .content-label {
+    font-size: 22px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1d1919;
+    margin-bottom: 15px;
+}
+
+
+        .blog-content {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+
+        .blog-content p {
+            margin-bottom: 18px;
+        }
+
+
+        .blog-content h1,
+        .blog-content h2,
+        .blog-content h3,
+        .blog-content h4,
+        .blog-content h5,
+        .blog-content h6 {
+            font-family: 'Cormorant Garamond', serif;
+            color: #111;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+
+        .blog-content img {
+            max-width: 100%;
+            height: auto;
+        }
+
+
+        /* =========================
+           AUTHOR
+        ========================= */
+
+        .blog-author {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e8e8e8;
+        }
+
+
+        .author-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+
+        .author-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: #111;
+        }
+
+
+        /* =========================
+           VIEW ALL BLOGS
+        ========================= */
+
+        .view-all-blogs {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
             color: #111;
             text-decoration: none;
+
+            margin-top: 30px;
 
             font-size: 12px;
             letter-spacing: 2px;
             text-transform: uppercase;
 
             border-bottom: 1px solid #111;
-
             padding-bottom: 5px;
 
             transition: .3s;
         }
 
 
-        .all-blogs-link:hover {
+        .view-all-blogs:hover {
             color: #777;
             border-color: #777;
         }
@@ -295,7 +368,6 @@
         ========================= */
 
         .footer {
-            margin-top: 30px;
             background: #111;
             color: white;
             padding: 55px 0;
@@ -327,8 +399,18 @@
             }
 
 
-            .blog-image-container img {
-                height: 70vh;
+            .blog-info {
+                padding: 40px 10px 10px;
+            }
+
+
+            .blog-image-wrapper img {
+                height: 550px;
+            }
+
+
+            .blog-title {
+                font-size: 45px;
             }
 
         }
@@ -346,35 +428,29 @@
             }
 
 
-            .blog-detail-page {
-                padding: 30px 0 60px;
+            .blog-detail-section {
+                padding: 40px 0 70px;
             }
 
 
-            .blog-top-bar {
-                margin-bottom: 25px;
+            .blog-image-wrapper img {
+                height: 450px;
             }
 
 
-            .blog-label {
-                display: none;
+            .blog-info {
+                padding: 35px 5px 10px;
             }
 
 
-            .blog-image-container img {
-                height: 65vh;
-                min-height: 450px;
+            .blog-title {
+                font-size: 40px;
             }
 
 
-            .blog-bottom {
-                display: block;
-            }
-
-
-            .all-blogs-link {
-                display: inline-block;
-                margin-top: 15px;
+            .blog-short-description,
+            .blog-content {
+                font-size: 14px;
             }
 
         }
@@ -463,7 +539,7 @@
                 </a>
 
 
-                <a href="#">
+                <a href="{{ route('cart.show') }}">
                     <i class="bi bi-bag"></i>
                 </a>
 
@@ -481,112 +557,215 @@
      BLOG DETAIL
 ========================= --}}
 
-<main class="blog-detail-page">
+<section class="blog-detail-section">
 
     <div class="container">
 
 
-        {{-- TOP --}}
+        {{-- BACK TO BLOGS --}}
 
-        <div class="blog-top-bar">
+        <a
+            href="{{ route('blogs') }}"
+            class="back-blogs"
+        >
 
+            <i class="bi bi-arrow-left"></i>
 
-            <a
-                href="{{ route('blogs') }}"
-                class="back-blog"
-            >
+            Back To Blogs
 
-                <i class="bi bi-arrow-left"></i>
-
-                Back To Blogs
-
-            </a>
-
-
-            <div class="blog-label">
-
-                Kaira Journal
-
-            </div>
-
-
-        </div>
+        </a>
 
 
 
-        {{-- IMAGE --}}
-
-        <div class="blog-image-container">
+        <div class="row g-5 align-items-start">
 
 
-            @if($blog->image)
+            {{-- =========================
+                 BLOG IMAGE
+            ========================= --}}
 
-               <img
-    src="{{ asset('uploads/blogs/' . $blog->image) }}"
-    alt="{{ $blog->title }}"
-    class="blog-main-image"
->
-            @else
+            <div class="col-lg-7">
 
-                <div
-                    class="d-flex align-items-center justify-content-center"
-                    style="height:78vh; min-height:500px;"
-                >
+                <div class="blog-image-wrapper">
 
-                    <i
-                        class="bi bi-image"
-                        style="font-size:80px; color:#aaa;"
-                    ></i>
+
+                    @if($blog->image)
+
+                        <img
+                            src="{{ asset('uploads/blogs/' . $blog->image) }}"
+                            alt="{{ $blog->title }}"
+                            class="blog-detail-image"
+                        >
+
+                    @else
+
+                        <div
+                            class="d-flex align-items-center justify-content-center"
+                            style="height:650px;"
+                        >
+
+                            <i
+                                class="bi bi-image"
+                                style="font-size:80px;color:#aaa;"
+                            ></i>
+
+                        </div>
+
+                    @endif
+
 
                 </div>
 
-            @endif
+            </div>
 
 
-            <div class="image-overlay"></div>
+
+            {{-- =========================
+                 BLOG INFORMATION
+            ========================= --}}
+
+            <div class="col-lg-5">
+
+                <div class="blog-info">
 
 
-            <div class="image-number">
+                    {{-- BLOG LABEL --}}
 
-                BLOG
+                    <div class="blog-label">
+                        Kaira Journal
+                    </div>
+
+
+
+                    {{-- TITLE --}}
+
+                    <h1 class="blog-title">
+
+                        {{ $blog->title }}
+
+                    </h1>
+
+
+
+                    {{-- CATEGORY + DATE --}}
+
+                    <div class="blog-meta">
+
+
+                        @if($blog->category)
+
+                            <span>
+                                {{ $blog->category }}
+                            </span>
+
+                        @endif
+
+
+                        @if($blog->category && $blog->created_at)
+
+                            <span class="separator">
+                                /
+                            </span>
+
+                        @endif
+
+
+                        @if($blog->created_at)
+
+                            <span>
+                                {{ $blog->created_at->format('M d, Y') }}
+                            </span>
+
+                        @endif
+
+
+                    </div>
+
+
+
+                    {{-- SHORT DESCRIPTION --}}
+
+                    @if($blog->short_description)
+
+                        <div class="blog-short-description">
+
+                            {{ $blog->short_description }}
+
+                        </div>
+
+                    @endif
+
+
+
+                    {{-- FULL CONTENT --}}
+
+                    @if($blog->content)
+
+                        <div class="blog-content-wrapper">
+
+
+                            <div class="content-label">
+                                Article
+                            </div>
+
+
+                            <div class="blog-content">
+
+                                {!! nl2br(e($blog->content)) !!}
+
+                            </div>
+
+
+                        </div>
+
+                    @endif
+
+
+
+                    {{-- AUTHOR --}}
+
+                    @if($blog->author)
+
+                        <div class="blog-author">
+
+                            <div class="author-label">
+                                Written By
+                            </div>
+
+                            <div class="author-name">
+                                {{ $blog->author }}
+                            </div>
+
+                        </div>
+
+                    @endif
+
+
+
+                    {{-- VIEW ALL BLOGS --}}
+
+                    <a
+                        href="{{ route('blogs') }}"
+                        class="view-all-blogs"
+                    >
+
+                        View All Blogs
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+
+                </div>
 
             </div>
 
 
         </div>
-
-
-
-        {{-- BOTTOM --}}
-
-        <div class="blog-bottom">
-
-
-            <div class="blog-bottom-text">
-
-                Kaira — Journal
-
-            </div>
-
-
-            <a
-                href="{{ route('blogs') }}"
-                class="all-blogs-link"
-            >
-
-                View All Blogs
-
-                <i class="bi bi-arrow-right ms-2"></i>
-
-            </a>
-
-
-        </div>
-
 
     </div>
 
-</main>
+</section>
 
 
 
@@ -635,6 +814,7 @@
     </div>
 
 </footer>
+
 
 
 <script
