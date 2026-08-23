@@ -15,6 +15,29 @@
             <small class="text-danger">{{ $message }}</small>
         @enderror
     </div>
+    {{-- Collection Price --}}
+<div class="mb-3">
+    <label for="price" class="form-label">
+        Collection Price
+    </label>
+
+    <input
+        type="number"
+        name="price"
+        id="price"
+        class="form-control"
+        value="{{ old('price', $collection->price ?? '') }}"
+        placeholder="Enter collection price"
+        min="0"
+        step="0.01"
+    >
+
+    @error('price')
+        <div class="text-danger mt-1">
+            {{ $message }}
+        </div>
+    @enderror
+</div>
 
     <!-- Slug -->
     <div class="col-md-6 mb-3">

@@ -25,6 +25,7 @@ use App\Http\Controllers\SignatureController;
 use App\Http\Controllers\Home\IndexController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\FrontendSearchController;
 
 
 
@@ -223,6 +224,9 @@ Route::post('/contact', [IndexController::class, 'storeContact'])
 // All Collections
 Route::get('/collections', [CollectionController::class, 'frontendIndex'])
     ->name('user.collections');
+    // Single Collection Detail
+Route::get('/collection/{collection}', [CollectionController::class, 'frontendShow'])
+    ->name('collection.detail');
 
 // Category
 Route::get('/category/{slug}', [CategoryController::class, 'frontendShow'])
@@ -248,6 +252,8 @@ Route::post('/cart/add-signature', [CartController::class, 'addSignature'])
 
 Route::post('/cart/add-subcategory', [CartController::class, 'addSubCategory'])
     ->name('cart.add.subcategory');
+    Route::post('/cart/add-collection', [CartController::class, 'addCollection']) 
+    ->name('cart.add.collections');
 
 // Blogs
 Route::get('/blogs', [BlogController::class, 'frontendIndex'])
@@ -301,3 +307,8 @@ Route::post('/checkout', [CheckoutController::class, 'store'])
 // Order Success
 Route::get('/order-success/{order_id}', [CheckoutController::class, 'success'])
     ->name('order.success');
+
+
+
+    Route::get('/search', [FrontendSearchController::class, 'search'])
+    ->name('frontend.search');

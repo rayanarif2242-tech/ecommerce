@@ -9,13 +9,11 @@
 
     <title>All Collections | Kaira</title>
 
-
     {{-- Bootstrap --}}
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
-
 
     {{-- Bootstrap Icons --}}
     <link
@@ -23,35 +21,17 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
 
-
     {{-- Fonts --}}
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap"
         rel="stylesheet"
     >
 
-
     <style>
-.add-cart-btn {
-    width: 100%;
-    border: none;
-    background: #111;
-    color: #fff;
-    padding: 15px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: .3s;
-}
 
-.add-cart-btn:hover {
-    background: #333;
-}
         * {
             box-sizing: border-box;
         }
-
 
         body {
             margin: 0;
@@ -60,10 +40,7 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-
-        /* =========================
-           NAVBAR
-        ========================= */
+        /* NAVBAR */
 
         .main-navbar {
             height: 82px;
@@ -72,7 +49,6 @@
             display: flex;
             align-items: center;
         }
-
 
         .brand {
             font-family: 'Cormorant Garamond', serif;
@@ -83,7 +59,6 @@
             text-decoration: none;
         }
 
-
         .nav-links {
             display: flex;
             gap: 38px;
@@ -91,7 +66,6 @@
             margin: 0;
             padding: 0;
         }
-
 
         .nav-links a {
             text-decoration: none;
@@ -102,11 +76,9 @@
             transition: .3s;
         }
 
-
         .nav-links a:hover {
             color: #888;
         }
-
 
         .nav-icons {
             display: flex;
@@ -114,17 +86,13 @@
             gap: 22px;
         }
 
-
         .nav-icons a {
             color: #111;
             font-size: 20px;
             text-decoration: none;
         }
 
-
-        /* =========================
-           HERO
-        ========================= */
+        /* HERO */
 
         .collections-hero {
             text-align: center;
@@ -132,23 +100,15 @@
             margin-bottom: 45px;
         }
 
+        .collections-hero small {
+            display: block;
+            font-size: 33px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #111;
+        }
 
-       .collections-hero small {
-    display: block;
-    
-    font-size: 33px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #111;
-}
-
-
-    
-
-
-        /* =========================
-           COLLECTION TOP
-        ========================= */
+        /* COLLECTION TOP */
 
         .collections-top {
             display: flex;
@@ -157,17 +117,13 @@
             margin-bottom: 30px;
         }
 
-
         .collections-count {
             font-size: 14px;
             color: #777;
             letter-spacing: 1px;
         }
 
-
-        /* =========================
-           COLLECTION CARD
-        ========================= */
+        /* COLLECTION CARD */
 
         .collection-card {
             position: relative;
@@ -176,22 +132,17 @@
             transition: transform .3s ease;
         }
 
-
         .collection-card:hover {
             transform: translateY(-5px);
         }
 
-
-        /* =========================
-           IMAGE
-        ========================= */
+        /* IMAGE */
 
         .collection-image-wrapper {
             position: relative;
             overflow: hidden;
             background: #f4f4f4;
         }
-
 
         .collection-image-wrapper img {
             width: 100%;
@@ -201,15 +152,11 @@
             transition: transform .6s ease;
         }
 
-
         .collection-card:hover .collection-image-wrapper img {
             transform: scale(1.04);
         }
 
-
-        /* =========================
-           WISHLIST
-        ========================= */
+        /* WISHLIST */
 
         .wishlist-btn {
             position: absolute;
@@ -229,21 +176,16 @@
             transition: .3s;
         }
 
-
         .wishlist-btn:hover {
             background: #111;
             color: #fff;
         }
 
-
-        /* =========================
-           DETAILS
-        ========================= */
+        /* DETAILS */
 
         .collection-details {
             padding: 18px 2px 35px;
         }
-
 
         .collection-name {
             color: #111;
@@ -257,11 +199,9 @@
             margin-bottom: 8px;
         }
 
-
         .collection-name:hover {
             color: #777;
         }
-
 
         .collection-description {
             font-size: 14px;
@@ -270,10 +210,7 @@
             margin-bottom: 18px;
         }
 
-
-        /* =========================
-           VIEW COLLECTION
-        ========================= */
+        /* VIEW BUTTON */
 
         .view-collection-btn {
             display: inline-block;
@@ -287,16 +224,12 @@
             transition: .3s;
         }
 
-
         .view-collection-btn:hover {
             color: #777;
             border-color: #777;
         }
 
-
-        /* =========================
-           FOOTER
-        ========================= */
+        /* FOOTER */
 
         .footer {
             margin-top: 80px;
@@ -305,7 +238,6 @@
             padding: 55px 0;
         }
 
-
         .footer-brand {
             font-family: 'Cormorant Garamond', serif;
             font-size: 34px;
@@ -313,16 +245,12 @@
             letter-spacing: 4px;
         }
 
-
         .footer p {
             color: #aaa;
             font-size: 14px;
         }
 
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
+        /* RESPONSIVE */
 
         @media (max-width: 991px) {
 
@@ -336,29 +264,24 @@
 
         }
 
-
         @media (max-width: 767px) {
 
             .main-navbar {
                 height: 70px;
             }
 
-
             .brand {
                 font-size: 28px;
             }
-
 
             .collections-hero {
                 padding-top: 35px;
                 margin-bottom: 35px;
             }
 
-
             .collections-hero small {
                 font-size: 29px;
             }
-
 
             .collection-image-wrapper img {
                 height: 430px;
@@ -374,9 +297,7 @@
 <body>
 
 
-{{-- =========================
-     NAVBAR
-========================= --}}
+{{-- NAVBAR --}}
 
 <nav class="main-navbar">
 
@@ -384,18 +305,12 @@
 
         <div class="d-flex align-items-center justify-content-between">
 
-
-            {{-- LOGO --}}
-
             <a
                 href="{{ url('/') }}"
                 class="brand"
             >
                 KAIRA
             </a>
-
-
-            {{-- NAVIGATION --}}
 
             <ul class="nav-links">
 
@@ -405,31 +320,25 @@
                     </a>
                 </li>
 
-
                 <li>
                     <a href="{{ url('/products') }}">
                         Shop
                     </a>
                 </li>
 
-
                 <li>
-                    <a href="{{ url('/collections') }}">
+                    <a href="{{ route('user.collections') }}">
                         Collections
                     </a>
                 </li>
 
-
                 <li>
-                     <a href="{{ route('contact') }}">
+                    <a href="{{ route('contact') }}">
                         Contact
                     </a>
                 </li>
 
             </ul>
-
-
-            {{-- ICONS --}}
 
             <div class="nav-icons">
 
@@ -437,13 +346,11 @@
                     <i class="bi bi-search"></i>
                 </a>
 
-
                 <a href="#">
                     <i class="bi bi-person"></i>
                 </a>
 
-
-                <a href="#">
+                <a href="{{ route('cart.show') }}">
                     <i class="bi bi-bag"></i>
                 </a>
 
@@ -456,10 +363,7 @@
 </nav>
 
 
-
-{{-- =========================
-     HERO
-========================= --}}
+{{-- HERO --}}
 
 <section class="collections-hero">
 
@@ -467,24 +371,23 @@
         Discover Collections
     </small>
 
-
 </section>
 
 
-
-{{-- =========================
-     COLLECTIONS
-========================= --}}
+{{-- COLLECTIONS --}}
 
 <section class="container pb-5">
-
 
     <div class="collections-top">
 
         <div class="collections-count">
 
             Showing
-            <strong>{{ $collections->count() }}</strong>
+
+            <strong>
+                {{ $collections->count() }}
+            </strong>
+
             Collections
 
         </div>
@@ -492,33 +395,56 @@
     </div>
 
 
-
     <div class="row g-4">
-
 
         @forelse($collections as $collection)
 
-
             <div class="col-12 col-md-6 col-lg-4">
 
-
                 <div class="collection-card">
-
 
                     {{-- IMAGE --}}
 
                     <div class="collection-image-wrapper">
 
+                        <a href="{{ route('collection.detail', $collection) }}">
 
-                        <a
-                            href="{{ url('/collection/' . $collection->slug) }}"
-                        >
+                            @if($collection->thumbnail)
 
-                            <img
-                                src="{{ asset('uploads/collections/' . $collection->thumbnail) }}"
-                                alt="{{ $collection->name }}"
-                                loading="lazy"
-                            >
+                                <img
+                                    src="{{ asset('uploads/collections/' . $collection->thumbnail) }}"
+                                    alt="{{ $collection->name }}"
+                                    loading="lazy"
+                                >
+
+                            @elseif($collection->banner)
+
+                                <img
+                                    src="{{ asset('uploads/collections/' . $collection->banner) }}"
+                                    alt="{{ $collection->name }}"
+                                    loading="lazy"
+                                >
+
+                            @else
+
+                                <div
+                                    style="
+                                        height:480px;
+                                        background:#f4f4f4;
+                                        display:flex;
+                                        align-items:center;
+                                        justify-content:center;
+                                    "
+                                >
+
+                                    <i
+                                        class="bi bi-image"
+                                        style="font-size:60px;color:#aaa;"
+                                    ></i>
+
+                                </div>
+
+                            @endif
 
                         </a>
 
@@ -534,18 +460,15 @@
 
                         </button>
 
-
                     </div>
-
 
 
                     {{-- DETAILS --}}
 
                     <div class="collection-details">
 
-
                         <a
-                            href="{{ url('/collection/' . $collection->slug) }}"
+                            href="{{ route('collection.detail', $collection) }}"
                             class="collection-name"
                         >
 
@@ -565,36 +488,26 @@
                         @endif
 
 
-                       <form action="{{ route('cart.add.product') }}" method="POST">
-    @csrf
+                        {{-- VIEW COLLECTION --}}
 
-    <input
-        type="hidden"
-        name="product_id"
-        value="{{ $collection->product_id }}"
-    >
+                        <a
+                            href="{{ route('collection.detail', $collection) }}"
+                            class="view-collection-btn"
+                        >
 
-    <button
-        type="submit"
-        class="add-cart-btn"
-    >
-        <i class="bi bi-bag me-2"></i>
-        ADD TO CART
-    </button>
-</form>
+                            Explore Collection
 
+                            <i class="bi bi-arrow-right ms-2"></i>
+
+                        </a>
 
                     </div>
 
-
                 </div>
-
 
             </div>
 
-
         @empty
-
 
             <div class="col-12">
 
@@ -605,37 +518,26 @@
                         style="font-size:60px;"
                     ></i>
 
-
                     <h3 class="mt-4">
-
                         No Collections Found
-
                     </h3>
 
-
                     <p class="text-muted">
-
                         There are currently no collections available.
-
                     </p>
 
                 </div>
 
             </div>
 
-
         @endforelse
-
 
     </div>
 
 </section>
 
 
-
-{{-- =========================
-     FOOTER
-========================= --}}
+{{-- FOOTER --}}
 
 <footer class="footer">
 
@@ -650,22 +552,17 @@
                 </div>
 
                 <p class="mt-3">
-
                     Discover timeless fashion designed
                     for modern living.
-
                 </p>
 
             </div>
 
-
             <div class="col-md-6 text-md-end">
 
                 <p>
-
                     © {{ date('Y') }} Kaira.
                     All Rights Reserved.
-
                 </p>
 
             </div>
@@ -680,7 +577,6 @@
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
 </script>
-
 
 </body>
 

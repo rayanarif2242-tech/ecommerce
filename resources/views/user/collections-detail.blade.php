@@ -10,11 +10,10 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>{{ $subCategory->name }} | Kaira</title>
+    <title>{{ $collection->name }} | Kaira</title>
 
 
     {{-- Bootstrap --}}
-
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -22,7 +21,6 @@
 
 
     {{-- Bootstrap Icons --}}
-
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
@@ -30,7 +28,6 @@
 
 
     {{-- Fonts --}}
-
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
         rel="stylesheet"
@@ -43,13 +40,35 @@
             box-sizing: border-box;
         }
 
-
         body {
             margin: 0;
             background: #fff;
             color: #111;
             font-family: 'Montserrat', sans-serif;
         }
+        .shop-collection-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    border: none;
+    background: #111;
+    color: #fff;
+    padding: 16px 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.shop-collection-btn:hover {
+    background: #333;
+    color: #fff;
+}
 
 
         /* =========================
@@ -114,23 +133,22 @@
 
 
         /* =========================
-           SUBCATEGORY DETAIL
-           SAME AS PRODUCT DETAIL
+           COLLECTION DETAIL
         ========================= */
 
-        .subcategory-detail-section {
+        .collection-detail-section {
             padding: 70px 0 100px;
         }
 
 
-        .subcategory-image-wrapper {
+        .collection-image-wrapper {
             position: relative;
             overflow: hidden;
             background: #f5f5f5;
         }
 
 
-        .subcategory-image-wrapper img {
+        .collection-image-wrapper img {
             width: 100%;
             height: 650px;
             object-fit: cover;
@@ -139,21 +157,21 @@
         }
 
 
-        .subcategory-image-wrapper:hover img {
+        .collection-image-wrapper:hover img {
             transform: scale(1.03);
         }
 
 
         /* =========================
-           SUBCATEGORY INFO
+           COLLECTION INFO
         ========================= */
 
-        .subcategory-info {
+        .collection-info {
             padding: 20px 30px 20px 55px;
         }
 
 
-        .subcategory-label {
+        .collection-label {
             font-size: 11px;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -162,17 +180,18 @@
         }
 
 
-        .subcategory-title {
+        .collection-title {
+           
             font-size: 52px;
             line-height: 1.1;
-            font-weight: 200;
+            font-weight: 400;
             letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
 
-        .subcategory-description {
+        .collection-description {
             color: #777;
             font-size: 14px;
             line-height: 1.9;
@@ -181,42 +200,43 @@
 
 
         /* =========================
-           CATEGORY
+           COLLECTION META
         ========================= */
 
-        .category-box {
+        .collection-meta {
             border-top: 1px solid #e5e5e5;
-            border-bottom: 1px solid #e5e5e5;
-
-            padding: 18px 0;
-
-            margin-bottom: 30px;
+            padding-top: 25px;
+            margin-top: 25px;
         }
 
 
-        .category-label {
-    font-size: 14px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #000000;
-    margin-bottom: 6px;
-}
-
-
-        .category-name {
-            
-            font-size: 25px;
-            letter-spacing: 1px;
+        .collection-meta-title {
+            font-size: 11px;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+
+        .collection-meta p {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.8;
         }
 
 
         /* =========================
-           EXPLORE BUTTON
+           SHOP BUTTON
         ========================= */
 
-        .explore-btn {
+        .shop-collection-btn {
             width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
             border: none;
             background: #111;
             color: #fff;
@@ -230,16 +250,11 @@
 
             text-decoration: none;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-
             transition: .3s;
         }
 
 
-        .explore-btn:hover {
+        .shop-collection-btn:hover {
             background: #333;
             color: #fff;
         }
@@ -249,7 +264,7 @@
            BACK BUTTON
         ========================= */
 
-        .back-subcategory {
+        .back-collections {
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -267,49 +282,18 @@
         }
 
 
-        .back-subcategory i {
+        .back-collections i {
             transition: .3s;
         }
 
 
-        .back-subcategory:hover {
+        .back-collections:hover {
             color: #777;
         }
 
 
-        .back-subcategory:hover i {
+        .back-collections:hover i {
             transform: translateX(-4px);
-        }
-
-
-        /* =========================
-           BANNER
-        ========================= */
-
-        .subcategory-banner-section {
-            margin-top: 90px;
-        }
-
-
-        .subcategory-banner-wrapper {
-            position: relative;
-            overflow: hidden;
-            background: #f5f5f5;
-        }
-
-
-        .subcategory-banner-wrapper img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            display: block;
-
-            transition: transform .7s ease;
-        }
-
-
-        .subcategory-banner-wrapper:hover img {
-            transform: scale(1.03);
         }
 
 
@@ -349,18 +333,13 @@
             }
 
 
-            .subcategory-info {
+            .collection-info {
                 padding: 40px 10px;
             }
 
 
-            .subcategory-image-wrapper img {
+            .collection-image-wrapper img {
                 height: 550px;
-            }
-
-
-            .subcategory-title {
-                font-size: 48px;
             }
 
         }
@@ -378,28 +357,18 @@
             }
 
 
-            .subcategory-detail-section {
+            .collection-detail-section {
                 padding: 40px 0 70px;
             }
 
 
-            .subcategory-image-wrapper img {
+            .collection-image-wrapper img {
                 height: 450px;
             }
 
 
-            .subcategory-title {
+            .collection-title {
                 font-size: 40px;
-            }
-
-
-            .subcategory-banner-section {
-                margin-top: 60px;
-            }
-
-
-            .subcategory-banner-wrapper img {
-                height: 350px;
             }
 
         }
@@ -438,47 +407,37 @@
             <ul class="nav-links">
 
                 <li>
-
                     <a href="{{ url('/') }}">
                         Home
                     </a>
-
                 </li>
 
 
                 <li>
-
-                    <a href="{{ route('signatures') }}">
+                    <a href="{{ route('user.products') }}">
                         Shop
                     </a>
-
                 </li>
 
 
                 <li>
-
-                    <a href="{{ url('/collections') }}">
+                    <a href="{{ route('user.collections') }}">
                         Collections
                     </a>
-
                 </li>
 
 
                 <li>
-
                     <a href="{{ route('blogs') }}">
                         Blog
                     </a>
-
                 </li>
 
 
                 <li>
-
-                     <a href="{{ route('contact') }}">
+                    <a href="{{ route('contact') }}">
                         Contact
                     </a>
-
                 </li>
 
             </ul>
@@ -489,23 +448,17 @@
             <div class="nav-icons">
 
                 <a href="#">
-
                     <i class="bi bi-search"></i>
-
                 </a>
 
 
                 <a href="#">
-
                     <i class="bi bi-person"></i>
-
                 </a>
 
 
-                <a href="#">
-
+                <a href="{{ route('cart.show') }}">
                     <i class="bi bi-bag"></i>
-
                 </a>
 
             </div>
@@ -519,24 +472,24 @@
 
 
 {{-- =========================
-     SUBCATEGORY DETAIL
+     COLLECTION DETAIL
 ========================= --}}
 
-<section class="subcategory-detail-section">
+<section class="collection-detail-section">
 
     <div class="container">
 
 
-        {{-- BACK --}}
+        {{-- BACK TO COLLECTIONS --}}
 
         <a
-            href="{{ url()->previous() }}"
-            class="back-subcategory"
+            href="{{ route('user.collections') }}"
+            class="back-collections"
         >
 
             <i class="bi bi-arrow-left"></i>
 
-            Back
+            Back To Collections
 
         </a>
 
@@ -546,26 +499,26 @@
 
 
             {{-- =========================
-                 SUBCATEGORY IMAGE
+                 COLLECTION IMAGE
             ========================= --}}
 
             <div class="col-lg-7">
 
-                <div class="subcategory-image-wrapper">
+                <div class="collection-image-wrapper">
 
 
-                    @if($subCategory->image)
+                    @if($collection->banner)
 
                         <img
-                            src="{{ asset('uploads/subcategories/' . $subCategory->image) }}"
-                            alt="{{ $subCategory->name }}"
+                            src="{{ asset('uploads/collections/' . $collection->banner) }}"
+                            alt="{{ $collection->name }}"
                         >
 
-                    @elseif($subCategory->banner)
+                    @elseif($collection->thumbnail)
 
                         <img
-                            src="{{ asset('uploads/subcategories/' . $subCategory->banner) }}"
-                            alt="{{ $subCategory->name }}"
+                            src="{{ asset('uploads/collections/' . $collection->thumbnail) }}"
+                            alt="{{ $collection->name }}"
                         >
 
                     @else
@@ -584,7 +537,6 @@
 
                     @endif
 
-
                 </div>
 
             </div>
@@ -592,51 +544,50 @@
 
 
             {{-- =========================
-                 SUBCATEGORY INFORMATION
+                 COLLECTION INFORMATION
             ========================= --}}
 
             <div class="col-lg-5">
 
-                <div class="subcategory-info">
+                <div class="collection-info">
 
 
                     {{-- LABEL --}}
 
-                    <div class="subcategory-label">
+                    <div class="collection-label">
 
                         Kaira Collection
 
                     </div>
 
 
+                    {{-- NAME --}}
 
-                    {{-- TITLE --}}
+                    <h1 class="collection-title">
 
-                    <h1 class="subcategory-title">
-
-                        {{ $subCategory->name }}
+                        {{ $collection->name }}
 
                     </h1>
 
 
-
                     {{-- DESCRIPTION --}}
 
-                    @if($subCategory->description)
+                    @if($collection->description)
 
-                        <div class="subcategory-description">
+                        <div class="collection-description">
 
-                            {!! $subCategory->description !!}
+                            {!! nl2br(e($collection->description)) !!}
 
                         </div>
 
                     @else
 
-                        <div class="subcategory-description">
+                        <div class="collection-description">
 
-                            Discover the timeless style and
-                            carefully selected designs of our
-                            {{ $subCategory->name }} collection.
+                            Discover our
+                            {{ $collection->name }}
+                            collection, carefully selected
+                            for modern living.
 
                         </div>
 
@@ -644,93 +595,66 @@
 
 
 
-                 {{-- PRICE --}}
-{{-- PRICE --}}
+                    {{-- SEO / ADDITIONAL INFORMATION --}}
 
-<div class="category-box">
+                    @if($collection->seo_title || $collection->seo_description)
 
-    <div class="category-label">
-        Price
-    </div>
-
-    <div class="category-name">
-
-        @if($subCategory->discount_price)
-
-            {{-- Original / Actual Price --}}
-            <span style="
-                color:#999;
-                text-decoration:line-through;
-                font-size:18px;
-                margin-right:10px;
-            ">
-                Rs.{{ number_format($subCategory->price, 2) }}
-            </span>
-
-            {{-- Discount Price --}}
-            <span style="
-                color:#111;
-                font-size:25px;
-                font-weight:600;
-            ">
-                Rs.{{ number_format($subCategory->discount_price, 2) }}
-            </span>
-
-        @else
-
-            {{-- Regular Price --}}
-            <span style="
-                color:#111;
-                font-size:25px;
-                font-weight:600;
-            ">
-                Rs.{{ number_format($subCategory->price, 2) }}
-            </span>
-
-        @endif
-
-    </div>
-
-</div>
+                        <div class="collection-meta">
 
 
-                    {{-- EXPLORE --}}
+                            @if($collection->seo_title)
 
-<form
-    action="{{ route('cart.add.subcategory') }}"
-    method="POST"
->
+                                <div class="collection-meta-title">
+
+                                    Collection
+
+                                </div>
+
+                                <p>
+
+                                    {{ $collection->seo_title }}
+
+                                </p>
+
+                            @endif
+
+
+                          
+
+
+                        </div>
+
+                    @endif
+
+
+
+                    {{-- SHOP PRODUCTS --}}
+
+ <form action="{{ route('cart.add.collections') }}" method="POST">
     @csrf
 
     <input
         type="hidden"
-        name="subcategory_id"
-        value="{{ $subCategory->subcategory_id }}"
+        name="collection_id"
+      value="{{ $collection->collection_id }}"
     >
 
     <button
         type="submit"
-        class="explore-btn"
+        class="shop-collection-btn"
     >
         <i class="bi bi-bag me-2"></i>
         Add To Cart
     </button>
-
 </form>
+
+
                 </div>
 
             </div>
 
 
         </div>
-
-
-
-        {{-- =========================
-             BANNER
-        ========================= --}}
-
-      
 
     </div>
 

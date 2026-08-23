@@ -12,7 +12,9 @@ class Collection extends Model
 
     protected $fillable = [
         'collection_id',
+        'product_id',
         'name',
+        'price',
         'slug',
         'description',
         'thumbnail',
@@ -31,18 +33,12 @@ class Collection extends Model
     {
         parent::boot();
 
-        /*
-        |--------------------------------------------------------------------------
-        | Creating Collection
-        |--------------------------------------------------------------------------
-        */
         static::creating(function ($collection) {
 
-            // Generate UUID
-            $collection->collection_id = $collection->collection_id
-                ?? (string) Str::uuid();
+            $collection->collection_id =
+                $collection->collection_id ??
+                (string) Str::uuid();
 
-            // Generate unique slug
             $originalSlug = Str::slug($collection->name);
 
             $slug = $originalSlug;
@@ -58,14 +54,8 @@ class Collection extends Model
             $collection->slug = $slug;
         });
 
-        /*
-        |--------------------------------------------------------------------------
-        | Updating Collection
-        |--------------------------------------------------------------------------
-        */
         static::updating(function ($collection) {
 
-            // Only change slug if the name was changed
             if ($collection->isDirty('name')) {
 
                 $originalSlug = Str::slug($collection->name);
@@ -91,6 +81,15 @@ class Collection extends Model
                 $collection->slug = $slug;
             }
         });
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(
+            Product::class,
+            'product_id',
+            'product_id'
+        );
     }
 
     public function getRouteKeyName()

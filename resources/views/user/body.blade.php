@@ -287,17 +287,17 @@
         @if($product->discount_price)
 
             <span>
-                ${{ number_format($product->discount_price, 2) }}
+                Rs.{{ number_format($product->discount_price, 2) }}
             </span>
 
             <del class="text-muted ms-2">
-                ${{ number_format($product->price, 2) }}
+                Rs.{{ number_format($product->price, 2) }}
             </del>
 
         @else
 
             <span>
-                ${{ number_format($product->price, 2) }}
+                Rs.{{ number_format($product->price, 2) }}
             </span>
 
         @endif
@@ -335,154 +335,138 @@
         </div>
 
     </div>
-    
+    </div>
 </section>
-<section id="collections"
-         class="collection product-carousel py-5 position-relative overflow-hidden">
+<section class="collection bg-light position-relative py-5">
 
     <div class="container">
 
-        {{-- Collection Heading --}}
-        <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
+        <div class="row">
 
-            <h4 class="text-uppercase">
-                Our Best Sellers
-            </h4>
+            <div class="title-xlarge text-uppercase txt-fx domino">
+                Collection
+            </div>
 
-            
-            <a href="{{ route('user.collections') }}" class="btn-link">
-    VIEW ALL COLLECTIONS
-</a>
+            @php
+                $collection = $collections->first();
+            @endphp
 
-        </div>
+            @if($collection)
 
+                <div class="collection-item d-flex flex-wrap my-5">
 
-        {{-- Collection Slider --}}
-        <div class="swiper product-swiper open-up" data-aos="zoom-out">
+                    {{-- ONE COLLECTION IMAGE --}}
+                    <div class="col-md-6 column-container">
 
-            <div class="swiper-wrapper d-flex">
+                        <div class="image-holder">
 
-                @forelse($collections as $collection)
+                            @if($collection->banner)
 
-                    <div class="swiper-slide">
+                                <img
+                                    src="{{ asset('uploads/collections/' . $collection->banner) }}"
+                                    alt="{{ $collection->name }}"
+                                    class="product-image img-fluid"
+                                >
 
-                        <div class="product-item image-zoom-effect link-effect">
+                            @elseif($collection->thumbnail)
 
-                            {{-- Collection Image --}}
-                            <div class="image-holder position-relative">
+                                <img
+                                    src="{{ asset('uploads/collections/' . $collection->thumbnail) }}"
+                                    alt="{{ $collection->name }}"
+                                    class="product-image img-fluid"
+                                >
 
-                                <a href="#">
+                            @else
 
-                                    @if($collection->thumbnail)
+                                <img
+                                    src="{{ asset('homes/images/single-image-2.jpg') }}"
+                                    alt="Collection"
+                                    class="product-image img-fluid"
+                                >
 
-                                        <img
-                                            src="{{ asset('uploads/collections/' . $collection->thumbnail) }}"
-                                            alt="{{ $collection->name }}"
-                                            class="product-image img-fluid"
-                                            style="width: 100%; height: 420px; object-fit: cover; display: block;"
-                                        >
-
-                                    @elseif($collection->banner)
-
-                                        <img
-                                            src="{{ asset('uploads/collections/' . $collection->banner) }}"
-                                            alt="{{ $collection->name }}"
-                                            class="product-image img-fluid"
-                                            style="width: 100%; height: 420px; object-fit: cover; display: block;"
-                                        >
-
-                                    @else
-
-                                        <img
-                                            src="{{ asset('homes/images/single-image-2.jpg') }}"
-                                            alt="{{ $collection->name }}"
-                                            class="product-image img-fluid"
-                                            style="width: 100%; height: 420px; object-fit: cover; display: block;"
-                                        >
-
-                                    @endif
-
-                                </a>
-
-
-                                {{-- Wishlist --}}
-                                <a href="#" class="btn-icon btn-wishlist">
-
-                                    <svg width="24" height="24" viewBox="0 0 24 24">
-                                        <use xlink:href="#heart"></use>
-                                    </svg>
-
-                                </a>
-
-
-                                {{-- Collection Content --}}
-                                <div class="product-content">
-
-                                    <h5 class="element-title text-uppercase fs-5 mt-3">
-
-                                        <a href="#">
-                                            {{ $collection->name }}
-                                        </a>
-
-                                    </h5>
-
-
-                                    @if($collection->description)
-
-                                        <p class="text-muted">
-                                            {{ Str::limit($collection->description, 80) }}
-                                        </p>
-
-                                    @endif
-
-                                </div>
-
-                            </div>
+                            @endif
 
                         </div>
 
                     </div>
 
-                @empty
+                    {{-- COLLECTION TEXT --}}
+                    <div class="col-md-6 column-container bg-white">
 
-                    <div class="col-12 text-center py-5">
+                        <div class="collection-content p-5 m-0 m-md-5">
 
-                        <h4>No collections available.</h4>
+                            <h3 class="element-title text-uppercase">
+                                {{ $collection->name }}
+                            </h3>
+
+                            <p>
+                                {{ $collection->description }}
+                            </p>
+
+                            <a
+                                href="{{ route('user.collections') }}"
+                                class="btn btn-dark text-uppercase mt-3"
+                            >
+                                Explore Collection
+                            </a>
+
+                        </div>
 
                     </div>
 
-                @endforelse
+                </div>
 
-            </div>
+            @else
 
+                {{-- DEFAULT IMAGE IF NO COLLECTION EXISTS --}}
+                <div class="collection-item d-flex flex-wrap my-5">
 
-            {{-- Pagination --}}
-            <div class="swiper-pagination"></div>
+                    <div class="col-md-6 column-container">
 
-        </div>
+                        <div class="image-holder">
 
+                            <img
+                                src="{{ asset('homes/images/single-image-2.jpg') }}"
+                                alt="Collection"
+                                class="product-image img-fluid"
+                            >
 
-        {{-- Arrows --}}
-        <div class="icon-arrow icon-arrow-left">
+                        </div>
 
-            <svg width="50" height="50" viewBox="0 0 24 24">
-                <use xlink:href="#arrow-left"></use>
-            </svg>
+                    </div>
 
-        </div>
+                    <div class="col-md-6 column-container bg-white">
 
-        <div class="icon-arrow icon-arrow-right">
+                        <div class="collection-content p-5 m-0 m-md-5">
 
-            <svg width="50" height="50" viewBox="0 0 24 24">
-                <use xlink:href="#arrow-right"></use>
-            </svg>
+                            <h3 class="element-title text-uppercase">
+                                Our Collection
+                            </h3>
+
+                            <p>
+                                Explore our latest collection.
+                            </p>
+
+                            <a
+                                href="{{ route('user.collections') }}"
+                                class="btn btn-dark text-uppercase mt-3"
+                            >
+                                Explore Collection
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            @endif
 
         </div>
 
     </div>
 
 </section>
-
   <section class="video py-5 overflow-hidden">
     <div class="container-fluid">
       <div class="row">
@@ -571,7 +555,7 @@
                   <h5 class="text-uppercase fs-5 mt-3">
                     <a href="{{ route('signatures') }}">Dark florish onepiece</a>
                   </h5>
-                  <a href="" class="text-decoration-none" data-after="Add to cart"><span>$95.00</span></a>
+                  <a href="" class="text-decoration-none" data-after="Add to cart"><span>Rs.5000</span></a>
                 </div>
               </div>
             </div>
@@ -591,7 +575,7 @@
                   <h5 class="text-uppercase fs-5 mt-3">
                     <a href="{{ route('signatures') }}">Baggy Shirt</a>
                   </h5>
-                  <a href="{{ route('signatures') }}" class="text-decoration-none" data-after="Add to cart"><span>$55.00</span></a>
+                  <a href="{{ route('signatures') }}" class="text-decoration-none" data-after="Add to cart"><span>Rs.5000</span></a>
                 </div>
               </div>
             </div>
@@ -611,7 +595,7 @@
                   <h5 class="text-uppercase fs-5 mt-3">
                     <a href="{{ route('signatures') }}">Cotton off-white shirt</a>
                   </h5>
-                  <a href="{{ route('signatures') }}" class="text-decoration-none" data-after="Add to cart"><span>$65.00</span></a>
+                  <a href="{{ route('signatures') }}" class="text-decoration-none" data-after="Add to cart"><span>Rs.5000</span></a>
                 </div>
               </div>
             </div>
@@ -631,7 +615,7 @@
                   <h5 class="text-uppercase fs-5 mt-3">
                     <a href="{{ route('signatures') }}">Handmade crop sweater</a>
                   </h5>
-                  <a href="{{ route('signatures') }}" class="text-decoration-none" data-after="Add to cart"><span>$50.00</span></a>
+                  <a href="{{ route('signatures') }}" class="text-decoration-none" data-after="Add to cart"><span>RS.5000</span></a>
                 </div>
               </div>
             </div>
@@ -651,7 +635,7 @@
                   <h5 class="text-uppercase fs-5 mt-3">
                     <a href="{{ route('signatures') }}">Handmade crop sweater</a>
                   </h5>
-                  <a href="{{ route('signatures') }}" class="text-decoration-none" data-after="Add to cart"><span>$70.00</span></a>
+                  <a href="{{ route('signatures') }}" class="text-decoration-none" data-after="Add to cart"><span>RS.5000</span></a>
                 </div>
               </div>
             </div>

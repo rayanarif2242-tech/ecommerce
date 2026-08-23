@@ -23,57 +23,64 @@ class SearchController extends Controller
 
             [
                 'name' => 'Users',
-                'url' => route('users.index'),
+                'url' => route('admin.users.index'),
             ],
 
             [
                 'name' => 'Variety',
-                'url' => route('variety.index'),
+                'url' => route('admin.variety.index'),
             ],
 
             [
                 'name' => 'Categories',
-                'url' => route('category.index'),
+                'url' => route('admin.category.index'),
             ],
 
             [
                 'name' => 'Sub Categories',
-                'url' => route('subcategory.index'),
+                'url' => route('admin.subcategory.index'),
             ],
 
             [
                 'name' => 'Products',
-                'url' => route('products.index'),
+                'url' => route('admin.products.index'),
             ],
 
             [
                 'name' => 'Billboards',
-                'url' => route('billboards.index'),
+                'url' => route('admin.billboards.index'),
             ],
 
             [
                 'name' => 'Collections',
-                'url' => route('collections.index'),
+                'url' => route('admin.collections.index'),
             ],
 
             [
                 'name' => 'Blog',
-                'url' => route('blog.index'),
+                'url' => route('admin.blog.index'),
+            ],
+
+            [
+                'name' => 'Signatures',
+                'url' => route('admin.signature.index'),
             ],
 
             [
                 'name' => 'Contact Messages',
-                'url' => route('contact-messages.index'),
+                'url' => route('admin.contact-messages.index'),
             ],
 
             [
                 'name' => 'FAQ Management',
-                'url' => route('faq.index'),
+                'url' => route('admin.faq.index'),
             ],
 
         ];
 
-        $keyword = strtolower(trim($request->search ?? ''));
+        $keyword = strtolower(
+            trim($request->search ?? '')
+        );
 
         if ($keyword === '') {
             return response()->json([]);
