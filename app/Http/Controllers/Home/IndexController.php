@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Collection;
 use App\Models\Blog;
 use App\Models\Billboard;
+use App\Models\Signature;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 
@@ -60,13 +61,19 @@ class IndexController extends Controller
             ->orderBy('sort_order', 'asc')
             ->get();
 
+        // Signatures
+        $signatures = Signature::where('status', 'Active')
+            ->orderBy('sort_order', 'asc')
+            ->get();
+
         return view('user.index', compact(
             'categories',
             'subCategories',
             'products',
             'collections',
             'blogs',
-            'billboards'
+            'billboards',
+            'signatures'
         ));
     }
 
@@ -79,36 +86,32 @@ class IndexController extends Controller
         return view('user.products', compact('products'));
     }
 
-
-
-
-
     public function contact()
-{
-    return view('user.contact');
-}
+    {
+        return view('user.contact');
+    }
 
-public function storeContact(Request $request)
-{
-    $request->validate([
-        'name'    => 'required|string|max:255',
-        'email'   => 'required|email|max:255',
-        'phone'   => 'nullable|string|max:50',
-        'subject' => 'required|string|max:255',
-        'message' => 'required|string',
-    ]);
+    public function storeContact(Request $request)
+    {
+        $request->validate([
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email|max:255',
+            'phone'   => 'nullable|string|max:50',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
 
-    ContactMessage::create([
-        'name'    => $request->name,
-        'email'   => $request->email,
-        'phone'   => $request->phone,
-        'subject' => $request->subject,
-        'message' => $request->message,
-        'status'  => 'New',
-    ]);
+        ContactMessage::create([
+            'name'    => $request->name,
+            'email'   => $request->email,
+            'phone'   => $request->phone,
+            'subject' => $request->subject,
+            'message' => $request->message,
+            'status'  => 'New',
+        ]);
 
-    return redirect()
-        ->route('contact')
-        ->with('success', 'Your message has been sent successfully!');
-}
+        return redirect()
+            ->route('contact')
+            ->with('success', 'Your message has been sent successfully!');
+    }
 }

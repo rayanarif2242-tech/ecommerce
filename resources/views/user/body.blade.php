@@ -236,15 +236,16 @@
     </div>
 
 </section>
-
-  <section id="new-arrival" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
+<section id="new-arrival" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
     <div class="container">
 
         <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
             <h4 class="text-uppercase">Our New Arrivals</h4>
-           <a href="{{ route('user.products') }}"class="btn-link">
-    VIEW ALL PRODUCTS
-</a>
+
+            {{-- View all products --}}
+            <a href="{{ route('user.products') }}" class="btn-link">
+                VIEW ALL PRODUCTS
+            </a>
         </div>
 
         <div class="swiper product-swiper open-up" data-aos="zoom-out">
@@ -259,54 +260,67 @@
 
                             <div class="image-holder position-relative">
 
-                              <a href="{{ route('user.products') }}">
-    <img
-        src="{{ asset('uploads/products/' . $product->image) }}"
-        alt="{{ $product->name }}"
-        class="product-image img-fluid"
-        style="width: 100%; height: 420px; object-fit: cover; display: block;"
-    >
-</a>
+                                {{-- PRODUCT IMAGE --}}
+                                <a href="{{ route('product.show', $product->slug) }}">
 
-                                <a href="{{ route('user.products') }}" class="btn-icon btn-wishlist">
-                                    <svg width="24" height="24" viewBox="0 0 24 24">
-                                      <use xlink:href="#heart"></use>
-                                    </svg>
+                                    <img
+                                        src="{{ asset('uploads/products/' . $product->image) }}"
+                                        alt="{{ $product->name }}"
+                                        class="product-image img-fluid"
+                                        style="width: 100%; height: 420px; object-fit: cover; display: block;"
+                                    >
+
                                 </a>
 
-                               <div class="product-content">
 
-    <h5 class="element-title text-uppercase fs-5 mt-3">
-        <a href="{{ route('user.products') }}">
-            {{ $product->name }}
-        </a>
-    </h5>
+                                {{-- WISHLIST --}}
+                                <a href="{{ route('product.show', $product->slug) }}"
+                                   class="btn-icon btn-wishlist">
 
-    <div class="product-price mt-2">
+                                    <svg width="24" height="24" viewBox="0 0 24 24">
+                                        <use xlink:href="#heart"></use>
+                                    </svg>
 
-        @if($product->discount_price)
+                                </a>
 
-            <span>
-                Rs.{{ number_format($product->discount_price, 2) }}
-            </span>
 
-            <del class="text-muted ms-2">
-                Rs.{{ number_format($product->price, 2) }}
-            </del>
+                                {{-- PRODUCT CONTENT --}}
+                                <div class="product-content">
 
-        @else
+                                    {{-- PRODUCT NAME --}}
+                                    <h5 class="element-title text-uppercase fs-5 mt-3">
 
-            <span>
-                Rs.{{ number_format($product->price, 2) }}
-            </span>
+                                        <a href="{{ route('product.show', $product->slug) }}">
+                                            {{ $product->name }}
+                                        </a>
 
-        @endif
+                                    </h5>
 
-    </div>
 
-    
+                                    {{-- PRODUCT PRICE --}}
+                                    <div class="product-price mt-2">
 
-</div>
+                                        @if($product->discount_price)
+
+                                            <span>
+                                                Rs.{{ number_format($product->discount_price, 2) }}
+                                            </span>
+
+                                            <del class="text-muted ms-2">
+                                                Rs.{{ number_format($product->price, 2) }}
+                                            </del>
+
+                                        @else
+
+                                            <span>
+                                                Rs.{{ number_format($product->price, 2) }}
+                                            </span>
+
+                                        @endif
+
+                                    </div>
+
+                                </div>
 
                             </div>
 
@@ -322,21 +336,30 @@
 
         </div>
 
+
+        {{-- LEFT ARROW --}}
         <div class="icon-arrow icon-arrow-left">
+
             <svg width="50" height="50" viewBox="0 0 24 24">
                 <use xlink:href="#arrow-left"></use>
             </svg>
+
         </div>
 
+
+        {{-- RIGHT ARROW --}}
         <div class="icon-arrow icon-arrow-right">
+
             <svg width="50" height="50" viewBox="0 0 24 24">
                 <use xlink:href="#arrow-right"></use>
             </svg>
+
         </div>
 
     </div>
-    </div>
 </section>
+
+ 
 <section class="collection bg-light position-relative py-5">
 
     <div class="container">
@@ -530,127 +553,181 @@
     <div class="testimonial-swiper-pagination d-flex justify-content-center mb-5"></div>
   </section>
 
-  <section id="related-products" class="related-products product-carousel py-5 position-relative overflow-hidden">
+ <section id="related-products"
+    class="related-products product-carousel py-5 position-relative overflow-hidden">
+
     <div class="container">
-      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
-        <h4 class="text-uppercase">You May Also Like</h4>
-       <a href="{{ route('signatures') }}" class="btn-link">
-    View All Products
-</a>
-      </div>
-      <div class="swiper product-swiper open-up" data-aos="zoom-out">
-        <div class="swiper-wrapper d-flex">
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="{{ route('signatures') }}">
-                  <img src="{{asset('homes/images/product-item-5.jpg')}}" alt="product" class="product-image img-fluid">
-                </a>
-                <a href="" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="{{ route('signatures') }}"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="{{ route('signatures') }}">Dark florish onepiece</a>
-                  </h5>
-                  <a href="" class="text-decoration-none" data-after="Add to cart"><span>Rs.5000</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="{{ route('signatures') }}">
-                  <img src="{{asset('homes/images/product-item-6.jpg')}}" alt="product" class="product-image img-fluid">
-                </a>
-                <a href="" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="#heart"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="{{ route('signatures') }}">Baggy Shirt</a>
-                  </h5>
-                  <a href="{{ route('signatures') }}" class="text-decoration-none" data-after="Add to cart"><span>Rs.5000</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="{{ route('signatures') }}">
-                  <img src="{{asset('homes/images/product-item-7.jpg')}}" alt="product" class="product-image img-fluid">
-                </a>
-                <a href="" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="{{ route('signatures') }}"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="{{ route('signatures') }}">Cotton off-white shirt</a>
-                  </h5>
-                  <a href="{{ route('signatures') }}" class="text-decoration-none" data-after="Add to cart"><span>Rs.5000</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="{{ route('signatures') }}">
-                  <img src="{{asset('homes/images/product-item-8.jpg')}}" alt="product" class="product-image img-fluid">
-                </a>
-                <a href="{{ route('signatures') }}" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="{{ route('signatures') }}"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="{{ route('signatures') }}">Handmade crop sweater</a>
-                  </h5>
-                  <a href="{{ route('signatures') }}" class="text-decoration-none" data-after="Add to cart"><span>RS.5000</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="product-item image-zoom-effect link-effect">
-              <div class="image-holder">
-                <a href="{{ route('signatures') }}">
-                  <img src="{{asset('homes/images/product-item-1.jpg')}}" alt="product" class="product-image img-fluid">
-                </a>
-                <a href="{{ route('signatures') }}" class="btn-icon btn-wishlist">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <use xlink:href="{{ route('signatures') }}"></use>
-                  </svg>
-                </a>
-                <div class="product-content">
-                  <h5 class="text-uppercase fs-5 mt-3">
-                    <a href="{{ route('signatures') }}">Handmade crop sweater</a>
-                  </h5>
-                  <a href="{{ route('signatures') }}" class="text-decoration-none" data-after="Add to cart"><span>RS.5000</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
+
+        {{-- Section Heading --}}
+        <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-4">
+
+            <h4 class="text-uppercase mb-0">
+                You May Also Like
+            </h4>
+
+            <a href="{{ route('signatures') }}" class="btn-link">
+                View All Products
+            </a>
+
         </div>
-        <div class="swiper-pagination"></div>
-      </div>
-      <div class="icon-arrow icon-arrow-left"><svg width="50" height="50" viewBox="0 0 24 24">
-          <use xlink:href="#arrow-left"></use>
-        </svg></div>
-      <div class="icon-arrow icon-arrow-right"><svg width="50" height="50" viewBox="0 0 24 24">
-          <use xlink:href="#arrow-right"></use>
-        </svg></div>
+
+
+        {{-- Products Slider --}}
+        <div class="swiper product-swiper open-up" data-aos="zoom-out">
+
+            <div class="swiper-wrapper d-flex">
+
+                @forelse($signatures as $signature)
+
+                    <div class="swiper-slide">
+
+                        <div class="product-item image-zoom-effect link-effect">
+
+                            {{-- Product Image --}}
+                            <div class="image-holder position-relative">
+
+                                <a href="{{ route('signature.show', $signature->signature_id) }}">
+
+                                    @if($signature->image && file_exists(public_path($signature->image)))
+
+                                        <img
+                                            src="{{ asset($signature->image) }}"
+                                            alt="{{ $signature->product_name }}"
+                                            class="product-image img-fluid"
+                                        >
+
+                                    @else
+
+                                        <img
+                                            src="{{ asset('homes/images/product-item-1.jpg') }}"
+                                            alt="{{ $signature->product_name }}"
+                                            class="product-image img-fluid"
+                                        >
+
+                                    @endif
+
+                                </a>
+
+
+                                {{-- Wishlist --}}
+                                <a href="#"
+                                   class="btn-icon btn-wishlist">
+
+                                    <svg width="24"
+                                         height="24"
+                                         viewBox="0 0 24 24">
+
+                                        <use xlink:href="#heart"></use>
+
+                                    </svg>
+
+                                </a>
+
+                            </div>
+
+
+                            {{-- Product Content --}}
+                            <div class="product-content">
+
+                                <h5 class="text-uppercase fs-5 mt-3">
+
+                                    <a href="{{ route('signature.show', $signature->signature_id) }}">
+
+                                        {{ $signature->product_name }}
+
+                                    </a>
+
+                                </h5>
+
+
+                                {{-- Price --}}
+                                <div class="product-price">
+
+                                    @if($signature->discount_price)
+
+                                        <span class="text-muted text-decoration-line-through me-2">
+                                            Rs. {{ number_format($signature->price, 0) }}
+                                        </span>
+
+                                        <span>
+                                            Rs. {{ number_format($signature->discount_price, 0) }}
+                                        </span>
+
+                                    @else
+
+                                        <span>
+                                            Rs. {{ number_format($signature->price, 0) }}
+                                        </span>
+
+                                    @endif
+
+                                </div>
+
+
+                                {{-- Add To Cart --}}
+                                <a href="{{ route('signature.show', $signature->signature_id) }}"
+                                   class="text-decoration-none"
+                                   data-after="View Product">
+
+                                    <span>View Product</span>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                @empty
+
+                    <div class="col-12 text-center py-5">
+
+                        <h5>No products available.</h5>
+
+                    </div>
+
+                @endforelse
+
+            </div>
+
+
+            {{-- Pagination --}}
+            <div class="swiper-pagination"></div>
+
+        </div>
+
+
+        {{-- Previous Button --}}
+        <div class="icon-arrow icon-arrow-left">
+
+            <svg width="50"
+                 height="50"
+                 viewBox="0 0 24 24">
+
+                <use xlink:href="#arrow-left"></use>
+
+            </svg>
+
+        </div>
+
+
+        {{-- Next Button --}}
+        <div class="icon-arrow icon-arrow-right">
+
+            <svg width="50"
+                 height="50"
+                 viewBox="0 0 24 24">
+
+                <use xlink:href="#arrow-right"></use>
+
+            </svg>
+
+        </div>
+
     </div>
-  </section>
+
+</section>
 
   <section class="blog py-5">
 

@@ -20,8 +20,8 @@ class BillboardController extends Controller
 
             $query->where(function ($q) use ($search) {
                 $q->where('billboard_id', 'LIKE', "%{$search}%")
-                  ->orWhere('title', 'LIKE', "%{$search}%")
-                  ->orWhere('subtitle', 'LIKE', "%{$search}%");
+                    ->orWhere('title', 'LIKE', "%{$search}%")
+                    ->orWhere('subtitle', 'LIKE', "%{$search}%");
             });
 
         })
@@ -29,10 +29,10 @@ class BillboardController extends Controller
         ->paginate(10)
         ->withQueryString();
 
-        return view('admin.billboards.index', compact(
-            'billboards',
-            'search'
-        ));
+        return view(
+            'admin.billboards.index',
+            compact('billboards', 'search')
+        );
     }
 
 
@@ -51,6 +51,8 @@ class BillboardController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+
+            'product_id' => 'nullable|exists:products,product_id',
 
             'title' => 'required|string|max:255',
 
@@ -81,36 +83,66 @@ class BillboardController extends Controller
 
         $billboard = new Billboard();
 
-        // Generate UUID
+        /*
+        |--------------------------------------------------------------------------
+        | Basic Information
+        |--------------------------------------------------------------------------
+        */
+
         $billboard->billboard_id = (string) Str::uuid();
 
-        // Basic information
+        // IMPORTANT: Save selected product
+        $billboard->product_id = $request->product_id;
+
         $billboard->title = $request->title;
+
         $billboard->subtitle = $request->subtitle;
+
         $billboard->button_text = $request->button_text;
+
         $billboard->button_link = $request->button_link;
 
-        // Settings
+
+        /*
+        |--------------------------------------------------------------------------
+        | Settings
+        |--------------------------------------------------------------------------
+        */
+
         $billboard->position = $request->position;
+
         $billboard->featured = $request->featured ?? 0;
+
         $billboard->status = $request->status ?? 1;
+
         $billboard->sort_order = $request->sort_order ?? 0;
 
-        // Dates
+
+        /*
+        |--------------------------------------------------------------------------
+        | Dates
+        |--------------------------------------------------------------------------
+        */
+
         $billboard->start_date = $request->start_date;
+
         $billboard->end_date = $request->end_date;
 
 
         /*
         |--------------------------------------------------------------------------
-        | Create Billboard Upload Directory
+        | Create Upload Directory
         |--------------------------------------------------------------------------
         */
 
         $uploadPath = public_path('uploads/billboards');
 
         if (!File::exists($uploadPath)) {
-            File::makeDirectory($uploadPath, 0755, true);
+            File::makeDirectory(
+                $uploadPath,
+                0755,
+                true
+            );
         }
 
 
@@ -124,9 +156,15 @@ class BillboardController extends Controller
 
             $image = $request->file('image');
 
-            $fileName = time() . '_desktop_' . $image->getClientOriginalName();
+            $fileName =
+                time() .
+                '_desktop_' .
+                $image->getClientOriginalName();
 
-            $image->move($uploadPath, $fileName);
+            $image->move(
+                $uploadPath,
+                $fileName
+            );
 
             $billboard->image = $fileName;
         }
@@ -142,20 +180,35 @@ class BillboardController extends Controller
 
             $mobileImage = $request->file('mobile_image');
 
-            $mobileFileName = time() . '_mobile_' . $mobileImage->getClientOriginalName();
+            $mobileFileName =
+                time() .
+                '_mobile_' .
+                $mobileImage->getClientOriginalName();
 
-            $mobileImage->move($uploadPath, $mobileFileName);
+            $mobileImage->move(
+                $uploadPath,
+                $mobileFileName
+            );
 
             $billboard->mobile_image = $mobileFileName;
         }
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Save Billboard
+        |--------------------------------------------------------------------------
+        */
 
         $billboard->save();
 
 
         return redirect()
             ->route('admin.billboards.index')
-            ->with('success', 'Billboard created successfully.');
+            ->with(
+                'success',
+                'Billboard created successfully.'
+            );
     }
 
 
@@ -164,6 +217,8 @@ class BillboardController extends Controller
      */
     public function show(Billboard $billboard)
     {
+        $billboard->load('product');
+
         return view(
             'admin.billboards.show',
             compact('billboard')
@@ -176,6 +231,8 @@ class BillboardController extends Controller
      */
     public function edit(Billboard $billboard)
     {
+        $billboard->load('product');
+
         return view(
             'admin.billboards.edit',
             compact('billboard')
@@ -186,9 +243,14 @@ class BillboardController extends Controller
     /**
      * Update billboard.
      */
-    public function update(Request $request, Billboard $billboard)
-    {
+    public function update(
+        Request $request,
+        Billboard $billboard
+    ) {
         $request->validate([
+
+            // IMPORTANT
+            'product_id' => 'nullable|exists:products,product_id',
 
             'title' => 'required|string|max:255',
 
@@ -217,17 +279,47 @@ class BillboardController extends Controller
         ]);
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Basic Information
+        |--------------------------------------------------------------------------
+        */
+
+        // IMPORTANT: Update selected product
+        $billboard->product_id = $request->product_id;
+
         $billboard->title = $request->title;
+
         $billboard->subtitle = $request->subtitle;
+
         $billboard->button_text = $request->button_text;
+
         $billboard->button_link = $request->button_link;
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Settings
+        |--------------------------------------------------------------------------
+        */
+
         $billboard->position = $request->position;
+
         $billboard->featured = $request->featured ?? 0;
+
         $billboard->status = $request->status ?? 1;
+
         $billboard->sort_order = $request->sort_order ?? 0;
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Dates
+        |--------------------------------------------------------------------------
+        */
+
         $billboard->start_date = $request->start_date;
+
         $billboard->end_date = $request->end_date;
 
 
@@ -240,7 +332,11 @@ class BillboardController extends Controller
         $uploadPath = public_path('uploads/billboards');
 
         if (!File::exists($uploadPath)) {
-            File::makeDirectory($uploadPath, 0755, true);
+            File::makeDirectory(
+                $uploadPath,
+                0755,
+                true
+            );
         }
 
 
@@ -266,9 +362,15 @@ class BillboardController extends Controller
 
             $image = $request->file('image');
 
-            $fileName = time() . '_desktop_' . $image->getClientOriginalName();
+            $fileName =
+                time() .
+                '_desktop_' .
+                $image->getClientOriginalName();
 
-            $image->move($uploadPath, $fileName);
+            $image->move(
+                $uploadPath,
+                $fileName
+            );
 
             $billboard->image = $fileName;
         }
@@ -296,20 +398,35 @@ class BillboardController extends Controller
 
             $mobileImage = $request->file('mobile_image');
 
-            $mobileFileName = time() . '_mobile_' . $mobileImage->getClientOriginalName();
+            $mobileFileName =
+                time() .
+                '_mobile_' .
+                $mobileImage->getClientOriginalName();
 
-            $mobileImage->move($uploadPath, $mobileFileName);
+            $mobileImage->move(
+                $uploadPath,
+                $mobileFileName
+            );
 
             $billboard->mobile_image = $mobileFileName;
         }
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Save Changes
+        |--------------------------------------------------------------------------
+        */
 
         $billboard->save();
 
 
         return redirect()
             ->route('admin.billboards.index')
-            ->with('success', 'Billboard updated successfully.');
+            ->with(
+                'success',
+                'Billboard updated successfully.'
+            );
     }
 
 
@@ -321,7 +438,12 @@ class BillboardController extends Controller
         $uploadPath = public_path('uploads/billboards');
 
 
-        // Delete desktop image
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Desktop Image
+        |--------------------------------------------------------------------------
+        */
+
         if (
             $billboard->image &&
             File::exists(
@@ -334,7 +456,12 @@ class BillboardController extends Controller
         }
 
 
-        // Delete mobile image
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Mobile Image
+        |--------------------------------------------------------------------------
+        */
+
         if (
             $billboard->mobile_image &&
             File::exists(
@@ -347,12 +474,21 @@ class BillboardController extends Controller
         }
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Billboard
+        |--------------------------------------------------------------------------
+        */
+
         $billboard->delete();
 
 
         return redirect()
             ->route('admin.billboards.index')
-            ->with('success', 'Billboard deleted successfully.');
+            ->with(
+                'success',
+                'Billboard deleted successfully.'
+            );
     }
 
 
@@ -361,9 +497,11 @@ class BillboardController extends Controller
      */
     public function detail($billboard_id)
     {
-        $billboard = Billboard::where('billboard_id', $billboard_id)
+        $billboard = Billboard::with('product')
+            ->where('billboard_id', $billboard_id)
             ->where('status', 1)
             ->firstOrFail();
+
 
         return view(
             'user.billboard-detail',

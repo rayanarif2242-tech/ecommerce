@@ -280,16 +280,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     searchForm.addEventListener('submit', function (event) {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        const firstResult =
-            searchResults.querySelector('a');
+    const keyword = searchInput.value.trim();
 
-        if (firstResult) {
-            window.location.href = firstResult.href;
-        }
+    if (keyword === '') {
+        return;
+    }
 
-    });
+    window.location.href =
+        "{{ route('frontend.search') }}" +
+        "?search=" +
+        encodeURIComponent(keyword);
+
+});
 
 
     /*
