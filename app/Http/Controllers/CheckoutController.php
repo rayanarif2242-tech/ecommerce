@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,7 +37,7 @@ class CheckoutController extends Controller
             $totalItems += $quantity;
         }
 
-        // Currently free delivery
+        // Free delivery
         $delivery = 0;
 
         $total = $subtotal + $delivery;
@@ -55,6 +57,12 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Validate Customer Information
+        |--------------------------------------------------------------------------
+        */
+
         $request->validate([
 
             'name' => 'required|string|max:255',
@@ -72,6 +80,12 @@ class CheckoutController extends Controller
         ]);
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Get Cart
+        |--------------------------------------------------------------------------
+        */
+
         $cart = session()->get('cart', []);
 
 
@@ -84,8 +98,13 @@ class CheckoutController extends Controller
         }
 
 
-        $subtotal = 0;
+        /*
+        |--------------------------------------------------------------------------
+        | Calculate Subtotal
+        |--------------------------------------------------------------------------
+        */
 
+        $subtotal = 0;
 
         foreach ($cart as $item) {
 
@@ -97,10 +116,22 @@ class CheckoutController extends Controller
         }
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Delivery
+        |--------------------------------------------------------------------------
+        */
+
         $delivery = 0;
 
         $total = $subtotal + $delivery;
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Database Transaction
+        |--------------------------------------------------------------------------
+        */
 
         DB::beginTransaction();
 
@@ -108,7 +139,161 @@ class CheckoutController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | Create Order
+            | CHECK PRODUCT STOCK
+            |--------------------------------------------------------------------------
+            |
+            | Your existing product stock logic is kept unchanged.
+            |
+            */
+
+            foreach ($cart as $item) {
+
+                // Only normal products
+                if (($item['type'] ?? '') !== 'product') {
+                    continue;
+                }
+
+
+                $product = Product::where(
+                    'product_id',
+                    $item['id']
+                )
+                ->lockForUpdate()
+                ->first();
+
+
+                // Product no longer exists
+                if (!$product) {
+
+                    throw new \Exception(
+                        'The product "' .
+                        $item['name'] .
+                        '" is no longer available.'
+                    );
+                }
+
+
+                // Product inactive
+                if ($product->status != 1) {
+
+                    throw new \Exception(
+                        'The product "' .
+                        $product->name .
+                        '" is currently not available.'
+                    );
+                }
+
+
+                $quantity = $item['quantity'] ?? 1;
+
+
+                // Product out of stock
+                if ($product->stock <= 0) {
+
+                    throw new \Exception(
+                        $product->name .
+                        ' is currently out of stock.'
+                    );
+                }
+
+
+                // Requested quantity greater than available stock
+                if ($quantity > $product->stock) {
+
+                    throw new \Exception(
+                        'Only ' .
+                        $product->stock .
+                        ' item(s) of "' .
+                        $product->name .
+                        '" are available in stock.'
+                    );
+                }
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | CHECK SUBCATEGORY STOCK
+            |--------------------------------------------------------------------------
+            |
+            | This is the new part for subcategories.
+            |
+            */
+
+            foreach ($cart as $item) {
+
+                // Only subcategory items
+                if (($item['type'] ?? '') !== 'subcategory') {
+                    continue;
+                }
+
+
+                /*
+                | Find subcategory using UUID
+                */
+
+                $subCategory = SubCategory::where(
+                    'subcategory_id',
+                    $item['id']
+                )
+                ->lockForUpdate()
+                ->first();
+
+
+                /*
+                | Subcategory no longer exists
+                */
+
+                if (!$subCategory) {
+
+                    throw new \Exception(
+                        'The subcategory "' .
+                        $item['name'] .
+                        '" is no longer available.'
+                    );
+                }
+
+
+                /*
+                | Requested quantity
+                */
+
+                $quantity = $item['quantity'] ?? 1;
+
+
+                /*
+                | Subcategory out of stock
+                */
+
+                if ($subCategory->stock <= 0) {
+
+                    throw new \Exception(
+                        $subCategory->name .
+                        ' is currently out of stock.'
+                    );
+                }
+
+
+                /*
+                | Requested quantity greater than available stock
+                */
+
+                if ($quantity > $subCategory->stock) {
+
+                    throw new \Exception(
+                        'Only ' .
+                        $subCategory->stock .
+                        ' item(s) of "' .
+                        $subCategory->name .
+                        '" are available in stock.'
+                    );
+                }
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | CREATE ORDER
             |--------------------------------------------------------------------------
             */
 
@@ -141,7 +326,7 @@ class CheckoutController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | Create Order Items
+            | CREATE ORDER ITEMS
             |--------------------------------------------------------------------------
             */
 
@@ -150,6 +335,7 @@ class CheckoutController extends Controller
                 $price = $item['price'] ?? 0;
 
                 $quantity = $item['quantity'] ?? 1;
+
 
                 OrderItem::create([
 
@@ -173,32 +359,134 @@ class CheckoutController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | Clear Cart
+            | REDUCE PRODUCT STOCK
+            |--------------------------------------------------------------------------
+            */
+
+            foreach ($cart as $item) {
+
+                // Only normal products
+                if (($item['type'] ?? '') !== 'product') {
+                    continue;
+                }
+
+
+                $quantity = $item['quantity'] ?? 1;
+
+
+                $product = Product::where(
+                    'product_id',
+                    $item['id']
+                )
+                ->lockForUpdate()
+                ->first();
+
+
+                if (!$product) {
+
+                    throw new \Exception(
+                        'Product not found while updating stock.'
+                    );
+                }
+
+
+                /*
+                | Reduce product stock
+                */
+
+                $product->decrement(
+                    'stock',
+                    $quantity
+                );
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | REDUCE SUBCATEGORY STOCK
+            |--------------------------------------------------------------------------
+            */
+
+            foreach ($cart as $item) {
+
+                // Only subcategories
+                if (($item['type'] ?? '') !== 'subcategory') {
+                    continue;
+                }
+
+
+                $quantity = $item['quantity'] ?? 1;
+
+
+                $subCategory = SubCategory::where(
+                    'subcategory_id',
+                    $item['id']
+                )
+                ->lockForUpdate()
+                ->first();
+
+
+                if (!$subCategory) {
+
+                    throw new \Exception(
+                        'Subcategory not found while updating stock.'
+                    );
+                }
+
+
+                /*
+                | Reduce subcategory stock
+                */
+
+                $subCategory->decrement(
+                    'stock',
+                    $quantity
+                );
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | CLEAR CART
             |--------------------------------------------------------------------------
             */
 
             session()->forget('cart');
 
 
+            /*
+            |--------------------------------------------------------------------------
+            | COMMIT TRANSACTION
+            |--------------------------------------------------------------------------
+            */
+
             DB::commit();
 
 
             /*
             |--------------------------------------------------------------------------
-            | Success Page
+            | ORDER SUCCESS
             |--------------------------------------------------------------------------
             */
 
             return redirect()
                 ->route('order.success', $order->order_id);
 
+
         } catch (\Exception $e) {
+
+            /*
+            |--------------------------------------------------------------------------
+            | ROLLBACK
+            |--------------------------------------------------------------------------
+            */
 
             DB::rollBack();
 
+
             return back()
                 ->withInput()
-                ->with('error', 'Something went wrong while placing your order.');
+                ->with('error', $e->getMessage());
         }
     }
 
@@ -212,6 +500,9 @@ class CheckoutController extends Controller
             ->where('order_id', $order_id)
             ->firstOrFail();
 
-        return view('user.order-success', compact('order'));
+        return view(
+            'user.order-success',
+            compact('order')
+        );
     }
 }

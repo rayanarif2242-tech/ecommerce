@@ -6,409 +6,493 @@
 
 * Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
 * Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
+* License: You must have a valid license purchased in order to legally use this theme for your project.
 * Copyright ThemeSelection (https://themeselection.com)
 
-=========================================================
- -->
-<!-- beautify ignore:start -->
-<html
-  lang="en"
-  class="light-style layout-menu-fixed"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="../assets/"
-  data-template="vertical-menu-template-free"
->
-  <head>
-   @include('admin.header')
-   
-  </head>
+========================================================= -->
 
-  <body>
-    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
+<html
+    lang="en"
+    class="light-style layout-menu-fixed"
+    dir="ltr"
+    data-theme="theme-default"
+    data-assets-path="../assets/"
+    data-template="vertical-menu-template-free"
+>
+
+<head>
+    @include('admin.header')
+</head>
+
+<body>
+
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+
+    <div class="layout-container">
+
         <!-- Menu -->
- @include('admin.sidebar')
+        @include('admin.sidebar')
         <!-- / Menu -->
+
 
         <!-- Layout container -->
         <div class="layout-page">
-          <!-- Navbar -->
 
-        @include('admin.nav')
+            <!-- Navbar -->
+            @include('admin.nav')
+            <!-- / Navbar -->
 
-          <!-- Content wrapper -->
-         <div class="container-xxl flex-grow-1 container-p-y">
 
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
 
-    <div class="card shadow-sm">
+                {{-- Success Message --}}
+                @if(session('success'))
 
-        <div class="card-header d-flex justify-content-between align-items-center">
+                    <div class="alert alert-success alert-dismissible fade show">
 
-            <h4 class="mb-0">
-                <i class="bx bx-sitemap me-2"></i>
-                Sub Category List
-            </h4>
+                        {{ session('success') }}
 
-            <a href="{{ route('admin.subcategory.create') }}" class="btn btn-primary">
-                <i class="bx bx-plus"></i>
-                Add Sub Category
-            </a>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert">
+                        </button>
 
-        </div>
+                    </div>
 
-        <div class="table-responsive">
+                @endif
 
-            <table class="table table-hover align-middle">
 
-                <thead>
+                <div class="card shadow-sm">
 
-                <tr>
+                    {{-- Card Header --}}
+                    <div class="card-header d-flex justify-content-between align-items-center">
 
-                    <th>#</th>
+                        <h4 class="mb-0">
 
-                    <th>Image</th>
+                            <i class="bx bx-sitemap me-2"></i>
 
-                    <th>Banner</th>
+                            Sub Category List
 
-                    <th>Category</th>
+                        </h4>
 
-                    <th>Sub Category</th>
 
-                    <th>Price</th>
+                        <a
+                            href="{{ route('admin.subcategory.create') }}"
+                            class="btn btn-primary"
+                        >
 
-                   <th>Discount Price</th>
+                            <i class="bx bx-plus"></i>
 
-                    <th>Featured</th>
+                            Add Sub Category
 
-                    <th>Home</th>
+                        </a>
 
-                    <th>Status</th>
+                    </div>
 
-                    <th>Sort</th>
 
-                    <th>Action</th>
+                    {{-- Table --}}
+                    <div class="table-responsive">
 
-                </tr>
+                        <table class="table table-hover align-middle">
 
-                </thead>
+                            <thead>
 
-                <tbody>
+                                <tr>
 
-                @forelse($subcategories as $subcategory)
+                                    <th>#</th>
 
-                <tr>
+                                    <th>Image</th>
 
-                    <td>{{ $loop->iteration }}</td>
+                                    <th>Banner</th>
 
-                    <td>
+                                    <th>Category</th>
 
-                        @if($subcategory->image)
+                                    <th>Sub Category</th>
 
-                            <img src="{{ asset('uploads/subcategories/'.$subcategory->image) }}"
-                                 class="img-box">
+                                    <th>Price</th>
 
-                        @else
+                                    <th>Discount Price</th>
 
-                            <span class="text-muted">No Image</span>
+                                    <th>Stock</th>
 
-                        @endif
+                                    <th>Featured</th>
 
-                    </td>
+                                    <th>Home</th>
 
-                    <td>
+                                    <th>Status</th>
 
-                        @if($subcategory->banner)
+                                    <th>Sort</th>
 
-                            <img src="{{ asset('uploads/subcategories/'.$subcategory->banner) }}"
-                                 class="banner-box">
+                                    <th>Action</th>
 
-                        @else
+                                </tr>
 
-                            <span class="text-muted">No Banner</span>
+                            </thead>
 
-                        @endif
 
-                    </td>
+                            <tbody>
 
-                    <td>
+                                @forelse($subcategories as $subcategory)
 
-                        {{ optional($subcategory->category)->name }}
+                                    <tr>
 
-                    </td>
+                                        {{-- # --}}
+                                        <td>
+                                            {{ $loop->iteration }}
+                                        </td>
 
-                    <td>
 
-                        <strong>{{ $subcategory->name }}</strong>
+                                        {{-- Image --}}
+                                        <td>
 
-                        <br>
+                                            @if($subcategory->image)
 
-                        <small class="text-muted">
+                                                <img
+                                                    src="{{ asset('uploads/subcategories/'.$subcategory->image) }}"
+                                                    class="img-box"
+                                                    alt="{{ $subcategory->name }}"
+                                                >
 
-                            {{ $subcategory->slug }}
+                                            @else
 
-                        </small>
+                                                <span class="text-muted">
+                                                    No Image
+                                                </span>
 
-                    </td>
-                    {{-- Price --}}
+                                            @endif
 
-<td>
+                                        </td>
 
-    @if($subcategory->price !== null)
 
-        <strong>
-            ${{ number_format($subcategory->price, 2) }}
-        </strong>
+                                        {{-- Banner --}}
+                                        <td>
 
-    @else
+                                            @if($subcategory->banner)
 
-        <span class="text-muted">
-            Not Set
-        </span>
+                                                <img
+                                                    src="{{ asset('uploads/subcategories/'.$subcategory->banner) }}"
+                                                    class="banner-box"
+                                                    alt="{{ $subcategory->name }}"
+                                                >
 
-    @endif
+                                            @else
 
-</td>
+                                                <span class="text-muted">
+                                                    No Banner
+                                                </span>
 
+                                            @endif
 
-{{-- Discount Price --}}
+                                        </td>
 
-<td>
 
-    @if($subcategory->discount_price !== null)
+                                        {{-- Category --}}
+                                        <td>
 
-        <strong class="text-success">
-            ${{ number_format($subcategory->discount_price, 2) }}
-        </strong>
+                                            {{ optional($subcategory->category)->name }}
 
-    @else
+                                        </td>
 
-        <span class="text-muted">
-            —
-        </span>
 
-    @endif
+                                        {{-- Sub Category --}}
+                                        <td>
 
-</td>
+                                            <strong>
+                                                {{ $subcategory->name }}
+                                            </strong>
 
-                    <td>
+                                            <br>
 
-                        @if($subcategory->featured)
+                                            <small class="text-muted">
+                                                {{ $subcategory->slug }}
+                                            </small>
 
-                            <span class="badge bg-label-warning">
-                                Featured
-                            </span>
+                                        </td>
 
-                        @else
 
-                            <span class="badge bg-label-secondary">
-                                No
-                            </span>
+                                        {{-- Price --}}
+                                        <td>
 
-                        @endif
+                                            @if($subcategory->price !== null)
 
-                    </td>
+                                                <strong>
+                                                    ${{ number_format($subcategory->price, 2) }}
+                                                </strong>
 
-                    <td>
+                                            @else
 
-                        @if($subcategory->show_on_home)
+                                                <span class="text-muted">
+                                                    Not Set
+                                                </span>
 
-                            <span class="badge bg-label-info">
-                                Yes
-                            </span>
+                                            @endif
 
-                        @else
+                                        </td>
 
-                            <span class="badge bg-label-secondary">
-                                No
-                            </span>
 
-                        @endif
+                                        {{-- Discount Price --}}
+                                        <td>
 
-                    </td>
+                                            @if($subcategory->discount_price !== null)
 
-                    <td>
+                                                <strong class="text-success">
+                                                    ${{ number_format($subcategory->discount_price, 2) }}
+                                                </strong>
 
-                        @if($subcategory->status)
+                                            @else
 
-                            <span class="badge bg-label-success">
-                                Active
-                            </span>
+                                                <span class="text-muted">
+                                                    —
+                                                </span>
 
-                        @else
+                                            @endif
 
-                            <span class="badge bg-label-danger">
-                                Inactive
-                            </span>
+                                        </td>
 
-                        @endif
 
-                    </td>
+                                        {{-- Stock --}}
+                                        <td>
 
-                    <td>
+                                            @if($subcategory->stock > 0)
 
-                        {{ $subcategory->sort_order }}
+                                                <span class="badge bg-label-success">
 
-                    </td>
+                                                    <i class="bx bx-package me-1"></i>
 
-                    <td>
+                                                    {{ $subcategory->stock }}
 
-                        <div class="d-flex gap-2">
+                                                </span>
 
-                           <a href="{{ route('admin.subcategory.edit',$subcategory->subcategory_id) }}"
-                               class="btn btn-warning btn-sm">
+                                            @else
 
-                                <i class="bx bx-edit"></i>
+                                                <span class="badge bg-label-danger">
 
-                            </a>
-<form action="{{ route('admin.subcategory.destroy',$subcategory->subcategory_id) }}"
-                                  method="POST"
-                                  onsubmit="return confirm('Delete this sub category?')">
+                                                    <i class="bx bx-x-circle me-1"></i>
 
-                                @csrf
-                                @method('DELETE')
+                                                    Out of Stock
 
-                                <button class="btn btn-danger btn-sm">
+                                                </span>
 
-                                    <i class="bx bx-trash"></i>
+                                            @endif
 
-                                </button>
+                                        </td>
 
-                            </form>
 
-                        </div>
+                                        {{-- Featured --}}
+                                        <td>
 
-                    </td>
+                                            @if($subcategory->featured)
 
-                </tr>
+                                                <span class="badge bg-label-warning">
+                                                    Featured
+                                                </span>
 
-                @empty
+                                            @else
 
-                <tr>
+                                                <span class="badge bg-label-secondary">
+                                                    No
+                                                </span>
 
-                    <td colspan="12" class="text-center py-4">
+                                            @endif
 
-                        No Sub Categories Found
+                                        </td>
 
-                    </td>
 
-                </tr>
+                                        {{-- Home --}}
+                                        <td>
 
-                @endforelse
+                                            @if($subcategory->show_on_home)
 
-                </tbody>
+                                                <span class="badge bg-label-info">
+                                                    Yes
+                                                </span>
 
-            </table>
+                                            @else
+
+                                                <span class="badge bg-label-secondary">
+                                                    No
+                                                </span>
+
+                                            @endif
+
+                                        </td>
+
+
+                                        {{-- Status --}}
+                                        <td>
+
+                                            @if($subcategory->status)
+
+                                                <span class="badge bg-label-success">
+                                                    Active
+                                                </span>
+
+                                            @else
+
+                                                <span class="badge bg-label-danger">
+                                                    Inactive
+                                                </span>
+
+                                            @endif
+
+                                        </td>
+
+
+                                        {{-- Sort --}}
+                                        <td>
+
+                                            {{ $subcategory->sort_order }}
+
+                                        </td>
+
+
+                                        {{-- Actions --}}
+                                        <td>
+
+                                            <div class="d-flex gap-2">
+
+                                                {{-- Edit --}}
+                                                <a
+                                                    href="{{ route('admin.subcategory.edit', $subcategory->subcategory_id) }}"
+                                                    class="btn btn-warning btn-sm"
+                                                    title="Edit"
+                                                >
+
+                                                    <i class="bx bx-edit"></i>
+
+                                                </a>
+
+
+                                                {{-- Delete --}}
+                                                <form
+                                                    action="{{ route('admin.subcategory.destroy', $subcategory->subcategory_id) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Delete this sub category?')"
+                                                >
+
+                                                    @csrf
+
+                                                    @method('DELETE')
+
+                                                    <button
+                                                        type="submit"
+                                                        class="btn btn-danger btn-sm"
+                                                        title="Delete"
+                                                    >
+
+                                                        <i class="bx bx-trash"></i>
+
+                                                    </button>
+
+                                                </form>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                @empty
+
+                                    <tr>
+
+                                        <td
+                                            colspan="13"
+                                            class="text-center py-4"
+                                        >
+
+                                            <i class="bx bx-info-circle fs-3 d-block mb-2"></i>
+
+                                            No Sub Categories Found
+
+                                        </td>
+
+                                    </tr>
+
+                                @endforelse
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- / Content -->
+
+
+            @include('admin.footer')
 
         </div>
 
     </div>
 
 </div>
+<!-- / Layout wrapper -->
+
+
+@include('admin.js')
 
 <style>
 
-.card{
-
-    border:none;
-
-    border-radius:12px;
-
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
 }
 
-.card-header{
-
-    border-bottom:1px solid #eee;
-
-    background:#fff;
-
+.card-header {
+    border-bottom: 1px solid #eee;
+    background: #fff;
 }
 
-.table th{
-
-    background:#f8f9fa;
-
-    color:#566a7f;
-
-    font-weight:600;
-
+.table th {
+    background: #f8f9fa;
+    color: #566a7f;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
-.table td{
-
-    vertical-align:middle;
-
+.table td {
+    vertical-align: middle;
 }
 
-.img-box{
-
-    width:60px;
-
-    height:60px;
-
-    object-fit:cover;
-
-    border-radius:8px;
-
-    border:1px solid #ddd;
-
+.img-box {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
 }
 
-.banner-box{
-
-    width:90px;
-
-    height:60px;
-
-    object-fit:cover;
-
-    border-radius:8px;
-
-    border:1px solid #ddd;
-
+.banner-box {
+    width: 90px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
 }
 
-.badge{
-
-    padding:8px 12px;
-
-    font-size:12px;
-
+.badge {
+    padding: 8px 12px;
+    font-size: 12px;
+    white-space: nowrap;
 }
 
-.btn{
-
-    border-radius:6px;
-
+.btn {
+    border-radius: 6px;
 }
 
-.table tbody tr:hover{
-
-    background:#f8f9fa;
-
+.table tbody tr:hover {
+    background: #f8f9fa;
 }
 
 </style>
-            <!-- / Content -->
 
-          
-           @include('admin.footer')
-            <!-- / Footer -->
-
-    </div>
-    <!-- / Layout wrapper -->
-
-
-    @include('admin.js')
-  </body>
+</body>
 </html>

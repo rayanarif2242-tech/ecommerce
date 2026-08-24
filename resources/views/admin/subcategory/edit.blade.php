@@ -261,7 +261,9 @@
                     </div>
                     {{-- Price --}}
 
-<div class="col-md-6 mb-3">
+{{-- Price --}}
+
+<div class="col-md-4 mb-3">
 
     <label class="form-label">
         Price <span class="text-danger">*</span>
@@ -271,7 +273,6 @@
         type="number"
         name="price"
         class="form-control"
-        placeholder="Enter Price"
         value="{{ old('price', $subcategory->price) }}"
         min="0"
         step="0.01"
@@ -283,7 +284,7 @@
 
 {{-- Discount Price --}}
 
-<div class="col-md-6 mb-3">
+<div class="col-md-4 mb-3">
 
     <label class="form-label">
         Discount Price
@@ -293,18 +294,37 @@
         type="number"
         name="discount_price"
         class="form-control"
-        placeholder="Enter Discount Price"
         value="{{ old('discount_price', $subcategory->discount_price) }}"
         min="0"
         step="0.01"
     >
 
+</div>
+
+
+{{-- Stock --}}
+
+<div class="col-md-4 mb-3">
+
+    <label class="form-label">
+        Stock Quantity <span class="text-danger">*</span>
+    </label>
+
+    <input
+        type="number"
+        name="stock"
+        class="form-control"
+        value="{{ old('stock', $subcategory->stock) }}"
+        min="0"
+        step="1"
+        required
+    >
+
     <small class="text-muted">
-        Leave empty if there is no discount.
+        Available quantity
     </small>
 
 </div>
-
                     <div class="col-12 mt-3">
 
                         <button type="submit" class="btn btn-success">

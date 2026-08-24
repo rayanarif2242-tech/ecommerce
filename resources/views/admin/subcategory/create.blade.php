@@ -245,7 +245,9 @@
                     </div>
                     {{-- Price --}}
 
-<div class="col-md-6 mb-3">
+{{-- Price --}}
+
+<div class="col-md-4 mb-3">
 
     <label class="form-label">
         Price <span class="text-danger">*</span>
@@ -267,7 +269,7 @@
 
 {{-- Discount Price --}}
 
-<div class="col-md-6 mb-3">
+<div class="col-md-4 mb-3">
 
     <label class="form-label">
         Discount Price
@@ -285,6 +287,32 @@
 
     <small class="text-muted">
         Leave empty if there is no discount.
+    </small>
+
+</div>
+
+
+{{-- Stock --}}
+
+<div class="col-md-4 mb-3">
+
+    <label class="form-label">
+        Stock Quantity <span class="text-danger">*</span>
+    </label>
+
+    <input
+        type="number"
+        name="stock"
+        class="form-control"
+        placeholder="Enter Stock Quantity"
+        value="{{ old('stock', 0) }}"
+        min="0"
+        step="1"
+        required
+    >
+
+    <small class="text-muted">
+        Available quantity
     </small>
 
 </div>

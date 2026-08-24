@@ -49,6 +49,9 @@ class SubCategoryController extends Controller
 
             'discount_price' => 'nullable|numeric|min:0|lte:price',
 
+            // NEW: Stock
+            'stock' => 'required|integer|min:0',
+
             'description' => 'nullable|string',
 
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -116,6 +119,9 @@ class SubCategoryController extends Controller
 
             'discount_price' => $request->discount_price,
 
+            // NEW: Stock
+            'stock' => $request->stock,
+
             'image' => $imageName,
 
             'banner' => $bannerName,
@@ -181,6 +187,9 @@ class SubCategoryController extends Controller
 
             'discount_price' => 'nullable|numeric|min:0|lte:price',
 
+            // NEW: Stock
+            'stock' => 'required|integer|min:0',
+
             'description' => 'nullable|string',
 
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -207,6 +216,9 @@ class SubCategoryController extends Controller
             'price' => $request->price,
 
             'discount_price' => $request->discount_price,
+
+            // NEW: Stock
+            'stock' => $request->stock,
 
             'icon' => $request->icon,
 

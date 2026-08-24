@@ -20,22 +20,67 @@ class CartController extends Controller
     {
         $request->validate([
             'product_id' => 'required',
+            'quantity'   => 'required|integer|min:1',
         ]);
 
-        $product = Product::where(
-            'product_id',
-            $request->product_id
-        )->firstOrFail();
+        // Find product
+        $product = Product::where('product_id', $request->product_id)
+            ->where('status', 1)
+            ->firstOrFail();
 
+        // Check stock
+        if ($product->stock <= 0) {
+            return back()->with(
+                'error',
+                'This product is currently out of stock.'
+            );
+        }
+
+        // Quantity selected in product page
+        $quantity = (int) $request->quantity;
+
+        // Selected quantity cannot exceed stock
+        if ($quantity > $product->stock) {
+            return back()->with(
+                'error',
+                'Only ' . $product->stock . ' item(s) are available in stock.'
+            );
+        }
+
+        // Get existing cart
         $cart = session()->get('cart', []);
 
+        // Unique cart ID
         $id = 'product_' . $product->product_id;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Product Already In Cart
+        |--------------------------------------------------------------------------
+        */
 
         if (isset($cart[$id])) {
 
-            $cart[$id]['quantity']++;
+            // Add selected quantity to existing quantity
+            $newQuantity = $cart[$id]['quantity'] + $quantity;
+
+            // Check total quantity against stock
+            if ($newQuantity > $product->stock) {
+                return back()->with(
+                    'error',
+                    'Only ' . $product->stock . ' item(s) are available in stock.'
+                );
+            }
+
+            $cart[$id]['quantity'] = $newQuantity;
 
         } else {
+
+            /*
+            |--------------------------------------------------------------------------
+            | New Product
+            |--------------------------------------------------------------------------
+            */
 
             $cart[$id] = [
                 'type'     => 'product',
@@ -43,10 +88,11 @@ class CartController extends Controller
                 'name'     => $product->name,
                 'price'    => $product->discount_price ?: $product->price,
                 'image'    => 'uploads/products/' . $product->image,
-                'quantity' => 1,
+                'quantity' => $quantity,
             ];
         }
 
+        // Save cart
         session()->put('cart', $cart);
 
         return redirect()
@@ -112,31 +158,75 @@ class CartController extends Controller
             'subcategory_id' => 'required',
         ]);
 
+        // Find subcategory
         $subCategory = SubCategory::where(
             'subcategory_id',
             $request->subcategory_id
         )->firstOrFail();
 
+        /*
+        |--------------------------------------------------------------------------
+        | Check SubCategory Stock
+        |--------------------------------------------------------------------------
+        */
+
+        if ((int) $subCategory->stock <= 0) {
+            return back()->with(
+                'error',
+                'This subcategory is currently out of stock.'
+            );
+        }
+
+        // Get existing cart
         $cart = session()->get('cart', []);
 
+        // Unique cart ID
         $id = 'subcategory_' . $subCategory->subcategory_id;
+
+        /*
+        |--------------------------------------------------------------------------
+        | SubCategory Already In Cart
+        |--------------------------------------------------------------------------
+        */
 
         if (isset($cart[$id])) {
 
-            $cart[$id]['quantity']++;
+            // Add one more
+            $newQuantity = $cart[$id]['quantity'] + 1;
+
+            // Don't allow quantity above stock
+            if ($newQuantity > (int) $subCategory->stock) {
+                return back()->with(
+                    'error',
+                    'Only ' . $subCategory->stock .
+                    ' item(s) are available in stock.'
+                );
+            }
+
+            $cart[$id]['quantity'] = $newQuantity;
 
         } else {
+
+            /*
+            |--------------------------------------------------------------------------
+            | New SubCategory
+            |--------------------------------------------------------------------------
+            */
 
             $cart[$id] = [
                 'type'     => 'subcategory',
                 'id'       => $subCategory->subcategory_id,
                 'name'     => $subCategory->name,
-                'price'    => $subCategory->price,
-                'image'    => 'uploads/subcategories/' . $subCategory->image,
+                'price'    => $subCategory->discount_price
+                                ?: $subCategory->price,
+                'image'    => $subCategory->image
+                                ? 'uploads/subcategories/' . $subCategory->image
+                                : null,
                 'quantity' => 1,
             ];
         }
 
+        // Save cart
         session()->put('cart', $cart);
 
         return redirect()
@@ -176,10 +266,7 @@ class CartController extends Controller
                 'type'     => 'collection',
                 'id'       => $collection->collection_id,
                 'name'     => $collection->name,
-
-                // Get price directly from database
                 'price'    => (float) $collection->price,
-
                 'image'    => 'uploads/collections/' . $collection->thumbnail,
                 'quantity' => 1,
             ];
@@ -203,10 +290,7 @@ class CartController extends Controller
     {
         $cart = session()->get('cart', []);
 
-        return view(
-            'user.cart',
-            compact('cart')
-        );
+        return view('user.cart', compact('cart'));
     }
 
 
@@ -220,15 +304,124 @@ class CartController extends Controller
     {
         $cart = session()->get('cart', []);
 
-        if (isset($cart[$id])) {
-
-            $cart[$id]['quantity']++;
+        // Cart item does not exist
+        if (!isset($cart[$id])) {
+            return redirect()->route('cart.show');
         }
 
+        /*
+        |--------------------------------------------------------------------------
+        | Product Stock Check
+        |--------------------------------------------------------------------------
+        */
+
+        if (($cart[$id]['type'] ?? '') === 'product') {
+
+            $product = Product::where(
+                'product_id',
+                $cart[$id]['id']
+            )->first();
+
+            // Product no longer exists
+            if (!$product) {
+
+                unset($cart[$id]);
+
+                session()->put('cart', $cart);
+
+                return redirect()
+                    ->route('cart.show')
+                    ->with(
+                        'error',
+                        'This product is no longer available.'
+                    );
+            }
+
+            // Product out of stock
+            if ($product->stock <= 0) {
+
+                return redirect()
+                    ->route('cart.show')
+                    ->with(
+                        'error',
+                        'This product is currently out of stock.'
+                    );
+            }
+
+            // Maximum stock reached
+            if ($cart[$id]['quantity'] >= $product->stock) {
+
+                return redirect()
+                    ->route('cart.show')
+                    ->with(
+                        'error',
+                        'Only ' . $product->stock .
+                        ' item(s) are available in stock.'
+                    );
+            }
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | SubCategory Stock Check
+        |--------------------------------------------------------------------------
+        */
+
+        if (($cart[$id]['type'] ?? '') === 'subcategory') {
+
+            $subCategory = SubCategory::where(
+                'subcategory_id',
+                $cart[$id]['id']
+            )->first();
+
+            // SubCategory no longer exists
+            if (!$subCategory) {
+
+                unset($cart[$id]);
+
+                session()->put('cart', $cart);
+
+                return redirect()
+                    ->route('cart.show')
+                    ->with(
+                        'error',
+                        'This subcategory is no longer available.'
+                    );
+            }
+
+            // SubCategory out of stock
+            if ((int) $subCategory->stock <= 0) {
+
+                return redirect()
+                    ->route('cart.show')
+                    ->with(
+                        'error',
+                        'This subcategory is currently out of stock.'
+                    );
+            }
+
+            // Maximum stock reached
+            if ($cart[$id]['quantity'] >= (int) $subCategory->stock) {
+
+                return redirect()
+                    ->route('cart.show')
+                    ->with(
+                        'error',
+                        'Only ' . $subCategory->stock .
+                        ' item(s) are available in stock.'
+                    );
+            }
+        }
+
+
+        // Increase quantity
+        $cart[$id]['quantity']++;
+
+        // Save cart
         session()->put('cart', $cart);
 
-        return redirect()
-            ->route('cart.show');
+        return redirect()->route('cart.show');
     }
 
 
@@ -256,14 +449,13 @@ class CartController extends Controller
 
         session()->put('cart', $cart);
 
-        return redirect()
-            ->route('cart.show');
+        return redirect()->route('cart.show');
     }
 
 
     /*
     |--------------------------------------------------------------------------
-    | Remove Item From Cart
+    | Remove Item
     |--------------------------------------------------------------------------
     */
 

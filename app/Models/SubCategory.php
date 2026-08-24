@@ -24,6 +24,8 @@ class SubCategory extends Model
         'price',
 
         'discount_price',
+         
+        'stock',
 
         'image',
 
