@@ -674,6 +674,13 @@
     </a>
 
    
+<a 
+    href="{{ route('newsletter.index') }}" 
+    aria-label="Newsletter & Suggestions"
+    title="Newsletter & Suggestions"
+>
+    <i class="bi bi-person"></i>
+</a>
 
     <a
         href="{{ route('cart.show') }}"

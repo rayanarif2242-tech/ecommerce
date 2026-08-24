@@ -853,23 +853,94 @@
       </div>
     </div>
   </section>
-
-  <section class="newsletter bg-light"
-    style="background: url('{{ asset('homes/images/pattern-bg.png') }}') no-repeat;">
+<section
+    class="newsletter bg-light"
+    style="background: url('{{ asset('homes/images/pattern-bg.png') }}') no-repeat;"
+>
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-8 py-5 my-5">
-          <div class="subscribe-header text-center pb-3">
-            <h3 class="section-title text-uppercase">Sign Up for our newsletter</h3>
-          </div>
-          <form id="form" class="d-flex flex-wrap gap-2">
-            <input type="text" name="email" placeholder="Your Email Addresss" class="form-control form-control-lg">
-            <button class="btn btn-dark btn-lg text-uppercase w-100">Sign Up</button>
-          </form>
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-8 py-5 my-5">
+
+                <div class="subscribe-header text-center pb-3">
+
+                    <h3 class="section-title text-uppercase">
+                        Sign Up for our newsletter
+                    </h3>
+
+                </div>
+
+
+                {{-- SUCCESS MESSAGE --}}
+
+                @if(session()->has('newsletter_success'))
+
+                    <div
+                        class="alert alert-success text-center mb-4"
+                        role="alert"
+                    >
+                        <i class="bi bi-check-circle me-2"></i>
+
+                        {{ session('newsletter_success') }}
+
+                    </div>
+
+                @endif
+
+
+                {{-- ERROR MESSAGE --}}
+
+                @if($errors->has('email'))
+
+                    <div
+                        class="alert alert-danger text-center mb-4"
+                        role="alert"
+                    >
+                        <i class="bi bi-exclamation-circle me-2"></i>
+
+                        {{ $errors->first('email') }}
+
+                    </div>
+
+                @endif
+
+
+                {{-- NEWSLETTER FORM --}}
+
+                <form
+                    action="{{ route('newsletter.subscribe') }}"
+                    method="POST"
+                    class="d-flex flex-wrap gap-2"
+                >
+
+                    @csrf
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Your Email Address"
+                        class="form-control form-control-lg"
+                        value="{{ old('email') }}"
+                        required
+                    >
+
+                    <button
+                        type="submit"
+                        class="btn btn-dark btn-lg text-uppercase w-100"
+                    >
+                        <i class="bi bi-envelope me-2"></i>
+                        Sign Up
+                    </button>
+
+                </form>
+
+            </div>
+
         </div>
-      </div>
+
     </div>
-  </section>
+</section>
 
   <section class="instagram position-relative">
     <div class="d-flex justify-content-center w-100 position-absolute bottom-0 z-1">

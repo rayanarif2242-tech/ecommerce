@@ -38,6 +38,56 @@
     gap: 22px;
 }
 
+/* =========================
+   COMING SOON
+========================= */
+
+.coming-soon-box {
+    width: 100%;
+    padding: 22px 25px;
+    border: 1px solid #111;
+    background: #fff;
+    color: #111;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.coming-soon-box i {
+    font-size: 18px;
+}
+
+.coming-soon-box span {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.coming-soon-box small {
+    margin-left: auto;
+    color: #888;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: none;
+}
+
+@media (max-width: 767px) {
+
+    .coming-soon-box {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .coming-soon-box small {
+        width: 100%;
+        margin-left: 32px;
+    }
+
+}
+
 .nav-icons a {
     color: #111;
     font-size: 20px;
@@ -718,6 +768,13 @@
         <i class="bi bi-search"></i>
     </a>
 
+<a 
+    href="{{ route('newsletter.index') }}" 
+    aria-label="Newsletter & Suggestions"
+    title="Newsletter & Suggestions"
+>
+    <i class="bi bi-person"></i>
+</a>
     
 
     <a
@@ -969,35 +1026,24 @@
 
 
 
- {{-- =========================
-     SHOP / EXPLORE BUTTON
+{{-- =========================
+     COMING SOON
 ========================= --}}
 
-@if($billboard->button_text)
+<div class="coming-soon-box">
 
-    @if($billboard->product)
+    <i class="bi bi-stars"></i>
 
-        <a
-            href="{{ route('product.show', $billboard->product->product_id) }}"
-            class="billboard-btn"
-        >
-            <i class="bi bi-bag"></i>
-            {{ $billboard->button_text }}
-        </a>
+    <span>Coming Soon</span>
 
-    @else
+    <small>
+        This collection will be available soon.
+    </small>
 
-        <a
-            href="{{ url('/') }}"
-            class="billboard-btn"
-        >
-            <i class="bi bi-bag"></i>
-            {{ $billboard->button_text }}
-        </a>
+</div>
 
-    @endif
 
-@endif
+
 
 
 

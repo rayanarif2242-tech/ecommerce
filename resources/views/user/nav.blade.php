@@ -128,40 +128,76 @@
           </div>
         </div>
 
-        <div class="col-3 col-lg-auto">
-          <ul class="list-unstyled d-flex m-0">
-          
-            <li class="d-none d-lg-block">
-    <a href="{{ route('cart.show') }}"
-       class="text-uppercase mx-3">
-        Cart <span class="cart-count">(0)</span>
-    </a>
-</li>
-            <li class="d-lg-none">
-              <a href="#" class="mx-2">
-                <svg width="24" height="24" viewBox="0 0 24 24">
-                  <use xlink:href="#heart"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="d-lg-none">
-              <a href="#" class="mx-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                aria-controls="offcanvasCart">
-                <svg width="24" height="24" viewBox="0 0 24 24">
-                  <use xlink:href="#cart"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="search-box" class="mx-2">
-              <a href="#search" class="search-button">
-                <svg width="24" height="24" viewBox="0 0 24 24">
-                  <use xlink:href="#search"></use>
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
+       <div class="col-3 col-lg-auto">
 
+    <ul class="list-unstyled d-flex align-items-center m-0">
+
+        {{-- CART --}}
+        <li class="d-none d-lg-block">
+            <a
+                href="{{ route('cart.show') }}"
+                class="text-uppercase mx-3 text-dark text-decoration-none"
+            >
+                Cart <span class="cart-count">(0)</span>
+            </a>
+        </li>
+
+
+        {{-- NEWSLETTER / ACCOUNT --}}
+        <li class="d-none d-lg-block">
+            <a
+                href="{{ route('newsletter.index') }}"
+                class="mx-3 text-dark text-decoration-none"
+                aria-label="Newsletter & Suggestions"
+                title="Newsletter & Suggestions"
+            >
+                <i class="bi bi-person fs-5"></i>
+            </a>
+        </li>
+
+
+        {{-- MOBILE HEART --}}
+        <li class="d-lg-none">
+            <a href="#" class="mx-2">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#heart"></use>
+                </svg>
+            </a>
+        </li>
+
+
+        {{-- MOBILE CART --}}
+        <li class="d-lg-none">
+            <a
+                href="#"
+                class="mx-2"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasCart"
+                aria-controls="offcanvasCart"
+            >
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#cart"></use>
+                </svg>
+            </a>
+        </li>
+
+
+        {{-- SEARCH --}}
+        <li class="search-box mx-2">
+            <a
+                href="#search"
+                class="search-button"
+                aria-label="Search"
+            >
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#search"></use>
+                </svg>
+            </a>
+        </li>
+
+    </ul>
+
+</div>
       </div>
 
     </div>

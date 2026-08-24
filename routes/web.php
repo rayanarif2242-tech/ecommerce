@@ -26,6 +26,9 @@ use App\Http\Controllers\Home\IndexController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FrontendSearchController;
+use App\Http\Controllers\NewsletterController;
+
+
 
 
 
@@ -312,3 +315,15 @@ Route::get('/order-success/{order_id}', [CheckoutController::class, 'success'])
 
     Route::get('/search', [FrontendSearchController::class, 'search'])
     ->name('frontend.search');
+
+
+
+
+
+    Route::post('/newsletter/subscribe', [
+    NewsletterController::class,
+    'subscribe'
+])->name('newsletter.subscribe');
+Route::get('/newsletter', [NewsletterController::class, 'index'])
+    ->name('newsletter.index');
+
