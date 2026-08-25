@@ -47,9 +47,35 @@ class CartController extends Controller
 
         $id = 'product_' . $product->product_id;
 
+        /*
+        |--------------------------------------------------------------------------
+        | Check Existing Cart Quantity
+        |--------------------------------------------------------------------------
+        */
+
+        $existingQuantity = isset($cart[$id])
+            ? (int) $cart[$id]['quantity']
+            : 0;
+
+        if (($existingQuantity + $quantity) > (int) $product->stock) {
+            return back()->with(
+                'error',
+                'You can only add up to ' . $product->stock . ' item(s) of this product.'
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Add / Update Session Cart
+        |--------------------------------------------------------------------------
+        */
+
         if (isset($cart[$id])) {
+
             $cart[$id]['quantity'] += $quantity;
+
         } else {
+
             $cart[$id] = [
                 'type'     => 'product',
                 'id'       => $product->product_id,
@@ -62,16 +88,25 @@ class CartController extends Controller
             ];
         }
 
-        $product->decrement('stock', $quantity);
+        /*
+        |--------------------------------------------------------------------------
+        | IMPORTANT:
+        | DO NOT CHANGE DATABASE STOCK HERE
+        |--------------------------------------------------------------------------
+        */
 
         session()->put('cart', $cart);
 
-        return redirect()
-            ->route('cart.show')
-            ->with(
-                'success',
-                $quantity . ' product item(s) added to cart!'
-            );
+        /*
+        |--------------------------------------------------------------------------
+        | Stay On Product Page
+        |--------------------------------------------------------------------------
+        */
+
+        return back()->with(
+            'success',
+            $quantity . ' product item(s) added to cart!'
+        );
     }
 
 
@@ -113,9 +148,35 @@ class CartController extends Controller
 
         $id = 'signature_' . $signature->signature_id;
 
+        /*
+        |--------------------------------------------------------------------------
+        | Check Existing Cart Quantity
+        |--------------------------------------------------------------------------
+        */
+
+        $existingQuantity = isset($cart[$id])
+            ? (int) $cart[$id]['quantity']
+            : 0;
+
+        if (($existingQuantity + $quantity) > (int) $signature->stock) {
+            return back()->with(
+                'error',
+                'You can only add up to ' . $signature->stock . ' item(s) of this signature.'
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Add / Update Session Cart
+        |--------------------------------------------------------------------------
+        */
+
         if (isset($cart[$id])) {
+
             $cart[$id]['quantity'] += $quantity;
+
         } else {
+
             $cart[$id] = [
                 'type'     => 'signature',
                 'id'       => $signature->signature_id,
@@ -126,16 +187,18 @@ class CartController extends Controller
             ];
         }
 
-        $signature->decrement('stock', $quantity);
+        /*
+        |--------------------------------------------------------------------------
+        | DO NOT CHANGE DATABASE STOCK
+        |--------------------------------------------------------------------------
+        */
 
         session()->put('cart', $cart);
 
-        return redirect()
-            ->route('cart.show')
-            ->with(
-                'success',
-                $quantity . ' signature item(s) added to cart!'
-            );
+        return back()->with(
+            'success',
+            $quantity . ' signature item(s) added to cart!'
+        );
     }
 
 
@@ -177,9 +240,35 @@ class CartController extends Controller
 
         $id = 'subcategory_' . $subCategory->subcategory_id;
 
+        /*
+        |--------------------------------------------------------------------------
+        | Check Existing Cart Quantity
+        |--------------------------------------------------------------------------
+        */
+
+        $existingQuantity = isset($cart[$id])
+            ? (int) $cart[$id]['quantity']
+            : 0;
+
+        if (($existingQuantity + $quantity) > (int) $subCategory->stock) {
+            return back()->with(
+                'error',
+                'You can only add up to ' . $subCategory->stock . ' item(s) of this subcategory.'
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Add / Update Session Cart
+        |--------------------------------------------------------------------------
+        */
+
         if (isset($cart[$id])) {
+
             $cart[$id]['quantity'] += $quantity;
+
         } else {
+
             $cart[$id] = [
                 'type'     => 'subcategory',
                 'id'       => $subCategory->subcategory_id,
@@ -193,16 +282,18 @@ class CartController extends Controller
             ];
         }
 
-        $subCategory->decrement('stock', $quantity);
+        /*
+        |--------------------------------------------------------------------------
+        | DO NOT CHANGE DATABASE STOCK
+        |--------------------------------------------------------------------------
+        */
 
         session()->put('cart', $cart);
 
-        return redirect()
-            ->route('cart.show')
-            ->with(
-                'success',
-                $quantity . ' subcategory item(s) added to cart!'
-            );
+        return back()->with(
+            'success',
+            $quantity . ' subcategory item(s) added to cart!'
+        );
     }
 
 
@@ -252,7 +343,24 @@ class CartController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Existing Collection
+        | Check Existing Cart Quantity
+        |--------------------------------------------------------------------------
+        */
+
+        $existingQuantity = isset($cart[$id])
+            ? (int) $cart[$id]['quantity']
+            : 0;
+
+        if (($existingQuantity + $quantity) > (int) $collection->stock) {
+            return back()->with(
+                'error',
+                'You can only add up to ' . $collection->stock . ' item(s) of this collection.'
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Add / Update Session Cart
         |--------------------------------------------------------------------------
         */
 
@@ -276,20 +384,16 @@ class CartController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Reduce Collection Stock
+        | DO NOT CHANGE DATABASE STOCK
         |--------------------------------------------------------------------------
         */
 
-        $collection->decrement('stock', $quantity);
-
         session()->put('cart', $cart);
 
-        return redirect()
-            ->route('cart.show')
-            ->with(
-                'success',
-                $quantity . ' collection item(s) added to cart!'
-            );
+        return back()->with(
+            'success',
+            $quantity . ' collection item(s) added to cart!'
+        );
     }
 
 
@@ -350,17 +454,15 @@ class CartController extends Controller
                     );
             }
 
-            if ((int) $product->stock <= 0) {
+            if ((int) $item['quantity'] >= (int) $product->stock) {
 
                 return redirect()
                     ->route('cart.show')
                     ->with(
                         'error',
-                        'This product is currently out of stock.'
+                        'You cannot add more than ' . $product->stock . ' item(s).'
                     );
             }
-
-            $product->decrement('stock', 1);
         }
 
 
@@ -391,17 +493,15 @@ class CartController extends Controller
                     );
             }
 
-            if ((int) $signature->stock <= 0) {
+            if ((int) $item['quantity'] >= (int) $signature->stock) {
 
                 return redirect()
                     ->route('cart.show')
                     ->with(
                         'error',
-                        'This signature is currently out of stock.'
+                        'You cannot add more than ' . $signature->stock . ' item(s).'
                     );
             }
-
-            $signature->decrement('stock', 1);
         }
 
 
@@ -432,17 +532,15 @@ class CartController extends Controller
                     );
             }
 
-            if ((int) $subCategory->stock <= 0) {
+            if ((int) $item['quantity'] >= (int) $subCategory->stock) {
 
                 return redirect()
                     ->route('cart.show')
                     ->with(
                         'error',
-                        'This subcategory is currently out of stock.'
+                        'You cannot add more than ' . $subCategory->stock . ' item(s).'
                     );
             }
-
-            $subCategory->decrement('stock', 1);
         }
 
 
@@ -473,23 +571,20 @@ class CartController extends Controller
                     );
             }
 
-            if ((int) $collection->stock <= 0) {
+            if ((int) $item['quantity'] >= (int) $collection->stock) {
 
                 return redirect()
                     ->route('cart.show')
                     ->with(
                         'error',
-                        'No more stock is available for this collection.'
+                        'You cannot add more than ' . $collection->stock . ' item(s).'
                     );
             }
-
-            $collection->decrement('stock', 1);
         }
-
 
         /*
         |--------------------------------------------------------------------------
-        | Increase Cart Quantity
+        | Increase Session Cart Quantity Only
         |--------------------------------------------------------------------------
         */
 
@@ -515,127 +610,21 @@ class CartController extends Controller
             return redirect()->route('cart.show');
         }
 
-        $item = $cart[$id];
-
-        /*
-        |--------------------------------------------------------------------------
-        | Only Return Stock If Quantity Is Actually Being Decreased
-        |--------------------------------------------------------------------------
-        */
-
         if ($cart[$id]['quantity'] > 1) {
-
-            if ($item['type'] === 'product') {
-
-                $product = Product::where(
-                    'product_id',
-                    $item['id']
-                )->first();
-
-                if ($product) {
-                    $product->increment('stock', 1);
-                }
-            }
-
-            elseif ($item['type'] === 'signature') {
-
-                $signature = Signature::where(
-                    'signature_id',
-                    $item['id']
-                )->first();
-
-                if ($signature) {
-                    $signature->increment('stock', 1);
-                }
-            }
-
-            elseif ($item['type'] === 'subcategory') {
-
-                $subCategory = SubCategory::where(
-                    'subcategory_id',
-                    $item['id']
-                )->first();
-
-                if ($subCategory) {
-                    $subCategory->increment('stock', 1);
-                }
-            }
-
-            elseif ($item['type'] === 'collection') {
-
-                $collection = Collection::where(
-                    'collection_id',
-                    $item['id']
-                )->first();
-
-                if ($collection) {
-                    $collection->increment('stock', 1);
-                }
-            }
 
             $cart[$id]['quantity']--;
 
         } else {
 
-            /*
-            |--------------------------------------------------------------------------
-            | If Quantity Is 1, Remove Item
-            |--------------------------------------------------------------------------
-            |
-            | Return that one reserved item to stock.
-            |
-            */
-
-            if ($item['type'] === 'product') {
-
-                $product = Product::where(
-                    'product_id',
-                    $item['id']
-                )->first();
-
-                if ($product) {
-                    $product->increment('stock', 1);
-                }
-            }
-
-            elseif ($item['type'] === 'signature') {
-
-                $signature = Signature::where(
-                    'signature_id',
-                    $item['id']
-                )->first();
-
-                if ($signature) {
-                    $signature->increment('stock', 1);
-                }
-            }
-
-            elseif ($item['type'] === 'subcategory') {
-
-                $subCategory = SubCategory::where(
-                    'subcategory_id',
-                    $item['id']
-                )->first();
-
-                if ($subCategory) {
-                    $subCategory->increment('stock', 1);
-                }
-            }
-
-            elseif ($item['type'] === 'collection') {
-
-                $collection = Collection::where(
-                    'collection_id',
-                    $item['id']
-                )->first();
-
-                if ($collection) {
-                    $collection->increment('stock', 1);
-                }
-            }
-
             unset($cart[$id]);
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | IMPORTANT:
+        | No Database Stock Change
+        |--------------------------------------------------------------------------
+        */
 
         session()->put('cart', $cart);
 
@@ -657,73 +646,11 @@ class CartController extends Controller
             return redirect()->route('cart.show');
         }
 
-        $item = $cart[$id];
-
         /*
         |--------------------------------------------------------------------------
-        | Return Reserved Stock
+        | Remove From Session Only
         |--------------------------------------------------------------------------
         */
-
-        if ($item['type'] === 'product') {
-
-            $product = Product::where(
-                'product_id',
-                $item['id']
-            )->first();
-
-            if ($product) {
-                $product->increment(
-                    'stock',
-                    $item['quantity']
-                );
-            }
-        }
-
-        elseif ($item['type'] === 'signature') {
-
-            $signature = Signature::where(
-                'signature_id',
-                $item['id']
-            )->first();
-
-            if ($signature) {
-                $signature->increment(
-                    'stock',
-                    $item['quantity']
-                );
-            }
-        }
-
-        elseif ($item['type'] === 'subcategory') {
-
-            $subCategory = SubCategory::where(
-                'subcategory_id',
-                $item['id']
-            )->first();
-
-            if ($subCategory) {
-                $subCategory->increment(
-                    'stock',
-                    $item['quantity']
-                );
-            }
-        }
-
-        elseif ($item['type'] === 'collection') {
-
-            $collection = Collection::where(
-                'collection_id',
-                $item['id']
-            )->first();
-
-            if ($collection) {
-                $collection->increment(
-                    'stock',
-                    $item['quantity']
-                );
-            }
-        }
 
         unset($cart[$id]);
 
@@ -746,76 +673,11 @@ class CartController extends Controller
 
     public function clear()
     {
-        $cart = session()->get('cart', []);
-
         /*
         |--------------------------------------------------------------------------
-        | Return All Reserved Stock
+        | Clear Session Only
         |--------------------------------------------------------------------------
         */
-
-        foreach ($cart as $item) {
-
-            if (($item['type'] ?? '') === 'product') {
-
-                $product = Product::where(
-                    'product_id',
-                    $item['id']
-                )->first();
-
-                if ($product) {
-                    $product->increment(
-                        'stock',
-                        $item['quantity']
-                    );
-                }
-            }
-
-            elseif (($item['type'] ?? '') === 'signature') {
-
-                $signature = Signature::where(
-                    'signature_id',
-                    $item['id']
-                )->first();
-
-                if ($signature) {
-                    $signature->increment(
-                        'stock',
-                        $item['quantity']
-                    );
-                }
-            }
-
-            elseif (($item['type'] ?? '') === 'subcategory') {
-
-                $subCategory = SubCategory::where(
-                    'subcategory_id',
-                    $item['id']
-                )->first();
-
-                if ($subCategory) {
-                    $subCategory->increment(
-                        'stock',
-                        $item['quantity']
-                    );
-                }
-            }
-
-            elseif (($item['type'] ?? '') === 'collection') {
-
-                $collection = Collection::where(
-                    'collection_id',
-                    $item['id']
-                )->first();
-
-                if ($collection) {
-                    $collection->increment(
-                        'stock',
-                        $item['quantity']
-                    );
-                }
-            }
-        }
 
         session()->forget('cart');
 
