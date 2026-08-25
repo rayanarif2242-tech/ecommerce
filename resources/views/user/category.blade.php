@@ -794,7 +794,7 @@
 </a>
                 
 
-                <a href="#">
+                <a href="{{ route('cart.show') }}">
                     <i class="bi bi-bag"></i>
                 </a>
 

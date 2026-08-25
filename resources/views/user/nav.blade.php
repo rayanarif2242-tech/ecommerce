@@ -1,3 +1,69 @@
+<style>
+  /* =========================================================
+   CART ICON
+========================================================= */
+.navbar-cart-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-cart-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    /* Changed to solid black to match image */
+    color: #000000; 
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.navbar-cart-icon i {
+    /* Using font-weight or a solid icon class is recommended if available */
+    font-size: 22px; 
+    line-height: 1;
+}
+
+/* =========================================================
+   CART COUNT BADGE (MATCHES IMAGE EXACTLY)
+========================================================= */
+.cart-count {
+    position: absolute;
+    /* Precise positioning to sit on top-right of the bag */
+    top: 2px;
+    right: 0px;
+    
+    /* Perfect circle dimensions */
+    width: 16px;
+    height: 16px;
+    
+    /* Background and text styling */
+    background: #000000;
+    color: #ffffff;
+    border-radius: 50%;
+    
+    /* Center the number perfectly */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Typography adjustments */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700; /* Made bold like the screenshot */
+    line-height: 1;
+    
+    /* Removed the thick 2px white border from your previous code */
+    border: none; 
+    
+    z-index: 10;
+}
+
+</style>
  <nav class="navbar navbar-expand-lg bg-light text-uppercase fs-6 p-3 border-bottom align-items-center">
     <div class="container-fluid">
       <div class="row justify-content-between align-items-center w-100">
@@ -133,15 +199,33 @@
     <ul class="list-unstyled d-flex align-items-center m-0">
 
         {{-- CART --}}
-        <li class="d-none d-lg-block">
-            <a
-                href="{{ route('cart.show') }}"
-                class="text-uppercase mx-3 text-dark text-decoration-none"
-            >
-                Cart <span class="cart-count">(0)</span>
-            </a>
-        </li>
+       <li class="navbar-cart-wrapper">
 
+    <a
+        href="{{ route('cart.show') }}"
+        class="navbar-cart-icon"
+        aria-label="Cart"
+        title="Cart"
+    >
+
+        <i class="bi bi-bag"></i>
+
+        @php
+            $cartCount = collect(session('cart', []))
+                ->sum('quantity');
+        @endphp
+
+        @if($cartCount > 0)
+
+            <span class="cart-count">
+                {{ $cartCount }}
+            </span>
+
+        @endif
+
+    </a>
+
+</li>
 
         {{-- NEWSLETTER / ACCOUNT --}}
         <li class="d-none d-lg-block">
@@ -243,3 +327,60 @@
       </div>
     </div>
   </div>
+ <script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    /*
+    |--------------------------------------------------------------------------
+    | MOBILE CART OFFCANVAS
+    |--------------------------------------------------------------------------
+    */
+
+    const mobileCart =
+        document.querySelector(
+            '[data-bs-target="#offcanvasCart"]'
+        );
+
+    const offcanvasCart =
+        document.getElementById('offcanvasCart');
+
+
+    if (mobileCart && offcanvasCart) {
+
+        mobileCart.addEventListener('click', function () {
+
+            const cart =
+                bootstrap.Offcanvas.getOrCreateInstance(
+                    offcanvasCart
+                );
+
+            cart.show();
+
+        });
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CART HOVER EFFECT
+    |--------------------------------------------------------------------------
+    */
+
+    const cartIcon =
+        document.querySelector('.navbar-cart-icon');
+
+    if (cartIcon) {
+
+        cartIcon.addEventListener('mouseenter', function () {
+            this.classList.add('cart-hover');
+        });
+
+        cartIcon.addEventListener('mouseleave', function () {
+            this.classList.remove('cart-hover');
+        });
+
+    }
+
+});
+ </script>
