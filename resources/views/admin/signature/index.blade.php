@@ -121,6 +121,7 @@
                         <th>Product Name</th>
                         <th>Price</th>
                         <th>Discount Price</th>
+                        <th>Stock</th>
                         <th>Home</th>
                         <th>Status</th>
                         <th>Sort</th>
@@ -187,6 +188,23 @@
                                 @endif
 
                             </td>
+                            <td>
+
+    @if($signature->stock > 0)
+
+        <span class="badge bg-label-success">
+            {{ $signature->stock }}
+        </span>
+
+    @else
+
+        <span class="badge bg-label-danger">
+            Out of Stock
+        </span>
+
+    @endif
+
+</td>
 
 
                             <td>
@@ -278,7 +296,7 @@
 
                         <tr>
 
-                            <td colspan="9"
+                            <td colspan="10"
                                 class="text-center">
 
                                 No signatures found.

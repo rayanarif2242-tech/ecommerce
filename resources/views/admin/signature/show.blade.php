@@ -221,7 +221,7 @@
                             </div>
 
                         </div>
-
+         
 
                         {{-- Show on Home --}}
                         <div class="col-md-4 mb-4">
@@ -249,7 +249,26 @@
                             </div>
 
                         </div>
+               {{-- Stock --}}
+<div class="col-md-3 mb-3">
 
+    <label class="form-label">
+        Stock
+    </label>
+
+    <input type="number"
+           name="stock"
+           class="form-control"
+           min="0"
+           value="{{ old('stock', $signature->stock) }}"
+           placeholder="Enter stock quantity"
+           required>
+
+    @error('stock')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+
+</div>
 
                         {{-- Status --}}
                         <div class="col-md-4 mb-4">

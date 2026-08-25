@@ -274,6 +274,34 @@
 
     color: #777;
 }
+.quantity-box {
+    display: flex;
+    align-items: center;
+    width: 160px;
+    border: 1px solid #ddd;
+}
+
+.quantity-btn {
+    width: 50px;
+    height: 48px;
+    border: none;
+    background: #fff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.quantity-btn:hover {
+    background: #f5f5f5;
+}
+
+#signatureQuantity {
+    width: 60px;
+    height: 48px;
+    border: none;
+    text-align: center;
+    font-size: 15px;
+    outline: none;
+}
 
 .search-arrow {
 
@@ -907,29 +935,107 @@
 
 
 {{-- ADD TO CART --}}
-<form
-    action="{{ route('cart.add.signature') }}"
-    method="POST"
->
-    @csrf
+{{-- =========================
+     SIGNATURE STOCK & CART
+========================= --}}
 
-    <input
-        type="hidden"
-        name="signature_id"
-        value="{{ $signature->signature_id }}"
+@if((int) $signature->stock > 0)
+
+    {{-- AVAILABLE STOCK --}}
+    <div class="mb-3">
+
+        <span class="text-muted">
+            Available Stock:
+        </span>
+
+        <strong>
+            {{ $signature->stock }}
+        </strong>
+
+    </div>
+
+
+    {{-- ADD TO CART FORM --}}
+    <form
+        action="{{ route('cart.add.signature') }}"
+        method="POST"
     >
 
+        @csrf
+
+        <input
+            type="hidden"
+            name="signature_id"
+            value="{{ $signature->signature_id }}"
+        >
+
+
+        {{-- QUANTITY --}}
+        <div class="quantity-box mb-3">
+
+            <button
+                type="button"
+                class="quantity-btn"
+                onclick="decreaseSignatureQuantity()"
+                aria-label="Decrease quantity"
+            >
+                −
+            </button>
+
+
+            <input
+                type="number"
+                id="signatureQuantity"
+                name="quantity"
+                value="1"
+                min="1"
+                max="{{ $signature->stock }}"
+                readonly
+            >
+
+
+            <button
+                type="button"
+                class="quantity-btn"
+                onclick="increaseSignatureQuantity()"
+                aria-label="Increase quantity"
+            >
+                +
+            </button>
+
+        </div>
+
+
+        {{-- ADD TO CART --}}
+        <button
+            type="submit"
+            class="add-cart-btn"
+        >
+
+            <i class="bi bi-bag me-2"></i>
+
+            Add To Cart
+
+        </button>
+
+    </form>
+
+
+@else
+
+    {{-- OUT OF STOCK --}}
     <button
-        type="submit"
+        type="button"
         class="add-cart-btn"
+        disabled
+        style="background:#999;cursor:not-allowed;"
     >
-        <i class="bi bi-bag me-2"></i>
-        Add To Cart
+
+        Out Of Stock
+
     </button>
 
-</form>
-
-
+@endif
                 </div>
 
             </div>
@@ -1378,10 +1484,41 @@ document.addEventListener('DOMContentLoaded', function () {
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
     }
+    
 
 });
+
+
+
+
 </script>
 
 </body>
+
+<script>
+function increaseSignatureQuantity() {
+
+    const input = document.getElementById('signatureQuantity');
+
+    let quantity = parseInt(input.value) || 1;
+
+    const maxStock = parseInt(input.max) || 0;
+
+    if (quantity < maxStock) {
+        input.value = quantity + 1;
+    }
+}
+
+function decreaseSignatureQuantity() {
+
+    const input = document.getElementById('signatureQuantity');
+
+    let quantity = parseInt(input.value) || 1;
+
+    if (quantity > 1) {
+        input.value = quantity - 1;
+    }
+}
+</script>
 
 </html>

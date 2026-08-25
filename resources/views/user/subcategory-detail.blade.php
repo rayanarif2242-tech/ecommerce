@@ -697,6 +697,47 @@
             }
 
         }
+        /* =========================
+   QUANTITY SELECTOR
+========================= */
+
+.quantity-wrapper {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 48px;
+    margin-bottom: 18px;
+    border: 1px solid #ddd;
+}
+
+.quantity-btn {
+    width: 45px;
+    height: 46px;
+    border: none;
+    background: #fff;
+    color: #111;
+    font-size: 20px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.quantity-btn:hover {
+    background: #111;
+    color: #fff;
+}
+
+.quantity-input {
+    width: 60px;
+    height: 46px;
+    border: none;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    text-align: center;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+    background: #fff;
+}
 
     </style>
 
@@ -1132,6 +1173,36 @@
         name="subcategory_id"
         value="{{ $subCategory->subcategory_id }}"
     >
+
+    <div class="quantity-wrapper">
+
+        <button
+            type="button"
+            class="quantity-btn"
+            onclick="decreaseQuantity()"
+        >
+            −
+        </button>
+
+        <input
+            type="number"
+            name="quantity"
+            id="quantity"
+            class="quantity-input"
+            value="1"
+            min="1"
+            max="{{ $subCategory->stock }}"
+        >
+
+        <button
+            type="button"
+            class="quantity-btn"
+            onclick="increaseQuantity()"
+        >
+            +
+        </button>
+
+    </div>
 
     <button
         type="submit"
@@ -1609,6 +1680,27 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 });
+
+function increaseQuantity() {
+
+    const quantity = document.getElementById('quantity');
+
+    let value = parseInt(quantity.value) || 1;
+
+    quantity.value = value + 1;
+}
+
+
+function decreaseQuantity() {
+
+    const quantity = document.getElementById('quantity');
+
+    let value = parseInt(quantity.value) || 1;
+
+    if (value > 1) {
+        quantity.value = value - 1;
+    }
+}
 </script>
 
 

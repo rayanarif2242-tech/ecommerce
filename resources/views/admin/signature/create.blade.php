@@ -119,7 +119,26 @@
                                placeholder="0.00">
 
                     </div>
+                      {{-- Stock --}}
+<div class="col-md-3 mb-3">
 
+    <label class="form-label">
+        Stock
+    </label>
+
+    <input type="number"
+           name="stock"
+           class="form-control"
+           value="{{ old('stock', 0) }}"
+           placeholder="Enter stock quantity"
+           min="0"
+           required>
+
+    @error('stock')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+
+</div>
 
                     {{-- Description --}}
                     <div class="col-12 mb-3">

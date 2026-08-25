@@ -12,13 +12,11 @@
 
     <title>{{ $collection->name }} | Kaira</title>
 
-
     {{-- Bootstrap --}}
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
-
 
     {{-- Bootstrap Icons --}}
     <link
@@ -26,310 +24,17 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
 
-
     {{-- Fonts --}}
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
         rel="stylesheet"
     >
 
-
     <style>
 
         * {
             box-sizing: border-box;
         }
-        .nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-}
-
-.nav-icons a {
-    color: #111;
-    font-size: 20px;
-    text-decoration: none;
-    transition: .3s;
-    position: relative;
-}
-
-.nav-icons a:hover {
-    color: #777;
-}
-
-/* =========================
-   SEARCH POPUP
-========================= */
-
-.search-popup {
-    position: fixed;
-    top: 82px;
-    left: 0;
-    right: 0;
-
-    z-index: 9999;
-
-    background: #fff;
-
-    border-bottom: 1px solid #e5e5e5;
-
-    padding: 35px 0 40px;
-
-    display: none;
-
-    box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
-}
-
-.search-popup.is-visible {
-    display: block;
-}
-
-.search-popup-container {
-    width: min(900px, calc(100% - 40px));
-
-    margin: auto;
-}
-
-.search-popup .form-group {
-    position: relative;
-}
-
-.search-popup #search-form {
-    height: 55px;
-
-    padding-right: 60px;
-
-    font-size: 16px;
-
-    outline: none;
-
-    box-shadow: none;
-}
-
-.search-popup #search-form:focus {
-    border-color: #111 !important;
-}
-
-
-/* =========================
-   BROWSE CATEGORIES
-========================= */
-
-.search-popup .cat-list {
-    list-style: none;
-
-    padding: 0;
-
-    margin: 15px 0 0;
-}
-
-.search-popup .cat-list-item {
-    border-bottom: 1px solid #eee;
-}
-
-.search-popup .cat-list-item a {
-    display: block;
-
-    padding: 10px 0;
-
-    color: #222;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    letter-spacing: 1px;
-
-    transition: .3s;
-}
-
-.search-popup .cat-list-item a:hover {
-    color: #888;
-
-    padding-left: 5px;
-}
-
-.search-popup .cat-list-title {
-
-    margin-top: 30px;
-
-    font-size: 11px;
-
-    letter-spacing: 3px;
-
-    text-transform: uppercase;
-
-    color: #888;
-}
-
-
-/* =========================
-   LIVE SEARCH RESULTS
-========================= */
-
-#frontendSearchResults {
-
-    display: none;
-
-    margin-top: 15px;
-
-    max-height: 430px;
-
-    overflow-y: auto;
-}
-
-.search-suggestion-title {
-
-    padding: 12px 0;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
-    color: #888;
-}
-
-.search-suggestion {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    width: 100%;
-
-    padding: 12px 5px;
-
-    border-bottom: 1px solid #eee;
-
-    text-decoration: none;
-
-    color: #111;
-
-    transition: all .2s ease;
-}
-
-.search-suggestion:hover {
-
-    background: #fafafa;
-
-    padding-left: 10px;
-}
-
-.search-suggestion-image {
-
-    width: 55px;
-
-    height: 55px;
-
-    object-fit: cover;
-
-    flex-shrink: 0;
-
-    border-radius: 4px;
-
-    background: #f5f5f5;
-}
-
-.search-suggestion-image.no-image {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: #888;
-
-    font-size: 18px;
-}
-
-.search-suggestion-info {
-
-    flex: 1;
-}
-
-.search-suggestion-name {
-
-    font-size: 14px;
-
-    font-weight: 500;
-
-    color: #111;
-}
-
-.search-suggestion-type {
-
-    margin-top: 3px;
-
-    font-size: 10px;
-
-    letter-spacing: 1.5px;
-
-    text-transform: uppercase;
-
-    color: #999;
-}
-
-.search-suggestion-price {
-
-    margin-top: 4px;
-
-    font-size: 12px;
-
-    color: #777;
-}
-
-.search-arrow {
-
-    margin-right: 10px;
-
-    color: #aaa;
-}
-
-.search-no-results {
-
-    padding: 35px 10px;
-
-    text-align: center;
-
-    color: #888;
-
-    font-size: 14px;
-}
-
-.search-no-results i {
-
-    display: block;
-
-    margin-bottom: 10px;
-
-    font-size: 24px;
-}
-
-
-/* =========================
-   MOBILE SEARCH
-========================= */
-
-@media (max-width: 767px) {
-
-    .search-popup {
-
-        top: 70px;
-
-        padding: 25px 0 30px;
-    }
-
-    .search-popup-container {
-
-        width: calc(100% - 30px);
-    }
-
-}
 
         body {
             margin: 0;
@@ -337,30 +42,6 @@
             color: #111;
             font-family: 'Montserrat', sans-serif;
         }
-        .shop-collection-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    border: none;
-    background: #111;
-    color: #fff;
-    padding: 16px 25px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all .3s ease;
-}
-
-.shop-collection-btn:hover {
-    background: #333;
-    color: #fff;
-}
-
 
         /* =========================
            NAVBAR
@@ -374,7 +55,6 @@
             align-items: center;
         }
 
-
         .brand {
             font-family: 'Cormorant Garamond', serif;
             font-size: 34px;
@@ -384,7 +64,6 @@
             text-decoration: none;
         }
 
-
         .nav-links {
             display: flex;
             gap: 38px;
@@ -392,7 +71,6 @@
             margin: 0;
             padding: 0;
         }
-
 
         .nav-links a {
             text-decoration: none;
@@ -403,11 +81,9 @@
             transition: .3s;
         }
 
-
         .nav-links a:hover {
             color: #888;
         }
-
 
         .nav-icons {
             display: flex;
@@ -415,13 +91,191 @@
             gap: 22px;
         }
 
-
         .nav-icons a {
+            position: relative;
             color: #111;
             font-size: 20px;
             text-decoration: none;
+            transition: .3s;
         }
 
+        .nav-icons a:hover {
+            color: #777;
+        }
+
+        /* =========================
+           SEARCH POPUP
+        ========================= */
+
+        .search-popup {
+            position: fixed;
+            top: 82px;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 35px 0 40px;
+            display: none;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+        }
+
+        .search-popup.is-visible {
+            display: block;
+        }
+
+        .search-popup-container {
+            width: min(900px, calc(100% - 40px));
+            margin: auto;
+        }
+
+        .search-popup .form-group {
+            position: relative;
+        }
+
+        .search-popup #search-form {
+            height: 55px;
+            padding-right: 60px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .search-popup #search-form:focus {
+            border-color: #111 !important;
+        }
+
+        /* =========================
+           BROWSE CATEGORIES
+        ========================= */
+
+        .search-popup .cat-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0;
+        }
+
+        .search-popup .cat-list-item {
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-popup .cat-list-item a {
+            display: block;
+            padding: 10px 0;
+            color: #222;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: .3s;
+        }
+
+        .search-popup .cat-list-item a:hover {
+            color: #888;
+            padding-left: 5px;
+        }
+
+        .search-popup .cat-list-title {
+            margin-top: 30px;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        /* =========================
+           LIVE SEARCH RESULTS
+        ========================= */
+
+        #frontendSearchResults {
+            display: none;
+            margin-top: 15px;
+            max-height: 430px;
+            overflow-y: auto;
+        }
+
+        .search-suggestion-title {
+            padding: 12px 0;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        .search-suggestion {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            padding: 12px 5px;
+            border-bottom: 1px solid #eee;
+            text-decoration: none;
+            color: #111;
+            transition: all .2s ease;
+        }
+
+        .search-suggestion:hover {
+            background: #fafafa;
+            padding-left: 10px;
+        }
+
+        .search-suggestion-image {
+            width: 55px;
+            height: 55px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border-radius: 4px;
+            background: #f5f5f5;
+        }
+
+        .search-suggestion-image.no-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 18px;
+        }
+
+        .search-suggestion-info {
+            flex: 1;
+        }
+
+        .search-suggestion-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #111;
+        }
+
+        .search-suggestion-type {
+            margin-top: 3px;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #999;
+        }
+
+        .search-suggestion-price {
+            margin-top: 4px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .search-arrow {
+            margin-right: 10px;
+            color: #aaa;
+        }
+
+        .search-no-results {
+            padding: 35px 10px;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .search-no-results i {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
 
         /* =========================
            COLLECTION DETAIL
@@ -431,27 +285,23 @@
             padding: 70px 0 100px;
         }
 
-
         .collection-image-wrapper {
             position: relative;
             overflow: hidden;
             background: #f5f5f5;
         }
 
-
         .collection-image-wrapper img {
             width: 100%;
-            height: 650px;
+            height: 867px;
             object-fit: cover;
             display: block;
             transition: transform .7s ease;
         }
 
-
         .collection-image-wrapper:hover img {
             transform: scale(1.03);
         }
-
 
         /* =========================
            COLLECTION INFO
@@ -461,7 +311,6 @@
             padding: 20px 30px 20px 55px;
         }
 
-
         .collection-label {
             font-size: 11px;
             letter-spacing: 3px;
@@ -470,9 +319,7 @@
             margin-bottom: 15px;
         }
 
-
         .collection-title {
-           
             font-size: 52px;
             line-height: 1.1;
             font-weight: 400;
@@ -481,7 +328,6 @@
             margin-bottom: 25px;
         }
 
-
         .collection-description {
             color: #777;
             font-size: 14px;
@@ -489,6 +335,32 @@
             margin-bottom: 30px;
         }
 
+        /* =========================
+           COLLECTION PRICE
+        ========================= */
+
+        .collection-price {
+            display: block;
+            margin: 25px 0 30px;
+            padding: 15px 0;
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 500;
+            line-height: 1.4;
+            color: #111;
+        }
+
+        .collection-price-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #999;
+        }
 
         /* =========================
            COLLECTION META
@@ -500,7 +372,6 @@
             margin-top: 25px;
         }
 
-
         .collection-meta-title {
             font-size: 11px;
             text-transform: uppercase;
@@ -509,47 +380,136 @@
             margin-bottom: 10px;
         }
 
-
         .collection-meta p {
             color: #777;
             font-size: 13px;
             line-height: 1.8;
         }
 
+        /* =========================
+           QUANTITY
+        ========================= */
+
+        .quantity-wrapper {
+            margin: 25px 0 20px;
+        }
+
+        .quantity-label {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        .quantity-selector {
+            display: inline-flex;
+            align-items: stretch;
+            height: 62px;
+            border: 1px solid #e1e1e1;
+            background: #fff;
+        }
+
+        .quantity-btn {
+            width: 58px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: #fff;
+            color: #222;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all .25s ease;
+        }
+
+        .quantity-btn:hover {
+            background: #f5f5f5;
+        }
+
+        .quantity-btn:active {
+            background: #ededed;
+        }
+
+        .quantity-btn:disabled {
+            background: #f5f5f5;
+            color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .quantity-input {
+            width: 76px;
+            height: 62px;
+            border: none;
+            border-left: 1px solid #e1e1e1;
+            border-right: 1px solid #e1e1e1;
+            background: #fff;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: #111;
+            outline: none;
+        }
+
+        .quantity-input:disabled {
+            background: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        /* Remove browser number arrows */
+
+        .quantity-input::-webkit-outer-spin-button,
+        .quantity-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .quantity-input[type="number"] {
+            -moz-appearance: textfield;
+        }
 
         /* =========================
-           SHOP BUTTON
+           ADD TO CART
         ========================= */
 
         .shop-collection-btn {
             width: 100%;
+            min-height: 52px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-
             border: none;
             background: #111;
             color: #fff;
-
-            padding: 17px;
-
+            padding: 16px 20px;
             font-family: 'Montserrat', sans-serif;
             font-size: 12px;
             letter-spacing: 2px;
             text-transform: uppercase;
-
             text-decoration: none;
-
-            transition: .3s;
+            cursor: pointer;
+            transition: all .3s ease;
         }
-
 
         .shop-collection-btn:hover {
             background: #333;
             color: #fff;
         }
 
+        .shop-collection-btn:disabled {
+            background: #999;
+            color: #fff;
+            cursor: not-allowed;
+            opacity: .7;
+        }
 
         /* =========================
            BACK BUTTON
@@ -559,34 +519,26 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-
             color: #111;
             text-decoration: none;
-
             font-size: 12px;
             letter-spacing: 2px;
             text-transform: uppercase;
-
             margin-bottom: 35px;
-
             transition: .3s;
         }
-
 
         .back-collections i {
             transition: .3s;
         }
 
-
         .back-collections:hover {
             color: #777;
         }
 
-
         .back-collections:hover i {
             transform: translateX(-4px);
         }
-
 
         /* =========================
            FOOTER
@@ -598,7 +550,6 @@
             padding: 55px 0;
         }
 
-
         .footer-brand {
             font-family: 'Cormorant Garamond', serif;
             font-size: 34px;
@@ -606,12 +557,10 @@
             letter-spacing: 4px;
         }
 
-
         .footer p {
             color: #aaa;
             font-size: 14px;
         }
-
 
         /* =========================
            RESPONSIVE
@@ -623,11 +572,9 @@
                 display: none;
             }
 
-
             .collection-info {
                 padding: 40px 10px;
             }
-
 
             .collection-image-wrapper img {
                 height: 550px;
@@ -635,31 +582,57 @@
 
         }
 
-
         @media (max-width: 767px) {
 
             .main-navbar {
                 height: 70px;
             }
 
-
             .brand {
                 font-size: 28px;
             }
 
+            .nav-icons {
+                gap: 15px;
+            }
+
+            .nav-icons a {
+                font-size: 18px;
+            }
+
+            .search-popup {
+                top: 70px;
+                padding: 25px 0 30px;
+            }
+
+            .search-popup-container {
+                width: calc(100% - 30px);
+            }
 
             .collection-detail-section {
                 padding: 40px 0 70px;
             }
 
-
             .collection-image-wrapper img {
                 height: 450px;
             }
 
-
             .collection-title {
                 font-size: 40px;
+            }
+
+            .quantity-selector {
+                height: 56px;
+            }
+
+            .quantity-btn {
+                width: 52px;
+                height: 56px;
+            }
+
+            .quantity-input {
+                width: 65px;
+                height: 56px;
             }
 
         }
@@ -668,9 +641,7 @@
 
 </head>
 
-
 <body>
-
 
 {{-- =========================
      NAVBAR
@@ -682,7 +653,6 @@
 
         <div class="d-flex align-items-center justify-content-between">
 
-
             {{-- LOGO --}}
 
             <a
@@ -691,7 +661,6 @@
             >
                 KAIRA
             </a>
-
 
             {{-- NAVIGATION --}}
 
@@ -703,13 +672,11 @@
                     </a>
                 </li>
 
-
                 <li>
                     <a href="{{ route('user.products') }}">
                         Shop
                     </a>
                 </li>
-
 
                 <li>
                     <a href="{{ route('user.collections') }}">
@@ -717,13 +684,11 @@
                     </a>
                 </li>
 
-
                 <li>
                     <a href="{{ route('blogs') }}">
                         Blog
                     </a>
                 </li>
-
 
                 <li>
                     <a href="{{ route('contact') }}">
@@ -733,71 +698,78 @@
 
             </ul>
 
-
             {{-- ICONS --}}
 
-           <div class="nav-icons">
+            <div class="nav-icons">
 
-    <a
-        href="#"
-        class="search-toggle"
-        aria-label="Open search"
-    >
-        <i class="bi bi-search"></i>
-    </a>
+                {{-- SEARCH --}}
 
-    
-<a 
-    href="{{ route('newsletter.index') }}" 
-    aria-label="Newsletter & Suggestions"
-    title="Newsletter & Suggestions"
->
-    <i class="bi bi-person"></i>
-</a>
+                <a
+                    href="#"
+                    class="search-toggle"
+                    aria-label="Open search"
+                >
+                    <i class="bi bi-search"></i>
+                </a>
 
-    
+                {{-- NEWSLETTER / PROFILE --}}
 
-    <a
-        href="{{ route('cart.show') }}"
-        aria-label="Cart"
-    >
-        <i class="bi bi-bag"></i>
+                <a
+                    href="{{ route('newsletter.index') }}"
+                    aria-label="Newsletter & Suggestions"
+                    title="Newsletter & Suggestions"
+                >
+                    <i class="bi bi-person"></i>
+                </a>
 
-        @php
-            $cartCount = collect(session('cart', []))
-                ->sum('quantity');
-        @endphp
+                {{-- CART --}}
 
-        @if($cartCount > 0)
-            <span
-                style="
-                    position:absolute;
-                    top:-8px;
-                    right:-10px;
-                    background:#111;
-                    color:#fff;
-                    width:18px;
-                    height:18px;
-                    border-radius:50%;
-                    font-size:9px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                "
-            >
-                {{ $cartCount }}
-            </span>
-        @endif
+                <a
+                    href="{{ route('cart.show') }}"
+                    aria-label="Cart"
+                >
 
-    </a>
+                    <i class="bi bi-bag"></i>
 
-</div>
+                    @php
+                        $cartCount = collect(session('cart', []))
+                            ->sum('quantity');
+                    @endphp
+
+                    @if($cartCount > 0)
+
+                        <span
+                            style="
+                                position:absolute;
+                                top:-8px;
+                                right:-10px;
+                                background:#111;
+                                color:#fff;
+                                width:18px;
+                                height:18px;
+                                border-radius:50%;
+                                font-size:9px;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                            "
+                        >
+                            {{ $cartCount }}
+                        </span>
+
+                    @endif
+
+                </a>
+
+            </div>
 
         </div>
 
     </div>
 
 </nav>
+
+
 {{-- =========================
      SEARCH POPUP
 ========================= --}}
@@ -861,7 +833,6 @@
 
                 </li>
 
-
                 <li class="cat-list-item">
 
                     <a href="{{ route('user.collections') }}">
@@ -869,7 +840,6 @@
                     </a>
 
                 </li>
-
 
                 @foreach(
                     \App\Models\Category::where('status', 1)
@@ -899,7 +869,6 @@
 </div>
 
 
-
 {{-- =========================
      COLLECTION DETAIL
 ========================= --}}
@@ -908,24 +877,18 @@
 
     <div class="container">
 
-
         {{-- BACK TO COLLECTIONS --}}
 
         <a
             href="{{ route('user.collections') }}"
             class="back-collections"
         >
-
             <i class="bi bi-arrow-left"></i>
-
             Back To Collections
-
         </a>
 
 
-
         <div class="row g-5 align-items-center">
-
 
             {{-- =========================
                  COLLECTION IMAGE
@@ -934,7 +897,6 @@
             <div class="col-lg-7">
 
                 <div class="collection-image-wrapper">
-
 
                     @if($collection->banner)
 
@@ -971,7 +933,6 @@
             </div>
 
 
-
             {{-- =========================
                  COLLECTION INFORMATION
             ========================= --}}
@@ -980,22 +941,17 @@
 
                 <div class="collection-info">
 
-
                     {{-- LABEL --}}
 
                     <div class="collection-label">
-
                         Kaira Collection
-
                     </div>
 
 
                     {{-- NAME --}}
 
                     <h1 class="collection-title">
-
                         {{ $collection->name }}
-
                     </h1>
 
 
@@ -1023,72 +979,211 @@
                     @endif
 
 
+                    {{-- =========================
+                         COLLECTION PRICE
+                    ========================= --}}
 
-                    {{-- SEO / ADDITIONAL INFORMATION --}}
+                    @if($collection->price !== null)
 
-                    @if($collection->seo_title || $collection->seo_description)
+                        <div class="collection-price">
 
-                        <div class="collection-meta">
+                            <span class="collection-price-label">
+                                Price
+                            </span>
 
-
-                            @if($collection->seo_title)
-
-                                <div class="collection-meta-title">
-
-                                    Collection
-
-                                </div>
-
-                                <p>
-
-                                    {{ $collection->seo_title }}
-
-                                </p>
-
-                            @endif
-
-
-                          
-
+                            Rs.
+                            {{ number_format($collection->price, 2) }}
 
                         </div>
 
                     @endif
 
 
+                    {{-- =========================
+                         SEO INFORMATION
+                    ========================= --}}
 
-                    {{-- SHOP PRODUCTS --}}
+                    @if($collection->seo_title || $collection->seo_description)
 
- <form action="{{ route('cart.add.collections') }}" method="POST">
-    @csrf
+                        <div class="collection-meta">
 
-    <input
-        type="hidden"
-        name="collection_id"
-      value="{{ $collection->collection_id }}"
-    >
+                            @if($collection->seo_title)
 
-    <button
-        type="submit"
-        class="shop-collection-btn"
-    >
-        <i class="bi bi-bag me-2"></i>
-        Add To Cart
-    </button>
-</form>
+                                <div class="collection-meta-title">
+                                    Collection
+                                </div>
 
+                                <p>
+                                    {{ $collection->seo_title }}
+                                </p>
+
+                            @endif
+
+                            @if($collection->seo_description)
+
+                                <div class="collection-meta-title mt-3">
+                                    About
+                                </div>
+
+                                <p>
+                                    {{ $collection->seo_description }}
+                                </p>
+
+                            @endif
+
+                        </div>
+
+                    @endif
+
+
+                    {{-- =========================
+                         CART VARIABLES
+                    ========================= --}}
+
+                    @php
+
+                        $maximumQuantity = (int) ($collection->stock ?? 0);
+
+                        $cart = session('cart', []);
+
+                        $cartQuantity = 0;
+
+                        if (isset($cart[$collection->collection_id])) {
+
+                            $cartQuantity = (int) (
+                                $cart[$collection->collection_id]['quantity'] ?? 0
+                            );
+
+                        }
+
+                    @endphp
+
+
+                    {{-- =========================
+                         ADD TO CART
+                    ========================= --}}
+
+                    <form
+                        action="{{ route('cart.add.collections') }}"
+                        method="POST"
+                    >
+
+                        @csrf
+
+
+                        {{-- COLLECTION ID --}}
+
+                        <input
+                            type="hidden"
+                            name="collection_id"
+                            value="{{ $collection->collection_id }}"
+                        >
+
+
+                        {{-- =========================
+                             QUANTITY
+                        ========================= --}}
+
+                        <div class="quantity-wrapper">
+
+                            <label class="quantity-label">
+                                Quantity
+                            </label>
+
+                            <div
+                                class="quantity-selector"
+                                data-max-quantity="{{ $maximumQuantity }}"
+                            >
+
+                                {{-- MINUS --}}
+
+                                <button
+                                    type="button"
+                                    class="quantity-btn quantity-minus"
+                                    aria-label="Decrease quantity"
+                                    @if($maximumQuantity <= 0)
+                                        disabled
+                                    @endif
+                                >
+                                    −
+                                </button>
+
+
+                                {{-- INPUT --}}
+
+                                <input
+                                    type="number"
+                                    name="quantity"
+                                    class="quantity-input"
+                                    value="{{ $maximumQuantity > 0 ? 1 : 0 }}"
+                                    min="1"
+                                    max="{{ $maximumQuantity }}"
+                                    required
+                                    @if($maximumQuantity <= 0)
+                                        disabled
+                                    @endif
+                                >
+
+
+                                {{-- PLUS --}}
+
+                                <button
+                                    type="button"
+                                    class="quantity-btn quantity-plus"
+                                    aria-label="Increase quantity"
+                                    @if($maximumQuantity <= 0)
+                                        disabled
+                                    @endif
+                                >
+                                    +
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        {{-- =========================
+                             ADD TO CART BUTTON
+                        ========================= --}}
+
+                        <button
+                            type="submit"
+                            class="shop-collection-btn"
+                            @if($maximumQuantity <= 0)
+                                disabled
+                            @endif
+                        >
+
+                            <i class="bi bi-bag"></i>
+
+                            @if($maximumQuantity <= 0)
+
+                                Out Of Stock
+
+                            @elseif($cartQuantity > 0)
+
+                                Update Cart
+
+                            @else
+
+                                Add To Cart
+
+                            @endif
+
+                        </button>
+
+                    </form>
 
                 </div>
 
             </div>
-
 
         </div>
 
     </div>
 
 </section>
-
 
 
 {{-- =========================
@@ -1101,37 +1196,27 @@
 
         <div class="row">
 
-
             <div class="col-md-6">
 
                 <div class="footer-brand">
-
                     KAIRA
-
                 </div>
 
-
                 <p class="mt-3">
-
                     Discover timeless fashion designed
                     for modern living.
-
                 </p>
 
             </div>
-
 
             <div class="col-md-6 text-md-end">
 
                 <p>
-
                     © {{ date('Y') }} Kaira.
                     All Rights Reserved.
-
                 </p>
 
             </div>
-
 
         </div>
 
@@ -1140,12 +1225,20 @@
 </footer>
 
 
+{{-- Bootstrap JS --}}
 
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
 </script>
+
+
 <script>
+
 document.addEventListener('DOMContentLoaded', function () {
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
 
     const searchToggle =
         document.querySelector('.search-toggle');
@@ -1167,135 +1260,304 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     if (
-        !searchToggle ||
-        !searchPopup ||
-        !searchInput ||
-        !searchResults
+        searchToggle &&
+        searchPopup &&
+        searchInput &&
+        searchResults
     ) {
-        return;
-    }
+
+        let searchTimeout = null;
 
 
-    let searchTimeout = null;
+        /* =========================
+           OPEN / CLOSE SEARCH
+        ========================= */
+
+        searchToggle.addEventListener('click', function (e) {
+
+            e.preventDefault();
+
+            searchPopup.classList.toggle('is-visible');
 
 
-    /* =========================
-       OPEN / CLOSE SEARCH
-    ========================= */
+            if (searchPopup.classList.contains('is-visible')) {
 
-    searchToggle.addEventListener('click', function (e) {
+                setTimeout(function () {
 
-        e.preventDefault();
+                    searchInput.focus();
 
-        searchPopup.classList.toggle('is-visible');
+                }, 100);
 
+            } else {
 
-        if (searchPopup.classList.contains('is-visible')) {
-
-            setTimeout(function () {
-
-                searchInput.focus();
-
-            }, 100);
-
-        } else {
-
-            searchInput.value = '';
-
-            searchResults.innerHTML = '';
-
-            searchResults.style.display = 'none';
-
-            if (browseCategories) {
-                browseCategories.style.display = 'block';
-            }
-
-        }
-
-    });
-
-
-    /* =========================
-       LIVE SEARCH
-    ========================= */
-
-    searchInput.addEventListener('input', function () {
-
-        const keyword =
-            this.value.trim();
-
-        clearTimeout(searchTimeout);
-
-
-        /* Empty */
-
-        if (keyword === '') {
-
-            searchResults.innerHTML = '';
-
-            searchResults.style.display = 'none';
-
-            if (browseCategories) {
-                browseCategories.style.display = 'block';
-            }
-
-            return;
-        }
-
-
-        /* Hide categories */
-
-        if (browseCategories) {
-            browseCategories.style.display = 'none';
-        }
-
-
-        /* Delay request */
-
-        searchTimeout = setTimeout(function () {
-
-            fetch(
-                "{{ route('frontend.search') }}?search=" +
-                encodeURIComponent(keyword),
-                {
-                    method: 'GET',
-
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                }
-            )
-            .then(function (response) {
-
-                if (!response.ok) {
-                    throw new Error('Search failed');
-                }
-
-                return response.json();
-
-            })
-            .then(function (results) {
+                searchInput.value = '';
 
                 searchResults.innerHTML = '';
 
+                searchResults.style.display = 'none';
 
-                /* =========================
-                   NO RESULTS
-                ========================= */
+                if (browseCategories) {
+                    browseCategories.style.display = 'block';
+                }
 
-                if (!results.length) {
+            }
+
+        });
+
+
+        /* =========================
+           LIVE SEARCH
+        ========================= */
+
+        searchInput.addEventListener('input', function () {
+
+            const keyword = this.value.trim();
+
+            clearTimeout(searchTimeout);
+
+
+            /* EMPTY SEARCH */
+
+            if (keyword === '') {
+
+                searchResults.innerHTML = '';
+
+                searchResults.style.display = 'none';
+
+                if (browseCategories) {
+                    browseCategories.style.display = 'block';
+                }
+
+                return;
+
+            }
+
+
+            /* HIDE CATEGORIES */
+
+            if (browseCategories) {
+                browseCategories.style.display = 'none';
+            }
+
+
+            /* REQUEST DELAY */
+
+            searchTimeout = setTimeout(function () {
+
+                fetch(
+                    "{{ route('frontend.search') }}?search=" +
+                    encodeURIComponent(keyword),
+                    {
+                        method: 'GET',
+
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    }
+                )
+
+                .then(function (response) {
+
+                    if (!response.ok) {
+                        throw new Error('Search failed');
+                    }
+
+                    return response.json();
+
+                })
+
+                .then(function (results) {
+
+                    searchResults.innerHTML = '';
+
+
+                    /* =========================
+                       NO RESULTS
+                    ========================= */
+
+                    if (!results.length) {
+
+                        searchResults.innerHTML = `
+
+                            <div class="search-no-results">
+
+                                <i class="bi bi-search"></i>
+
+                                <div>
+                                    No results found for
+                                    "<strong>${escapeHtml(keyword)}</strong>"
+                                </div>
+
+                            </div>
+
+                        `;
+
+                        searchResults.style.display = 'block';
+
+                        return;
+                    }
+
+
+                    /* =========================
+                       TITLE
+                    ========================= */
+
+                    const title =
+                        document.createElement('div');
+
+                    title.className =
+                        'search-suggestion-title';
+
+                    title.innerHTML = `
+
+                        Related results for
+                        "<strong>${escapeHtml(keyword)}</strong>"
+
+                    `;
+
+                    searchResults.appendChild(title);
+
+
+                    /* =========================
+                       RESULTS
+                    ========================= */
+
+                    results.forEach(function (item) {
+
+                        const result =
+                            document.createElement('a');
+
+                        result.href = item.url;
+
+                        result.className =
+                            'search-suggestion';
+
+
+                        /* IMAGE */
+
+                        let image = '';
+
+
+                        if (item.image) {
+
+                            image = `
+
+                                <img
+                                    src="${escapeAttribute(item.image)}"
+                                    alt="${escapeAttribute(item.name)}"
+                                    class="search-suggestion-image"
+                                >
+
+                            `;
+
+                        } else {
+
+                            image = `
+
+                                <div
+                                    class="search-suggestion-image no-image"
+                                >
+
+                                    <i class="bi bi-grid"></i>
+
+                                </div>
+
+                            `;
+
+                        }
+
+
+                        /* PRICE */
+
+                        let price = '';
+
+
+                        if (
+                            item.price !== null &&
+                            item.price !== undefined &&
+                            item.price !== ''
+                        ) {
+
+                            const number =
+                                Number(item.price);
+
+
+                            if (!Number.isNaN(number)) {
+
+                                price = `
+
+                                    <div class="search-suggestion-price">
+
+                                        Rs.
+                                        ${number.toLocaleString(
+                                            'en-PK',
+                                            {
+                                                minimumFractionDigits: 2,
+                                                maximumFractionDigits: 2
+                                            }
+                                        )}
+
+                                    </div>
+
+                                `;
+
+                            }
+
+                        }
+
+
+                        result.innerHTML = `
+
+                            ${image}
+
+                            <div class="search-suggestion-info">
+
+                                <div class="search-suggestion-name">
+
+                                    ${escapeHtml(item.name)}
+
+                                </div>
+
+                                <div class="search-suggestion-type">
+
+                                    ${escapeHtml(item.type)}
+
+                                </div>
+
+                                ${price}
+
+                            </div>
+
+                            <i class="
+                                bi bi-arrow-right
+                                search-arrow
+                            "></i>
+
+                        `;
+
+
+                        searchResults.appendChild(result);
+
+                    });
+
+
+                    searchResults.style.display = 'block';
+
+                })
+
+                .catch(function (error) {
+
+                    console.error(error);
+
 
                     searchResults.innerHTML = `
 
                         <div class="search-no-results">
 
-                            <i class="bi bi-search"></i>
+                            <i class="bi bi-exclamation-circle"></i>
 
-                            <div>
-                                No results found for
-                                "<strong>${escapeHtml(keyword)}</strong>"
-                            </div>
+                            Search could not be completed.
 
                         </div>
 
@@ -1303,237 +1565,209 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     searchResults.style.display = 'block';
 
-                    return;
-                }
-
-
-                /* =========================
-                   TITLE
-                ========================= */
-
-                const title =
-                    document.createElement('div');
-
-                title.className =
-                    'search-suggestion-title';
-
-                title.innerHTML = `
-                    Related results for
-                    "<strong>${escapeHtml(keyword)}</strong>"
-                `;
-
-                searchResults.appendChild(title);
-
-
-                /* =========================
-                   RESULTS
-                ========================= */
-
-                results.forEach(function (item) {
-
-                    const result =
-                        document.createElement('a');
-
-                    result.href =
-                        item.url;
-
-                    result.className =
-                        'search-suggestion';
-
-
-                    /* IMAGE */
-
-                    let image = '';
-
-
-                    if (item.image) {
-
-                        image = `
-
-                            <img
-                                src="${escapeAttribute(item.image)}"
-                                alt="${escapeAttribute(item.name)}"
-                                class="search-suggestion-image"
-                            >
-
-                        `;
-
-                    } else {
-
-                        image = `
-
-                            <div
-                                class="search-suggestion-image no-image"
-                            >
-
-                                <i class="bi bi-grid"></i>
-
-                            </div>
-
-                        `;
-                    }
-
-
-                    /* PRICE */
-
-                    let price = '';
-
-
-                    if (
-                        item.price !== null &&
-                        item.price !== undefined &&
-                        item.price !== ''
-                    ) {
-
-                        const number =
-                            Number(item.price);
-
-
-                        if (!Number.isNaN(number)) {
-
-                            price = `
-
-                                <div class="search-suggestion-price">
-
-                                    Rs.
-                                    ${number.toLocaleString(
-                                        'en-PK',
-                                        {
-                                            minimumFractionDigits: 2,
-                                            maximumFractionDigits: 2
-                                        }
-                                    )}
-
-                                </div>
-
-                            `;
-                        }
-                    }
-
-
-                    result.innerHTML = `
-
-                        ${image}
-
-                        <div class="search-suggestion-info">
-
-                            <div class="search-suggestion-name">
-
-                                ${escapeHtml(item.name)}
-
-                            </div>
-
-                            <div class="search-suggestion-type">
-
-                                ${escapeHtml(item.type)}
-
-                            </div>
-
-                            ${price}
-
-                        </div>
-
-                        <i class="
-                            bi bi-arrow-right
-                            search-arrow
-                        "></i>
-
-                    `;
-
-
-                    searchResults.appendChild(result);
-
                 });
 
+            }, 250);
 
-                searchResults.style.display =
-                    'block';
+        });
 
-            })
-            .catch(function (error) {
 
-                console.error(error);
+        /* =========================
+           ENTER SEARCH
+        ========================= */
 
-                searchResults.innerHTML = `
+        if (searchForm) {
 
-                    <div class="search-no-results">
+            searchForm.addEventListener(
+                'submit',
+                function (e) {
 
-                        <i class="bi bi-exclamation-circle"></i>
+                    e.preventDefault();
 
-                        Search could not be completed.
+                    const keyword =
+                        searchInput.value.trim();
 
-                    </div>
 
-                `;
+                    if (!keyword) {
+                        return;
+                    }
 
-                searchResults.style.display =
-                    'block';
 
-            });
+                    window.location.href =
+                        "{{ route('frontend.search') }}" +
+                        "?search=" +
+                        encodeURIComponent(keyword);
 
-        }, 250);
+                }
+            );
+
+        }
+
+
+        /* =========================
+           ESCAPE HTML
+        ========================= */
+
+        function escapeHtml(value) {
+
+            const div =
+                document.createElement('div');
+
+            div.textContent =
+                value ?? '';
+
+            return div.innerHTML;
+
+        }
+
+
+        /* =========================
+           ESCAPE ATTRIBUTE
+        ========================= */
+
+        function escapeAttribute(value) {
+
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+
+        }
+
+    }
+
+
+    /* =====================================================
+       QUANTITY SELECTOR
+    ===================================================== */
+
+    const quantitySelector =
+        document.querySelector('.quantity-selector');
+
+
+    if (!quantitySelector) {
+        return;
+    }
+
+
+    const minusButton =
+        quantitySelector.querySelector('.quantity-minus');
+
+    const plusButton =
+        quantitySelector.querySelector('.quantity-plus');
+
+    const quantityInput =
+        quantitySelector.querySelector('.quantity-input');
+
+
+    const maxQuantity =
+        parseInt(
+            quantitySelector.dataset.maxQuantity || '0',
+            10
+        );
+
+
+    /* OUT OF STOCK */
+
+    if (maxQuantity <= 0) {
+        return;
+    }
+
+
+    /* =========================
+       MINUS
+    ========================= */
+
+    minusButton.addEventListener('click', function () {
+
+        let quantity =
+            parseInt(quantityInput.value, 10) || 1;
+
+
+        if (quantity > 1) {
+
+            quantity--;
+
+            quantityInput.value = quantity;
+
+        }
 
     });
 
 
     /* =========================
-       ENTER SEARCH
+       PLUS
     ========================= */
 
-    if (searchForm) {
+    plusButton.addEventListener('click', function () {
 
-        searchForm.addEventListener(
-            'submit',
-            function (e) {
-
-                e.preventDefault();
-
-                const keyword =
-                    searchInput.value.trim();
+        let quantity =
+            parseInt(quantityInput.value, 10) || 1;
 
 
-                if (!keyword) {
-                    return;
-                }
+        if (quantity < maxQuantity) {
 
+            quantity++;
 
-                window.location.href =
-                    "{{ route('frontend.search') }}" +
-                    "?search=" +
-                    encodeURIComponent(keyword);
+            quantityInput.value = quantity;
 
-            }
-        );
+        }
 
-    }
+    });
 
 
     /* =========================
-       ESCAPE HTML
+       MANUAL INPUT
     ========================= */
 
-    function escapeHtml(value) {
+    quantityInput.addEventListener('input', function () {
 
-        const div =
-            document.createElement('div');
-
-        div.textContent =
-            value ?? '';
-
-        return div.innerHTML;
-    }
+        let quantity =
+            parseInt(this.value, 10) || 1;
 
 
-    function escapeAttribute(value) {
+        if (quantity < 1) {
+            quantity = 1;
+        }
 
-        return String(value ?? '')
-            .replace(/&/g, '&amp;')
-            .replace(/"/g, '&quot;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
-    }
+
+        if (quantity > maxQuantity) {
+            quantity = maxQuantity;
+        }
+
+
+        this.value = quantity;
+
+    });
+
+
+    /* =========================
+       BLUR VALIDATION
+    ========================= */
+
+    quantityInput.addEventListener('blur', function () {
+
+        let quantity =
+            parseInt(this.value, 10) || 1;
+
+
+        if (quantity < 1) {
+            quantity = 1;
+        }
+
+
+        if (quantity > maxQuantity) {
+            quantity = maxQuantity;
+        }
+
+
+        this.value = quantity;
+
+    });
 
 });
+
 </script>
 
 </body>

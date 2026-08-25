@@ -16,6 +16,7 @@ class Signature extends Model
         'description',
         'price',
         'discount_price',
+        'stock',
         'image',
         'sort_order',
         'show_on_home',
@@ -26,6 +27,7 @@ class Signature extends Model
         'show_on_home' => 'boolean',
         'price' => 'decimal:2',
         'discount_price' => 'decimal:2',
+        'stock' => 'integer',
     ];
 
     protected static function boot()
@@ -33,11 +35,9 @@ class Signature extends Model
         parent::boot();
 
         static::creating(function ($signature) {
-
             if (!$signature->signature_id) {
                 $signature->signature_id = 'SIG-' . Str::uuid();
             }
-
         });
     }
 

@@ -169,7 +169,7 @@
                                value="{{ old('discount_price', $signature->discount_price) }}">
 
                     </div>
-
+           
 
                     {{-- Description --}}
                     <div class="col-md-12 mb-3">
@@ -250,6 +250,26 @@
                                value="{{ old('sort_order', $signature->sort_order) }}">
 
                     </div>
+                    {{-- Stock --}}
+<div class="col-md-3 mb-3">
+
+    <label class="form-label">
+        Stock
+    </label>
+
+    <input type="number"
+           name="stock"
+           class="form-control"
+           min="0"
+           value="{{ old('stock', $signature->stock) }}"
+           placeholder="Enter stock quantity"
+           required>
+
+    @error('stock')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+
+</div>
 
 
                     {{-- Show on Home --}}
