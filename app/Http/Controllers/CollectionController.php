@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\File;
 class CollectionController extends Controller
 {
     /**
-     * Display a listing of collections.
+     * Display all collections.
      */
     public function index(Request $request)
     {
@@ -18,13 +18,16 @@ class CollectionController extends Controller
 
         $collections = Collection::when($search, function ($query) use ($search) {
 
-            $query->where('collection_id', 'LIKE', "%{$search}%")
-                ->orWhere('name', 'LIKE', "%{$search}%")
-                ->orWhere('slug', 'LIKE', "%{$search}%");
+            $query->where(function ($q) use ($search) {
+                $q->where('collection_id', 'LIKE', "%{$search}%")
+                    ->orWhere('name', 'LIKE', "%{$search}%")
+                    ->orWhere('slug', 'LIKE', "%{$search}%");
+            });
 
         })
         ->latest()
-        ->paginate(10);
+        ->paginate(10)
+        ->withQueryString();
 
         return view(
             'admin.collections.index',
@@ -53,43 +56,52 @@ class CollectionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
             'product_id' => 'required|exists:products,product_id',
-
-            'name' => 'required|max:255',
-
+            'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
-
-            'description' => 'nullable',
+            'description' => 'nullable|string',
 
             'thumbnail' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-
             'banner' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-
             'icon' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:1024',
 
+            'featured' => 'nullable',
+            'show_home' => 'nullable',
+            'status' => 'nullable',
             'sort_order' => 'nullable|integer',
 
+            'seo_title' => 'nullable|string|max:255',
+            'seo_keywords' => 'nullable|string',
+            'seo_description' => 'nullable|string',
         ]);
 
         $collection = new Collection();
 
         $collection->product_id = $request->product_id;
         $collection->name = $request->name;
-
-        // Collection price
         $collection->price = $request->price;
-
         $collection->description = $request->description;
 
-        $collection->featured = $request->featured ?? 0;
-        $collection->show_home = $request->show_home ?? 0;
-        $collection->status = $request->status ?? 1;
+        $collection->featured = $request->has('featured') ? 1 : 0;
+        $collection->show_home = $request->has('show_home') ? 1 : 0;
+        $collection->status = $request->has('status') ? 1 : 0;
         $collection->sort_order = $request->sort_order ?? 0;
 
         $collection->seo_title = $request->seo_title;
         $collection->seo_keywords = $request->seo_keywords;
         $collection->seo_description = $request->seo_description;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Upload Directory
+        |--------------------------------------------------------------------------
+        */
+
+        $uploadPath = public_path('uploads/collections');
+
+        if (!File::exists($uploadPath)) {
+            File::makeDirectory($uploadPath, 0755, true);
+        }
 
         /*
         |--------------------------------------------------------------------------
@@ -104,10 +116,7 @@ class CollectionController extends Controller
             $name = time() . '_thumb.' .
                 $image->getClientOriginalExtension();
 
-            $image->move(
-                public_path('uploads/collections'),
-                $name
-            );
+            $image->move($uploadPath, $name);
 
             $collection->thumbnail = $name;
         }
@@ -125,10 +134,7 @@ class CollectionController extends Controller
             $name = time() . '_banner.' .
                 $image->getClientOriginalExtension();
 
-            $image->move(
-                public_path('uploads/collections'),
-                $name
-            );
+            $image->move($uploadPath, $name);
 
             $collection->banner = $name;
         }
@@ -146,23 +152,16 @@ class CollectionController extends Controller
             $name = time() . '_icon.' .
                 $image->getClientOriginalExtension();
 
-            $image->move(
-                public_path('uploads/collections'),
-                $name
-            );
+            $image->move($uploadPath, $name);
 
             $collection->icon = $name;
         }
 
-        // Save collection
         $collection->save();
 
         return redirect()
             ->route('admin.collections.index')
-            ->with(
-                'success',
-                'Collection created successfully.'
-            );
+            ->with('success', 'Collection created successfully.');
     }
 
     /**
@@ -194,46 +193,47 @@ class CollectionController extends Controller
     /**
      * Update collection.
      */
-    public function update(
-        Request $request,
-        Collection $collection
-    ) {
+    public function update(Request $request, Collection $collection)
+    {
         $request->validate([
-
             'product_id' => 'required|exists:products,product_id',
-
-            'name' => 'required|max:255',
-
+            'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
-
-            'description' => 'nullable',
+            'description' => 'nullable|string',
 
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-
             'banner' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-
             'icon' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:1024',
 
+            'featured' => 'nullable',
+            'show_home' => 'nullable',
+            'status' => 'nullable',
             'sort_order' => 'nullable|integer',
 
+            'seo_title' => 'nullable|string|max:255',
+            'seo_keywords' => 'nullable|string',
+            'seo_description' => 'nullable|string',
         ]);
 
         $collection->product_id = $request->product_id;
         $collection->name = $request->name;
-
-        // Collection price
         $collection->price = $request->price;
-
         $collection->description = $request->description;
 
-        $collection->featured = $request->featured ?? 0;
-        $collection->show_home = $request->show_home ?? 0;
-        $collection->status = $request->status ?? 1;
+        $collection->featured = $request->has('featured') ? 1 : 0;
+        $collection->show_home = $request->has('show_home') ? 1 : 0;
+        $collection->status = $request->has('status') ? 1 : 0;
         $collection->sort_order = $request->sort_order ?? 0;
 
         $collection->seo_title = $request->seo_title;
         $collection->seo_keywords = $request->seo_keywords;
         $collection->seo_description = $request->seo_description;
+
+        $uploadPath = public_path('uploads/collections');
+
+        if (!File::exists($uploadPath)) {
+            File::makeDirectory($uploadPath, 0755, true);
+        }
 
         /*
         |--------------------------------------------------------------------------
@@ -246,17 +246,11 @@ class CollectionController extends Controller
             if (
                 $collection->thumbnail &&
                 File::exists(
-                    public_path(
-                        'uploads/collections/' .
-                        $collection->thumbnail
-                    )
+                    $uploadPath . '/' . $collection->thumbnail
                 )
             ) {
                 File::delete(
-                    public_path(
-                        'uploads/collections/' .
-                        $collection->thumbnail
-                    )
+                    $uploadPath . '/' . $collection->thumbnail
                 );
             }
 
@@ -265,10 +259,7 @@ class CollectionController extends Controller
             $name = time() . '_thumb.' .
                 $image->getClientOriginalExtension();
 
-            $image->move(
-                public_path('uploads/collections'),
-                $name
-            );
+            $image->move($uploadPath, $name);
 
             $collection->thumbnail = $name;
         }
@@ -284,17 +275,11 @@ class CollectionController extends Controller
             if (
                 $collection->banner &&
                 File::exists(
-                    public_path(
-                        'uploads/collections/' .
-                        $collection->banner
-                    )
+                    $uploadPath . '/' . $collection->banner
                 )
             ) {
                 File::delete(
-                    public_path(
-                        'uploads/collections/' .
-                        $collection->banner
-                    )
+                    $uploadPath . '/' . $collection->banner
                 );
             }
 
@@ -303,10 +288,7 @@ class CollectionController extends Controller
             $name = time() . '_banner.' .
                 $image->getClientOriginalExtension();
 
-            $image->move(
-                public_path('uploads/collections'),
-                $name
-            );
+            $image->move($uploadPath, $name);
 
             $collection->banner = $name;
         }
@@ -322,17 +304,11 @@ class CollectionController extends Controller
             if (
                 $collection->icon &&
                 File::exists(
-                    public_path(
-                        'uploads/collections/' .
-                        $collection->icon
-                    )
+                    $uploadPath . '/' . $collection->icon
                 )
             ) {
                 File::delete(
-                    public_path(
-                        'uploads/collections/' .
-                        $collection->icon
-                    )
+                    $uploadPath . '/' . $collection->icon
                 );
             }
 
@@ -341,23 +317,16 @@ class CollectionController extends Controller
             $name = time() . '_icon.' .
                 $image->getClientOriginalExtension();
 
-            $image->move(
-                public_path('uploads/collections'),
-                $name
-            );
+            $image->move($uploadPath, $name);
 
             $collection->icon = $name;
         }
 
-        // Save updated collection
         $collection->save();
 
         return redirect()
             ->route('admin.collections.index')
-            ->with(
-                'success',
-                'Collection updated successfully.'
-            );
+            ->with('success', 'Collection updated successfully.');
     }
 
     /**
@@ -365,22 +334,18 @@ class CollectionController extends Controller
      */
     public function destroy(Collection $collection)
     {
+        $uploadPath = public_path('uploads/collections');
+
         foreach (['thumbnail', 'banner', 'icon'] as $file) {
 
             if (
-                $collection->$file &&
+                !empty($collection->$file) &&
                 File::exists(
-                    public_path(
-                        'uploads/collections/' .
-                        $collection->$file
-                    )
+                    $uploadPath . '/' . $collection->$file
                 )
             ) {
                 File::delete(
-                    public_path(
-                        'uploads/collections/' .
-                        $collection->$file
-                    )
+                    $uploadPath . '/' . $collection->$file
                 );
             }
         }
@@ -389,10 +354,7 @@ class CollectionController extends Controller
 
         return redirect()
             ->route('admin.collections.index')
-            ->with(
-                'success',
-                'Collection deleted successfully.'
-            );
+            ->with('success', 'Collection deleted successfully.');
     }
 
     /**
@@ -415,7 +377,7 @@ class CollectionController extends Controller
      */
     public function frontendShow(Collection $collection)
     {
-        if ($collection->status != 1) {
+        if ((int) $collection->status !== 1) {
             abort(404);
         }
 

@@ -10,6 +10,21 @@ class Collection extends Model
 {
     use HasFactory;
 
+    /**
+     * Primary key.
+     */
+    protected $primaryKey = 'collection_id';
+
+    /**
+     * Primary key is UUID/string, not auto-incrementing integer.
+     */
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
+    /**
+     * Mass assignable fields.
+     */
     protected $fillable = [
         'collection_id',
         'product_id',
@@ -29,33 +44,51 @@ class Collection extends Model
         'seo_description',
     ];
 
+    /**
+     * Automatically create UUID and slug.
+     */
     protected static function boot()
     {
         parent::boot();
 
+        /*
+        |--------------------------------------------------------------------------
+        | Creating
+        |--------------------------------------------------------------------------
+        */
+
         static::creating(function ($collection) {
 
-            $collection->collection_id =
-                $collection->collection_id ??
-                (string) Str::uuid();
+            // Generate UUID
+            if (empty($collection->collection_id)) {
+                $collection->collection_id = (string) Str::uuid();
+            }
 
+            // Generate unique slug
             $originalSlug = Str::slug($collection->name);
 
             $slug = $originalSlug;
             $counter = 1;
 
-            while (static::where('slug', $slug)->exists()) {
-
+            while (
+                static::where('slug', $slug)->exists()
+            ) {
                 $slug = $originalSlug . '-' . $counter;
-
                 $counter++;
             }
 
             $collection->slug = $slug;
         });
 
+        /*
+        |--------------------------------------------------------------------------
+        | Updating
+        |--------------------------------------------------------------------------
+        */
+
         static::updating(function ($collection) {
 
+            // Only regenerate slug if name changed
             if ($collection->isDirty('name')) {
 
                 $originalSlug = Str::slug($collection->name);
@@ -72,9 +105,7 @@ class Collection extends Model
                         )
                         ->exists()
                 ) {
-
                     $slug = $originalSlug . '-' . $counter;
-
                     $counter++;
                 }
 
@@ -83,6 +114,9 @@ class Collection extends Model
         });
     }
 
+    /**
+     * Collection belongs to a product.
+     */
     public function product()
     {
         return $this->belongsTo(
@@ -92,6 +126,9 @@ class Collection extends Model
         );
     }
 
+    /**
+     * Route model binding uses collection_id.
+     */
     public function getRouteKeyName()
     {
         return 'collection_id';
