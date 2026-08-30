@@ -27,11 +27,17 @@ class OrderItem extends Model
             if (!$item->order_item_id) {
                 $item->order_item_id = Str::uuid();
             }
+
         });
     }
 
+
     public function order()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(
+            Order::class,
+            'order_id',
+            'order_id'
+        );
     }
 }

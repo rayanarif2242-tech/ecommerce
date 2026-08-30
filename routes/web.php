@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\FAQController;
+use App\Http\Controllers\Admin\OrderController;
 
 use App\Http\Controllers\VarietyController;
 use App\Http\Controllers\CategoryController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FrontendSearchController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\AiChatController;
 
 
 
@@ -38,7 +40,7 @@ use App\Http\Controllers\NewsletterController;
 |--------------------------------------------------------------------------
 */
 
-Auth::routes();
+// Auth::routes();
 
 
 // Admin Login
@@ -172,6 +174,9 @@ Route::middleware('auth:admin')
 
         // FAQ
         Route::resource('faq', FAQController::class);
+        
+        // Orders
+         Route::resource('orders', OrderController::class); 
 
 
         /*
@@ -326,4 +331,26 @@ Route::get('/order-success/{order_id}', [CheckoutController::class, 'success'])
 ])->name('newsletter.subscribe');
 Route::get('/newsletter', [NewsletterController::class, 'index'])
     ->name('newsletter.index');
+
+
+
+
+
+
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| kiara AI Shopping Assistant
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/ai/categories', [AiChatController::class, 'categories'])
+    ->name('ai.categories');
+
+Route::post('/ai/chat', [AiChatController::class, 'chat'])
+    ->name('ai.chat');
 

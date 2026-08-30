@@ -35,8 +35,19 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
+
+    // Sub Categories
+    public function subCategories()
+    {
+        return $this->hasMany(
+            SubCategory::class,
+            'category_id',
+            'id'
+        );
+    }
+
     public function getRouteKeyName()
-{
-    return 'category_id';
-}
+    {
+        return 'category_id';
+    }
 }

@@ -1,4 +1,411 @@
-<section id="billboard" class="bg-light py-5">
+ <style>
+    /* =========================================================
+   KAIRA AI FLOATING BUTTON
+========================================================= */
+
+.kaira-ai-button {
+    position: fixed;
+    right: 30px;
+    bottom: 90px;
+
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: #111111;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 26px;
+
+    cursor: pointer;
+
+    z-index: 999998;
+
+    border: 1px solid #eeeeee;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+
+    transition: all 0.25s ease;
+}
+
+.kaira-ai-button:hover {
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
+   AI PANEL
+========================================================= */
+
+/* =========================================================
+   KAIRA AI FLOATING BUTTON
+========================================================= */
+
+.kaira-ai-button {
+    position: fixed;
+    right: 30px;
+    bottom: 25px;
+
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+    background: #ffffff;
+    color: #111111;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 26px;
+    cursor: pointer;
+
+    z-index: 999998;
+
+    border: 1px solid #eeeeee;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+
+    transition: all 0.25s ease;
+}
+
+.kaira-ai-button:hover {
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
+   AI PANEL
+========================================================= */
+
+.kaira-ai-panel {
+    position: fixed;
+
+    right: 30px;
+
+    /* PANEL WILL NOW SIT LOWER */
+    bottom: 5px;
+
+    width: 380px;
+    height: 570px;
+
+    max-width: calc(100vw - 30px);
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    z-index: 999999;
+
+    display: none;
+    flex-direction: column;
+
+    border: 1px solid #eeeeee;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.20);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .kaira-ai-panel {
+        right: 12px;
+        bottom: 100px;
+
+        width: calc(100vw - 24px);
+        height: 70vh;
+    }
+
+    .kaira-ai-button {
+        right: 18px;
+        bottom: 20px;
+    }
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.kaira-ai-header {
+    height: 70px;
+
+    padding: 0 18px;
+
+    background: #111111;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.kaira-ai-title {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.kaira-ai-sparkle {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: #111111;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kaira-ai-title strong {
+    display: block;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.kaira-ai-title small {
+    display: block;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    opacity: .65;
+}
+
+#kairaAiClose {
+    border: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+.kaira-ai-messages {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 20px;
+
+    background: #fafafa;
+}
+
+
+/* AI MESSAGE */
+
+.kaira-ai-message {
+    background: #ffffff;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    margin-bottom: 18px;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    box-shadow: 0 3px 15px rgba(0,0,0,.04);
+}
+
+.kaira-ai-message p {
+    margin: 5px 0;
+}
+
+
+/* USER MESSAGE */
+
+.kaira-user-message {
+    background: #111111;
+
+    color: #ffffff;
+
+    padding: 12px 15px;
+
+    border-radius: 15px;
+
+    margin: 10px 0 10px auto;
+
+    max-width: 85%;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.kaira-ai-question {
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    color: #777777;
+
+    margin-bottom: 12px;
+}
+
+.kaira-category-button {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    margin-bottom: 9px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 12px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 12px;
+
+    transition: .25s;
+}
+
+.kaira-category-button:hover {
+    background: #111111;
+
+    color: #ffffff;
+
+    border-color: #111111;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.kaira-ai-input-area {
+    display: flex;
+
+    gap: 8px;
+
+    padding: 12px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #eeeeee;
+}
+
+#kairaAiInput {
+    flex: 1;
+
+    height: 44px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 24px;
+
+    padding: 0 16px;
+
+    outline: none;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 11px;
+}
+
+#kairaAiSend {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.kaira-ai-loading {
+    padding: 15px;
+
+    color: #888888;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .kaira-ai-panel {
+        right: 12px;
+        bottom: 85px;
+
+        width: calc(100vw - 24px);
+
+        height: 70vh;
+    }
+
+    .kaira-ai-button {
+    bottom: 25px;
+}
+}
+ </style><section id="billboard" class="bg-light py-5">
     <div class="container">
 
         <div class="row justify-content-center">
@@ -991,3 +1398,516 @@
       </div>
     </div>
   </section>
+
+    <!-- =========================================================
+     KAIRA AI SHOPPING ASSISTANT
+========================================================= -->
+
+<div id="kairaAiButton" class="kaira-ai-button">
+    ✨
+</div>
+
+<div id="kairaAiPanel" class="kaira-ai-panel">
+
+    <!-- Header -->
+    <div class="kaira-ai-header">
+
+        <div class="kaira-ai-title">
+
+            <span class="kaira-ai-sparkle">
+                ✨
+            </span>
+
+            <div>
+                <strong>Kaira AI</strong>
+                <small>Shopping Assistant</small>
+            </div>
+
+        </div>
+
+        <button type="button" id="kairaAiClose">
+            ×
+        </button>
+
+    </div>
+
+
+    <!-- Messages -->
+    <div id="kairaAiMessages" class="kaira-ai-messages">
+
+        <div class="kaira-ai-message">
+
+            <strong>Hello! 👋</strong>
+
+            <p>
+                Welcome to Kaira AI.
+            </p>
+
+            <p>
+                What are you looking for today?
+            </p>
+
+        </div>
+
+        <div id="kairaCategoryArea">
+
+            <div class="kaira-ai-question">
+                Choose a category
+            </div>
+
+            <div id="kairaCategoryButtons">
+                <div class="kaira-ai-loading">
+                    Loading categories...
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Input -->
+    <div class="kaira-ai-input-area">
+
+        <input
+            type="text"
+            id="kairaAiInput"
+            placeholder="Ask about Kaira products..."
+            autocomplete="off"
+        >
+
+        <button
+            type="button"
+            id="kairaAiSend"
+        >
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const button = document.getElementById('kairaAiButton');
+    const panel = document.getElementById('kairaAiPanel');
+    const close = document.getElementById('kairaAiClose');
+
+    const input = document.getElementById('kairaAiInput');
+    const sendButton = document.getElementById('kairaAiSend');
+
+    const messagesBox =
+        document.getElementById('kairaAiMessages');
+
+    const categoryButtons =
+        document.getElementById('kairaCategoryButtons');
+
+    const categoryArea =
+        document.getElementById('kairaCategoryArea');
+
+
+    let selectedCategory = null;
+    let chatHistory = [];
+
+
+    /* =====================================================
+       CHECK ELEMENTS
+    ===================================================== */
+
+    if (!button || !panel) {
+
+        console.error('Kaira AI elements not found.');
+
+        return;
+    }
+
+
+    /* =====================================================
+       OPEN AI
+    ===================================================== */
+
+    button.addEventListener('click', function () {
+
+        panel.style.display = 'flex';
+
+        loadCategories();
+
+        input.focus();
+    });
+
+
+    /* =====================================================
+       CLOSE AI
+    ===================================================== */
+
+    close.addEventListener('click', function () {
+
+        panel.style.display = 'none';
+
+    });
+
+
+    /* =====================================================
+       LOAD CATEGORIES
+    ===================================================== */
+
+    function loadCategories() {
+
+        categoryButtons.innerHTML =
+            '<div class="kaira-ai-loading">Loading categories...</div>';
+
+
+        fetch("{{ route('ai.categories') }}")
+
+            .then(response => {
+
+                if (!response.ok) {
+                    throw new Error('HTTP error ' + response.status);
+                }
+
+                return response.json();
+
+            })
+
+            .then(data => {
+
+                categoryButtons.innerHTML = '';
+
+
+                if (!data.success) {
+
+                    categoryButtons.innerHTML =
+                        '<div class="kaira-ai-loading">' +
+                        'Unable to load categories.' +
+                        '</div>';
+
+                    return;
+                }
+
+
+                data.categories.forEach(category => {
+
+                    const btn =
+                        document.createElement('button');
+
+                    btn.type = 'button';
+
+                    btn.className =
+                        'kaira-category-button';
+
+                    btn.innerHTML =
+                        '🛍️ ' + escapeHtml(category.name);
+
+
+                    btn.addEventListener('click', function () {
+
+                        selectCategory(category);
+
+                    });
+
+
+                    categoryButtons.appendChild(btn);
+
+                });
+
+            })
+
+            .catch(error => {
+
+                console.error('Category error:', error);
+
+                categoryButtons.innerHTML =
+                    '<div class="kaira-ai-loading">' +
+                    'Unable to connect to categories.' +
+                    '</div>';
+
+            });
+    }
+
+
+    /* =====================================================
+       SELECT CATEGORY
+    ===================================================== */
+
+    function selectCategory(category) {
+
+        selectedCategory =
+            category.category_id;
+
+
+        addUserMessage(
+            'I want to shop for ' +
+            category.name
+        );
+
+
+        categoryArea.style.display = 'none';
+
+
+        addAiMessage(
+            '<strong>' +
+            escapeHtml(category.name) +
+            '</strong>' +
+
+            '<p>Great choice! 👋</p>' +
+
+            '<p>' +
+            'Ask me anything about the available ' +
+            'products in this category.' +
+            '</p>'
+        );
+
+
+        input.focus();
+    }
+
+
+    /* =====================================================
+       SEND BUTTON
+    ===================================================== */
+
+    sendButton.addEventListener(
+        'click',
+        sendMessage
+    );
+
+
+    /* =====================================================
+       ENTER KEY
+    ===================================================== */
+
+    input.addEventListener(
+        'keydown',
+        function (event) {
+
+            if (event.key === 'Enter') {
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       SEND MESSAGE
+    ===================================================== */
+
+    function sendMessage() {
+
+        const message =
+            input.value.trim();
+
+
+        if (!message) {
+            return;
+        }
+
+
+        addUserMessage(message);
+
+
+        input.value = '';
+
+
+        const loading =
+            addAiMessage(
+                'Thinking... ✨'
+            );
+
+
+        fetch("{{ route('ai.chat') }}", {
+
+            method: 'POST',
+
+            headers: {
+
+                'Content-Type':
+                    'application/json',
+
+                'Accept':
+                    'application/json',
+
+                'X-CSRF-TOKEN':
+                    document
+                        .querySelector(
+                            'meta[name="csrf-token"]'
+                        )
+                        .getAttribute('content')
+
+            },
+
+           body: JSON.stringify({
+    message: message,
+    category_id: selectedCategory,
+    history: chatHistory
+})
+
+        })
+
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error(
+                    'HTTP error ' +
+                    response.status
+                );
+            }
+
+            return response.json();
+
+        })
+
+        .then(data => {
+
+            loading.remove();
+
+
+           if (data.success) {
+
+    addAiMessage(
+        formatResponse(data.message)
+    );
+
+    chatHistory.push({
+        role: 'user',
+        content: message
+    });
+
+    chatHistory.push({
+        role: 'assistant',
+        content: data.message
+    });
+}else {
+
+                addAiMessage(
+                    'Sorry, I could not answer that right now.'
+                );
+
+            }
+
+        })
+
+        .catch(error => {
+
+            console.error(
+                'AI error:',
+                error
+            );
+
+
+            loading.remove();
+
+
+            addAiMessage(
+                'Unable to connect to Kaira AI.'
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       ADD USER MESSAGE
+    ===================================================== */
+
+    function addUserMessage(text) {
+
+        const div =
+            document.createElement('div');
+
+        div.className =
+            'kaira-user-message';
+
+        div.textContent =
+            text;
+
+        messagesBox.appendChild(div);
+
+        scrollMessages();
+    }
+
+
+    /* =====================================================
+       ADD AI MESSAGE
+    ===================================================== */
+
+    function addAiMessage(html) {
+
+        const div =
+            document.createElement('div');
+
+        div.className =
+            'kaira-ai-message';
+
+        div.innerHTML =
+            html;
+
+        messagesBox.appendChild(div);
+
+        scrollMessages();
+
+        return div;
+    }
+
+
+    /* =====================================================
+       FORMAT RESPONSE
+    ===================================================== */
+
+    function formatResponse(text) {
+
+        let safe =
+            escapeHtml(text);
+
+
+        safe = safe.replace(
+            /\*\*(.*?)\*\*/g,
+            '<strong>$1</strong>'
+        );
+
+
+        safe = safe.replace(
+            /\n/g,
+            '<br>'
+        );
+
+
+        return safe;
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHtml(text) {
+
+        const div =
+            document.createElement('div');
+
+        div.textContent =
+            text;
+
+        return div.innerHTML;
+    }
+
+
+    /* =====================================================
+       SCROLL
+    ===================================================== */
+
+    function scrollMessages() {
+
+        messagesBox.scrollTop =
+            messagesBox.scrollHeight;
+    }
+
+});
+</script>
+  </body>

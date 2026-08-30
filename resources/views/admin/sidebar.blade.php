@@ -139,6 +139,19 @@
     </a>
 
 </li>
+<li class="menu-item {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
+
+    <a href="{{ route('admin.orders.index') }}" class="menu-link">
+
+        <i class="menu-icon tf-icons bx bx-shopping-bag"></i>
+
+        <div data-i18n="Orders">
+            Orders
+        </div>
+
+    </a>
+
+</li>
 
 
 <li class="menu-item {{ request()->routeIs('admin.blog.*') ? 'active open' : '' }}">
