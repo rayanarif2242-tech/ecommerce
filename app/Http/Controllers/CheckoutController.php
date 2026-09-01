@@ -39,7 +39,7 @@ class CheckoutController extends Controller
         }
 
         // Free delivery
-        $delivery = 0;
+        $delivery = 200;
 
         $total = $subtotal + $delivery;
 
@@ -115,7 +115,7 @@ class CheckoutController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $delivery = 0;
+        $delivery = 200;
 
         $total = $subtotal + $delivery;
 

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,7 +163,7 @@
             </span>
 
             <strong>
-                {{ $order->order_id }}
+                {{ $order->order_number }}
             </strong>
 
         </div>

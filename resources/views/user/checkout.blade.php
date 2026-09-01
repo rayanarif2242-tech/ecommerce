@@ -1072,9 +1072,9 @@
                                 Delivery
                             </span>
 
-                            <strong>
-                                Free
-                            </strong>
+                             <strong>
+                                  Rs. {{ number_format($delivery, 2) }}
+    </strong>
 
                         </div>
 

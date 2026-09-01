@@ -1712,11 +1712,7 @@
                                 Delivery
                             </span>
 
-                            <strong>
-
-                                Free
-
-                            </strong>
+                               <strong>Rs. 200.00</strong>
 
                         </div>
 
@@ -1733,7 +1729,7 @@
                             <strong>
 
                                 Rs.
-                                {{ number_format($subtotal, 2) }}
+                                {{ number_format($subtotal + 200, 2) }}
 
                             </strong>
 
