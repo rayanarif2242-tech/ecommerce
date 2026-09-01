@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\NewsletterSubscriberController;
 
 use App\Http\Controllers\VarietyController;
 use App\Http\Controllers\CategoryController;
@@ -29,7 +30,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FrontendSearchController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\AiChatController;
-
+use App\Http\Controllers\Admin\DashboardController;
 
 
 
@@ -75,7 +76,7 @@ Route::get('/', [IndexController::class, 'index'])
 
 
 // Admin Dashboard
-Route::view('/admin', 'admin.index')
+Route::get('/admin', [DashboardController::class, 'index'])
     ->middleware('auth:admin')
     ->name('admin.dashboard');
 
@@ -177,9 +178,38 @@ Route::middleware('auth:admin')
         
         // Orders
          Route::resource('orders', OrderController::class); 
+         
+
+    
+/*
+|--------------------------------------------------------------------------
+| Newsletter Subscribers
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    '/newsletter-subscribers',
+    [NewsletterSubscriberController::class, 'index']
+)->name('newsletter.index');
+
+Route::post(
+    '/newsletter-subscribers',
+    [NewsletterSubscriberController::class, 'store']
+)->name('newsletter.store');
+
+Route::patch(
+    '/newsletter-subscribers/{subscriber}/toggle-status',
+    [NewsletterSubscriberController::class, 'toggleStatus']
+)->name('newsletter.toggle-status');
+
+Route::delete(
+    '/newsletter-subscribers/{subscriber}',
+    [NewsletterSubscriberController::class, 'destroy']
+)->name('newsletter.destroy');
 
 
-        /*
+
+    /*
         |--------------------------------------------------------------------------
         | Admin Profile
         |--------------------------------------------------------------------------

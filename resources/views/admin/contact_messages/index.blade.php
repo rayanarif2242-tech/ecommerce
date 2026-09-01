@@ -268,7 +268,7 @@ class="btn btn-warning btn-sm">
             <!-- / Content -->
 
           
-           @include('admin.footer')
+         
             <!-- / Footer -->
 
     </div>

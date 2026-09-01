@@ -1,536 +1,1116 @@
- <div class="content-wrapper">
-            <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="row">
-                <div class="col-lg-8 mb-4 order-0">
-                  <div class="card">
+<style>
+    /* =========================================================
+       DASHBOARD
+    ========================================================= */
+
+    .dashboard-small-card {
+        height: 100%;
+    }
+
+    .dashboard-small-card .card-body {
+        padding: 1.25rem;
+        overflow: hidden;
+    }
+
+    .dashboard-small-card .avatar {
+        margin-bottom: .75rem !important;
+    }
+
+    .dashboard-small-card .avatar img {
+        width: 42px;
+        height: 42px;
+        object-fit: contain;
+    }
+
+    .dashboard-amount {
+        font-size: 1.45rem;
+        line-height: 1.25;
+        font-weight: 700;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .dashboard-small-card small {
+        display: block;
+        line-height: 1.4;
+    }
+
+    .revenue-amount {
+        font-size: 1.15rem;
+        word-break: break-word;
+    }
+
+    #totalRevenueChart {
+        min-height: 300px;
+    }
+
+    #orderStatisticsChart {
+        min-height: 180px;
+        min-width: 180px;
+    }
+
+    #incomeChart {
+        min-height: 100px;
+    }
+
+    @media (max-width: 1399px) {
+        .dashboard-amount {
+            font-size: 1.25rem;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .dashboard-amount {
+            font-size: 1.4rem;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .dashboard-small-card .card-body {
+            padding: 1rem;
+        }
+
+        .dashboard-amount {
+            font-size: 1.05rem;
+        }
+    }
+</style>
+
+
+<div class="content-wrapper">
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        {{-- =====================================================
+            FIRST ROW
+        ====================================================== --}}
+
+        <div class="row">
+
+            {{-- WELCOME --}}
+            <div class="col-lg-8 mb-4 order-0">
+
+                <div class="card">
+
                     <div class="d-flex align-items-end row">
-                      <div class="col-sm-7">
-                        <div class="card-body">
-                          <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
-                          <p class="mb-4">
-                            You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                            your profile.
-                          </p>
 
-                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
-                        </div>
-                      </div>
-                      <div class="col-sm-5 text-center text-sm-left">
-                        <div class="card-body pb-0 px-0 px-md-4">
-                          <img
-                            src="{{asset('admins/assets/img/illustrations/man-with-laptop-light.png')}}"
-                            height="140"
-                            alt="View Badge User"
-                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                            data-app-light-img="illustrations/man-with-laptop-light.png"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-4 order-1">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-12 col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="{{asset('admins/assets/img/icons/unicons/chart-success.png')}}"
-                                alt="chart success"
-                                class="rounded"
-                              />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt3"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <span class="fw-semibold d-block mb-1">Profit</span>
-                          <h3 class="card-title mb-2">$12,628</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="{{asset('admins/assets/img/icons/unicons/wallet-info.png')}}"
-                                alt="Credit Card"
-                                class="rounded"
-                              />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt6"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <span>Sales</span>
-                          <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Total Revenue -->
-                <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
-                  <div class="card">
-                    <div class="row row-bordered g-0">
-                      <div class="col-md-8">
-                        <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
-                        <div id="totalRevenueChart" class="px-2"></div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="card-body">
-                          <div class="text-center">
-                            <div class="dropdown">
-                              <button
-                                class="btn btn-sm btn-outline-primary dropdown-toggle"
-                                type="button"
-                                id="growthReportId"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                2022
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                                <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                                <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div id="growthChart"></div>
-                        <div class="text-center fw-semibold pt-3 mb-2">62% Company Growth</div>
+                        <div class="col-sm-7">
 
-                        <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                          <div class="d-flex">
-                            <div class="me-2">
-                              <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-                            </div>
-                            <div class="d-flex flex-column">
-                              <small>2022</small>
-                              <h6 class="mb-0">$32.5k</h6>
-                            </div>
-                          </div>
-                          <div class="d-flex">
-                            <div class="me-2">
-                              <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-                            </div>
-                            <div class="d-flex flex-column">
-                              <small>2021</small>
-                              <h6 class="mb-0">$41.2k</h6>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!--/ Total Revenue -->
-                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-                  <div class="row">
-                    <div class="col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img src="{{asset('admins/assets/img/icons/unicons/paypal.png')}}" alt="Credit Card" class="rounded" />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt4"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <span class="d-block mb-1">Payments</span>
-                          <h3 class="card-title text-nowrap mb-2">$2,456</h3>
-                          <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img src="{{asset('admins/assets/img/icons/unicons/cc-primary.png')}}" alt="Credit Card" class="rounded" />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt1"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <span class="fw-semibold d-block mb-1">Transactions</span>
-                          <h3 class="card-title mb-2">$14,857</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- </div>
-    <div class="row"> -->
-                    <div class="col-12 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                            <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                              <div class="card-title">
-                                <h5 class="text-nowrap mb-2">Profile Report</h5>
-                                <span class="badge bg-label-warning rounded-pill">Year 2021</span>
-                              </div>
-                              <div class="mt-sm-auto">
-                                <small class="text-success text-nowrap fw-semibold"
-                                  ><i class="bx bx-chevron-up"></i> 68.2%</small
+                            <div class="card-body">
+
+                                <h5 class="card-title text-primary">
+                                    Welcome,
+                                    {{ Auth::guard('admin')->user()->name ?? 'Admin' }}! 🎉
+                                </h5>
+
+                                <p class="mb-4">
+
+                                    Today you have received
+
+                                    <span class="fw-bold">
+                                        {{ $todayOrders ?? 0 }}
+                                    </span>
+
+                                    new orders.
+
+                                </p>
+
+                                <a
+                                    href="{{ route('admin.orders.index') }}"
+                                    class="btn btn-sm btn-outline-primary"
                                 >
-                                <h3 class="mb-0">$84,686k</h3>
-                              </div>
-                            </div>
-                            <div id="profileReportChart"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <!-- Order Statistics -->
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-                  <div class="card h-100">
-                    <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                      <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">Order Statistics</h5>
-                        <small class="text-muted">42.82k Total Sales</small>
-                      </div>
-                      <div class="dropdown">
-                        <button
-                          class="btn p-0"
-                          type="button"
-                          id="orederStatistics"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
-                          <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                          <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                          <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="d-flex flex-column align-items-center gap-1">
-                          <h2 class="mb-2">8,258</h2>
-                          <span>Total Orders</span>
-                        </div>
-                        <div id="orderStatisticsChart"></div>
-                      </div>
-                      <ul class="p-0 m-0">
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-primary"
-                              ><i class="bx bx-mobile-alt"></i
-                            ></span>
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <h6 class="mb-0">Electronic</h6>
-                              <small class="text-muted">Mobile, Earbuds, TV</small>
-                            </div>
-                            <div class="user-progress">
-                              <small class="fw-semibold">82.5k</small>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-success"><i class="bx bx-closet"></i></span>
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <h6 class="mb-0">Fashion</h6>
-                              <small class="text-muted">T-shirt, Jeans, Shoes</small>
-                            </div>
-                            <div class="user-progress">
-                              <small class="fw-semibold">23.8k</small>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-info"><i class="bx bx-home-alt"></i></span>
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <h6 class="mb-0">Decor</h6>
-                              <small class="text-muted">Fine Art, Dining</small>
-                            </div>
-                            <div class="user-progress">
-                              <small class="fw-semibold">849k</small>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-secondary"
-                              ><i class="bx bx-football"></i
-                            ></span>
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <h6 class="mb-0">Sports</h6>
-                              <small class="text-muted">Football, Cricket Kit</small>
-                            </div>
-                            <div class="user-progress">
-                              <small class="fw-semibold">99</small>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <!--/ Order Statistics -->
+                                    View Orders
+                                </a>
 
-                <!-- Expense Overview -->
-                <div class="col-md-6 col-lg-4 order-1 mb-4">
-                  <div class="card h-100">
-                    <div class="card-header">
-                      <ul class="nav nav-pills" role="tablist">
-                        <li class="nav-item">
-                          <button
-                            type="button"
-                            class="nav-link active"
-                            role="tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#navs-tabs-line-card-income"
-                            aria-controls="navs-tabs-line-card-income"
-                            aria-selected="true"
-                          >
-                            Income
-                          </button>
-                        </li>
-                        <li class="nav-item">
-                          <button type="button" class="nav-link" role="tab">Expenses</button>
-                        </li>
-                        <li class="nav-item">
-                          <button type="button" class="nav-link" role="tab">Profit</button>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="card-body px-0">
-                      <div class="tab-content p-0">
-                        <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
-                          <div class="d-flex p-4 pt-3">
-                            <div class="avatar flex-shrink-0 me-3">
-                              <img src="{{asset('admins/assets/img/icons/unicons/wallet.png')}}" alt="User" />
                             </div>
-                            <div>
-                              <small class="text-muted d-block">Total Balance</small>
-                              <div class="d-flex align-items-center">
-                                <h6 class="mb-0 me-1">$459.10</h6>
-                                <small class="text-success fw-semibold">
-                                  <i class="bx bx-chevron-up"></i>
-                                  42.9%
-                                </small>
-                              </div>
-                            </div>
-                          </div>
-                          <div id="incomeChart"></div>
-                          <div class="d-flex justify-content-center pt-4 gap-2">
-                            <div class="flex-shrink-0">
-                              <div id="expensesOfWeek"></div>
-                            </div>
-                            <div>
-                              <p class="mb-n1 mt-1">Expenses This Week</p>
-                              <small class="text-muted">$39 less than last week</small>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!--/ Expense Overview -->
 
-                <!-- Transactions -->
-                <div class="col-md-6 col-lg-4 order-2 mb-4">
-                  <div class="card h-100">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                      <h5 class="card-title m-0 me-2">Transactions</h5>
-                      <div class="dropdown">
-                        <button
-                          class="btn p-0"
-                          type="button"
-                          id="transactionID"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                          <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                          <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                          <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
                         </div>
-                      </div>
+
+
+                        <div class="col-sm-5 text-center">
+
+                            <div class="card-body pb-0 px-0 px-md-4">
+
+                                <img
+                                    src="{{ asset('admins/assets/img/illustrations/man-with-laptop-light.png') }}"
+                                    height="140"
+                                    alt="Admin Dashboard"
+                                    data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                                    data-app-light-img="illustrations/man-with-laptop-light.png"
+                                >
+
+                            </div>
+
+                        </div>
+
                     </div>
-                    <div class="card-body">
-                      <ul class="p-0 m-0">
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="{{asset('admins/assets/img/icons/unicons/paypal.png')}}" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Paypal</small>
-                              <h6 class="mb-0">Send money</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">+82.6</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="{{asset('admins/assets/img/icons/unicons/wallet.png')}}" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Wallet</small>
-                              <h6 class="mb-0">Mac'D</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">+270.69</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="{{asset('admins/assets/img/icons/unicons/chart.png')}}" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Transfer</small>
-                              <h6 class="mb-0">Refund</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">+637.91</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="{{asset('admins/assets/img/icons/unicons/cc-success.png')}}" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Credit Card</small>
-                              <h6 class="mb-0">Ordered Food</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">-838.71</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="{{asset('admins/assets/img/icons/unicons/wallet.png')}}" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Wallet</small>
-                              <h6 class="mb-0">Starbucks</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">+203.33</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="{{asset('admins/assets/img/icons/unicons/cc-warning.png')}}" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Mastercard</small>
-                              <h6 class="mb-0">Ordered Food</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">-92.45</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+
                 </div>
-                <!--/ Transactions -->
-              </div>
+
             </div>
+
+
+            {{-- TOP REVENUE CARDS --}}
+            <div class="col-lg-4 mb-4 order-1">
+
+                <div class="row g-4">
+
+                    {{-- TOTAL REVENUE --}}
+                    <div class="col-6">
+
+                        <div class="card dashboard-small-card">
+
+                            <div class="card-body">
+
+                                <div class="avatar flex-shrink-0">
+
+                                    <img
+                                        src="{{ asset('admins/assets/img/icons/unicons/chart-success.png') }}"
+                                        alt="Revenue"
+                                        class="rounded"
+                                    >
+
+                                </div>
+
+                                <span class="fw-semibold d-block mb-1">
+                                    Total Revenue
+                                </span>
+
+                                <h4 class="dashboard-amount mb-2">
+                                    Rs. {{ number_format($totalRevenue ?? 0) }}
+                                </h4>
+
+                                <small class="text-muted">
+                                    Completed orders
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- TODAY SALES --}}
+                    <div class="col-6">
+
+                        <div class="card dashboard-small-card">
+
+                            <div class="card-body">
+
+                                <div class="avatar flex-shrink-0">
+
+                                    <img
+                                        src="{{ asset('admins/assets/img/icons/unicons/wallet-info.png') }}"
+                                        alt="Today's Sales"
+                                        class="rounded"
+                                    >
+
+                                </div>
+
+                                <span class="fw-semibold d-block mb-1">
+                                    Today's Sales
+                                </span>
+
+                                <h4 class="dashboard-amount mb-2">
+                                    Rs. {{ number_format($todayRevenue ?? 0) }}
+                                </h4>
+
+                                <small class="text-muted">
+                                    {{ $todayOrders ?? 0 }} orders today
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {{-- =====================================================
+                REVENUE OVERVIEW
+            ====================================================== --}}
+
+            <div class="col-12 col-lg-8 order-2 mb-4">
+
+                <div class="card">
+
+                    <div class="row row-bordered g-0">
+
+                        {{-- CHART --}}
+                        <div class="col-md-8">
+
+                            <h5 class="card-header m-0 me-2 pb-3">
+                                Revenue Overview
+                            </h5>
+
+                            <div
+                                id="totalRevenueChart"
+                                class="px-2"
+                            ></div>
+
+                        </div>
+
+
+                        {{-- MONTHLY SUMMARY --}}
+                        <div class="col-md-4">
+
+                            <div class="card-body">
+
+                                <div class="text-center">
+
+                                    <span class="btn btn-sm btn-outline-primary">
+                                        {{ now()->year }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="text-center pt-2">
+
+                                <div class="avatar mx-auto mb-3">
+
+                                    <span class="avatar-initial rounded bg-label-primary">
+
+                                        <i class="bx bx-money fs-3"></i>
+
+                                    </span>
+
+                                </div>
+
+
+                                <div class="fw-semibold mb-2">
+                                    Monthly Revenue
+                                </div>
+
+
+                                <h4 class="mb-1 revenue-amount">
+
+                                    Rs. {{ number_format($monthlyRevenue ?? 0) }}
+
+                                </h4>
+
+
+                                <small class="text-muted">
+
+                                    {{ now()->format('F Y') }}
+
+                                </small>
+
+                            </div>
+
+
+                            <div class="px-4 pb-4 mt-4">
+
+                                <div class="d-flex align-items-center">
+
+                                    <div class="me-3">
+
+                                        <span class="badge bg-label-success p-2">
+
+                                            <i class="bx bx-check"></i>
+
+                                        </span>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <small class="text-muted d-block">
+                                            Revenue Status
+                                        </small>
+
+                                        <h6 class="mb-0 text-success">
+                                            Completed Orders
+                                        </h6>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {{-- =====================================================
+                RIGHT SIDE
+            ====================================================== --}}
+
+            <div class="col-12 col-lg-4 order-3">
+
+                <div class="row g-4">
+
+                    {{-- MONTHLY REVENUE --}}
+                    <div class="col-6">
+
+                        <div class="card dashboard-small-card">
+
+                            <div class="card-body">
+
+                                <div class="avatar flex-shrink-0">
+
+                                    <img
+                                        src="{{ asset('admins/assets/img/icons/unicons/paypal.png') }}"
+                                        alt="Monthly Revenue"
+                                        class="rounded"
+                                    >
+
+                                </div>
+
+                                <span class="d-block mb-1">
+                                    Monthly Revenue
+                                </span>
+
+                                <h4 class="dashboard-amount mb-2">
+                                    Rs. {{ number_format($monthlyRevenue ?? 0) }}
+                                </h4>
+
+                                <small class="text-muted">
+                                    {{ now()->format('F') }}
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- TOTAL ORDERS --}}
+                    <div class="col-6">
+
+                        <div class="card dashboard-small-card">
+
+                            <div class="card-body">
+
+                                <div class="avatar flex-shrink-0">
+
+                                    <img
+                                        src="{{ asset('admins/assets/img/icons/unicons/cc-primary.png') }}"
+                                        alt="Orders"
+                                        class="rounded"
+                                    >
+
+                                </div>
+
+                                <span class="fw-semibold d-block mb-1">
+                                    Total Orders
+                                </span>
+
+                                <h4 class="dashboard-amount mb-2">
+                                    {{ number_format($totalOrders ?? 0) }}
+                                </h4>
+
+                                <small class="text-muted">
+                                    All customer orders
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- STORE SUMMARY --}}
+                    <div class="col-12">
+
+                        <div class="card">
+
+                            <div class="card-body">
+
+                                <div class="d-flex justify-content-between align-items-center">
+
+                                    <div>
+
+                                        <h5 class="mb-2">
+                                            Store Summary
+                                        </h5>
+
+                                        <span class="badge bg-label-primary rounded-pill mb-3">
+                                            LIVE DATA
+                                        </span>
+
+                                        <div>
+
+                                            <small class="text-success fw-semibold">
+
+                                                <i class="bx bx-package"></i>
+
+                                                {{ $totalProducts ?? 0 }}
+                                                Products
+
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="text-end">
+
+                                        <h4 class="mb-1">
+                                            {{ $deliveredOrders ?? 0 }}
+                                        </h4>
+
+                                        <small class="text-muted">
+                                            Delivered Orders
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {{-- =====================================================
+            SECOND ROW
+        ====================================================== --}}
+
+        <div class="row">
+
+
+            {{-- ORDER STATISTICS --}}
+            <div class="col-md-6 col-lg-4 mb-4">
+
+                <div class="card h-100">
+
+                    <div class="card-header">
+
+                        <h5 class="m-0">
+                            Order Statistics
+                        </h5>
+
+                        <small class="text-muted">
+                            Real order status data
+                        </small>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+
+                            <div class="text-center">
+
+                                <h2 class="mb-1">
+                                    {{ number_format($totalOrders ?? 0) }}
+                                </h2>
+
+                                <span>
+                                    Total Orders
+                                </span>
+
+                            </div>
+
+
+                            <div id="orderStatisticsChart"></div>
+
+                        </div>
+
+
+                        <ul class="p-0 m-0 list-unstyled">
+
+                            {{-- PENDING --}}
+                            <li class="d-flex mb-4">
+
+                                <div class="avatar flex-shrink-0 me-3">
+
+                                    <span class="avatar-initial rounded bg-label-warning">
+                                        <i class="bx bx-time"></i>
+                                    </span>
+
+                                </div>
+
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+
+                                    <div>
+
+                                        <h6 class="mb-0">
+                                            Pending
+                                        </h6>
+
+                                        <small class="text-muted">
+                                            Waiting for confirmation
+                                        </small>
+
+                                    </div>
+
+                                    <strong>
+                                        {{ $pendingOrders ?? 0 }}
+                                    </strong>
+
+                                </div>
+
+                            </li>
+
+
+                            {{-- PROCESSING --}}
+                            <li class="d-flex mb-4">
+
+                                <div class="avatar flex-shrink-0 me-3">
+
+                                    <span class="avatar-initial rounded bg-label-info">
+                                        <i class="bx bx-loader-circle"></i>
+                                    </span>
+
+                                </div>
+
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+
+                                    <div>
+
+                                        <h6 class="mb-0">
+                                            Processing
+                                        </h6>
+
+                                        <small class="text-muted">
+                                            Orders being processed
+                                        </small>
+
+                                    </div>
+
+                                    <strong>
+                                        {{ $processingOrders ?? 0 }}
+                                    </strong>
+
+                                </div>
+
+                            </li>
+
+
+                            {{-- SHIPPED --}}
+                            <li class="d-flex mb-4">
+
+                                <div class="avatar flex-shrink-0 me-3">
+
+                                    <span class="avatar-initial rounded bg-label-primary">
+                                        <i class="bx bx-car"></i>
+                                    </span>
+
+                                </div>
+
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+
+                                    <div>
+
+                                        <h6 class="mb-0">
+                                            Shipped
+                                        </h6>
+
+                                        <small class="text-muted">
+                                            Orders on delivery
+                                        </small>
+
+                                    </div>
+
+                                    <strong>
+                                        {{ $shippedOrders ?? 0 }}
+                                    </strong>
+
+                                </div>
+
+                            </li>
+
+
+                            {{-- DELIVERED --}}
+                            <li class="d-flex">
+
+                                <div class="avatar flex-shrink-0 me-3">
+
+                                    <span class="avatar-initial rounded bg-label-success">
+                                        <i class="bx bx-check"></i>
+                                    </span>
+
+                                </div>
+
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+
+                                    <div>
+
+                                        <h6 class="mb-0">
+                                            Delivered
+                                        </h6>
+
+                                        <small class="text-muted">
+                                            Successfully delivered
+                                        </small>
+
+                                    </div>
+
+                                    <strong>
+                                        {{ $deliveredOrders ?? 0 }}
+                                    </strong>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {{-- REVENUE SUMMARY --}}
+            <div class="col-md-6 col-lg-4 mb-4">
+
+                <div class="card h-100">
+
+                    <div class="card-header">
+
+                        <h5 class="m-0">
+                            Revenue Summary
+                        </h5>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="d-flex align-items-center mb-4">
+
+                            <div class="avatar flex-shrink-0 me-3">
+
+                                <span class="avatar-initial rounded bg-label-primary">
+
+                                    <i class="bx bx-money fs-4"></i>
+
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <small class="text-muted d-block">
+                                    Total Revenue
+                                </small>
+
+                                <h5 class="mb-0">
+                                    Rs. {{ number_format($totalRevenue ?? 0) }}
+                                </h5>
+
+                            </div>
+
+                        </div>
+
+
+                        {{-- MINI REVENUE BAR --}}
+                        <div id="incomeChart"></div>
+
+
+                        <hr>
+
+
+                        <div class="d-flex justify-content-between">
+
+                            <div>
+
+                                <small class="text-muted">
+                                    Today's Revenue
+                                </small>
+
+                                <h6 class="mb-0">
+                                    Rs. {{ number_format($todayRevenue ?? 0) }}
+                                </h6>
+
+                            </div>
+
+
+                            <div class="text-end">
+
+                                <small class="text-muted">
+                                    Monthly Revenue
+                                </small>
+
+                                <h6 class="mb-0">
+                                    Rs. {{ number_format($monthlyRevenue ?? 0) }}
+                                </h6>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {{-- RECENT ORDERS --}}
+            <div class="col-md-12 col-lg-4 mb-4">
+
+                <div class="card h-100">
+
+                    <div class="card-header d-flex align-items-center justify-content-between">
+
+                        <h5 class="card-title m-0">
+                            Recent Orders
+                        </h5>
+
+                        <a
+                            href="{{ route('admin.orders.index') }}"
+                            class="btn btn-sm btn-outline-primary"
+                        >
+                            View All
+                        </a>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <ul class="p-0 m-0 list-unstyled">
+
+                            @forelse($recentOrders as $order)
+
+                                <li class="d-flex mb-4">
+
+                                    <div class="avatar flex-shrink-0 me-3">
+
+                                        <span class="avatar-initial rounded bg-label-primary">
+
+                                            <i class="bx bx-package"></i>
+
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+
+                                        <div>
+
+                                            <small class="text-muted d-block">
+
+                                                {{ $order->order_number ?? 'Order' }}
+
+                                            </small>
+
+
+                                            <h6 class="mb-0">
+
+                                                {{ $order->name }}
+
+                                            </h6>
+
+
+                                            <small class="text-muted">
+
+                                                {{ $order->status }}
+
+                                            </small>
+
+                                        </div>
+
+
+                                        <div class="text-end">
+
+                                            <h6 class="mb-0">
+
+                                                Rs. {{ number_format($order->total ?? 0) }}
+
+                                            </h6>
+
+                                        </div>
+
+                                    </div>
+
+                                </li>
+
+                            @empty
+
+                                <div class="text-center text-muted py-5">
+
+                                    <i class="bx bx-package fs-1 d-block mb-2"></i>
+
+                                    No orders yet.
+
+                                </div>
+
+                            @endforelse
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    console.log('Dashboard charts loading...');
+
+    if (typeof ApexCharts === 'undefined') {
+        console.error('ApexCharts is not loaded!');
+        return;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | DATA
+    |--------------------------------------------------------------------------
+    */
+
+    const monthlyRevenue = @json(
+        isset($monthlyRevenueChart)
+            ? $monthlyRevenueChart
+            : array_fill(0, 12, 0)
+    );
+
+    const pendingOrders = {{ $pendingOrders ?? 0 }};
+    const processingOrders = {{ $processingOrders ?? 0 }};
+    const shippedOrders = {{ $shippedOrders ?? 0 }};
+    const deliveredOrders = {{ $deliveredOrders ?? 0 }};
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | REVENUE OVERVIEW CHART
+    |--------------------------------------------------------------------------
+    */
+
+    const revenueElement = document.querySelector('#totalRevenueChart');
+
+    if (revenueElement) {
+
+        revenueElement.innerHTML = '';
+
+        const revenueOptions = {
+
+            series: [{
+                name: 'Revenue',
+                data: monthlyRevenue
+            }],
+
+            chart: {
+                type: 'area',
+                height: 300,
+                toolbar: {
+                    show: false
+                },
+                zoom: {
+                    enabled: false
+                }
+            },
+
+            stroke: {
+                curve: 'smooth',
+                width: 3
+            },
+
+            dataLabels: {
+                enabled: false
+            },
+
+            markers: {
+                size: 4
+            },
+
+            xaxis: {
+                categories: [
+                    'Jan', 'Feb', 'Mar', 'Apr',
+                    'May', 'Jun', 'Jul', 'Aug',
+                    'Sep', 'Oct', 'Nov', 'Dec'
+                ]
+            },
+
+            yaxis: {
+                labels: {
+                    formatter: function (value) {
+                        return 'Rs. ' + Number(value).toLocaleString();
+                    }
+                }
+            },
+
+            tooltip: {
+                y: {
+                    formatter: function (value) {
+                        return 'Rs. ' + Number(value).toLocaleString();
+                    }
+                }
+            },
+
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    opacityFrom: 0.5,
+                    opacityTo: 0.1
+                }
+            },
+
+            grid: {
+                strokeDashArray: 4
+            }
+
+        };
+
+        const revenueChart = new ApexCharts(
+            revenueElement,
+            revenueOptions
+        );
+
+        revenueChart.render();
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | ORDER STATISTICS DONUT
+    |--------------------------------------------------------------------------
+    */
+
+    const orderElement = document.querySelector('#orderStatisticsChart');
+
+    if (orderElement) {
+
+        orderElement.innerHTML = '';
+
+        const orderOptions = {
+
+            series: [
+                pendingOrders,
+                processingOrders,
+                shippedOrders,
+                deliveredOrders
+            ],
+
+            labels: [
+                'Pending',
+                'Processing',
+                'Shipped',
+                'Delivered'
+            ],
+
+            chart: {
+                type: 'donut',
+                height: 220
+            },
+
+            legend: {
+                show: false
+            },
+
+            dataLabels: {
+                enabled: false
+            },
+
+            tooltip: {
+                y: {
+                    formatter: function (value) {
+                        return value + ' Orders';
+                    }
+                }
+            }
+
+        };
+
+        const orderChart = new ApexCharts(
+            orderElement,
+            orderOptions
+        );
+
+        orderChart.render();
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | REVENUE SUMMARY MINI CHART
+    |--------------------------------------------------------------------------
+    */
+
+    const incomeElement = document.querySelector('#incomeChart');
+
+    if (incomeElement) {
+
+        incomeElement.innerHTML = '';
+
+        const incomeOptions = {
+
+            series: [{
+                name: 'Revenue',
+                data: monthlyRevenue
+            }],
+
+            chart: {
+                type: 'bar',
+                height: 100,
+
+                sparkline: {
+                    enabled: true
+                }
+            },
+
+            plotOptions: {
+                bar: {
+                    columnWidth: '55%',
+                    borderRadius: 4
+                }
+            },
+
+            dataLabels: {
+                enabled: false
+            },
+
+            tooltip: {
+                y: {
+                    formatter: function (value) {
+                        return 'Rs. ' + Number(value).toLocaleString();
+                    }
+                }
+            }
+
+        };
+
+        const incomeChart = new ApexCharts(
+            incomeElement,
+            incomeOptions
+        );
+
+        incomeChart.render();
+    }
+
+});
+</script>

@@ -352,7 +352,7 @@ showConfirmButton:false
             <!-- / Content -->
 
           
-           @include('admin.footer')
+          
             <!-- / Footer -->
 
     </div>

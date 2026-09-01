@@ -427,7 +427,7 @@
 
 
                 <!-- Footer -->
-                @include('admin.footer')
+               
                 <!-- / Footer -->
 
             </div>

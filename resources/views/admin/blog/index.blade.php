@@ -296,7 +296,7 @@ No blog Found
             <!-- / Content -->
 
           
-           @include('admin.footer')
+          
             <!-- / Footer -->
 
     </div>

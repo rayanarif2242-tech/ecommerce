@@ -274,7 +274,7 @@ textarea{
             <!-- / Content -->
 
           
-           @include('admin.footer')
+          
             <!-- / Footer -->
 
     </div>

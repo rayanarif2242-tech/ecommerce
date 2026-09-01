@@ -218,7 +218,7 @@ Save FAQ
             <!-- / Content -->
 
           
-           @include('admin.footer')
+         
             <!-- / Footer -->
 
     </div>

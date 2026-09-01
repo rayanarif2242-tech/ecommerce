@@ -311,7 +311,7 @@ class="btn btn-sm btn-danger">
             <!-- / Content -->
 
           
-           @include('admin.footer')
+          
             <!-- / Footer -->
 
     </div>

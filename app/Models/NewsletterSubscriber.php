@@ -19,6 +19,10 @@ class NewsletterSubscriber extends Model
         'subscribed_at',
     ];
 
+    protected $casts = [
+        'subscribed_at' => 'datetime',
+    ];
+
     protected static function boot()
     {
         parent::boot();
@@ -34,5 +38,10 @@ class NewsletterSubscriber extends Model
             }
 
         });
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'subscriber_id';
     }
 }

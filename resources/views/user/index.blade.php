@@ -140,8 +140,8 @@
 
  @include('user.nav')
  @include('user.body')
-   
-            @include('user.footer')
+    @include('user.footer')
+            
              @include('user.js')
   
 </body>

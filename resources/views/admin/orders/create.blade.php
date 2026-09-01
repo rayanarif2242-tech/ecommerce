@@ -383,7 +383,7 @@
 
 
 
- @include('admin.footer')
+ 
 
 
  @include('admin.js')

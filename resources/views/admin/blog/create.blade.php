@@ -366,7 +366,7 @@ border-radius:8px;
             <!-- / Content -->
 
           
-           @include('admin.footer')
+          
             <!-- / Footer -->
 
     </div>
