@@ -363,33 +363,48 @@
 
 
                                             {{-- Remove --}}
-                                            <td>
+                                        
+{{-- Newsletter Actions --}}
+<td>
 
-                                                <form
-                                                    action="{{ route('admin.newsletter.destroy', $subscriber->subscriber_id) }}"
-                                                    method="POST"
-                                                    class="m-0"
-                                                >
+    <div class="d-flex gap-2">
 
-                                                    @csrf
+        {{-- Edit Subscriber --}}
+        <a
+            href="{{ route('admin.newsletter.edit', $subscriber->subscriber_id) }}"
+            class="btn btn-warning btn-sm"
+            title="Edit Subscriber"
+        >
+            <i class="bx bx-edit"></i>
+        </a>
 
-                                                    @method('DELETE')
 
-                                                    <button
-                                                        type="submit"
-                                                        class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Remove this newsletter subscriber?')"
-                                                    >
+        {{-- Remove Subscriber --}}
+        <form
+            action="{{ route('admin.newsletter.destroy', $subscriber->subscriber_id) }}"
+            method="POST"
+            class="m-0"
+        >
 
-                                                        <i class="bx bx-trash me-1"></i>
+            @csrf
 
-                                                        Remove
+            @method('DELETE')
 
-                                                    </button>
+            <button
+                type="submit"
+                class="btn btn-danger btn-sm"
+                title="Remove Subscriber"
+                onclick="return confirm('Remove this newsletter subscriber?')"
+            >
+                <i class="bx bx-trash"></i>
+            </button>
 
-                                                </form>
+        </form>
 
-                                            </td>
+    </div>
+
+</td>
+
 
                                         </tr>
 

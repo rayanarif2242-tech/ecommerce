@@ -6,6 +6,9 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use App\Mail\OrderStatusMail;
 
 class CheckoutController extends Controller
 {
@@ -127,39 +130,39 @@ class CheckoutController extends Controller
 
         try {
 
-         $order = Order::create([
+            $order = Order::create([
 
-    'name' => $request->name,
+                'name' => $request->name,
 
-    'email' => $request->email,
+                'email' => $request->email,
 
-    'phone' => $request->phone,
+                'phone' => $request->phone,
 
-    'address' => $request->address,
+                'address' => $request->address,
 
-    'city' => $request->city,
+                'city' => $request->city,
 
-    'postal_code' => $request->postal_code,
+                'postal_code' => $request->postal_code,
 
-    'subtotal' => $subtotal,
+                'subtotal' => $subtotal,
 
-    'delivery' => $delivery,
+                'delivery' => $delivery,
 
-    'total' => $total,
+                'total' => $total,
 
-    'payment_method' => 'Cash on Delivery',
+                'payment_method' => 'Cash on Delivery',
 
-    'payment_status' => 'Pending',
+                'payment_status' => 'Pending',
 
-    'fulfillment_status' => 'Unfulfilled',
+                'fulfillment_status' => 'Unfulfilled',
 
-    'delivery_status' => 'Pending',
+                'delivery_status' => 'Pending',
 
-    'delivery_method' => 'Standard Delivery',
+                'delivery_method' => 'Standard Delivery',
 
-    'status' => 'Pending',
+                'status' => 'Pending',
 
-]);
+            ]);
 
 
             /*
@@ -189,6 +192,7 @@ class CheckoutController extends Controller
                     'quantity' => $quantity,
 
                     'total' => $price * $quantity,
+
                 ]);
             }
 
@@ -197,13 +201,6 @@ class CheckoutController extends Controller
             |--------------------------------------------------------------------------
             | Clear Cart
             |--------------------------------------------------------------------------
-            |
-            | IMPORTANT:
-            | Your CartController already decreases stock when items
-            | are added to the cart.
-            |
-            | Therefore we DO NOT decrease stock here again.
-            |
             */
 
             session()->forget('cart');
@@ -220,6 +217,33 @@ class CheckoutController extends Controller
 
             /*
             |--------------------------------------------------------------------------
+            | SEND ORDER PLACED EMAIL
+            |--------------------------------------------------------------------------
+            */
+
+            try {
+
+                Mail::to($order->email)
+                    ->send(new OrderStatusMail($order, 'placed'));
+
+            } catch (\Throwable $e) {
+
+                Log::error('Order placed email failed.', [
+
+                    'order_id' => $order->order_id,
+
+                    'customer_email' => $order->email,
+
+                    'status' => 'placed',
+
+                    'error' => $e->getMessage(),
+
+                ]);
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
             | Order Success
             |--------------------------------------------------------------------------
             */
@@ -231,7 +255,7 @@ class CheckoutController extends Controller
                 );
 
 
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
 
             DB::rollBack();
 
@@ -257,3 +281,4 @@ class CheckoutController extends Controller
         );
     }
 }
+

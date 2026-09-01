@@ -50,10 +50,63 @@ class NewsletterSubscriberController extends Controller
 
 
     /**
+     * Show edit newsletter subscriber form.
+     */
+    public function edit($subscriber_id)
+    {
+        $subscriber = NewsletterSubscriber::where(
+            'subscriber_id',
+            $subscriber_id
+        )->firstOrFail();
+
+        return view(
+            'admin.newsletter.edit',
+            compact('subscriber')
+        );
+    }
+
+
+    /**
+     * Update newsletter subscriber.
+     */
+    public function update(Request $request, $subscriber_id)
+    {
+        $subscriber = NewsletterSubscriber::where(
+            'subscriber_id',
+            $subscriber_id
+        )->firstOrFail();
+
+        $request->validate([
+            'email' => 'required|email|max:255|unique:newsletter_subscribers,email,' . $subscriber->id,
+
+            'status' => 'required|in:Active,Inactive',
+        ]);
+
+        $subscriber->email = $request->email;
+
+        $subscriber->status = $request->status;
+
+        $subscriber->save();
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with(
+                'success',
+                'Newsletter subscriber updated successfully.'
+            );
+    }
+
+
+    /**
      * Toggle subscriber status.
      */
-    public function toggleStatus(NewsletterSubscriber $subscriber)
+    public function toggleStatus($subscriber_id)
     {
+        $subscriber = NewsletterSubscriber::where(
+            'subscriber_id',
+            $subscriber_id
+        )->firstOrFail();
+
         $subscriber->status =
             $subscriber->status === 'Active'
                 ? 'Inactive'
@@ -71,8 +124,13 @@ class NewsletterSubscriberController extends Controller
     /**
      * Remove newsletter subscriber.
      */
-    public function destroy(NewsletterSubscriber $subscriber)
+    public function destroy($subscriber_id)
     {
+        $subscriber = NewsletterSubscriber::where(
+            'subscriber_id',
+            $subscriber_id
+        )->firstOrFail();
+
         $subscriber->delete();
 
         return redirect()
@@ -83,4 +141,3 @@ class NewsletterSubscriberController extends Controller
             );
     }
 }
-

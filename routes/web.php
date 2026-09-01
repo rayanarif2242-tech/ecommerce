@@ -33,6 +33,11 @@ use App\Http\Controllers\AiChatController;
 use App\Http\Controllers\Admin\DashboardController;
 
 
+use App\Mail\OrderStatusMail;
+use App\Models\Order;
+use Illuminate\Support\Facades\Mail;
+
+
 
 
 /*
@@ -181,6 +186,7 @@ Route::middleware('auth:admin')
          
 
     
+
 /*
 |--------------------------------------------------------------------------
 | Newsletter Subscribers
@@ -197,13 +203,23 @@ Route::post(
     [NewsletterSubscriberController::class, 'store']
 )->name('newsletter.store');
 
+Route::get(
+    '/newsletter-subscribers/{subscriber_id}/edit',
+    [NewsletterSubscriberController::class, 'edit']
+)->name('newsletter.edit');
+
+Route::put(
+    '/newsletter-subscribers/{subscriber_id}',
+    [NewsletterSubscriberController::class, 'update']
+)->name('newsletter.update');
+
 Route::patch(
-    '/newsletter-subscribers/{subscriber}/toggle-status',
+    '/newsletter-subscribers/{subscriber_id}/toggle-status',
     [NewsletterSubscriberController::class, 'toggleStatus']
 )->name('newsletter.toggle-status');
 
 Route::delete(
-    '/newsletter-subscribers/{subscriber}',
+    '/newsletter-subscribers/{subscriber_id}',
     [NewsletterSubscriberController::class, 'destroy']
 )->name('newsletter.destroy');
 
@@ -384,3 +400,22 @@ Route::get('/ai/categories', [AiChatController::class, 'categories'])
 Route::post('/ai/chat', [AiChatController::class, 'chat'])
     ->name('ai.chat');
 
+
+
+
+
+
+
+    Route::get('/test-order-email', function () {
+
+    $order = Order::latest()->first();
+
+    if (!$order) {
+        return 'No order found in database.';
+    }
+
+    Mail::to($order->email)
+        ->send(new OrderStatusMail($order, 'confirmed'));
+
+    return 'Email sent successfully! Check Mailtrap.';
+});
