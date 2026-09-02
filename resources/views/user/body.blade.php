@@ -1,519 +1,197 @@
- <style>
-    /* =========================================================
-   KAIRA AI FLOATING BUTTON
-========================================================= */
 
-.kaira-ai-button {
-    position: fixed;
-    right: 30px;
-    bottom: 90px;
 
-    width: 60px;
-    height: 60px;
 
-    border-radius: 50%;
 
-    background: #ffffff;
-    color: #111111;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    font-size: 26px;
-
-    cursor: pointer;
-
-    z-index: 999998;
-
-    border: 1px solid #eeeeee;
-
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
-
-    transition: all 0.25s ease;
-}
-
-.kaira-ai-button:hover {
-    transform: scale(1.08);
-}
-
-
-/* =========================================================
-   AI PANEL
-========================================================= */
-
-/* =========================================================
-   KAIRA AI FLOATING BUTTON
-========================================================= */
-
-.kaira-ai-button {
-    position: fixed;
-    right: 30px;
-    bottom: 25px;
-
-    width: 60px;
-    height: 60px;
-
-    border-radius: 50%;
-    background: #ffffff;
-    color: #111111;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 26px;
-    cursor: pointer;
-
-    z-index: 999998;
-
-    border: 1px solid #eeeeee;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
-
-    transition: all 0.25s ease;
-}
-
-.kaira-ai-button:hover {
-    transform: scale(1.08);
-}
-
-
-/* =========================================================
-   AI PANEL
-========================================================= */
-
-.kaira-ai-panel {
-    position: fixed;
-
-    right: 30px;
-
-    /* PANEL WILL NOW SIT LOWER */
-    bottom: 5px;
-
-    width: 380px;
-    height: 570px;
-
-    max-width: calc(100vw - 30px);
-
-    background: #ffffff;
-
-    border-radius: 22px;
-
-    overflow: hidden;
-
-    z-index: 999999;
-
-    display: none;
-    flex-direction: column;
-
-    border: 1px solid #eeeeee;
-
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.20);
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 576px) {
-
-    .kaira-ai-panel {
-        right: 12px;
-        bottom: 100px;
-
-        width: calc(100vw - 24px);
-        height: 70vh;
-    }
-
-    .kaira-ai-button {
-        right: 18px;
-        bottom: 20px;
-    }
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.kaira-ai-header {
-    height: 70px;
-
-    padding: 0 18px;
-
-    background: #111111;
-    color: #ffffff;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.kaira-ai-title {
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-}
-
-.kaira-ai-sparkle {
-    width: 38px;
-    height: 38px;
-
-    border-radius: 50%;
-
-    background: #ffffff;
-    color: #111111;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.kaira-ai-title strong {
-    display: block;
-
-    font-family: "Cormorant Garamond", serif;
-
-    font-size: 22px;
-    font-weight: 600;
-}
-
-.kaira-ai-title small {
-    display: block;
-
-    font-family: "Montserrat", sans-serif;
-
-    font-size: 9px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 1px;
-
-    opacity: .65;
-}
-
-#kairaAiClose {
-    border: none;
-
-    background: transparent;
-
-    color: #ffffff;
-
-    font-size: 28px;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   CHAT
-========================================================= */
-
-.kaira-ai-messages {
-    flex: 1;
-
-    overflow-y: auto;
-
-    padding: 20px;
-
-    background: #fafafa;
-}
-
-
-/* AI MESSAGE */
-
-.kaira-ai-message {
-    background: #ffffff;
-
-    padding: 15px;
-
-    border-radius: 15px;
-
-    margin-bottom: 18px;
-
-    font-family: "Montserrat", sans-serif;
-
-    font-size: 12px;
-
-    line-height: 1.6;
-
-    box-shadow: 0 3px 15px rgba(0,0,0,.04);
-}
-
-.kaira-ai-message p {
-    margin: 5px 0;
-}
-
-
-/* USER MESSAGE */
-
-.kaira-user-message {
-    background: #111111;
-
-    color: #ffffff;
-
-    padding: 12px 15px;
-
-    border-radius: 15px;
-
-    margin: 10px 0 10px auto;
-
-    max-width: 85%;
-
-    font-family: "Montserrat", sans-serif;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   CATEGORY
-========================================================= */
-
-.kaira-ai-question {
-    font-family: "Montserrat", sans-serif;
-
-    font-size: 10px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 1px;
-
-    color: #777777;
-
-    margin-bottom: 12px;
-}
-
-.kaira-category-button {
-    width: 100%;
-
-    padding: 14px 15px;
-
-    margin-bottom: 9px;
-
-    background: #ffffff;
-
-    border: 1px solid #e5e5e5;
-
-    border-radius: 12px;
-
-    text-align: left;
-
-    cursor: pointer;
-
-    font-family: "Montserrat", sans-serif;
-
-    font-size: 12px;
-
-    transition: .25s;
-}
-
-.kaira-category-button:hover {
-    background: #111111;
-
-    color: #ffffff;
-
-    border-color: #111111;
-}
-
-
-/* =========================================================
-   INPUT
-========================================================= */
-
-.kaira-ai-input-area {
-    display: flex;
-
-    gap: 8px;
-
-    padding: 12px;
-
-    background: #ffffff;
-
-    border-top: 1px solid #eeeeee;
-}
-
-#kairaAiInput {
-    flex: 1;
-
-    height: 44px;
-
-    border: 1px solid #dddddd;
-
-    border-radius: 24px;
-
-    padding: 0 16px;
-
-    outline: none;
-
-    font-family: "Montserrat", sans-serif;
-
-    font-size: 11px;
-}
-
-#kairaAiSend {
-    width: 44px;
-    height: 44px;
-
-    border-radius: 50%;
-
-    border: none;
-
-    background: #111111;
-
-    color: #ffffff;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.kaira-ai-loading {
-    padding: 15px;
-
-    color: #888888;
-
-    font-family: "Montserrat", sans-serif;
-
-    font-size: 11px;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 576px) {
-
-    .kaira-ai-panel {
-        right: 12px;
-        bottom: 85px;
-
-        width: calc(100vw - 24px);
-
-        height: 70vh;
-    }
-
-    .kaira-ai-button {
-    bottom: 25px;
-}
-}
- </style><section id="billboard" class="bg-light py-5">
+<section id="billboard" class="bg-light py-5">
     <div class="container">
+    <div class="row justify-content-center">
 
-        <div class="row justify-content-center">
+    @if($billboards->count())
 
-            <h1 class="section-title text-center mt-4" data-aos="fade-up">
+        @foreach($billboards as $billboard)
+
+            <div class="col-12 text-center">
+
+                <h1 class="section-title mt-4"
+                    data-aos="fade-up">
+                    {{ $billboard->name }}
+                </h1>
+
+                <div class="col-md-6 mx-auto"
+                     data-aos="fade-up"
+                     data-aos-delay="300">
+
+                    <p>
+                        {{ $billboard->description }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        @endforeach
+
+    @else
+
+        <div class="col-12 text-center">
+
+            <h1 class="section-title mt-4"
+                data-aos="fade-up">
                 New Collections
             </h1>
 
-            <div class="col-md-6 text-center"
+            <div class="col-md-6 mx-auto"
                  data-aos="fade-up"
                  data-aos-delay="300">
 
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe voluptas ut dolorum consequuntur, adipisci
-                    repellat! Eveniet commodi voluptatem voluptate, eum minima, in suscipit explicabo voluptatibus harum,
-                    quibusdam ex repellat eaque!
+                    Discover our latest collections.
                 </p>
 
             </div>
 
         </div>
 
-        <div class="row">
+    @endif
 
-            <div class="swiper main-swiper py-4"
-                 data-aos="fade-up"
-                 data-aos-delay="600">
+</div>
+      
+<div class="row">
 
-                <div class="swiper-wrapper d-flex border-animation-left">
+    <div class="swiper main-swiper py-4"
+         data-aos="fade-up"
+         data-aos-delay="600">
 
-                @foreach($billboards as $billboard)
+        <div class="swiper-wrapper d-flex border-animation-left">
 
-    <div class="swiper-slide">
+            @forelse($varieties as $variety)
 
-        <div class="banner-item image-zoom-effect">
+                <div class="swiper-slide">
 
-            <div class="image-holder">
+                    <div class="banner-item image-zoom-effect">
 
-                <a href="{{ route('billboard.detail', $billboard->billboard_id) }}">
+                        {{-- Image --}}
+                        <div class="image-holder">
 
-                    <img
-                        src="{{ asset('uploads/billboards/' . $billboard->image) }}"
-                        alt="{{ $billboard->title }}"
-                        class="img-fluid"
-                    >
+                           <a href="{{ route('variety.show', $variety) }}">
 
-                </a>
+                               @if($variety->image)
 
-            </div>
+    <picture>
 
-            <div class="banner-content py-4">
+        @if($variety->mobile_image)
+            <source
+                media="(max-width: 767px)"
+                srcset="{{ asset('uploads/varieties/' . $variety->mobile_image) }}"
+            >
+        @endif
 
-                <h5 class="element-title text-uppercase">
+        <img
+            src="{{ asset('uploads/varieties/' . $variety->image) }}"
+            alt="{{ $variety->title }}"
+            class="img-fluid"
+        >
 
-                    <a href="{{ route('billboard.detail', $billboard->billboard_id) }}"
-                       class="item-anchor">
+    </picture>
 
-                        {{ $billboard->title }}
+@endif
 
-                    </a>
+                            </a>
 
-                </h5>
+                        </div>
 
-                <p>
-                    {{ $billboard->subtitle }}
-                </p>
+                        {{-- Content --}}
+                        <div class="banner-content py-4">
 
-                <div class="btn-left">
+                            @if($variety->title)
+                                <h5 class="element-title text-uppercase">
 
-                    <a
-                        href="{{ route('billboard.detail', $billboard->billboard_id) }}"
-                        class="btn-link fs-6 text-uppercase item-anchor text-decoration-none"
-                    >
-                        {{ $billboard->button_text }}
-                    </a>
+                                            <a 
+    href="{{ route('variety.show', $variety) }}" 
+    class="item-anchor"
+>
+                                        {{ $variety->title }}
+                                    </a>
+
+                                </h5>
+                            @endif
+
+
+                            @if($variety->subtitle)
+                                <p>
+                                    {{ $variety->subtitle }}
+                                </p>
+                            @endif
+
+
+                            @if($variety->button_text)
+
+                                <div class="btn-left">
+
+                                   <a 
+    href="{{ route('variety.show', $variety) }}" 
+    class="btn-link fs-6 text-uppercase item-anchor text-decoration-none"
+>
+                                        {{ $variety->button_text }}
+                                    </a>
+
+                                </div>
+
+                            @endif
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-            </div>
+            @empty
 
-        </div>
+                {{-- No varieties --}}
+                <div class="swiper-slide">
 
-    </div>
+                    <div class="text-center py-5">
 
-@endforeach
+                        <h5>No varieties available.</h5>
+
+                    </div>
 
                 </div>
 
-                <div class="swiper-pagination"></div>
-
-            </div>
-
-            <div class="icon-arrow icon-arrow-left">
-                <svg width="50" height="50" viewBox="0 0 24 24">
-                    <use xlink:href="#arrow-left"></use>
-                </svg>
-            </div>
-
-            <div class="icon-arrow icon-arrow-right">
-                <svg width="50" height="50" viewBox="0 0 24 24">
-                    <use xlink:href="#arrow-right"></use>
-                </svg>
-            </div>
+            @endforelse
 
         </div>
 
+        <div class="swiper-pagination"></div>
+
     </div>
-</section>
+
+
+    {{-- Left Arrow --}}
+    <div class="icon-arrow icon-arrow-left">
+
+        <svg width="50" height="50" viewBox="0 0 24 24">
+            <use xlink:href="#arrow-left"></use>
+        </svg>
+
+    </div>
+
+
+    {{-- Right Arrow --}}
+    <div class="icon-arrow icon-arrow-right">
+
+        <svg width="50" height="50" viewBox="0 0 24 24">
+            <use xlink:href="#arrow-right"></use>
+        </svg>
+
+    </div>
+
+</div>
+
+
+  </section>
 
   <section class="features py-5">
     <div class="container">

@@ -22,9 +22,9 @@
   data-template="vertical-menu-template-free"
 >
   <head>
-   @include('admin.header')
-   
-  </head>
+  @include('admin.header')
+
+ </head>
 
   <body>
     <!-- Layout wrapper -->
@@ -32,45 +32,112 @@
       <div class="layout-container">
         <!-- Menu -->
  @include('admin.sidebar')
-        <!-- / Menu -->
+  <!-- / Menu -->
 
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
+             @include('admin.nav')
 
-        @include('admin.nav')
 
-          <!-- Content wrapper -->
-        <div class="container-xxl flex-grow-1 container-p-y">
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h4 class="fw-bold mb-1">Add Billboard</h4>
+            <p class="text-muted mb-0">
+                Create a new billboard
+            </p>
+        </div>
+
+        <a href="{{ route('admin.billboards.index') }}"
+           class="btn btn-secondary">
+
+            <i class="bx bx-arrow-back me-1"></i>
+            Back
+
+        </a>
+
+    </div>
+
 
     <div class="card">
-
-        <div class="card-header">
-            <h4 class="mb-0">
-                <i class="bx bx-plus-circle"></i>
-                Add Billboard
-            </h4>
-        </div>
 
         <div class="card-body">
 
             <form action="{{ route('admin.billboards.store') }}"
-                  method="POST"
-                  enctype="multipart/form-data">
+                  method="POST">
 
                 @csrf
 
-                @include('admin.billboards.form')
 
-                <div class="mt-3">
+                {{-- Name --}}
+                <div class="mb-3">
 
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bx bx-save"></i>
-                        Save Billboard
+                    <label class="form-label">
+                        Name <span class="text-danger">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control @error('name') is-invalid @enderror"
+                        value="{{ old('name') }}"
+                        placeholder="Enter billboard name"
+                        required
+                    >
+
+                    @error('name')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                </div>
+
+
+                {{-- Description --}}
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Description
+                    </label>
+
+                    <textarea
+                        name="description"
+                        rows="5"
+                        class="form-control @error('description') is-invalid @enderror"
+                        placeholder="Enter billboard description"
+                    >{{ old('description') }}</textarea>
+
+                    @error('description')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                </div>
+
+
+                {{-- Buttons --}}
+                <div class="mt-4">
+
+                    <button type="submit"
+                            class="btn btn-primary">
+
+                        <i class="bx bx-save me-1"></i>
+                        Create Billboard
+
                     </button>
 
-                    <a href="{{ route('admin.billboards.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('admin.billboards.index') }}"
+                       class="btn btn-secondary">
+
                         Cancel
+
                     </a>
 
                 </div>
@@ -82,16 +149,12 @@
     </div>
 
 </div>
-            <!-- / Content -->
 
-          
-         
-            <!-- / Footer -->
-
-    </div>
-    <!-- / Layout wrapper -->
+ 
 
 
-    @include('admin.js')
-  </body>
+ @include('admin.js')
+
+
+ </body>
 </html>

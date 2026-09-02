@@ -22,9 +22,9 @@
   data-template="vertical-menu-template-free"
 >
   <head>
-   @include('admin.header')
-   
-  </head>
+  @include('admin.header')
+
+ </head>
 
   <body>
     <!-- Layout wrapper -->
@@ -32,127 +32,40 @@
       <div class="layout-container">
         <!-- Menu -->
  @include('admin.sidebar')
-        <!-- / Menu -->
+  <!-- / Menu -->
 
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
+             @include('admin.nav')
 
-        @include('admin.nav')
 
-          <!-- Content wrapper -->
-         <div class="container-xxl flex-grow-1 container-p-y">
 
-    <div class="card">
 
-        <div class="card-header">
 
-            <h4>
-                <i class="bx bx-show"></i>
-                Billboard Details
-            </h4>
+<div class="container-xxl flex-grow-1 container-p-y">
 
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h4 class="fw-bold mb-1">Billboard Details</h4>
+            <p class="text-muted mb-0">
+                View billboard information
+            </p>
         </div>
 
-        <div class="card-body">
+        <div>
 
-            <table class="table table-bordered">
+            <a href="{{ route('admin.billboards.edit', $billboard) }}"
+               class="btn btn-warning">
 
-                <tr>
-                    <th width="220">UUID</th>
-                    <td>{{ $billboard->billboard_id }}</td>
-                </tr>
+                <i class="bx bx-edit me-1"></i>
+                Edit
 
-                <tr>
-                    <th>Title</th>
-                    <td>{{ $billboard->title }}</td>
-                </tr>
-
-                <tr>
-                    <th>Subtitle</th>
-                    <td>{{ $billboard->subtitle }}</td>
-                </tr>
-
-                <tr>
-                    <th>Button Text</th>
-                    <td>{{ $billboard->button_text }}</td>
-                </tr>
-
-                <tr>
-                    <th>Button Link</th>
-                    <td>{{ $billboard->button_link }}</td>
-                </tr>
-
-                <tr>
-                    <th>Position</th>
-                    <td>{{ $billboard->position }}</td>
-                </tr>
-
-                <tr>
-                    <th>Featured</th>
-                    <td>
-                        @if($billboard->featured)
-                            <span class="badge bg-success">Yes</span>
-                        @else
-                            <span class="badge bg-secondary">No</span>
-                        @endif
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Status</th>
-                    <td>
-                        @if($billboard->status)
-                            <span class="badge bg-success">Active</span>
-                        @else
-                            <span class="badge bg-danger">Inactive</span>
-                        @endif
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Sort Order</th>
-                    <td>{{ $billboard->sort_order }}</td>
-                </tr>
-
-                <tr>
-                    <th>Start Date</th>
-                    <td>{{ $billboard->start_date }}</td>
-                </tr>
-
-                <tr>
-                    <th>End Date</th>
-                    <td>{{ $billboard->end_date }}</td>
-                </tr>
-
-                <tr>
-                    <th>Desktop Image</th>
-                    <td>
-                        @if($billboard->image)
-                            <img src="{{ asset('uploads/billboards/'.$billboard->image) }}"
-                                 width="250"
-                                 class="rounded border">
-                        @endif
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Mobile Image</th>
-                    <td>
-                        @if($billboard->mobile_image)
-                            <img src="{{ asset('uploads/billboards/'.$billboard->mobile_image) }}"
-                                 width="250"
-                                 class="rounded border">
-                        @endif
-                    </td>
-                </tr>
-
-            </table>
+            </a>
 
             <a href="{{ route('admin.billboards.index') }}"
                class="btn btn-secondary">
-
-                <i class="bx bx-arrow-back"></i>
 
                 Back
 
@@ -162,17 +75,94 @@
 
     </div>
 
-</div>
-            <!-- / Content -->
 
-          
-           
-            <!-- / Footer -->
+    <div class="card">
+
+        <div class="card-body">
+
+            {{-- UUID --}}
+            <div class="mb-4">
+
+                <label class="form-label fw-bold">
+                    UUID
+                </label>
+
+                <div class="form-control bg-light">
+                    {{ $billboard->uuid }}
+                </div>
+
+            </div>
+
+
+            {{-- Name --}}
+            <div class="mb-4">
+
+                <label class="form-label fw-bold">
+                    Name
+                </label>
+
+                <div class="form-control bg-light">
+                    {{ $billboard->name }}
+                </div>
+
+            </div>
+
+
+            {{-- Description --}}
+            <div class="mb-4">
+
+                <label class="form-label fw-bold">
+                    Description
+                </label>
+
+                <div class="form-control bg-light"
+                     style="min-height: 120px; white-space: pre-wrap;">
+                    {{ $billboard->description ?: 'No description available.' }}
+                </div>
+
+            </div>
+
+
+            {{-- Dates --}}
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <label class="form-label fw-bold">
+                        Created At
+                    </label>
+
+                    <div class="form-control bg-light">
+                        {{ $billboard->created_at?->format('d M Y, h:i A') }}
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label fw-bold">
+                        Updated At
+                    </label>
+
+                    <div class="form-control bg-light">
+                        {{ $billboard->updated_at?->format('d M Y, h:i A') }}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
-    <!-- / Layout wrapper -->
+
+</div>
+
+ 
 
 
-    @include('admin.js')
-  </body>
+ @include('admin.js')
+
+
+ </body>
 </html>

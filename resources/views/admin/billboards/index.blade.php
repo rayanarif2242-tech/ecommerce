@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <!-- =========================================================
@@ -21,9 +22,9 @@
   data-template="vertical-menu-template-free"
 >
   <head>
-   @include('admin.header')
-   
-  </head>
+  @include('admin.header')
+
+ </head>
 
   <body>
     <!-- Layout wrapper -->
@@ -31,253 +32,142 @@
       <div class="layout-container">
         <!-- Menu -->
  @include('admin.sidebar')
-        <!-- / Menu -->
+  <!-- / Menu -->
 
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
+             @include('admin.nav')
 
-        @include('admin.nav')
 
-          <!-- Content wrapper -->
-        <div class="container-xxl flex-grow-1 container-p-y">
 
-    <div class="card">
 
-        <!-- Card Header -->
-        <div class="card-header d-flex justify-content-between align-items-center">
 
-            <h4 class="mb-0">
-                <i class="bx bx-images"></i>
-                Billboards
-            </h4>
+<div class="container-xxl flex-grow-1 container-p-y">
 
-            <a href="{{ route('admin.billboards.create') }}" class="btn btn-primary">
-                <i class="bx bx-plus"></i>
-                Add Billboard
-            </a>
-
+    {{-- Header --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="fw-bold mb-1">Billboards</h4>
+            <p class="text-muted mb-0">
+                Manage your website billboards
+            </p>
         </div>
 
-        <!-- Search -->
-        <div class="card-body">
+        <a href="{{ route('admin.billboards.create') }}"
+           class="btn btn-primary">
+            <i class="bx bx-plus me-1"></i>
+            Add Billboard
+        </a>
+    </div>
 
-            @if(session('success'))
 
-                <div class="alert alert-success">
+    {{-- Success Message --}}
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('success') }}
 
-                    {{ session('success') }}
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+        </div>
+    @endif
 
-                </div>
 
-            @endif
+    {{-- Search --}}
+    
 
-            <form method="GET" action="{{ route('admin.billboards.index') }}">
 
-                <div class="row mb-3">
+    {{-- Billboard Table --}}
+    <div class="card">
 
-                    <div class="col-md-4">
+        <div class="card-header">
+            <h5 class="mb-0">All Billboards</h5>
+        </div>
 
-                        <input
-                            type="text"
-                            name="search"
-                            value="{{ request('search') }}"
-                            class="form-control"
-                            placeholder="Search UUID, Title, Position">
+        <div class="table-responsive text-nowrap">
 
-                    </div>
+            <table class="table table-hover">
 
-                    <div class="col-md-2">
-
-                        <button class="btn btn-primary">
-
-                            <i class="bx bx-search"></i>
-
-                            Search
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </form>
-
-            <!-- Table -->
-
-            <div class="table-responsive">
-
-                <table class="table table-bordered table-hover align-middle">
-
-                    <thead class="table-dark">
-
+                <thead>
                     <tr>
-
                         <th>#</th>
-
                         <th>UUID</th>
-
-                        <th>Image</th>
-
-                        <th>Title</th>
-
-                        <th>Position</th>
-
-                        <th>Featured</th>
-
-                        <th>Status</th>
-
-                        <th>Sort</th>
-
-                        <th>Action</th>
-
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Actions</th>
                     </tr>
+                </thead>
 
-                    </thead>
+                <tbody>
 
-                    <tbody>
-
-                    @forelse($billboards as $key => $billboard)
+                    @forelse($billboards as $billboard)
 
                         <tr>
 
                             <td>
-
-                                {{ $billboards->firstItem() + $key }}
-
+                                {{ $billboards->firstItem() + $loop->index }}
                             </td>
 
                             <td>
-
-                                <small>
-
-                                    {{ $billboard->billboard_id }}
-
-                                </small>
-
-                            </td>
-
-                            <td>
-
-                                @if($billboard->image)
-
-                                    <img
-                                        src="{{ asset('uploads/billboards/'.$billboard->image) }}"
-                                        width="80"
-                                        class="rounded">
-
-                                @else
-
-                                    No Image
-
-                                @endif
-
-                            </td>
-
-                            <td>
-
-                                {{ $billboard->title }}
-
-                            </td>
-
-                            <td>
-
-                                <span class="badge bg-info">
-
-                                    {{ $billboard->position }}
-
+                                <span class="badge bg-label-secondary">
+                                    {{ $billboard->uuid }}
                                 </span>
+                            </td>
 
+                            <td>
+                                <strong>
+                                    {{ $billboard->name }}
+                                </strong>
+                            </td>
+
+                            <td>
+                                {{ Str::limit($billboard->description, 80) }}
                             </td>
 
                             <td>
 
-                                @if($billboard->featured)
-
-                                    <span class="badge bg-success">
-
-                                        Yes
-
-                                    </span>
-
-                                @else
-
-                                    <span class="badge bg-secondary">
-
-                                        No
-
-                                    </span>
-
-                                @endif
-
-                            </td>
-
-                            <td>
-
-                                @if($billboard->status)
-
-                                    <span class="badge bg-success">
-
-                                        Active
-
-                                    </span>
-
-                                @else
-
-                                    <span class="badge bg-danger">
-
-                                        Inactive
-
-                                    </span>
-
-                                @endif
-
-                            </td>
-
-                            <td>
-
-                                {{ $billboard->sort_order }}
-
-                            </td>
-
-                            <td>
-
-                                <!-- View -->
-
-                                <a href="{{ route('admin.billboards.show',$billboard) }}"
-                                   class="btn btn-info btn-sm">
+                                {{-- View --}}
+                                <a href="{{ route('admin.billboards.show', $billboard) }}"
+                                   class="btn btn-sm btn-info"
+                                   title="View">
 
                                     <i class="bx bx-show"></i>
 
                                 </a>
 
-                                <!-- Edit -->
 
-                                <a href="{{ route('admin.billboards.edit',$billboard) }}"
-                                   class="btn btn-warning btn-sm">
+                                {{-- Edit --}}
+                                <a href="{{ route('admin.billboards.edit', $billboard) }}"
+                                   class="btn btn-sm btn-warning"
+                                   title="Edit">
 
                                     <i class="bx bx-edit"></i>
 
                                 </a>
 
-                                <!-- Delete -->
 
-                              <form action="{{ route('admin.billboards.destroy',$billboard) }}"
-      method="POST"
-      class="d-inline">
+                                {{-- Delete --}}
+                                <form
+                                    action="{{ route('admin.billboards.destroy', $billboard) }}"
+                                    method="POST"
+                                    class="d-inline"
+                                    onsubmit="return confirm('Are you sure you want to delete this billboard?');"
+                                >
 
-    @csrf
-    @method('DELETE')
+                                    @csrf
+                                    @method('DELETE')
 
-    <button type="submit"
-            class="btn btn-danger btn-sm"
-            onclick="return confirm('Are you sure you want to delete this billboard?')">
+                                    <button type="submit"
+                                            class="btn btn-sm btn-danger"
+                                            title="Delete">
 
-        <i class="bx bx-trash"></i>
+                                        <i class="bx bx-trash"></i>
 
-    </button>
+                                    </button>
 
-</form>
+                                </form>
 
                             </td>
 
@@ -286,46 +176,52 @@
                     @empty
 
                         <tr>
+                            <td colspan="5"
+                                class="text-center py-5">
 
-                            <td colspan="9" class="text-center">
+                                <h5 class="text-muted">
+                                    No billboards found
+                                </h5>
 
-                                No Billboards Found.
+                                <a href="{{ route('admin.billboards.create') }}"
+                                   class="btn btn-primary mt-2">
+                                    Add Billboard
+                                </a>
 
                             </td>
-
                         </tr>
 
                     @endforelse
 
-                    </tbody>
+                </tbody>
 
-                </table>
-
-            </div>
-
-            <!-- Pagination -->
-
-            <div class="mt-3">
-
-                {{ $billboards->links() }}
-
-            </div>
+            </table>
 
         </div>
+
+
+        {{-- Pagination --}}
+        @if($billboards->hasPages())
+
+            <div class="card-footer">
+
+                {{ $billboards->appends(request()->query())->links() }}
+
+            </div>
+
+        @endif
 
     </div>
 
 </div>
-            <!-- / Content -->
-
-          
-         
-            <!-- / Footer -->
-
-    </div>
-    <!-- / Layout wrapper -->
 
 
-    @include('admin.js')
-  </body>
+
+ 
+
+
+ @include('admin.js')
+
+
+ </body>
 </html>

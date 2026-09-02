@@ -81,9 +81,15 @@
     </a>
 </li>
 <li class="menu-item">
-    <a href="{{ route('admin.variety.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-category"></i>
-        <div>Variety</div>
+    <a href="{{ route('admin.billboards.index') }}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-image"></i>
+        <div>Billboards</div>
+    </a>
+</li>
+<li class="menu-item">
+    <a href="{{ route('admin.varieties.index') }}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-purchase-tag"></i>
+        <div>Varieties</div>
     </a>
 </li>
 <li class="menu-item">
@@ -111,15 +117,7 @@
     </a>
 
 </li>
-<li class="menu-item">
-    <a href="{{ route('admin.billboards.index') }}" class="menu-link">
 
-        <i class="menu-icon tf-icons bx bx-images"></i>
-
-        <div>Billboards</div>
-
-    </a>
-</li>
 <li class="menu-item {{ request()->routeIs('admin.collections.*') ? 'active' : '' }}">
     <a href="{{ route('admin.collections.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-collection"></i>

@@ -7,10 +7,11 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Product;
 use App\Models\Collection;
+use App\Models\Variety;
 use App\Models\Blog;
-use App\Models\Billboard;
 use App\Models\Signature;
 use App\Models\ContactMessage;
+use App\Models\Billboard;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -41,23 +42,18 @@ class IndexController extends Controller
             ->orderBy('sort_order', 'asc')
             ->get();
 
-        // Blogs
-        $blogs = Blog::where('status', 1)
-            ->where('show_on_home', 1)
+        // Varieties
+        $varieties = Variety::where('status', 'active')
             ->orderBy('sort_order', 'asc')
             ->get();
 
         // Billboards
-        $billboards = Billboard::where('status', 1)
-            ->where('featured', 1)
-            ->where(function ($query) {
-                $query->whereNull('start_date')
-                    ->orWhereDate('start_date', '<=', now());
-            })
-            ->where(function ($query) {
-                $query->whereNull('end_date')
-                    ->orWhereDate('end_date', '>=', now());
-            })
+        // Do NOT use where('status', 1)
+        $billboards = Billboard::latest()->get();
+
+        // Blogs
+        $blogs = Blog::where('status', 1)
+            ->where('show_on_home', 1)
             ->orderBy('sort_order', 'asc')
             ->get();
 
@@ -71,8 +67,9 @@ class IndexController extends Controller
             'subCategories',
             'products',
             'collections',
-            'blogs',
+            'varieties',
             'billboards',
+            'blogs',
             'signatures'
         ));
     }
@@ -114,4 +111,12 @@ class IndexController extends Controller
             ->route('contact')
             ->with('success', 'Your message has been sent successfully!');
     }
+
+    public function showVariety(Variety $variety)
+{
+    $variety->load('product');
+
+    return view('user.variety-detail', compact('variety'));
 }
+}
+

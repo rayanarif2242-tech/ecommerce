@@ -28,7 +28,7 @@ class SearchController extends Controller
 
             [
                 'name' => 'Variety',
-                'url' => route('admin.variety.index'),
+                'url' => route('admin.varieties.index'),
             ],
 
             [
@@ -76,15 +76,25 @@ class SearchController extends Controller
                 'url' => route('admin.faq.index'),
             ],
 
+            [
+                'name' => 'Orders',
+                'url' => route('admin.orders.index'),
+            ],
+
+            [
+                'name' => 'Newsletter Subscribers',
+                'url' => route('admin.newsletter.index'),
+            ],
+
         ];
 
-        $keyword = strtolower(
-            trim($request->search ?? '')
-        );
+        $keyword = trim($request->input('search', ''));
 
         if ($keyword === '') {
             return response()->json([]);
         }
+
+        $keyword = strtolower($keyword);
 
         $results = collect($menus)
             ->filter(function ($item) use ($keyword) {
@@ -95,7 +105,8 @@ class SearchController extends Controller
                 );
 
             })
-            ->values();
+            ->values()
+            ->toArray();
 
         return response()->json($results);
     }

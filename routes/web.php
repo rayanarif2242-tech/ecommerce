@@ -15,11 +15,12 @@ use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\NewsletterSubscriberController;
 
-use App\Http\Controllers\VarietyController;
+use App\Http\Controllers\Admin\BillboardController;
+use App\Http\Controllers\Admin\VarietyController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\BillboardController;
+
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SignatureController;
@@ -142,7 +143,6 @@ Route::post('/logout', function (Request $request) {
 | All admin CRUD pages are now under /admin
 |
 */
-
 Route::middleware('auth:admin')
     ->prefix('admin')
     ->name('admin.')
@@ -151,8 +151,15 @@ Route::middleware('auth:admin')
         // Users
         Route::resource('users', UserController::class);
 
-        // Variety
-        Route::resource('variety', VarietyController::class);
+        // Billboards
+        Route::resource('billboards', BillboardController::class);
+                  
+        // variety
+        
+
+        Route::resource('varieties', VarietyController::class);
+
+
 
         // Categories
         Route::resource('category', CategoryController::class);
@@ -162,9 +169,6 @@ Route::middleware('auth:admin')
 
         // Products
         Route::resource('products', ProductController::class);
-
-        // Billboards
-        Route::resource('billboards', BillboardController::class);
 
         // Collections
         Route::resource('collections', CollectionController::class);
@@ -180,11 +184,11 @@ Route::middleware('auth:admin')
 
         // FAQ
         Route::resource('faq', FAQController::class);
-        
-        // Orders
-         Route::resource('orders', OrderController::class); 
-         
 
+        // Orders
+        Route::resource('orders', OrderController::class);
+
+       
     
 
 /*
@@ -323,9 +327,7 @@ Route::get('/signatures', [SignatureController::class, 'frontendIndex'])
 Route::get('/signature/{signature_id}', [SignatureController::class, 'frontendShow'])
     ->name('signature.show');
 
-// Billboard
-Route::get('/billboard/{billboard_id}', [BillboardController::class, 'detail'])
-    ->name('billboard.detail');
+
 
 
 
@@ -419,3 +421,15 @@ Route::post('/ai/chat', [AiChatController::class, 'chat'])
 
     return 'Email sent successfully! Check Mailtrap.';
 });
+
+
+
+
+
+
+
+
+
+
+Route::get('/varieties/{variety}', [IndexController::class, 'showVariety'])
+    ->name('variety.show');
