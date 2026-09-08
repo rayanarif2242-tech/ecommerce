@@ -62,9 +62,243 @@
     
     z-index: 10;
 }
+/* =========================================================
+   KAIRA NAVBAR
+========================================================= */
+
+/* =========================================================
+   KAIRA PREMIUM FLOATING NAVBAR
+========================================================= */
+
+.kaira-navbar {
+    position: fixed;
+    top: 14px;
+    left: 28px;
+    right: 28px;
+
+    width: auto;
+    min-height: 76px;
+
+    z-index: 1050;
+
+    padding: 10px 22px !important;
+
+    /* Clean top appearance */
+   
+
+    /* Premium rounded shape */
+    border-radius: 28px;
+
+    /* Very subtle border */
+    border: 1px solid rgba(0, 0, 0, 0.06);
+
+    /* Soft shadow */
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.05),
+        0 15px 40px rgba(0, 0, 0, 0.04);
+
+    transition:
+        background 0.35s ease,
+        box-shadow 0.35s ease,
+        backdrop-filter 0.35s ease,
+        transform 0.35s ease;
+}
+
+
+/* =========================================================
+   SCROLL STATE
+========================================================= */
+
+.kaira-navbar.scrolled {
+
+    background: rgba(255, 255, 255, 0.68) !important;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-color: rgba(255, 255, 255, 0.45);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08),
+        0 20px 50px rgba(0, 0, 0, 0.05);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.kaira-navbar .navbar-brand {
+    display: flex;
+    align-items: center;
+    margin-right: 35px;
+}
+
+.kaira-navbar .navbar-brand svg {
+    width: 112px;
+    height: 45px;
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.kaira-navbar .nav-link {
+    position: relative;
+
+    color: #111 !important;
+
+    font-size: 15px;
+    font-weight: 400;
+
+    letter-spacing: 0.3px;
+
+    padding: 10px 5px !important;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* Small elegant hover effect */
+
+.kaira-navbar .nav-link:hover {
+    opacity: 0.55;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   NAVIGATION SPACING
+========================================================= */
+
+.kaira-navbar .navbar-nav {
+    align-items: center;
+}
+
+
+/* =========================================================
+   ICONS
+========================================================= */
+
+.kaira-navbar .navbar-cart-icon,
+.kaira-navbar .search-button,
+.kaira-navbar .navbar-cart-wrapper a {
+    color: #111 !important;
+}
+
+.kaira-navbar .search-button svg,
+.kaira-navbar .navbar-cart-wrapper svg,
+.kaira-navbar .navbar-cart-wrapper i {
+    transition: transform 0.25s ease;
+}
+
+.kaira-navbar .search-button:hover svg,
+.kaira-navbar .navbar-cart-wrapper a:hover i {
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
+   CART BADGE
+========================================================= */
+
+.kaira-navbar .cart-count {
+    top: 0;
+    right: -2px;
+
+    width: 16px;
+    height: 16px;
+
+    font-size: 9px;
+
+    background: #111;
+    color: #fff;
+
+    border: 2px solid #fff;
+}
+
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.kaira-navbar .dropdown-menu {
+    margin-top: 14px !important;
+
+    min-width: 190px;
+
+    padding: 10px;
+
+   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(0, 0, 0, 0.06);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.10);
+}
+
+.kaira-navbar .dropdown-item {
+    border-radius: 10px;
+
+    padding: 9px 12px;
+
+    font-size: 14px;
+
+    transition: background 0.2s ease;
+}
+
+.kaira-navbar .dropdown-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================================================
+   BODY SPACE
+========================================================= */
+
+body {
+    padding-top: 105px;
+    background-color: #f2f2f2;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .kaira-navbar {
+        top: 10px;
+        left: 12px;
+        right: 12px;
+
+        min-height: 65px;
+
+        padding: 8px 15px !important;
+
+        border-radius: 22px;
+    }
+
+    body {
+        padding-top: 85px;
+    }
+
+}
 
 </style>
- <nav class="navbar navbar-expand-lg bg-light text-uppercase fs-6 p-3 border-bottom align-items-center">
+<nav class="navbar navbar-expand-lg text-uppercase fs-6 align-items-center kaira-navbar">
     <div class="container-fluid">
       <div class="row justify-content-between align-items-center w-100">
 
@@ -154,14 +388,7 @@
 
     </ul>
 </li>
-                <li class="nav-item">
-    <a
-        class="nav-link"
-        href="{{ route('blogs') }}"
-    >
-        Blog
-    </a>
-</li>
+              
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="dropdownPages" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Pages</a>
@@ -181,13 +408,24 @@
                     <li>
                       <a href="index.html" class="dropdown-item item-anchor">FAQs </a>
                     </li>
+                      <li>
+    <a
+        
+        href="{{ route('blogs') }}"class="dropdown-item item-anchor"
+    >
+        Blog
+    </a>
+</li>
                    
                    
                    
                   </ul>
      
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ route('contact') }}">Contact</a>
+                  <a class="nav-link" href="{{ route('user.products') }}">PRODUCTS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('user.collections') }}">COLLECTIONS</a>
                 </li>
               </ul>
             </div>
@@ -381,6 +619,27 @@
         });
 
     }
+    /*
+|--------------------------------------------------------------------------
+| NAVBAR SCROLL EFFECT
+|--------------------------------------------------------------------------
+*/
+
+const navbar = document.querySelector('.kaira-navbar');
+
+if (navbar) {
+
+    window.addEventListener('scroll', function () {
+
+        if (window.scrollY > 30) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+    });
+
+}
 
 });
  </script>

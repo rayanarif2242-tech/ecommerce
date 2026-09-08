@@ -38,6 +38,8 @@ use App\Mail\OrderStatusMail;
 use App\Models\Order;
 use Illuminate\Support\Facades\Mail;
 
+use App\Http\Controllers\StripeController;
+
 
 
 
@@ -422,14 +424,25 @@ Route::post('/ai/chat', [AiChatController::class, 'chat'])
     return 'Email sent successfully! Check Mailtrap.';
 });
 
-
-
-
-
-
-
-
-
-
 Route::get('/varieties/{variety}', [IndexController::class, 'showVariety'])
     ->name('variety.show');
+
+
+
+
+
+
+
+
+
+
+
+
+    Route::post('/stripe/checkout', [StripeController::class, 'checkout'])
+    ->name('stripe.checkout');
+
+Route::get('/stripe/success', [StripeController::class, 'success'])
+    ->name('stripe.success');
+
+Route::get('/stripe/cancel', [StripeController::class, 'cancel'])
+    ->name('stripe.cancel');

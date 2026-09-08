@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collection;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -40,14 +39,7 @@ class CollectionController extends Controller
      */
     public function create()
     {
-        $products = Product::where('status', 1)
-            ->orderBy('name', 'asc')
-            ->get();
-
-        return view(
-            'admin.collections.create',
-            compact('products')
-        );
+        return view('admin.collections.create');
     }
 
     /**
@@ -56,18 +48,18 @@ class CollectionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'product_id' => 'required|exists:products,product_id',
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
             'description' => 'nullable|string',
 
             'thumbnail' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
             'banner' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
             'icon' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:1024',
 
-            'featured' => 'nullable',
-            'show_home' => 'nullable',
-            'status' => 'nullable',
+            'featured' => 'nullable|boolean',
+            'show_home' => 'nullable|boolean',
+            'status' => 'nullable|boolean',
             'sort_order' => 'nullable|integer',
 
             'seo_title' => 'nullable|string|max:255',
@@ -77,14 +69,14 @@ class CollectionController extends Controller
 
         $collection = new Collection();
 
-        $collection->product_id = $request->product_id;
         $collection->name = $request->name;
         $collection->price = $request->price;
+        $collection->stock = $request->stock;
         $collection->description = $request->description;
 
-        $collection->featured = $request->has('featured') ? 1 : 0;
-        $collection->show_home = $request->has('show_home') ? 1 : 0;
-        $collection->status = $request->has('status') ? 1 : 0;
+        $collection->featured = $request->featured ?? 0;
+        $collection->show_home = $request->show_home ?? 0;
+        $collection->status = $request->status ?? 0;
         $collection->sort_order = $request->sort_order ?? 0;
 
         $collection->seo_title = $request->seo_title;
@@ -180,13 +172,9 @@ class CollectionController extends Controller
      */
     public function edit(Collection $collection)
     {
-        $products = Product::where('status', 1)
-            ->orderBy('name', 'asc')
-            ->get();
-
         return view(
             'admin.collections.edit',
-            compact('collection', 'products')
+            compact('collection')
         );
     }
 
@@ -196,18 +184,18 @@ class CollectionController extends Controller
     public function update(Request $request, Collection $collection)
     {
         $request->validate([
-            'product_id' => 'required|exists:products,product_id',
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
             'description' => 'nullable|string',
 
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'banner' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'icon' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:1024',
 
-            'featured' => 'nullable',
-            'show_home' => 'nullable',
-            'status' => 'nullable',
+            'featured' => 'nullable|boolean',
+            'show_home' => 'nullable|boolean',
+            'status' => 'nullable|boolean',
             'sort_order' => 'nullable|integer',
 
             'seo_title' => 'nullable|string|max:255',
@@ -215,19 +203,25 @@ class CollectionController extends Controller
             'seo_description' => 'nullable|string',
         ]);
 
-        $collection->product_id = $request->product_id;
         $collection->name = $request->name;
         $collection->price = $request->price;
+        $collection->stock = $request->stock;
         $collection->description = $request->description;
 
-        $collection->featured = $request->has('featured') ? 1 : 0;
-        $collection->show_home = $request->has('show_home') ? 1 : 0;
-        $collection->status = $request->has('status') ? 1 : 0;
+        $collection->featured = $request->featured ?? 0;
+        $collection->show_home = $request->show_home ?? 0;
+        $collection->status = $request->status ?? 0;
         $collection->sort_order = $request->sort_order ?? 0;
 
         $collection->seo_title = $request->seo_title;
         $collection->seo_keywords = $request->seo_keywords;
         $collection->seo_description = $request->seo_description;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Upload Directory
+        |--------------------------------------------------------------------------
+        */
 
         $uploadPath = public_path('uploads/collections');
 
@@ -245,13 +239,9 @@ class CollectionController extends Controller
 
             if (
                 $collection->thumbnail &&
-                File::exists(
-                    $uploadPath . '/' . $collection->thumbnail
-                )
+                File::exists($uploadPath . '/' . $collection->thumbnail)
             ) {
-                File::delete(
-                    $uploadPath . '/' . $collection->thumbnail
-                );
+                File::delete($uploadPath . '/' . $collection->thumbnail);
             }
 
             $image = $request->file('thumbnail');
@@ -274,13 +264,9 @@ class CollectionController extends Controller
 
             if (
                 $collection->banner &&
-                File::exists(
-                    $uploadPath . '/' . $collection->banner
-                )
+                File::exists($uploadPath . '/' . $collection->banner)
             ) {
-                File::delete(
-                    $uploadPath . '/' . $collection->banner
-                );
+                File::delete($uploadPath . '/' . $collection->banner);
             }
 
             $image = $request->file('banner');
@@ -303,13 +289,9 @@ class CollectionController extends Controller
 
             if (
                 $collection->icon &&
-                File::exists(
-                    $uploadPath . '/' . $collection->icon
-                )
+                File::exists($uploadPath . '/' . $collection->icon)
             ) {
-                File::delete(
-                    $uploadPath . '/' . $collection->icon
-                );
+                File::delete($uploadPath . '/' . $collection->icon);
             }
 
             $image = $request->file('icon');
@@ -340,13 +322,9 @@ class CollectionController extends Controller
 
             if (
                 !empty($collection->$file) &&
-                File::exists(
-                    $uploadPath . '/' . $collection->$file
-                )
+                File::exists($uploadPath . '/' . $collection->$file)
             ) {
-                File::delete(
-                    $uploadPath . '/' . $collection->$file
-                );
+                File::delete($uploadPath . '/' . $collection->$file);
             }
         }
 

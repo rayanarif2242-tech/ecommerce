@@ -482,8 +482,8 @@
         .collection-name {
             color: #111;
             text-decoration: none;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
+            
+            font-size: 18px;
             letter-spacing: 1px;
             text-transform: uppercase;
             font-weight: 500;

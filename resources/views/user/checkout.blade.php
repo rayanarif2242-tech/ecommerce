@@ -812,9 +812,10 @@
 
 
         <form
-            action="{{ route('checkout.store') }}"
-            method="POST"
-        >
+    id="checkout-form"
+    action="{{ route('checkout.store') }}"
+    method="POST"
+>
 
             @csrf
 
@@ -943,52 +944,77 @@
                         </div>
 
 
-                        <div class="payment-box">
+                       <div class="payment-box">
 
-                            <strong>
-                                Payment Method
-                            </strong>
+    <strong>
+        Payment Method
+    </strong>
 
-                            <div class="mt-3">
+    <div class="mt-3">
 
-                                <div class="form-check">
+        {{-- Cash on Delivery --}}
+        <div class="form-check mb-3">
 
-                                    <input
-                                        class="form-check-input"
-                                        type="radio"
-                                        checked
-                                    >
+            <input
+                class="form-check-input"
+                type="radio"
+                name="payment_method"
+                id="payment_cod"
+                value="cod"
+                checked
+            >
 
-                                    <label class="form-check-label">
+            <label
+                class="form-check-label"
+                for="payment_cod"
+            >
+                <strong>Cash on Delivery</strong>
+            </label>
 
-                                        Cash on Delivery
+        </div>
 
-                                    </label>
 
-                                </div>
+        {{-- Stripe --}}
+        <div class="form-check">
 
-                            </div>
+            <input
+                class="form-check-input"
+                type="radio"
+                name="payment_method"
+                id="payment_stripe"
+                value="stripe"
+            >
 
-                            <small class="text-muted d-block mt-2">
+            <label
+                class="form-check-label"
+                for="payment_stripe"
+            >
+                <strong>Credit / Debit Card</strong>
+            </label>
 
-                                Pay when your order is delivered.
+        </div>
 
-                            </small>
+    </div>
 
-                        </div>
+
+    <small
+        id="payment-description"
+        class="text-muted d-block mt-2"
+    >
+        Pay when your order is delivered.
+    </small>
+
+</div>
 
 
                         <button
-                            type="submit"
-                            class="confirm-btn"
-                        >
-
-                            <i class="bi bi-check-circle me-2"></i>
-
-                            Confirm Order
-
-                        </button>
-
+    type="submit"
+    class="confirm-btn"
+    id="confirm-button"
+>
+    <i class="bi bi-check-circle me-2"></i>
+    <span id="button-text">Confirm Order</span>
+</button>
                     </div>
 
                 </div>
@@ -1492,8 +1518,83 @@ document.addEventListener('DOMContentLoaded', function () {
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
     }
+/* =========================
+   PAYMENT METHOD
+========================= */
 
+const checkoutForm = document.getElementById('checkout-form');
+
+const paymentCod = document.getElementById('payment_cod');
+
+const paymentStripe = document.getElementById('payment_stripe');
+
+const confirmButton = document.getElementById('confirm-button');
+
+const buttonText = document.getElementById('button-text');
+
+const paymentDescription =
+    document.getElementById('payment-description');
+
+
+function updatePaymentMethod() {
+
+    if (paymentStripe.checked) {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Stripe
+        |--------------------------------------------------------------------------
+        */
+
+        checkoutForm.action =
+            "{{ route('stripe.checkout') }}";
+
+        buttonText.textContent =
+            "Pay with Card";
+
+        paymentDescription.textContent =
+            "You will be redirected to Stripe's secure checkout page.";
+
+    } else {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Cash on Delivery
+        |--------------------------------------------------------------------------
+        */
+
+        checkoutForm.action =
+            "{{ route('checkout.store') }}";
+
+        buttonText.textContent =
+            "Confirm Order";
+
+        paymentDescription.textContent =
+            "Pay when your order is delivered.";
+    }
+}
+
+
+/* Listen for payment changes */
+
+paymentCod.addEventListener(
+    'change',
+    updatePaymentMethod
+);
+
+paymentStripe.addEventListener(
+    'change',
+    updatePaymentMethod
+);
+
+
+/* Set initial payment method */
+
+updatePaymentMethod();
 });
+
+
+
 </script>
 </body>
 

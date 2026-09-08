@@ -81,10 +81,7 @@ class SearchController extends Controller
                 'url' => route('admin.orders.index'),
             ],
 
-            [
-                'name' => 'Newsletter Subscribers',
-                'url' => route('admin.newsletter.index'),
-            ],
+           
 
         ];
 

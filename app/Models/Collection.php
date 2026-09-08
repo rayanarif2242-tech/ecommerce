@@ -16,7 +16,7 @@ class Collection extends Model
     protected $primaryKey = 'collection_id';
 
     /**
-     * Primary key is UUID/string, not auto-incrementing integer.
+     * UUID/string primary key.
      */
     public $incrementing = false;
 
@@ -27,9 +27,9 @@ class Collection extends Model
      */
     protected $fillable = [
         'collection_id',
-        'product_id',
         'name',
         'price',
+        'stock',
         'slug',
         'description',
         'thumbnail',
@@ -70,9 +70,7 @@ class Collection extends Model
             $slug = $originalSlug;
             $counter = 1;
 
-            while (
-                static::where('slug', $slug)->exists()
-            ) {
+            while (static::where('slug', $slug)->exists()) {
                 $slug = $originalSlug . '-' . $counter;
                 $counter++;
             }
@@ -88,7 +86,7 @@ class Collection extends Model
 
         static::updating(function ($collection) {
 
-            // Only regenerate slug if name changed
+            // Regenerate slug only when name changes
             if ($collection->isDirty('name')) {
 
                 $originalSlug = Str::slug($collection->name);
@@ -112,18 +110,6 @@ class Collection extends Model
                 $collection->slug = $slug;
             }
         });
-    }
-
-    /**
-     * Collection belongs to a product.
-     */
-    public function product()
-    {
-        return $this->belongsTo(
-            Product::class,
-            'product_id',
-            'product_id'
-        );
     }
 
     /**
