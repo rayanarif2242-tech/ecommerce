@@ -5,10 +5,8 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>{{ $variety->title }} | Kaira</title>
 
@@ -41,80 +39,435 @@
             background: #fff;
             color: #111;
             font-family: 'Montserrat', sans-serif;
+
+            /* Space for the navbar */
+            padding-top: 82px;
         }
 
-        /* =========================
-           NAVBAR
-        ========================= */
 
-        .main-navbar {
+        /* =========================================================
+           KAIRA NAVBAR
+        ========================================================= */
+
+        .kaira-navbar {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
             height: 82px;
-            border-bottom: 1px solid #e8e8e8;
-            background: #fff;
+
+            z-index: 1050;
+
+            padding: 10px 22px !important;
+
+            background: rgba(255, 255, 255, 0.98);
+
+            border-radius: 0;
+
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-top: none;
+
+            box-shadow: none;
+
             display: flex;
             align-items: center;
+
+            transition:
+                top 0.35s ease,
+                left 0.35s ease,
+                width 0.35s ease,
+                height 0.35s ease,
+                border-radius 0.35s ease,
+                background 0.35s ease,
+                border-color 0.35s ease,
+                box-shadow 0.35s ease,
+                backdrop-filter 0.35s ease,
+                transform 0.35s ease;
         }
 
-        .brand {
+
+        /* =========================================================
+           NAVBAR SCROLL STATE
+        ========================================================= */
+
+        .kaira-navbar.scrolled {
+
+            top: 14px;
+            left: 28px;
+
+            width: calc(100% - 56px);
+            height: 76px;
+
+            border-radius: 28px;
+
+            background: rgba(255, 255, 255, 0.88);
+
+            border: 1px solid rgba(0, 0, 0, 0.08);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.08),
+                0 20px 50px rgba(0, 0, 0, 0.05);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================================================
+           LOGO
+        ========================================================= */
+
+        .kaira-navbar .navbar-brand {
+            display: flex;
+            align-items: center;
+
+            margin-right: 35px;
+
+            text-decoration: none;
+        }
+
+        .kaira-logo {
             font-family: 'Cormorant Garamond', serif;
+
             font-size: 34px;
             font-weight: 600;
+
             letter-spacing: 4px;
+
             color: #111;
+
+            line-height: 1;
+
             text-decoration: none;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 38px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
 
-        .nav-links a {
-            text-decoration: none;
-            color: #222;
-            font-size: 14px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            transition: .3s;
-        }
+        /* =========================================================
+           NAV LINKS
+        ========================================================= */
 
-        .nav-links a:hover {
-            color: #888;
-        }
+        .kaira-navbar .navbar-nav {
 
-        /* =========================
-           NAV ICONS
-        ========================= */
-
-        .nav-icons {
-            display: flex;
             align-items: center;
-            gap: 22px;
+
+            gap: 20px;
         }
 
-        .nav-icons a {
-            color: #111;
-            font-size: 20px;
-            text-decoration: none;
-            transition: .3s;
+        .kaira-navbar .nav-link {
+
             position: relative;
-            cursor: pointer;
+
+            color: #111 !important;
+
+            font-size: 14px;
+            font-weight: 400;
+
+            letter-spacing: 0.8px;
+
+            padding: 10px 8px !important;
+
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease;
         }
 
-        .nav-icons a:hover {
+        .kaira-navbar .nav-link:hover {
+
+            opacity: 0.55;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================================
+           DROPDOWN
+        ========================================================= */
+
+        .kaira-navbar .dropdown-menu {
+
+            margin-top: 14px !important;
+
+            min-width: 210px;
+
+            padding: 10px;
+
+            background: rgba(255, 255, 255, 0.96) !important;
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(0, 0, 0, 0.06);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, 0.10);
+        }
+
+        .kaira-navbar .dropdown-item {
+
+            border-radius: 10px;
+
+            padding: 10px 12px;
+
+            font-size: 13px;
+
+            color: #111;
+
+            transition:
+                background 0.2s ease,
+                padding 0.2s ease;
+        }
+
+        .kaira-navbar .dropdown-item:hover {
+
+            background: rgba(0, 0, 0, 0.05);
+
+            padding-left: 15px;
+        }
+
+
+        /* =========================================================
+           NAVBAR ICONS
+        ========================================================= */
+
+        .kaira-navbar .nav-icons {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            margin-left: 20px;
+        }
+
+        .kaira-navbar .nav-icon {
+
+            position: relative;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            width: 40px;
+            height: 40px;
+
+            color: #111;
+
+            text-decoration: none;
+
+            border-radius: 50%;
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .kaira-navbar .nav-icon i {
+
+            font-size: 20px;
+
+            line-height: 1;
+        }
+
+        .kaira-navbar .nav-icon:hover {
+
+            background: rgba(0, 0, 0, 0.05);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================================
+           CART
+        ========================================================= */
+
+        .navbar-cart-wrapper {
+
+            position: relative;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-cart-icon {
+
+            position: relative;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            width: 40px;
+            height: 40px;
+
+            color: #111;
+
+            text-decoration: none;
+
+            border-radius: 50%;
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .navbar-cart-icon i {
+
+            font-size: 21px;
+
+            line-height: 1;
+        }
+
+        .navbar-cart-icon:hover {
+
+            background: rgba(0, 0, 0, 0.05);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================================
+           CART COUNT
+        ========================================================= */
+
+        .cart-count {
+
+            position: absolute;
+
+            top: 1px;
+            right: -1px;
+
+            width: 17px;
+            height: 17px;
+
+            background: #111;
+
+            color: #fff;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-family: 'Montserrat', sans-serif;
+
+            font-size: 9px;
+            font-weight: 700;
+
+            line-height: 1;
+
+            border: 2px solid #fff;
+
+            z-index: 10;
+        }
+
+
+        /* =========================================================
+           MOBILE TOGGLER
+        ========================================================= */
+
+        .kaira-navbar .navbar-toggler {
+
+            border: none;
+
+            padding: 7px;
+
+            color: #111;
+
+            box-shadow: none !important;
+        }
+
+        .kaira-navbar .navbar-toggler:focus {
+
+            box-shadow: none !important;
+        }
+
+        .kaira-navbar .navbar-toggler-icon {
+
+            background-image:
+                url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(17,17,17,1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+
+        /* =========================================================
+           MOBILE OFFCANVAS
+        ========================================================= */
+
+        .kaira-offcanvas {
+
+            background: #fff;
+
+            width: 310px !important;
+        }
+
+        .kaira-offcanvas .offcanvas-header {
+
+            padding: 25px;
+        }
+
+        .kaira-offcanvas .offcanvas-title {
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 30px;
+
+            letter-spacing: 3px;
+
+            color: #111;
+        }
+
+        .kaira-offcanvas .offcanvas-body {
+
+            padding: 10px 25px 30px;
+        }
+
+        .mobile-nav-link {
+
+            display: block;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid #eee;
+
+            color: #111;
+
+            font-size: 13px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            text-decoration: none;
+        }
+
+        .mobile-nav-link:hover {
+
             color: #777;
         }
 
-        /* =========================
+
+        /* =========================================================
            SEARCH OVERLAY
-        ========================= */
+        ========================================================= */
 
         .search-overlay {
+
             position: fixed;
+
             inset: 0;
+
             width: 100%;
             height: 100%;
 
@@ -125,22 +478,28 @@
             display: none;
 
             align-items: flex-start;
+
             justify-content: center;
 
             padding-top: 110px;
         }
 
         .search-overlay.active {
+
             display: flex;
         }
 
         .search-box {
+
             width: 90%;
+
             max-width: 850px;
+
             position: relative;
         }
 
         .search-close {
+
             position: absolute;
 
             top: -60px;
@@ -150,6 +509,7 @@
             height: 40px;
 
             border: none;
+
             background: transparent;
 
             font-size: 24px;
@@ -159,15 +519,18 @@
             cursor: pointer;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
         }
 
         .search-close:hover {
+
             color: #777;
         }
 
         .search-title {
+
             font-family: 'Cormorant Garamond', serif;
 
             font-size: 42px;
@@ -178,6 +541,7 @@
         }
 
         .search-input-wrapper {
+
             display: flex;
 
             align-items: center;
@@ -188,15 +552,18 @@
         }
 
         .search-input-wrapper i {
+
             font-size: 20px;
 
             margin-right: 15px;
         }
 
         .search-input-wrapper input {
+
             width: 100%;
 
             border: none;
+
             outline: none;
 
             background: transparent;
@@ -207,14 +574,17 @@
         }
 
         .search-input-wrapper input::placeholder {
+
             color: #999;
         }
 
-        /* =========================
+
+        /* =========================================================
            SEARCH RESULTS
-        ========================= */
+        ========================================================= */
 
         .search-results {
+
             margin-top: 25px;
 
             max-height: 500px;
@@ -223,6 +593,7 @@
         }
 
         .search-result-item {
+
             display: flex;
 
             align-items: center;
@@ -237,14 +608,16 @@
 
             text-decoration: none;
 
-            transition: .2s;
+            transition: 0.2s;
         }
 
         .search-result-item:hover {
+
             background: #f8f8f8;
         }
 
         .search-result-image {
+
             width: 70px;
             height: 80px;
 
@@ -256,10 +629,12 @@
         }
 
         .search-result-info {
+
             flex: 1;
         }
 
         .search-result-name {
+
             font-size: 14px;
 
             font-weight: 500;
@@ -268,6 +643,7 @@
         }
 
         .search-result-type {
+
             font-size: 10px;
 
             color: #999;
@@ -278,6 +654,7 @@
         }
 
         .search-result-price {
+
             font-size: 13px;
 
             color: #555;
@@ -286,6 +663,7 @@
         }
 
         .search-no-result {
+
             text-align: center;
 
             padding: 40px;
@@ -295,19 +673,23 @@
             font-size: 13px;
         }
 
-        /* =========================
-           DETAIL SECTION
-        ========================= */
+
+        /* =========================================================
+           VARIETY DETAIL
+        ========================================================= */
 
         .variety-detail-section {
+
             padding: 70px 0 100px;
         }
 
-        /* =========================
+
+        /* =========================================================
            BACK BUTTON
-        ========================= */
+        ========================================================= */
 
         .back-home {
+
             display: inline-flex;
 
             align-items: center;
@@ -326,26 +708,31 @@
 
             margin-bottom: 35px;
 
-            transition: .3s;
+            transition: 0.3s;
         }
 
         .back-home:hover {
+
             color: #777;
         }
 
         .back-home i {
-            transition: .3s;
+
+            transition: 0.3s;
         }
 
         .back-home:hover i {
+
             transform: translateX(-4px);
         }
 
-        /* =========================
+
+        /* =========================================================
            IMAGE
-        ========================= */
+        ========================================================= */
 
         .variety-image-wrapper {
+
             position: relative;
 
             overflow: hidden;
@@ -354,6 +741,7 @@
         }
 
         .variety-image-wrapper img {
+
             width: 100%;
 
             height: 650px;
@@ -362,22 +750,26 @@
 
             display: block;
 
-            transition: transform .7s ease;
+            transition: transform 0.7s ease;
         }
 
         .variety-image-wrapper:hover img {
+
             transform: scale(1.03);
         }
 
-        /* =========================
+
+        /* =========================================================
            INFORMATION
-        ========================= */
+        ========================================================= */
 
         .variety-info {
+
             padding: 20px 30px 20px 55px;
         }
 
         .variety-label {
+
             font-size: 11px;
 
             letter-spacing: 3px;
@@ -390,6 +782,7 @@
         }
 
         .variety-title {
+
             font-size: 52px;
 
             line-height: 1.1;
@@ -404,6 +797,7 @@
         }
 
         .variety-subtitle {
+
             color: #777;
 
             font-size: 14px;
@@ -413,11 +807,13 @@
             margin-bottom: 30px;
         }
 
-        /* =========================
+
+        /* =========================================================
            PRODUCT BUTTON
-        ========================= */
+        ========================================================= */
 
         .variety-btn {
+
             display: inline-flex;
 
             align-items: center;
@@ -444,20 +840,23 @@
 
             text-decoration: none;
 
-            transition: .3s;
+            transition: 0.3s;
         }
 
         .variety-btn:hover {
+
             background: #333;
 
             color: #fff;
         }
 
-        /* =========================
+
+        /* =========================================================
            PRODUCT INFORMATION
-        ========================= */
+        ========================================================= */
 
         .product-info {
+
             margin-top: 30px;
 
             padding-top: 25px;
@@ -466,6 +865,7 @@
         }
 
         .product-info-title {
+
             font-size: 11px;
 
             letter-spacing: 3px;
@@ -478,12 +878,14 @@
         }
 
         .product-name {
+
             font-size: 20px;
 
             font-weight: 500;
         }
 
         .product-price {
+
             margin-top: 8px;
 
             font-size: 15px;
@@ -491,11 +893,13 @@
             color: #555;
         }
 
-        /* =========================
+
+        /* =========================================================
            COMING SOON
-        ========================= */
+        ========================================================= */
 
         .coming-soon-box {
+
             width: 100%;
 
             padding: 22px 25px;
@@ -518,16 +922,19 @@
         }
 
         .coming-soon-box i {
+
             font-size: 18px;
         }
 
         .coming-soon-box span {
+
             font-size: 12px;
 
             font-weight: 600;
         }
 
         .coming-soon-box small {
+
             margin-left: auto;
 
             color: #888;
@@ -539,11 +946,13 @@
             text-transform: none;
         }
 
-        /* =========================
+
+        /* =========================================================
            META
-        ========================= */
+        ========================================================= */
 
         .variety-meta {
+
             margin-top: 30px;
 
             padding-top: 25px;
@@ -552,6 +961,7 @@
         }
 
         .meta-item {
+
             font-size: 12px;
 
             letter-spacing: 1.5px;
@@ -564,6 +974,7 @@
         }
 
         .meta-item strong {
+
             color: #111;
 
             font-weight: 600;
@@ -571,11 +982,13 @@
             margin-left: 5px;
         }
 
-        /* =========================
+
+        /* =========================================================
            FOOTER
-        ========================= */
+        ========================================================= */
 
         .footer {
+
             background: #111;
 
             color: white;
@@ -584,6 +997,7 @@
         }
 
         .footer-brand {
+
             font-family: 'Cormorant Garamond', serif;
 
             font-size: 34px;
@@ -594,82 +1008,164 @@
         }
 
         .footer p {
+
             color: #aaa;
 
             font-size: 14px;
         }
 
-        /* =========================
-           RESPONSIVE
-        ========================= */
 
-        @media (max-width: 991px) {
+        /* =========================================================
+           TABLET
+        ========================================================= */
 
-            .nav-links {
-                display: none;
+        @media (max-width: 991.98px) {
+
+            body {
+
+                padding-top: 85px;
+            }
+
+            .kaira-navbar {
+
+                top: 0;
+                left: 0;
+
+                width: 100%;
+
+                height: 70px;
+
+                min-height: 70px;
+
+                padding: 8px 15px !important;
+
+                border-radius: 0;
+            }
+
+            .kaira-navbar.scrolled {
+
+                top: 10px;
+                left: 12px;
+
+                width: calc(100% - 24px);
+
+                height: 64px;
+
+                border-radius: 22px;
+
+                background: rgba(255, 255, 255, 0.88);
+
+                backdrop-filter: blur(18px);
+
+                -webkit-backdrop-filter: blur(18px);
+
+                box-shadow:
+                    0 8px 25px rgba(0, 0, 0, 0.08),
+                    0 18px 45px rgba(0, 0, 0, 0.05);
+            }
+
+            .kaira-logo {
+
+                font-size: 30px;
+            }
+
+            .kaira-navbar .nav-icons {
+
+                gap: 5px;
+
+                margin-left: 0;
             }
 
             .variety-info {
+
                 padding: 40px 10px;
             }
 
             .variety-image-wrapper img {
+
                 height: 550px;
             }
-
         }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
 
         @media (max-width: 767px) {
 
-            .main-navbar {
+            body {
+
+                padding-top: 70px;
+            }
+
+            .kaira-navbar {
+
                 height: 70px;
             }
 
-            .brand {
-                font-size: 28px;
+            .kaira-navbar.scrolled {
+
+                top: 10px;
+                left: 12px;
+
+                width: calc(100% - 24px);
+
+                height: 64px;
+
+                border-radius: 20px;
             }
 
             .variety-detail-section {
+
                 padding: 40px 0 70px;
             }
 
             .variety-image-wrapper img {
+
                 height: 450px;
             }
 
             .variety-title {
+
                 font-size: 40px;
             }
 
             .coming-soon-box {
+
                 flex-wrap: wrap;
 
                 gap: 10px;
             }
 
             .coming-soon-box small {
+
                 width: 100%;
 
                 margin-left: 32px;
             }
 
             .search-overlay {
+
                 padding-top: 90px;
             }
 
             .search-box {
+
                 width: 92%;
             }
 
             .search-title {
+
                 font-size: 34px;
             }
 
             .search-result-image {
+
                 width: 60px;
+
                 height: 70px;
             }
-
         }
 
     </style>
@@ -680,134 +1176,255 @@
 <body>
 
 
-{{-- =========================
-NAVBAR
-========================= --}}
+{{-- =========================================================
+     KAIRA NAVBAR
+========================================================= --}}
 
-<nav class="main-navbar">
+<nav class="navbar navbar-expand-lg kaira-navbar">
 
-    <div class="container">
+    <div class="container-fluid">
 
-        <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center justify-content-between w-100">
+
 
             {{-- LOGO --}}
 
             <a
-                href="{{ url('/') }}"
-                class="brand"
+                class="navbar-brand"
+                href="{{ route('frontend.home') }}"
             >
-                KAIRA
+
+                <span class="kaira-logo">
+                    KAIRA
+                </span>
+
             </a>
 
 
-            {{-- NAVIGATION --}}
+            {{-- DESKTOP NAVIGATION --}}
 
-            <ul class="nav-links">
+            <div class="d-none d-lg-flex flex-grow-1 ms-5">
 
-                <li>
-                    <a href="{{ url('/') }}">
-                        Home
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('user.products') }}">
-                        Shop
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ url('/collections') }}">
-                        Collections
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('blogs') }}">
-                        Blog
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('contact') }}">
-                        Contact
-                    </a>
-                </li>
-
-            </ul>
+                <ul class="navbar-nav ms-3">
 
 
-            {{-- ICONS --}}
+                    {{-- HOME --}}
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{{ route('frontend.home') }}"
+                        >
+                            Home
+                        </a>
+
+                    </li>
+
+
+                    {{-- SHOP DROPDOWN --}}
+
+                    <li class="nav-item dropdown">
+
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="dropdownShop"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            Shop
+                        </a>
+
+                        <ul
+                            class="dropdown-menu"
+                            aria-labelledby="dropdownShop"
+                        >
+
+                            @if(isset($categories) && $categories->count())
+
+                                @foreach($categories as $category)
+
+                                    <li>
+
+                                        <a
+                                            href="{{ route('category.show', $category->slug) }}"
+                                            class="dropdown-item"
+                                        >
+                                            {{ $category->name }}
+                                        </a>
+
+                                    </li>
+
+                                @endforeach
+
+                            @else
+
+                                <li>
+
+                                    <a
+                                        href="{{ route('user.products') }}"
+                                        class="dropdown-item"
+                                    >
+                                        All Products
+                                    </a>
+
+                                </li>
+
+                            @endif
+
+                        </ul>
+
+                    </li>
+
+
+                    {{-- PRODUCTS --}}
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{{ route('user.products') }}"
+                        >
+                            Products
+                        </a>
+
+                    </li>
+
+
+                    {{-- COLLECTIONS --}}
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{{ route('user.collections') }}"
+                        >
+                            Collections
+                        </a>
+
+                    </li>
+
+
+                    {{-- BLOG --}}
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{{ route('blogs') }}"
+                        >
+                            Blog
+                        </a>
+
+                    </li>
+
+
+                    {{-- CONTACT --}}
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{{ route('contact') }}"
+                        >
+                            Contact
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            {{-- RIGHT ICONS --}}
 
             <div class="nav-icons">
+
 
                 {{-- SEARCH --}}
 
                 <a
-                    href="javascript:void(0)"
+                    href="#"
+                    class="nav-icon"
                     id="openSearch"
                     aria-label="Search"
+                    title="Search"
                 >
+
                     <i class="bi bi-search"></i>
+
                 </a>
 
 
-                {{-- PROFILE --}}
+                {{-- PROFILE / NEWSLETTER --}}
 
                 <a
                     href="{{ route('newsletter.index') }}"
-                    aria-label="Profile"
+                    class="nav-icon d-none d-sm-inline-flex"
+                    aria-label="Account"
+                    title="Account"
                 >
+
                     <i class="bi bi-person"></i>
+
                 </a>
 
 
                 {{-- CART --}}
 
-                <a
-                    href="{{ route('cart.show') }}"
-                    aria-label="Cart"
+                <span class="navbar-cart-wrapper">
+
+                    <a
+                        href="{{ route('cart.show') }}"
+                        class="navbar-cart-icon"
+                        aria-label="Cart"
+                        title="Cart"
+                    >
+
+                        <i class="bi bi-bag"></i>
+
+
+                        @php
+
+                            $cartCount = collect(
+                                session('cart', [])
+                            )->sum('quantity');
+
+                        @endphp
+
+
+                        @if($cartCount > 0)
+
+                            <span class="cart-count">
+
+                                {{ $cartCount }}
+
+                            </span>
+
+                        @endif
+
+                    </a>
+
+                </span>
+
+
+                {{-- MOBILE MENU BUTTON --}}
+
+                <button
+                    class="navbar-toggler d-lg-none"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#kairaMobileMenu"
+                    aria-controls="kairaMobileMenu"
+                    aria-label="Open navigation"
                 >
 
-                    <i class="bi bi-bag"></i>
+                    <span class="navbar-toggler-icon"></span>
 
-                    @php
-
-                        $cartCount = collect(
-                            session('cart', [])
-                        )->sum('quantity');
-
-                    @endphp
-
-                    @if($cartCount > 0)
-
-                        <span
-                            style="
-                                position:absolute;
-                                top:-8px;
-                                right:-10px;
-
-                                background:#111;
-                                color:#fff;
-
-                                width:18px;
-                                height:18px;
-
-                                border-radius:50%;
-
-                                font-size:9px;
-
-                                display:flex;
-                                align-items:center;
-                                justify-content:center;
-                            "
-                        >
-                            {{ $cartCount }}
-                        </span>
-
-                    @endif
-
-                </a>
+                </button>
 
             </div>
 
@@ -818,9 +1435,110 @@ NAVBAR
 </nav>
 
 
-{{-- =========================
-SEARCH OVERLAY
-========================= --}}
+{{-- =========================================================
+     MOBILE OFFCANVAS MENU
+========================================================= --}}
+
+<div
+    class="offcanvas offcanvas-end kaira-offcanvas"
+    tabindex="-1"
+    id="kairaMobileMenu"
+    aria-labelledby="kairaMobileMenuLabel"
+>
+
+    <div class="offcanvas-header">
+
+        <h5
+            class="offcanvas-title"
+            id="kairaMobileMenuLabel"
+        >
+            KAIRA
+        </h5>
+
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+        ></button>
+
+    </div>
+
+
+    <div class="offcanvas-body">
+
+
+        <a
+            href="{{ route('frontend.home') }}"
+            class="mobile-nav-link"
+        >
+            Home
+        </a>
+
+
+        <a
+            href="{{ route('user.products') }}"
+            class="mobile-nav-link"
+        >
+            Shop
+        </a>
+
+
+        <a
+            href="{{ route('user.products') }}"
+            class="mobile-nav-link"
+        >
+            Products
+        </a>
+
+
+        <a
+            href="{{ route('user.collections') }}"
+            class="mobile-nav-link"
+        >
+            Collections
+        </a>
+
+
+        <a
+            href="{{ route('blogs') }}"
+            class="mobile-nav-link"
+        >
+            Blog
+        </a>
+
+
+        <a
+            href="{{ route('contact') }}"
+            class="mobile-nav-link"
+        >
+            Contact
+        </a>
+
+
+        <a
+            href="{{ route('newsletter.index') }}"
+            class="mobile-nav-link"
+        >
+            Account
+        </a>
+
+
+        <a
+            href="{{ route('cart.show') }}"
+            class="mobile-nav-link"
+        >
+            Cart
+        </a>
+
+    </div>
+
+</div>
+
+
+{{-- =========================================================
+     SEARCH OVERLAY
+========================================================= --}}
 
 <div
     id="searchOverlay"
@@ -890,9 +1608,9 @@ SEARCH OVERLAY
 </div>
 
 
-{{-- =========================
-VARIETY DETAIL
-========================= --}}
+{{-- =========================================================
+     VARIETY DETAIL
+========================================================= --}}
 
 <section class="variety-detail-section">
 
@@ -902,7 +1620,7 @@ VARIETY DETAIL
         {{-- BACK TO HOME --}}
 
         <a
-            href="{{ url('/') }}"
+            href="{{ route('frontend.home') }}"
             class="back-home"
         >
 
@@ -916,9 +1634,7 @@ VARIETY DETAIL
         <div class="row g-5 align-items-center">
 
 
-            {{-- =========================
-                 IMAGE
-            ========================= --}}
+            {{-- IMAGE --}}
 
             <div class="col-lg-7">
 
@@ -965,9 +1681,7 @@ VARIETY DETAIL
             </div>
 
 
-            {{-- =========================
-                 INFORMATION
-            ========================= --}}
+            {{-- INFORMATION --}}
 
             <div class="col-lg-5">
 
@@ -1005,9 +1719,7 @@ VARIETY DETAIL
                     @endif
 
 
-                    {{-- =========================
-                         RELATED PRODUCT
-                    ========================= --}}
+                    {{-- RELATED PRODUCT --}}
 
                     @if($variety->product)
 
@@ -1036,17 +1748,17 @@ VARIETY DETAIL
                                 <div class="product-price">
 
                                     Rs.
+
                                     {{ number_format($variety->product->discount_price, 2) }}
 
                                 </div>
 
-                            @elseif(
-                                isset($variety->product->price)
-                            )
+                            @elseif(isset($variety->product->price))
 
                                 <div class="product-price">
 
                                     Rs.
+
                                     {{ number_format($variety->product->price, 2) }}
 
                                 </div>
@@ -1095,9 +1807,7 @@ VARIETY DETAIL
                     @endif
 
 
-                    {{-- =========================
-                         META INFORMATION
-                    ========================= --}}
+                    {{-- META INFORMATION --}}
 
                     @if(
                         $variety->position ||
@@ -1117,7 +1827,9 @@ VARIETY DETAIL
                                     Position:
 
                                     <strong>
+
                                         {{ $variety->position }}
+
                                     </strong>
 
                                 </div>
@@ -1134,7 +1846,9 @@ VARIETY DETAIL
                                     Available From:
 
                                     <strong>
+
                                         {{ $variety->start_date->format('d M Y') }}
+
                                     </strong>
 
                                 </div>
@@ -1151,23 +1865,22 @@ VARIETY DETAIL
                                     Available Until:
 
                                     <strong>
+
                                         {{ $variety->end_date->format('d M Y') }}
+
                                     </strong>
 
                                 </div>
 
                             @endif
 
-
                         </div>
 
                     @endif
 
-
                 </div>
 
             </div>
-
 
         </div>
 
@@ -1176,15 +1889,16 @@ VARIETY DETAIL
 </section>
 
 
-{{-- =========================
-FOOTER
-========================= --}}
+{{-- =========================================================
+     FOOTER
+========================================================= --}}
 
 <footer class="footer">
 
     <div class="container">
 
         <div class="row align-items-center">
+
 
             <div class="col-md-6">
 
@@ -1209,6 +1923,7 @@ FOOTER
                 <p class="mb-0">
 
                     © {{ date('Y') }} Kaira.
+
                     All Rights Reserved.
 
                 </p>
@@ -1222,21 +1937,64 @@ FOOTER
 </footer>
 
 
-{{-- Bootstrap JS --}}
+{{-- =========================================================
+     BOOTSTRAP JS
+========================================================= --}}
 
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
 ></script>
 
 
-{{-- =========================
-SEARCH JAVASCRIPT
-========================= --}}
+{{-- =========================================================
+     KAIRA NAVBAR + SEARCH JAVASCRIPT
+========================================================= --}}
 
 <script>
 
 document.addEventListener('DOMContentLoaded', function () {
 
+
+    /* =========================================================
+       NAVBAR SCROLL EFFECT
+    ========================================================= */
+
+    const navbar =
+        document.querySelector('.kaira-navbar');
+
+
+    if (navbar) {
+
+        function handleNavbarScroll() {
+
+            if (window.scrollY > 40) {
+
+                navbar.classList.add('scrolled');
+
+            } else {
+
+                navbar.classList.remove('scrolled');
+
+            }
+
+        }
+
+
+        handleNavbarScroll();
+
+
+        window.addEventListener(
+            'scroll',
+            handleNavbarScroll,
+            { passive: true }
+        );
+
+    }
+
+
+    /* =========================================================
+       SEARCH ELEMENTS
+    ========================================================= */
 
     const openSearch =
         document.getElementById('openSearch');
@@ -1260,316 +2018,367 @@ document.addEventListener('DOMContentLoaded', function () {
     let searchTimeout;
 
 
-    /* =========================
+    /* =========================================================
        OPEN SEARCH
-    ========================= */
+    ========================================================= */
 
-    openSearch.addEventListener('click', function (event) {
+    if (openSearch) {
 
-        event.preventDefault();
+        openSearch.addEventListener(
+            'click',
+            function (event) {
 
-        searchOverlay.classList.add('active');
+                event.preventDefault();
 
-        document.body.style.overflow = 'hidden';
+                searchOverlay.classList.add('active');
 
-        setTimeout(function () {
-
-            searchInput.focus();
-
-        }, 100);
-
-    });
+                document.body.style.overflow = 'hidden';
 
 
-    /* =========================
+                setTimeout(function () {
+
+                    searchInput.focus();
+
+                }, 100);
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
        CLOSE SEARCH
-    ========================= */
+    ========================================================= */
 
-    closeSearch.addEventListener('click', function () {
+    if (closeSearch) {
 
-        searchOverlay.classList.remove('active');
+        closeSearch.addEventListener(
+            'click',
+            function () {
 
-        document.body.style.overflow = '';
+                searchOverlay.classList.remove('active');
 
-        searchInput.value = '';
+                document.body.style.overflow = '';
 
-        searchResults.innerHTML = '';
-
-    });
-
-
-    /* =========================
-       CLOSE WHEN CLICKING OUTSIDE
-    ========================= */
-
-    searchOverlay.addEventListener('click', function (event) {
-
-        if (event.target === searchOverlay) {
-
-            searchOverlay.classList.remove('active');
-
-            document.body.style.overflow = '';
-
-        }
-
-    });
-
-
-    /* =========================
-       ESC KEY
-    ========================= */
-
-    document.addEventListener('keydown', function (event) {
-
-        if (event.key === 'Escape') {
-
-            searchOverlay.classList.remove('active');
-
-            document.body.style.overflow = '';
-
-        }
-
-    });
-
-
-    /* =========================
-       PREVENT NORMAL FORM SUBMIT
-    ========================= */
-
-    searchForm.addEventListener('submit', function (event) {
-
-        event.preventDefault();
-
-    });
-
-
-    /* =========================
-       LIVE SEARCH
-    ========================= */
-
-    searchInput.addEventListener('input', function () {
-
-
-        const query = this.value.trim();
-
-
-        clearTimeout(searchTimeout);
-
-
-        /* Minimum 2 characters */
-
-        if (query.length < 2) {
-
-            searchResults.innerHTML = '';
-
-            return;
-
-        }
-
-
-        /* Loading */
-
-        searchResults.innerHTML = `
-
-            <div class="search-no-result">
-
-                Searching...
-
-            </div>
-
-        `;
-
-
-        searchTimeout = setTimeout(function () {
-
-
-            fetch(
-                "{{ route('frontend.search') }}?search=" +
-                encodeURIComponent(query),
-                {
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                }
-            )
-
-
-            .then(function (response) {
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        'Search request failed'
-                    );
-
-                }
-
-                return response.json();
-
-            })
-
-
-            .then(function (data) {
-
+                searchInput.value = '';
 
                 searchResults.innerHTML = '';
 
+            }
+        );
 
-                /* No results */
+    }
 
-                if (
-                    !Array.isArray(data)
-                    ||
-                    data.length === 0
-                ) {
 
-                    searchResults.innerHTML = `
+    /* =========================================================
+       CLICK OUTSIDE SEARCH
+    ========================================================= */
 
-                        <div class="search-no-result">
+    if (searchOverlay) {
 
-                            No results found for
-                            "<strong>${escapeHtml(query)}</strong>"
+        searchOverlay.addEventListener(
+            'click',
+            function (event) {
 
-                        </div>
+                if (event.target === searchOverlay) {
 
-                    `;
+                    searchOverlay.classList.remove('active');
+
+                    document.body.style.overflow = '';
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       ESC KEY
+    ========================================================= */
+
+    document.addEventListener(
+        'keydown',
+        function (event) {
+
+            if (event.key === 'Escape') {
+
+                searchOverlay.classList.remove('active');
+
+                document.body.style.overflow = '';
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       PREVENT NORMAL SEARCH FORM SUBMIT
+    ========================================================= */
+
+    if (searchForm) {
+
+        searchForm.addEventListener(
+            'submit',
+            function (event) {
+
+                event.preventDefault();
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       LIVE SEARCH
+    ========================================================= */
+
+    if (searchInput) {
+
+        searchInput.addEventListener(
+            'input',
+            function () {
+
+
+                const query =
+                    this.value.trim();
+
+
+                clearTimeout(searchTimeout);
+
+
+                /* Minimum 2 characters */
+
+                if (query.length < 2) {
+
+                    searchResults.innerHTML = '';
 
                     return;
 
                 }
 
 
-                /* Results */
-
-                data.forEach(function (item) {
-
-
-                    const result =
-                        document.createElement('a');
-
-
-                    result.href =
-                        item.url || '#';
-
-
-                    result.className =
-                        'search-result-item';
-
-
-                    /* Image */
-
-                    let imageHTML = '';
-
-                    if (item.image) {
-
-                        imageHTML = `
-
-                            <img
-                                src="${escapeAttribute(item.image)}"
-                                class="search-result-image"
-                                alt="${escapeAttribute(item.name || '')}"
-                            >
-
-                        `;
-
-                    }
-
-
-                    /* Price */
-
-                    let priceHTML = '';
-
-                    if (
-                        item.price !== null
-                        &&
-                        item.price !== undefined
-                        &&
-                        item.price !== ''
-                    ) {
-
-                        priceHTML = `
-
-                            <div class="search-result-price">
-
-                                Rs.
-                                ${escapeHtml(
-                                    Number(item.price).toLocaleString()
-                                )}
-
-                            </div>
-
-                        `;
-
-                    }
-
-
-                    result.innerHTML = `
-
-                        ${imageHTML}
-
-                        <div class="search-result-info">
-
-                            <div class="search-result-name">
-
-                                ${escapeHtml(
-                                    item.name || 'Unnamed'
-                                )}
-
-                            </div>
-
-                            <div class="search-result-type">
-
-                                ${escapeHtml(
-                                    item.type || ''
-                                )}
-
-                            </div>
-
-                        </div>
-
-                        ${priceHTML}
-
-                    `;
-
-
-                    searchResults.appendChild(result);
-
-                });
-
-            })
-
-
-            .catch(function (error) {
-
-
-                console.error(
-                    'Search Error:',
-                    error
-                );
-
+                /* Loading */
 
                 searchResults.innerHTML = `
 
                     <div class="search-no-result">
 
-                        Something went wrong.
-                        Please try again.
+                        Searching...
 
                     </div>
 
                 `;
 
-            });
+
+                searchTimeout =
+                    setTimeout(function () {
 
 
-        }, 300);
+                        fetch(
+                            "{{ route('frontend.search') }}?search=" +
+                            encodeURIComponent(query),
+                            {
+                                headers: {
+                                    'Accept': 'application/json'
+                                }
+                            }
+                        )
 
-    });
+
+                        .then(function (response) {
+
+                            if (!response.ok) {
+
+                                throw new Error(
+                                    'Search request failed'
+                                );
+
+                            }
+
+                            return response.json();
+
+                        })
 
 
-    /* =========================
+                        .then(function (data) {
+
+
+                            searchResults.innerHTML = '';
+
+
+                            /* No results */
+
+                            if (
+                                !Array.isArray(data)
+                                ||
+                                data.length === 0
+                            ) {
+
+                                searchResults.innerHTML = `
+
+                                    <div class="search-no-result">
+
+                                        No results found for
+                                        "<strong>${escapeHtml(query)}</strong>"
+
+                                    </div>
+
+                                `;
+
+                                return;
+
+                            }
+
+
+                            /* Results */
+
+                            data.forEach(function (item) {
+
+
+                                const result =
+                                    document.createElement('a');
+
+
+                                result.href =
+                                    item.url || '#';
+
+
+                                result.className =
+                                    'search-result-item';
+
+
+                                /* Image */
+
+                                let imageHTML = '';
+
+
+                                if (item.image) {
+
+                                    imageHTML = `
+
+                                        <img
+                                            src="${escapeAttribute(item.image)}"
+                                            class="search-result-image"
+                                            alt="${escapeAttribute(item.name || '')}"
+                                        >
+
+                                    `;
+
+                                }
+
+
+                                /* Price */
+
+                                let priceHTML = '';
+
+
+                                if (
+                                    item.price !== null
+                                    &&
+                                    item.price !== undefined
+                                    &&
+                                    item.price !== ''
+                                ) {
+
+                                    priceHTML = `
+
+                                        <div class="search-result-price">
+
+                                            Rs.
+
+                                            ${escapeHtml(
+                                                Number(
+                                                    item.price
+                                                ).toLocaleString()
+                                            )}
+
+                                        </div>
+
+                                    `;
+
+                                }
+
+
+                                result.innerHTML = `
+
+                                    ${imageHTML}
+
+
+                                    <div class="search-result-info">
+
+                                        <div class="search-result-name">
+
+                                            ${escapeHtml(
+                                                item.name ||
+                                                'Unnamed'
+                                            )}
+
+                                        </div>
+
+
+                                        <div class="search-result-type">
+
+                                            ${escapeHtml(
+                                                item.type || ''
+                                            )}
+
+                                        </div>
+
+                                    </div>
+
+
+                                    ${priceHTML}
+
+                                `;
+
+
+                                searchResults.appendChild(result);
+
+                            });
+
+                        })
+
+
+                        .catch(function (error) {
+
+
+                            console.error(
+                                'Search Error:',
+                                error
+                            );
+
+
+                            searchResults.innerHTML = `
+
+                                <div class="search-no-result">
+
+                                    Something went wrong.
+
+                                    Please try again.
+
+                                </div>
+
+                            `;
+
+                        });
+
+
+                    }, 300);
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
        ESCAPE HTML
-    ========================= */
+    ========================================================= */
 
     function escapeHtml(value) {
 
@@ -1583,13 +2392,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    /* =========================
+    /* =========================================================
        ESCAPE ATTRIBUTE
-    ========================= */
+    ========================================================= */
 
     function escapeAttribute(value) {
 
         return String(value)
+
             .replace(/&/g, '&amp;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;')

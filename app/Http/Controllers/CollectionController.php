@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collection;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -18,9 +19,11 @@ class CollectionController extends Controller
         $collections = Collection::when($search, function ($query) use ($search) {
 
             $query->where(function ($q) use ($search) {
+
                 $q->where('collection_id', 'LIKE', "%{$search}%")
                     ->orWhere('name', 'LIKE', "%{$search}%")
                     ->orWhere('slug', 'LIKE', "%{$search}%");
+
             });
 
         })
@@ -34,6 +37,7 @@ class CollectionController extends Controller
         );
     }
 
+
     /**
      * Show create form.
      */
@@ -41,6 +45,7 @@ class CollectionController extends Controller
     {
         return view('admin.collections.create');
     }
+
 
     /**
      * Store collection.
@@ -95,6 +100,7 @@ class CollectionController extends Controller
             File::makeDirectory($uploadPath, 0755, true);
         }
 
+
         /*
         |--------------------------------------------------------------------------
         | Thumbnail
@@ -113,6 +119,7 @@ class CollectionController extends Controller
             $collection->thumbnail = $name;
         }
 
+
         /*
         |--------------------------------------------------------------------------
         | Banner
@@ -130,6 +137,7 @@ class CollectionController extends Controller
 
             $collection->banner = $name;
         }
+
 
         /*
         |--------------------------------------------------------------------------
@@ -153,8 +161,12 @@ class CollectionController extends Controller
 
         return redirect()
             ->route('admin.collections.index')
-            ->with('success', 'Collection created successfully.');
+            ->with(
+                'success',
+                'Collection created successfully.'
+            );
     }
+
 
     /**
      * Display collection.
@@ -167,6 +179,7 @@ class CollectionController extends Controller
         );
     }
 
+
     /**
      * Show edit form.
      */
@@ -178,11 +191,14 @@ class CollectionController extends Controller
         );
     }
 
+
     /**
      * Update collection.
      */
-    public function update(Request $request, Collection $collection)
-    {
+    public function update(
+        Request $request,
+        Collection $collection
+    ) {
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
@@ -217,6 +233,7 @@ class CollectionController extends Controller
         $collection->seo_keywords = $request->seo_keywords;
         $collection->seo_description = $request->seo_description;
 
+
         /*
         |--------------------------------------------------------------------------
         | Upload Directory
@@ -229,6 +246,7 @@ class CollectionController extends Controller
             File::makeDirectory($uploadPath, 0755, true);
         }
 
+
         /*
         |--------------------------------------------------------------------------
         | Thumbnail
@@ -239,9 +257,13 @@ class CollectionController extends Controller
 
             if (
                 $collection->thumbnail &&
-                File::exists($uploadPath . '/' . $collection->thumbnail)
+                File::exists(
+                    $uploadPath . '/' . $collection->thumbnail
+                )
             ) {
-                File::delete($uploadPath . '/' . $collection->thumbnail);
+                File::delete(
+                    $uploadPath . '/' . $collection->thumbnail
+                );
             }
 
             $image = $request->file('thumbnail');
@@ -254,6 +276,7 @@ class CollectionController extends Controller
             $collection->thumbnail = $name;
         }
 
+
         /*
         |--------------------------------------------------------------------------
         | Banner
@@ -264,9 +287,13 @@ class CollectionController extends Controller
 
             if (
                 $collection->banner &&
-                File::exists($uploadPath . '/' . $collection->banner)
+                File::exists(
+                    $uploadPath . '/' . $collection->banner
+                )
             ) {
-                File::delete($uploadPath . '/' . $collection->banner);
+                File::delete(
+                    $uploadPath . '/' . $collection->banner
+                );
             }
 
             $image = $request->file('banner');
@@ -279,6 +306,7 @@ class CollectionController extends Controller
             $collection->banner = $name;
         }
 
+
         /*
         |--------------------------------------------------------------------------
         | Icon
@@ -289,9 +317,13 @@ class CollectionController extends Controller
 
             if (
                 $collection->icon &&
-                File::exists($uploadPath . '/' . $collection->icon)
+                File::exists(
+                    $uploadPath . '/' . $collection->icon
+                )
             ) {
-                File::delete($uploadPath . '/' . $collection->icon);
+                File::delete(
+                    $uploadPath . '/' . $collection->icon
+                );
             }
 
             $image = $request->file('icon');
@@ -308,8 +340,12 @@ class CollectionController extends Controller
 
         return redirect()
             ->route('admin.collections.index')
-            ->with('success', 'Collection updated successfully.');
+            ->with(
+                'success',
+                'Collection updated successfully.'
+            );
     }
+
 
     /**
      * Delete collection.
@@ -318,13 +354,20 @@ class CollectionController extends Controller
     {
         $uploadPath = public_path('uploads/collections');
 
-        foreach (['thumbnail', 'banner', 'icon'] as $file) {
+        foreach (
+            ['thumbnail', 'banner', 'icon']
+            as $file
+        ) {
 
             if (
                 !empty($collection->$file) &&
-                File::exists($uploadPath . '/' . $collection->$file)
+                File::exists(
+                    $uploadPath . '/' . $collection->$file
+                )
             ) {
-                File::delete($uploadPath . '/' . $collection->$file);
+                File::delete(
+                    $uploadPath . '/' . $collection->$file
+                );
             }
         }
 
@@ -332,36 +375,92 @@ class CollectionController extends Controller
 
         return redirect()
             ->route('admin.collections.index')
-            ->with('success', 'Collection deleted successfully.');
+            ->with(
+                'success',
+                'Collection deleted successfully.'
+            );
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | FRONTEND
+    |--------------------------------------------------------------------------
+    */
+
 
     /**
      * Frontend collections.
      */
     public function frontendIndex()
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Active Collections
+        |--------------------------------------------------------------------------
+        */
+
         $collections = Collection::where('status', 1)
             ->orderBy('sort_order', 'asc')
             ->get();
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Categories For Navbar
+        |--------------------------------------------------------------------------
+        */
+
+        $categories = Category::with('subCategories')
+            ->where('status', 1)
+            ->orderBy('sort_order', 'asc')
+            ->get();
+
+
         return view(
             'user.collections',
-            compact('collections')
+            compact(
+                'collections',
+                'categories'
+            )
         );
     }
+
 
     /**
      * Frontend collection detail.
      */
     public function frontendShow(Collection $collection)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Only Active Collections
+        |--------------------------------------------------------------------------
+        */
+
         if ((int) $collection->status !== 1) {
             abort(404);
         }
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Categories For Navbar
+        |--------------------------------------------------------------------------
+        */
+
+        $categories = Category::with('subCategories')
+            ->where('status', 1)
+            ->orderBy('sort_order', 'asc')
+            ->get();
+
+
         return view(
             'user.collections-detail',
-            compact('collection')
+            compact(
+                'collection',
+                'categories'
+            )
         );
     }
 }

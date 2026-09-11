@@ -36,23 +36,79 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
             background: #fff;
             color: #111;
             font-family: 'Montserrat', sans-serif;
+            padding-top: 82px;
         }
 
-        /* =========================
+        /* =========================================================
            NAVBAR
-        ========================= */
+        ========================================================= */
 
         .main-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
             height: 82px;
-            border-bottom: 1px solid #e8e8e8;
-            background: #fff;
+            z-index: 10000;
+
             display: flex;
             align-items: center;
+
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid #e8e8e8;
+
+            transition:
+                top 0.35s ease,
+                left 0.35s ease,
+                right 0.35s ease,
+                width 0.35s ease,
+                height 0.35s ease,
+                border-radius 0.35s ease,
+                background 0.35s ease,
+                box-shadow 0.35s ease,
+                backdrop-filter 0.35s ease,
+                -webkit-backdrop-filter 0.35s ease,
+                transform 0.35s ease;
+        }
+
+        /*
+        =========================================================
+        SCROLLED NAVBAR
+        =========================================================
+        */
+
+        .main-navbar.scrolled {
+            top: 14px;
+            left: 28px;
+            right: 28px;
+            width: auto;
+            height: 76px;
+
+            border-bottom: none;
+            border-radius: 28px;
+
+            background: rgba(255, 255, 255, 0.86);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+
+            transform: translateY(-2px);
+        }
+
+        .main-navbar .container {
+            width: 100%;
         }
 
         .brand {
@@ -62,11 +118,14 @@
             letter-spacing: 4px;
             color: #111;
             text-decoration: none;
+            white-space: nowrap;
         }
 
         .nav-links {
             display: flex;
+            align-items: center;
             gap: 38px;
+
             list-style: none;
             margin: 0;
             padding: 0;
@@ -75,10 +134,12 @@
         .nav-links a {
             text-decoration: none;
             color: #222;
+
             font-size: 14px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            transition: .3s;
+
+            transition: 0.3s ease;
         }
 
         .nav-links a:hover {
@@ -93,35 +154,121 @@
 
         .nav-icons a {
             position: relative;
+
             color: #111;
             font-size: 20px;
             text-decoration: none;
-            transition: .3s;
+
+            transition: 0.3s ease;
         }
 
         .nav-icons a:hover {
             color: #777;
         }
 
-        /* =========================
+        /* =========================================================
+           BOOTSTRAP NAVBAR DROPDOWN
+        ========================================================= */
+
+        .nav-links .dropdown-menu {
+            margin-top: 18px;
+            min-width: 210px;
+
+            padding: 8px 0;
+
+            border: 1px solid #e8e8e8;
+            border-radius: 0;
+
+            background: #fff;
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-links .dropdown-item {
+            padding: 10px 18px;
+
+            font-size: 12px;
+            letter-spacing: 1px;
+
+            color: #222;
+            text-transform: uppercase;
+
+            background: transparent;
+        }
+
+        .nav-links .dropdown-item:hover {
+            color: #777;
+            background: #fafafa;
+        }
+
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu > .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -8px;
+            margin-left: 1px;
+        }
+
+        .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }
+
+        .submenu-arrow {
+            font-size: 18px;
+            line-height: 1;
+            color: #999;
+        }
+
+        /* =========================================================
            SEARCH POPUP
-        ========================= */
+        ========================================================= */
 
         .search-popup {
             position: fixed;
+
             top: 82px;
             left: 0;
             right: 0;
+
             z-index: 9999;
+
             background: #fff;
+
             border-bottom: 1px solid #e5e5e5;
+
             padding: 35px 0 40px;
+
             display: none;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+
+            transition:
+                top 0.35s ease,
+                left 0.35s ease,
+                right 0.35s ease,
+                border-radius 0.35s ease;
         }
 
         .search-popup.is-visible {
             display: block;
+        }
+
+        /*
+        SEARCH POSITION WHEN NAVBAR IS FLOATING
+        */
+
+        body.navbar-scrolled .search-popup {
+            top: 104px;
+            left: 28px;
+            right: 28px;
+
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-top: none;
+
+            border-radius: 0 0 24px 24px;
         }
 
         .search-popup-container {
@@ -135,8 +282,11 @@
 
         .search-popup #search-form {
             height: 55px;
+
             padding-right: 60px;
+
             font-size: 16px;
+
             outline: none;
             box-shadow: none;
         }
@@ -145,12 +295,13 @@
             border-color: #111 !important;
         }
 
-        /* =========================
+        /* =========================================================
            BROWSE CATEGORIES
-        ========================= */
+        ========================================================= */
 
         .search-popup .cat-list {
             list-style: none;
+
             padding: 0;
             margin: 15px 0 0;
         }
@@ -161,12 +312,16 @@
 
         .search-popup .cat-list-item a {
             display: block;
+
             padding: 10px 0;
+
             color: #222;
             text-decoration: none;
+
             font-size: 13px;
             letter-spacing: 1px;
-            transition: .3s;
+
+            transition: 0.3s ease;
         }
 
         .search-popup .cat-list-item a:hover {
@@ -176,41 +331,55 @@
 
         .search-popup .cat-list-title {
             margin-top: 30px;
+
             font-size: 11px;
             letter-spacing: 3px;
+
             text-transform: uppercase;
+
             color: #888;
         }
 
-        /* =========================
+        /* =========================================================
            LIVE SEARCH RESULTS
-        ========================= */
+        ========================================================= */
 
         #frontendSearchResults {
             display: none;
+
             margin-top: 15px;
+
             max-height: 430px;
             overflow-y: auto;
         }
 
         .search-suggestion-title {
             padding: 12px 0;
+
             font-size: 11px;
             letter-spacing: 2px;
+
             text-transform: uppercase;
+
             color: #888;
         }
 
         .search-suggestion {
             display: flex;
             align-items: center;
+
             gap: 15px;
+
             width: 100%;
+
             padding: 12px 5px;
+
             border-bottom: 1px solid #eee;
+
             text-decoration: none;
             color: #111;
-            transition: all .2s ease;
+
+            transition: all 0.2s ease;
         }
 
         .search-suggestion:hover {
@@ -221,17 +390,24 @@
         .search-suggestion-image {
             width: 55px;
             height: 55px;
+
             object-fit: cover;
+
             flex-shrink: 0;
+
             border-radius: 4px;
+
             background: #f5f5f5;
         }
 
         .search-suggestion-image.no-image {
             display: flex;
+
             align-items: center;
             justify-content: center;
+
             color: #888;
+
             font-size: 18px;
         }
 
@@ -242,44 +418,56 @@
         .search-suggestion-name {
             font-size: 14px;
             font-weight: 500;
+
             color: #111;
         }
 
         .search-suggestion-type {
             margin-top: 3px;
+
             font-size: 10px;
             letter-spacing: 1.5px;
+
             text-transform: uppercase;
+
             color: #999;
         }
 
         .search-suggestion-price {
             margin-top: 4px;
+
             font-size: 12px;
+
             color: #777;
         }
 
         .search-arrow {
             margin-right: 10px;
+
             color: #aaa;
         }
 
         .search-no-results {
             padding: 35px 10px;
+
             text-align: center;
+
             color: #888;
+
             font-size: 14px;
         }
 
         .search-no-results i {
             display: block;
+
             margin-bottom: 10px;
+
             font-size: 24px;
         }
 
-        /* =========================
+        /* =========================================================
            COLLECTION DETAIL
-        ========================= */
+        ========================================================= */
 
         .collection-detail-section {
             padding: 70px 0 100px;
@@ -287,25 +475,30 @@
 
         .collection-image-wrapper {
             position: relative;
+
             overflow: hidden;
+
             background: #f5f5f5;
         }
 
         .collection-image-wrapper img {
             width: 100%;
             height: 867px;
+
             object-fit: cover;
+
             display: block;
-            transition: transform .7s ease;
+
+            transition: transform 0.7s ease;
         }
 
         .collection-image-wrapper:hover img {
             transform: scale(1.03);
         }
 
-        /* =========================
+        /* =========================================================
            COLLECTION INFO
-        ========================= */
+        ========================================================= */
 
         .collection-info {
             padding: 20px 30px 20px 55px;
@@ -313,82 +506,116 @@
 
         .collection-label {
             font-size: 11px;
+
             letter-spacing: 3px;
+
             text-transform: uppercase;
+
             color: #888;
+
             margin-bottom: 15px;
         }
 
         .collection-title {
             font-size: 52px;
+
             line-height: 1.1;
+
             font-weight: 400;
+
             letter-spacing: 1px;
+
             text-transform: uppercase;
+
             margin-bottom: 25px;
         }
 
         .collection-description {
             color: #777;
+
             font-size: 14px;
+
             line-height: 1.9;
+
             margin-bottom: 30px;
         }
 
-        /* =========================
+        /* =========================================================
            COLLECTION PRICE
-        ========================= */
+        ========================================================= */
 
         .collection-price {
             display: block;
+
             margin: 25px 0 30px;
+
             padding: 15px 0;
+
             border-top: 1px solid #e5e5e5;
             border-bottom: 1px solid #e5e5e5;
+
             font-family: 'Montserrat', sans-serif;
+
             font-size: 28px;
+
             font-weight: 500;
+
             line-height: 1.4;
+
             color: #111;
         }
 
         .collection-price-label {
             display: block;
+
             margin-bottom: 5px;
+
             font-size: 10px;
+
             font-weight: 500;
+
             letter-spacing: 3px;
+
             text-transform: uppercase;
+
             color: #999;
         }
 
-        /* =========================
+        /* =========================================================
            COLLECTION META
-        ========================= */
+        ========================================================= */
 
         .collection-meta {
             border-top: 1px solid #e5e5e5;
+
             padding-top: 25px;
+
             margin-top: 25px;
         }
 
         .collection-meta-title {
             font-size: 11px;
+
             text-transform: uppercase;
+
             letter-spacing: 2px;
+
             color: #888;
+
             margin-bottom: 10px;
         }
 
         .collection-meta p {
             color: #777;
+
             font-size: 13px;
+
             line-height: 1.8;
         }
 
-        /* =========================
+        /* =========================================================
            QUANTITY
-        ========================= */
+        ========================================================= */
 
         .quantity-wrapper {
             margin: 25px 0 20px;
@@ -396,36 +623,56 @@
 
         .quantity-label {
             display: block;
+
             margin-bottom: 12px;
+
             font-size: 11px;
+
             font-weight: 500;
+
             letter-spacing: 2px;
+
             text-transform: uppercase;
+
             color: #888;
         }
 
         .quantity-selector {
             display: inline-flex;
+
             align-items: stretch;
+
             height: 62px;
+
             border: 1px solid #e1e1e1;
+
             background: #fff;
         }
 
         .quantity-btn {
             width: 58px;
             height: 62px;
+
             display: flex;
+
             align-items: center;
             justify-content: center;
+
             border: none;
+
             background: #fff;
+
             color: #222;
+
             font-family: 'Montserrat', sans-serif;
+
             font-size: 18px;
+
             font-weight: 300;
+
             cursor: pointer;
-            transition: all .25s ease;
+
+            transition: all 0.25s ease;
         }
 
         .quantity-btn:hover {
@@ -438,28 +685,41 @@
 
         .quantity-btn:disabled {
             background: #f5f5f5;
+
             color: #aaa;
+
             cursor: not-allowed;
         }
 
         .quantity-input {
             width: 76px;
             height: 62px;
+
             border: none;
+
             border-left: 1px solid #e1e1e1;
             border-right: 1px solid #e1e1e1;
+
             background: #fff;
+
             text-align: center;
+
             font-family: 'Montserrat', sans-serif;
+
             font-size: 15px;
+
             font-weight: 400;
+
             color: #111;
+
             outline: none;
         }
 
         .quantity-input:disabled {
             background: #f5f5f5;
+
             color: #999;
+
             cursor: not-allowed;
         }
 
@@ -468,6 +728,7 @@
         .quantity-input::-webkit-outer-spin-button,
         .quantity-input::-webkit-inner-spin-button {
             -webkit-appearance: none;
+
             margin: 0;
         }
 
@@ -475,61 +736,89 @@
             -moz-appearance: textfield;
         }
 
-        /* =========================
+        /* =========================================================
            ADD TO CART
-        ========================= */
+        ========================================================= */
 
         .shop-collection-btn {
             width: 100%;
+
             min-height: 52px;
+
             display: inline-flex;
+
             align-items: center;
             justify-content: center;
+
             gap: 10px;
+
             border: none;
+
             background: #111;
+
             color: #fff;
+
             padding: 16px 20px;
+
             font-family: 'Montserrat', sans-serif;
+
             font-size: 12px;
+
             letter-spacing: 2px;
+
             text-transform: uppercase;
+
             text-decoration: none;
+
             cursor: pointer;
-            transition: all .3s ease;
+
+            transition: all 0.3s ease;
         }
 
         .shop-collection-btn:hover {
             background: #333;
+
             color: #fff;
         }
 
         .shop-collection-btn:disabled {
             background: #999;
+
             color: #fff;
+
             cursor: not-allowed;
-            opacity: .7;
+
+            opacity: 0.7;
         }
 
-        /* =========================
+        /* =========================================================
            BACK BUTTON
-        ========================= */
+        ========================================================= */
 
         .back-collections {
             display: inline-flex;
+
             align-items: center;
+
             gap: 10px;
+
             color: #111;
+
             text-decoration: none;
+
             font-size: 12px;
+
             letter-spacing: 2px;
+
             text-transform: uppercase;
+
             margin-bottom: 35px;
-            transition: .3s;
+
+            transition: 0.3s ease;
         }
 
         .back-collections i {
-            transition: .3s;
+            transition: 0.3s ease;
         }
 
         .back-collections:hover {
@@ -540,33 +829,59 @@
             transform: translateX(-4px);
         }
 
-        /* =========================
+        /* =========================================================
            FOOTER
-        ========================= */
+        ========================================================= */
 
         .footer {
             background: #111;
+
             color: white;
+
             padding: 55px 0;
         }
 
         .footer-brand {
             font-family: 'Cormorant Garamond', serif;
+
             font-size: 34px;
+
             font-weight: 600;
+
             letter-spacing: 4px;
         }
 
         .footer p {
             color: #aaa;
+
             font-size: 14px;
         }
 
-        /* =========================
+        /* =========================================================
            RESPONSIVE
-        ========================= */
+        ========================================================= */
 
         @media (max-width: 991px) {
+
+            body {
+                padding-top: 76px;
+            }
+
+            .main-navbar {
+                height: 76px;
+            }
+
+            .main-navbar.scrolled {
+                top: 10px;
+                left: 12px;
+                right: 12px;
+
+                width: auto;
+
+                height: 65px;
+
+                border-radius: 22px;
+            }
 
             .nav-links {
                 display: none;
@@ -580,12 +895,35 @@
                 height: 550px;
             }
 
+            body.navbar-scrolled .search-popup {
+                top: 87px;
+                left: 12px;
+                right: 12px;
+
+                border-radius: 0 0 20px 20px;
+            }
         }
 
         @media (max-width: 767px) {
 
+            body {
+                padding-top: 70px;
+            }
+
             .main-navbar {
                 height: 70px;
+            }
+
+            .main-navbar.scrolled {
+                top: 10px;
+                left: 12px;
+                right: 12px;
+
+                width: auto;
+
+                height: 64px;
+
+                border-radius: 20px;
             }
 
             .brand {
@@ -602,7 +940,16 @@
 
             .search-popup {
                 top: 70px;
+
                 padding: 25px 0 30px;
+            }
+
+            body.navbar-scrolled .search-popup {
+                top: 84px;
+                left: 12px;
+                right: 12px;
+
+                border-radius: 0 0 20px 20px;
             }
 
             .search-popup-container {
@@ -634,7 +981,6 @@
                 width: 65px;
                 height: 56px;
             }
-
         }
 
     </style>
@@ -643,9 +989,9 @@
 
 <body>
 
-{{-- =========================
+{{-- =========================================================
      NAVBAR
-========================= --}}
+========================================================= --}}
 
 <nav class="main-navbar">
 
@@ -654,7 +1000,6 @@
         <div class="d-flex align-items-center justify-content-between">
 
             {{-- LOGO --}}
-
             <a
                 href="{{ url('/') }}"
                 class="brand"
@@ -663,47 +1008,166 @@
             </a>
 
             {{-- NAVIGATION --}}
-
             <ul class="nav-links">
 
+                {{-- HOME --}}
                 <li>
                     <a href="{{ url('/') }}">
                         Home
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{ route('user.products') }}">
+                {{-- SHOP --}}
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="dropdownShop"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
                         Shop
                     </a>
+
+                    <ul
+                        class="dropdown-menu list-unstyled"
+                        aria-labelledby="dropdownShop"
+                    >
+
+                        @foreach($categories as $category)
+
+                            <li class="dropdown-submenu">
+
+                                <a
+                                    href="{{ route('category.show', $category->slug) }}"
+                                    class="dropdown-item item-anchor d-flex justify-content-between align-items-center"
+                                >
+
+                                    {{ $category->name }}
+
+                                    @if($category->subCategories && $category->subCategories->count() > 0)
+
+                                        <span class="submenu-arrow">
+                                            ›
+                                        </span>
+
+                                    @endif
+
+                                </a>
+
+                                @if($category->subCategories && $category->subCategories->count() > 0)
+
+                                    <ul class="dropdown-menu list-unstyled">
+
+                                        @foreach($category->subCategories as $subcategory)
+
+                                            <li>
+
+                                                <a
+                                                    href="{{ route('subcategory.show', $subcategory->slug) }}"
+                                                    class="dropdown-item item-anchor"
+                                                >
+                                                    {{ $subcategory->name }}
+                                                </a>
+
+                                            </li>
+
+                                        @endforeach
+
+                                    </ul>
+
+                                @endif
+
+                            </li>
+
+                        @endforeach
+
+                    </ul>
+
                 </li>
 
-                <li>
-                    <a href="{{ route('user.collections') }}">
+                {{-- PAGES --}}
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="dropdownPages"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        Pages
+                    </a>
+
+                    <ul
+                        class="dropdown-menu list-unstyled"
+                        aria-labelledby="dropdownPages"
+                    >
+
+                        <li>
+                            <a
+                                href="{{ route('cart.show') }}"
+                                class="dropdown-item item-anchor"
+                            >
+                                Cart
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="{{ route('contact') }}"
+                                class="dropdown-item item-anchor"
+                            >
+                                Contact
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="{{ route('blogs') }}"
+                                class="dropdown-item item-anchor"
+                            >
+                                Blog
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                {{-- PRODUCTS --}}
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{{ route('user.products') }}"
+                    >
+                        Products
+                    </a>
+
+                </li>
+
+                {{-- COLLECTIONS --}}
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{{ route('user.collections') }}"
+                    >
                         Collections
                     </a>
-                </li>
 
-                <li>
-                    <a href="{{ route('blogs') }}">
-                        Blog
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('contact') }}">
-                        Contact
-                    </a>
                 </li>
 
             </ul>
 
             {{-- ICONS --}}
-
             <div class="nav-icons">
 
                 {{-- SEARCH --}}
-
                 <a
                     href="#"
                     class="search-toggle"
@@ -713,7 +1177,6 @@
                 </a>
 
                 {{-- NEWSLETTER / PROFILE --}}
-
                 <a
                     href="{{ route('newsletter.index') }}"
                     aria-label="Newsletter & Suggestions"
@@ -723,7 +1186,6 @@
                 </a>
 
                 {{-- CART --}}
-
                 <a
                     href="{{ route('cart.show') }}"
                     aria-label="Cart"
@@ -732,8 +1194,10 @@
                     <i class="bi bi-bag"></i>
 
                     @php
+
                         $cartCount = collect(session('cart', []))
                             ->sum('quantity');
+
                     @endphp
 
                     @if($cartCount > 0)
@@ -770,9 +1234,9 @@
 </nav>
 
 
-{{-- =========================
+{{-- =========================================================
      SEARCH POPUP
-========================= --}}
+========================================================= --}}
 
 <div class="search-popup">
 
@@ -807,7 +1271,6 @@
 
 
         {{-- LIVE SEARCH RESULTS --}}
-
         <div
             id="frontendSearchResults"
             class="mt-3"
@@ -816,7 +1279,6 @@
 
 
         {{-- DEFAULT CATEGORIES --}}
-
         <div id="browseCategories">
 
             <h5 class="cat-list-title">
@@ -869,30 +1331,33 @@
 </div>
 
 
-{{-- =========================
+{{-- =========================================================
      COLLECTION DETAIL
-========================= --}}
+========================================================= --}}
 
 <section class="collection-detail-section">
 
     <div class="container">
 
         {{-- BACK TO COLLECTIONS --}}
-
         <a
             href="{{ route('user.collections') }}"
             class="back-collections"
         >
+
             <i class="bi bi-arrow-left"></i>
+
             Back To Collections
+
         </a>
 
 
         <div class="row g-5 align-items-center">
 
-            {{-- =========================
+
+            {{-- =================================================
                  COLLECTION IMAGE
-            ========================= --}}
+            ================================================== --}}
 
             <div class="col-lg-7">
 
@@ -933,30 +1398,27 @@
             </div>
 
 
-            {{-- =========================
+            {{-- =================================================
                  COLLECTION INFORMATION
-            ========================= --}}
+            ================================================== --}}
 
             <div class="col-lg-5">
 
                 <div class="collection-info">
 
                     {{-- LABEL --}}
-
                     <div class="collection-label">
                         Kaira Collection
                     </div>
 
 
                     {{-- NAME --}}
-
                     <h1 class="collection-title">
                         {{ $collection->name }}
                     </h1>
 
 
                     {{-- DESCRIPTION --}}
-
                     @if($collection->description)
 
                         <div class="collection-description">
@@ -979,9 +1441,9 @@
                     @endif
 
 
-                    {{-- =========================
+                    {{-- =================================================
                          COLLECTION PRICE
-                    ========================= --}}
+                    ================================================== --}}
 
                     @if($collection->price !== null)
 
@@ -999,9 +1461,9 @@
                     @endif
 
 
-                    {{-- =========================
+                    {{-- =================================================
                          SEO INFORMATION
-                    ========================= --}}
+                    ================================================== --}}
 
                     @if($collection->seo_title || $collection->seo_description)
 
@@ -1018,6 +1480,7 @@
                                 </p>
 
                             @endif
+
 
                             @if($collection->seo_description)
 
@@ -1036,9 +1499,9 @@
                     @endif
 
 
-                    {{-- =========================
+                    {{-- =================================================
                          CART VARIABLES
-                    ========================= --}}
+                    ================================================== --}}
 
                     @php
 
@@ -1059,9 +1522,9 @@
                     @endphp
 
 
-                    {{-- =========================
+                    {{-- =================================================
                          ADD TO CART
-                    ========================= --}}
+                    ================================================== --}}
 
                     <form
                         action="{{ route('cart.add.collections') }}"
@@ -1072,7 +1535,6 @@
 
 
                         {{-- COLLECTION ID --}}
-
                         <input
                             type="hidden"
                             name="collection_id"
@@ -1080,9 +1542,9 @@
                         >
 
 
-                        {{-- =========================
+                        {{-- =================================================
                              QUANTITY
-                        ========================= --}}
+                        ================================================== --}}
 
                         <div class="quantity-wrapper">
 
@@ -1096,7 +1558,6 @@
                             >
 
                                 {{-- MINUS --}}
-
                                 <button
                                     type="button"
                                     class="quantity-btn quantity-minus"
@@ -1110,7 +1571,6 @@
 
 
                                 {{-- INPUT --}}
-
                                 <input
                                     type="number"
                                     name="quantity"
@@ -1126,7 +1586,6 @@
 
 
                                 {{-- PLUS --}}
-
                                 <button
                                     type="button"
                                     class="quantity-btn quantity-plus"
@@ -1143,9 +1602,9 @@
                         </div>
 
 
-                        {{-- =========================
+                        {{-- =================================================
                              ADD TO CART BUTTON
-                        ========================= --}}
+                        ================================================== --}}
 
                         <button
                             type="submit"
@@ -1186,9 +1645,9 @@
 </section>
 
 
-{{-- =========================
+{{-- =========================================================
      FOOTER
-========================= --}}
+========================================================= --}}
 
 <footer class="footer">
 
@@ -1209,6 +1668,7 @@
 
             </div>
 
+
             <div class="col-md-6 text-md-end">
 
                 <p>
@@ -1225,20 +1685,60 @@
 </footer>
 
 
-{{-- Bootstrap JS --}}
+{{-- =========================================================
+     BOOTSTRAP JS
+========================================================= --}}
 
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 
 <script>
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    /* =====================================================
+
+    /* =========================================================
+       NAVBAR SCROLL
+    ========================================================= */
+
+    const navbar = document.querySelector('.main-navbar');
+
+    if (navbar) {
+
+        function handleNavbarScroll() {
+
+            if (window.scrollY > 40) {
+
+                navbar.classList.add('scrolled');
+
+                document.body.classList.add('navbar-scrolled');
+
+            } else {
+
+                navbar.classList.remove('scrolled');
+
+                document.body.classList.remove('navbar-scrolled');
+
+            }
+
+        }
+
+        handleNavbarScroll();
+
+        window.addEventListener(
+            'scroll',
+            handleNavbarScroll,
+            {
+                passive: true
+            }
+        );
+
+    }
+
+
+    /* =========================================================
        SEARCH
-    ===================================================== */
+    ========================================================= */
 
     const searchToggle =
         document.querySelector('.search-toggle');
@@ -1269,9 +1769,9 @@ document.addEventListener('DOMContentLoaded', function () {
         let searchTimeout = null;
 
 
-        /* =========================
+        /* =====================================================
            OPEN / CLOSE SEARCH
-        ========================= */
+        ===================================================== */
 
         searchToggle.addEventListener('click', function (e) {
 
@@ -1297,7 +1797,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 searchResults.style.display = 'none';
 
                 if (browseCategories) {
+
                     browseCategories.style.display = 'block';
+
                 }
 
             }
@@ -1305,9 +1807,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
 
-        /* =========================
+        /* =====================================================
            LIVE SEARCH
-        ========================= */
+        ===================================================== */
 
         searchInput.addEventListener('input', function () {
 
@@ -1325,7 +1827,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 searchResults.style.display = 'none';
 
                 if (browseCategories) {
+
                     browseCategories.style.display = 'block';
+
                 }
 
                 return;
@@ -1336,7 +1840,9 @@ document.addEventListener('DOMContentLoaded', function () {
             /* HIDE CATEGORIES */
 
             if (browseCategories) {
+
                 browseCategories.style.display = 'none';
+
             }
 
 
@@ -1360,7 +1866,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(function (response) {
 
                     if (!response.ok) {
+
                         throw new Error('Search failed');
+
                     }
 
                     return response.json();
@@ -1372,9 +1880,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     searchResults.innerHTML = '';
 
 
-                    /* =========================
+                    /* =================================================
                        NO RESULTS
-                    ========================= */
+                    ================================================= */
 
                     if (!results.length) {
 
@@ -1396,12 +1904,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         searchResults.style.display = 'block';
 
                         return;
+
                     }
 
 
-                    /* =========================
+                    /* =================================================
                        TITLE
-                    ========================= */
+                    ================================================= */
 
                     const title =
                         document.createElement('div');
@@ -1419,9 +1928,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     searchResults.appendChild(title);
 
 
-                    /* =========================
+                    /* =================================================
                        RESULTS
-                    ========================= */
+                    ================================================= */
 
                     results.forEach(function (item) {
 
@@ -1572,9 +2081,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
 
-        /* =========================
+        /* =====================================================
            ENTER SEARCH
-        ========================= */
+        ===================================================== */
 
         if (searchForm) {
 
@@ -1589,7 +2098,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
                     if (!keyword) {
+
                         return;
+
                     }
 
 
@@ -1604,9 +2115,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
 
-        /* =========================
+        /* =====================================================
            ESCAPE HTML
-        ========================= */
+        ===================================================== */
 
         function escapeHtml(value) {
 
@@ -1621,9 +2132,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
 
-        /* =========================
+        /* =====================================================
            ESCAPE ATTRIBUTE
-        ========================= */
+        ===================================================== */
 
         function escapeAttribute(value) {
 
@@ -1638,16 +2149,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    /* =====================================================
+    /* =========================================================
        QUANTITY SELECTOR
-    ===================================================== */
+    ========================================================= */
 
     const quantitySelector =
         document.querySelector('.quantity-selector');
 
 
     if (!quantitySelector) {
+
         return;
+
     }
 
 
@@ -1668,16 +2181,20 @@ document.addEventListener('DOMContentLoaded', function () {
         );
 
 
-    /* OUT OF STOCK */
+    /* =========================================================
+       OUT OF STOCK
+    ========================================================= */
 
     if (maxQuantity <= 0) {
+
         return;
+
     }
 
 
-    /* =========================
+    /* =========================================================
        MINUS
-    ========================= */
+    ========================================================= */
 
     minusButton.addEventListener('click', function () {
 
@@ -1696,9 +2213,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    /* =========================
+    /* =========================================================
        PLUS
-    ========================= */
+    ========================================================= */
 
     plusButton.addEventListener('click', function () {
 
@@ -1717,9 +2234,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    /* =========================
+    /* =========================================================
        MANUAL INPUT
-    ========================= */
+    ========================================================= */
 
     quantityInput.addEventListener('input', function () {
 
@@ -1728,12 +2245,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         if (quantity < 1) {
+
             quantity = 1;
+
         }
 
 
         if (quantity > maxQuantity) {
+
             quantity = maxQuantity;
+
         }
 
 
@@ -1742,9 +2263,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    /* =========================
+    /* =========================================================
        BLUR VALIDATION
-    ========================= */
+    ========================================================= */
 
     quantityInput.addEventListener('blur', function () {
 
@@ -1753,12 +2274,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         if (quantity < 1) {
+
             quantity = 1;
+
         }
 
 
         if (quantity > maxQuantity) {
+
             quantity = maxQuantity;
+
         }
 
 

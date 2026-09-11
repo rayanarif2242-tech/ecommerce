@@ -19,7 +19,12 @@ class StripeController extends Controller
      */
     public function checkout(Request $request)
     {
-        // Validate customer information
+        /*
+        |--------------------------------------------------------------------------
+        | Validate Customer Information
+        |--------------------------------------------------------------------------
+        */
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -29,7 +34,12 @@ class StripeController extends Controller
             'postal_code' => 'nullable|string|max:20',
         ]);
 
-        // Get cart
+        /*
+        |--------------------------------------------------------------------------
+        | Get Cart
+        |--------------------------------------------------------------------------
+        */
+
         $cart = session()->get('cart', []);
 
         if (empty($cart)) {
@@ -40,7 +50,7 @@ class StripeController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Calculate Order Total
+        | Calculate Total
         |--------------------------------------------------------------------------
         */
 
@@ -100,6 +110,7 @@ class StripeController extends Controller
                 'fulfillment_status' => 'Unfulfilled',
                 'delivery_status' => 'Pending',
                 'delivery_method' => 'Standard Delivery',
+
                 'status' => 'Pending',
             ]);
 
@@ -127,7 +138,7 @@ class StripeController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | Create Stripe Line Items
+            | Stripe Line Items
             |--------------------------------------------------------------------------
             */
 
@@ -146,8 +157,7 @@ class StripeController extends Controller
                             'name' => $item['name'],
                         ],
 
-                        // Stripe uses smallest currency unit
-                        // Rs. 5,000 = 500000 PKR minor units
+                        // Rs. 5,000 = 500000 minor units
                         'unit_amount' => (int) round($price * 100),
                     ],
 
@@ -157,7 +167,7 @@ class StripeController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | Add Delivery
+            | Delivery Line Item
             |--------------------------------------------------------------------------
             */
 
@@ -183,6 +193,7 @@ class StripeController extends Controller
             */
 
             $session = StripeSession::create([
+
                 'mode' => 'payment',
 
                 'customer_email' => $order->email,
@@ -193,12 +204,26 @@ class StripeController extends Controller
                     'order_id' => $order->order_id,
                 ],
 
+                /*
+                |--------------------------------------------------------------------------
+                | SUCCESS URL
+                |--------------------------------------------------------------------------
+                */
+
                 'success_url' => route('stripe.success')
                     . '?session_id={CHECKOUT_SESSION_ID}',
 
+                /*
+                |--------------------------------------------------------------------------
+                | CANCEL URL
+                |--------------------------------------------------------------------------
+                */
+
                 'cancel_url' => route(
                     'stripe.cancel',
-                    $order->order_id
+                    [
+                        'order_id' => $order->order_id
+                    ]
                 ),
             ]);
 
@@ -243,9 +268,16 @@ class StripeController extends Controller
     {
         $sessionId = $request->session_id;
 
+        /*
+        |--------------------------------------------------------------------------
+        | Check Session ID
+        |--------------------------------------------------------------------------
+        */
+
         if (!$sessionId) {
+
             return redirect()
-                ->route('checkout.index')
+                ->route('checkout')
                 ->with(
                     'error',
                     'Invalid Stripe payment session.'
@@ -275,7 +307,7 @@ class StripeController extends Controller
             if ($session->payment_status !== 'paid') {
 
                 return redirect()
-                    ->route('checkout.index')
+                    ->route('checkout')
                     ->with(
                         'error',
                         'Payment was not completed.'
@@ -284,7 +316,7 @@ class StripeController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | Get Order ID From Metadata
+            | Get Order ID
             |--------------------------------------------------------------------------
             */
 
@@ -293,7 +325,7 @@ class StripeController extends Controller
             if (!$orderId) {
 
                 return redirect()
-                    ->route('checkout.index')
+                    ->route('checkout')
                     ->with(
                         'error',
                         'Order could not be found.'
@@ -313,7 +345,7 @@ class StripeController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | Update Order
+            | Mark Order As Paid
             |--------------------------------------------------------------------------
             */
 
@@ -363,7 +395,7 @@ class StripeController extends Controller
 
             /*
             |--------------------------------------------------------------------------
-            | Redirect To Order Success
+            | Order Success Page
             |--------------------------------------------------------------------------
             */
 
@@ -383,7 +415,7 @@ class StripeController extends Controller
             );
 
             return redirect()
-                ->route('checkout.index')
+                ->route('checkout')
                 ->with(
                     'error',
                     'We could not verify your payment. Please contact support if money was deducted.'
@@ -397,6 +429,12 @@ class StripeController extends Controller
      */
     public function cancel($order_id)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Find Order
+        |--------------------------------------------------------------------------
+        */
+
         $order = Order::where(
             'order_id',
             $order_id
@@ -404,12 +442,8 @@ class StripeController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Do NOT cancel the order immediately
+        | Keep Order Pending
         |--------------------------------------------------------------------------
-        |
-        | The customer may simply have returned from Stripe
-        | and want to try the payment again.
-        |
         */
 
         if ($order && $order->payment_status === 'Pending') {
@@ -420,8 +454,14 @@ class StripeController extends Controller
             ]);
         }
 
+        /*
+        |--------------------------------------------------------------------------
+        | Return To Checkout
+        |--------------------------------------------------------------------------
+        */
+
         return redirect()
-            ->route('checkout.index')
+            ->route('checkout')
             ->with(
                 'error',
                 'Stripe payment was cancelled. You can try again.'

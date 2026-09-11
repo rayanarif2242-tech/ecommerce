@@ -31,413 +31,598 @@
         }
 
 
-
-
-        .nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-}
-
-.nav-icons a {
-    color: #111;
-    font-size: 20px;
-    text-decoration: none;
-    transition: .3s;
-    position: relative;
-}
-
-.nav-icons a:hover {
-    color: #777;
-}
-
-/* =========================
-   SEARCH POPUP
-========================= */
-
-.search-popup {
-    position: fixed;
-    top: 82px;
-    left: 0;
-    right: 0;
-
-    z-index: 9999;
-
-    background: #fff;
-
-    border-bottom: 1px solid #e5e5e5;
-
-    padding: 35px 0 40px;
-
-    display: none;
-
-    box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
-}
-
-.search-popup.is-visible {
-    display: block;
-}
-
-.search-popup-container {
-    width: min(900px, calc(100% - 40px));
-
-    margin: auto;
-}
-
-.search-popup .form-group {
-    position: relative;
-}
-
-.search-popup #search-form {
-    height: 55px;
-
-    padding-right: 60px;
-
-    font-size: 16px;
-
-    outline: none;
-
-    box-shadow: none;
-}
-
-.search-popup #search-form:focus {
-    border-color: #111 !important;
-}
-
-
-/* =========================
-   BROWSE CATEGORIES
-========================= */
-
-.search-popup .cat-list {
-    list-style: none;
-
-    padding: 0;
-
-    margin: 15px 0 0;
-}
-
-.search-popup .cat-list-item {
-    border-bottom: 1px solid #eee;
-}
-
-.search-popup .cat-list-item a {
-    display: block;
-
-    padding: 10px 0;
-
-    color: #222;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    letter-spacing: 1px;
-
-    transition: .3s;
-}
-
-.search-popup .cat-list-item a:hover {
-    color: #888;
-
-    padding-left: 5px;
-}
-
-.search-popup .cat-list-title {
-
-    margin-top: 30px;
-
-    font-size: 11px;
-
-    letter-spacing: 3px;
-
-    text-transform: uppercase;
-
-    color: #888;
-}
-
-
-/* =========================
-   LIVE SEARCH RESULTS
-========================= */
-
-#frontendSearchResults {
-
-    display: none;
-
-    margin-top: 15px;
-
-    max-height: 430px;
-
-    overflow-y: auto;
-}
-
-.search-suggestion-title {
-
-    padding: 12px 0;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
-    color: #888;
-}
-
-.search-suggestion {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    width: 100%;
-
-    padding: 12px 5px;
-
-    border-bottom: 1px solid #eee;
-
-    text-decoration: none;
-
-    color: #111;
-
-    transition: all .2s ease;
-}
-
-.search-suggestion:hover {
-
-    background: #fafafa;
-
-    padding-left: 10px;
-}
-
-.search-suggestion-image {
-
-    width: 55px;
-
-    height: 55px;
-
-    object-fit: cover;
-
-    flex-shrink: 0;
-
-    border-radius: 4px;
-
-    background: #f5f5f5;
-}
-
-.search-suggestion-image.no-image {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: #888;
-
-    font-size: 18px;
-}
-
-.search-suggestion-info {
-
-    flex: 1;
-}
-
-.search-suggestion-name {
-
-    font-size: 14px;
-
-    font-weight: 500;
-
-    color: #111;
-}
-
-.search-suggestion-type {
-
-    margin-top: 3px;
-
-    font-size: 10px;
-
-    letter-spacing: 1.5px;
-
-    text-transform: uppercase;
-
-    color: #999;
-}
-
-.search-suggestion-price {
-
-    margin-top: 4px;
-
-    font-size: 12px;
-
-    color: #777;
-}
-
-.search-arrow {
-
-    margin-right: 10px;
-
-    color: #aaa;
-}
-
-.search-no-results {
-
-    padding: 35px 10px;
-
-    text-align: center;
-
-    color: #888;
-
-    font-size: 14px;
-}
-
-.search-no-results i {
-
-    display: block;
-
-    margin-bottom: 10px;
-
-    font-size: 24px;
-}
-
-
-/* =========================
-   MOBILE SEARCH
-========================= */
-
-@media (max-width: 767px) {
-
-    .search-popup {
-
-        top: 70px;
-
-        padding: 25px 0 30px;
-    }
-
-    .search-popup-container {
-
-        width: calc(100% - 30px);
-    }
-
-}
+        /* =========================================================
+           BODY
+        ========================================================= */
 
         body {
             margin: 0;
             background: #fff;
             color: #111;
             font-family: 'Montserrat', sans-serif;
+            padding-top: 82px;
         }
 
         a {
             text-decoration: none;
         }
 
+
+        /* =========================================================
+           MAIN NAVBAR
+        ========================================================= */
+
         .main-navbar {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
             height: 82px;
+
+            z-index: 10000;
+
             border-bottom: 1px solid #e8e8e8;
-            background: #fff;
+
+            background: rgba(255, 255, 255, .98);
+
             display: flex;
             align-items: center;
+
+            transition:
+                top .35s ease,
+                left .35s ease,
+                width .35s ease,
+                height .35s ease,
+                border-radius .35s ease,
+                background .35s ease,
+                box-shadow .35s ease,
+                backdrop-filter .35s ease,
+                -webkit-backdrop-filter .35s ease;
         }
+
+
+        /* =========================================================
+           FLOATING NAVBAR ON SCROLL
+        ========================================================= */
+
+        .main-navbar.scrolled {
+
+            top: 14px;
+            left: 28px;
+
+            width: calc(100% - 56px);
+            height: 76px;
+
+            border-bottom: 0;
+
+            border-radius: 28px;
+
+            background: rgba(255, 255, 255, .84);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
+        }
+
+
+        /* =========================================================
+           BRAND
+        ========================================================= */
 
         .brand {
             font-family: 'Cormorant Garamond', serif;
+
             font-size: 34px;
             font-weight: 600;
+
             letter-spacing: 4px;
+
             color: #111;
         }
 
+
+        /* =========================================================
+           NAV LINKS
+        ========================================================= */
+
         .nav-links {
+
             display: flex;
+
+            align-items: center;
+
             gap: 38px;
+
             list-style: none;
+
             margin: 0;
             padding: 0;
         }
 
+        .nav-links > li {
+            position: relative;
+        }
+
         .nav-links a {
+
             color: #222;
+
             font-size: 14px;
+
             letter-spacing: 1.5px;
+
             text-transform: uppercase;
         }
 
+        .nav-links a:hover {
+            color: #777;
+        }
+
+
+        /* =========================================================
+           NAV ICONS
+        ========================================================= */
+
         .nav-icons {
+
             display: flex;
+
             align-items: center;
+
             gap: 22px;
         }
 
         .nav-icons a {
+
             color: #111;
+
             font-size: 20px;
+
+            text-decoration: none;
+
+            transition: .3s;
+
+            position: relative;
         }
 
-        .products-hero {
+        .nav-icons a:hover {
+            color: #777;
+        }
+
+
+        /* =========================================================
+           SEARCH POPUP
+        ========================================================= */
+
+        .search-popup {
+
+            position: fixed;
+
+            top: 82px;
+
+            left: 0;
+            right: 0;
+
+            z-index: 9999;
+
+            background: #fff;
+
+            border-bottom: 1px solid #e5e5e5;
+
+            padding: 35px 0 40px;
+
+            display: none;
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+
+            transition:
+                top .35s ease,
+                left .35s ease,
+                right .35s ease,
+                border-radius .35s ease;
+        }
+
+        .search-popup.is-visible {
+            display: block;
+        }
+
+
+        /* Search popup when navbar is floating */
+
+        body.navbar-scrolled .search-popup {
+
+            top: 104px;
+
+            left: 28px;
+            right: 28px;
+
+            border: 1px solid rgba(0, 0, 0, .08);
+
+            border-top: none;
+
+            border-radius: 0 0 24px 24px;
+        }
+
+
+        .search-popup-container {
+
+            width: min(900px, calc(100% - 40px));
+
+            margin: auto;
+        }
+
+        .search-popup .form-group {
+            position: relative;
+        }
+
+        .search-popup #search-form {
+
+            height: 55px;
+
+            padding-right: 60px;
+
+            font-size: 16px;
+
+            outline: none;
+
+            box-shadow: none;
+        }
+
+        .search-popup #search-form:focus {
+            border-color: #111 !important;
+        }
+
+
+        /* =========================================================
+           BROWSE CATEGORIES
+        ========================================================= */
+
+        .search-popup .cat-list {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin: 15px 0 0;
+        }
+
+        .search-popup .cat-list-item {
+
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-popup .cat-list-item a {
+
+            display: block;
+
+            padding: 10px 0;
+
+            color: #222;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            letter-spacing: 1px;
+
+            transition: .3s;
+        }
+
+        .search-popup .cat-list-item a:hover {
+
+            color: #888;
+
+            padding-left: 5px;
+        }
+
+        .search-popup .cat-list-title {
+
+            margin-top: 30px;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            color: #888;
+        }
+
+
+        /* =========================================================
+           LIVE SEARCH RESULTS
+        ========================================================= */
+
+        #frontendSearchResults {
+
+            display: none;
+
+            margin-top: 15px;
+
+            max-height: 430px;
+
+            overflow-y: auto;
+        }
+
+        .search-suggestion-title {
+
+            padding: 12px 0;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            color: #888;
+        }
+
+        .search-suggestion {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            width: 100%;
+
+            padding: 12px 5px;
+
+            border-bottom: 1px solid #eee;
+
+            text-decoration: none;
+
+            color: #111;
+
+            transition: all .2s ease;
+        }
+
+        .search-suggestion:hover {
+
+            background: #fafafa;
+
+            padding-left: 10px;
+        }
+
+        .search-suggestion-image {
+
+            width: 55px;
+            height: 55px;
+
+            object-fit: cover;
+
+            flex-shrink: 0;
+
+            border-radius: 4px;
+
+            background: #f5f5f5;
+        }
+
+        .search-suggestion-image.no-image {
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #888;
+
+            font-size: 18px;
+        }
+
+        .search-suggestion-info {
+            flex: 1;
+        }
+
+        .search-suggestion-name {
+
+            font-size: 14px;
+
+            font-weight: 500;
+
+            color: #111;
+        }
+
+        .search-suggestion-type {
+
+            margin-top: 3px;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            color: #999;
+        }
+
+        .search-suggestion-price {
+
+            margin-top: 4px;
+
+            font-size: 12px;
+
+            color: #777;
+        }
+
+        .search-arrow {
+
+            margin-right: 10px;
+
+            color: #aaa;
+        }
+
+        .search-no-results {
+
+            padding: 35px 10px;
+
             text-align: center;
+
+            color: #888;
+
+            font-size: 14px;
+        }
+
+        .search-no-results i {
+
+            display: block;
+
+            margin-bottom: 10px;
+
+            font-size: 24px;
+        }
+
+
+        /* =========================================================
+           DROPDOWN
+        ========================================================= */
+
+        .dropdown-menu {
+
+            border: 1px solid #eee;
+
+            border-radius: 0;
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+
+            padding: 8px 0;
+        }
+
+        .dropdown-item {
+
+            font-size: 12px !important;
+
+            letter-spacing: 1px !important;
+
+            padding: 10px 18px;
+
+            color: #222 !important;
+
+            background: transparent;
+        }
+
+        .dropdown-item:hover {
+
+            background: #f8f8f8;
+
+            color: #111 !important;
+        }
+
+
+        /* =========================================================
+           PRODUCTS HERO
+        ========================================================= */
+
+        .products-hero {
+
+            text-align: center;
+
             padding: 55px 15px 45px;
         }
 
         .products-hero small {
+
             display: block;
+
             font-size: 13px;
+
             letter-spacing: 4px;
+
             text-transform: uppercase;
+
             color: #777;
+
             margin-bottom: 12px;
         }
 
         .products-hero h1 {
+
             font-size: 60px;
+
             font-weight: 390;
+
             letter-spacing: 2px;
+
             text-transform: uppercase;
+
             margin: 0;
         }
 
         .products-hero p {
+
             color: #888;
+
             font-size: 13px;
+
             margin-top: 12px;
         }
 
+
+        /* =========================================================
+           PRODUCTS TOP
+        ========================================================= */
+
         .products-top {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
             margin-bottom: 35px;
+
             padding-bottom: 18px;
+
             border-bottom: 1px solid #e5e5e5;
         }
 
         .products-count {
+
             font-size: 13px;
+
             color: #777;
+
             letter-spacing: 1px;
         }
 
         .products-count strong {
+
             color: #111;
+
             font-weight: 500;
         }
 
         .sort-box {
+
             border: 1px solid #ddd;
+
             padding: 10px 15px;
+
             font-size: 12px;
+
             background: #fff;
+
             color: #111;
         }
 
+
+        /* =========================================================
+           PRODUCT CARD
+        ========================================================= */
+
         .product-card {
+
             position: relative;
+
             height: 100%;
+
             background: #fff;
+
             transition: transform .3s ease;
         }
 
@@ -445,17 +630,30 @@
             transform: translateY(-4px);
         }
 
+
+        /* =========================================================
+           PRODUCT IMAGE
+        ========================================================= */
+
         .product-image-wrapper {
+
             position: relative;
+
             overflow: hidden;
+
             background: #f4f4f4;
         }
 
         .product-image-wrapper img {
+
             width: 100%;
+
             height: 460px;
+
             object-fit: cover;
+
             display: block;
+
             transition: transform .6s ease;
         }
 
@@ -463,70 +661,133 @@
             transform: scale(1.04);
         }
 
+
+        /* =========================================================
+           WISHLIST
+        ========================================================= */
+
         .wishlist-btn {
+
             position: absolute;
+
             top: 15px;
             right: 15px;
+
             width: 44px;
             height: 44px;
+
             border: none;
+
             background: rgba(255,255,255,.95);
+
             border-radius: 50%;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             font-size: 18px;
+
             color: #111;
+
             z-index: 2;
+
             cursor: pointer;
         }
 
+
+        /* =========================================================
+           SALE BADGE
+        ========================================================= */
+
         .sale-badge {
+
             position: absolute;
+
             top: 18px;
             left: 18px;
+
             z-index: 2;
+
             background: #111;
+
             color: #fff;
+
             padding: 7px 12px;
+
             font-size: 9px;
+
             letter-spacing: 2px;
+
             text-transform: uppercase;
         }
 
+
+        /* =========================================================
+           PRODUCT DETAILS
+        ========================================================= */
+
         .product-details {
+
             padding: 20px 2px 35px;
         }
 
         .product-name {
+
             color: #111;
+
             font-family: 'Cormorant Garamond', serif;
+
             font-size: 24px;
+
             letter-spacing: 1px;
+
             text-transform: uppercase;
+
             font-weight: 500;
+
             display: block;
+
             margin-bottom: 9px;
         }
 
         .product-price {
+
             display: flex;
+
             align-items: center;
+
             gap: 10px;
+
             font-size: 14px;
+
             color: #111;
         }
 
         .old-price {
+
             color: #999;
+
             text-decoration: line-through;
+
             font-size: 12px;
         }
 
+
+        /* =========================================================
+           STOCK
+        ========================================================= */
+
         .stock-status {
+
             margin-top: 10px;
+
             font-size: 10px;
+
             letter-spacing: 2px;
+
             text-transform: uppercase;
         }
 
@@ -538,43 +799,76 @@
             color: #999;
         }
 
+
+        /* =========================================================
+           CART BUTTON
+        ========================================================= */
+
         .add-cart-btn,
         .out-stock-btn {
+
             width: 100%;
+
             height: 48px;
+
             margin-top: 14px;
+
             font-size: 11px;
+
             letter-spacing: 2px;
+
             text-transform: uppercase;
         }
 
         .add-cart-btn {
+
             border: 1px solid #111;
+
             background: #111;
+
             color: #fff;
+
+            transition: .3s;
         }
 
         .add-cart-btn:hover {
+
             background: #fff;
+
             color: #111;
         }
 
         .out-stock-btn {
+
             border: 1px solid #ddd;
+
             background: #eee;
+
             color: #777;
         }
 
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
         .footer {
+
             margin-top: 80px;
+
             background: #111;
+
             color: #fff;
+
             padding: 55px 0;
         }
 
         .footer-brand {
+
             font-family: 'Cormorant Garamond', serif;
+
             font-size: 34px;
+
             letter-spacing: 4px;
         }
 
@@ -582,7 +876,13 @@
             color: #aaa;
         }
 
+
+        /* =========================================================
+           TABLET
+        ========================================================= */
+
         @media (max-width: 991px) {
+
             .nav-links {
                 display: none;
             }
@@ -592,25 +892,136 @@
             }
         }
 
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
         @media (max-width: 767px) {
+
+            body {
+                padding-top: 70px;
+            }
+
+
+            /* Mobile normal navbar */
+
+            .main-navbar {
+
+                height: 70px;
+            }
+
+
+            /* Mobile floating navbar */
+
+            .main-navbar.scrolled {
+
+                top: 10px;
+
+                left: 12px;
+
+                width: calc(100% - 24px);
+
+                height: 64px;
+
+                border-radius: 20px;
+            }
+
+
+            /* Mobile search */
+
+            .search-popup {
+
+                top: 70px;
+
+                padding: 25px 0 30px;
+            }
+
+
+            /* Mobile floating search */
+
+            body.navbar-scrolled .search-popup {
+
+                top: 84px;
+
+                left: 12px;
+
+                right: 12px;
+
+                border-radius: 0 0 20px 20px;
+            }
+
+            .search-popup-container {
+
+                width: calc(100% - 30px);
+            }
+
+
+            /* Brand */
+
+            .brand {
+
+                font-size: 28px;
+
+                letter-spacing: 3px;
+            }
+
+
+            /* Icons */
+
+            .nav-icons {
+
+                gap: 16px;
+            }
+
+            .nav-icons a {
+
+                font-size: 19px;
+            }
+
+
+            /* Hero */
+
             .products-hero h1 {
+
                 font-size: 40px;
             }
 
+
+            /* Products top */
+
             .products-top {
+
                 display: block;
             }
 
             .sort-box {
+
                 margin-top: 15px;
+
                 width: 100%;
             }
+
+
+            /* Product image */
+
+            .product-image-wrapper img {
+
+                height: 420px;
+            }
         }
+
     </style>
 
 </head>
 
+
 <body>
+
+
+{{-- =========================================================
+     MAIN NAVBAR
+========================================================= --}}
 
 <nav class="main-navbar">
 
@@ -618,100 +1029,298 @@
 
         <div class="d-flex align-items-center justify-content-between">
 
-            <a href="{{ url('/') }}" class="brand">
+            {{-- BRAND --}}
+
+            <a
+                href="{{ url('/') }}"
+                class="brand"
+            >
                 KAIRA
             </a>
 
+
+            {{-- NAV LINKS --}}
+
             <ul class="nav-links">
 
-                <li>
-                    <a href="{{ url('/') }}">Home</a>
-                </li>
+
+                {{-- HOME --}}
 
                 <li>
-                    <a href="{{ route('user.products') }}">Shop</a>
-                </li>
-
-                <li>
-                    <a href="{{ url('/') }}#collections">Collections</a>
-                </li>
-
-                <li>
-                    <a href="{{ route('contact') }}">
-                        Contact
+                    <a href="{{ url('/') }}">
+                        Home
                     </a>
                 </li>
 
+
+                {{-- SHOP --}}
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="dropdownShop"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        Shop
+                    </a>
+
+
+                    <ul
+                        class="dropdown-menu list-unstyled"
+                        aria-labelledby="dropdownShop"
+                    >
+
+                        @foreach($categories as $category)
+
+                            <li class="dropdown-submenu">
+
+                                <a
+                                    href="{{ route('category.show', $category->slug) }}"
+                                    class="dropdown-item item-anchor d-flex justify-content-between align-items-center"
+                                >
+
+                                    {{ $category->name }}
+
+                                    @if($category->subCategories && $category->subCategories->count() > 0)
+
+                                        <span class="submenu-arrow">
+                                            ›
+                                        </span>
+
+                                    @endif
+
+                                </a>
+
+
+                                @if($category->subCategories && $category->subCategories->count() > 0)
+
+                                    <ul class="dropdown-menu list-unstyled">
+
+                                        @foreach($category->subCategories as $subcategory)
+
+                                            <li>
+
+                                                <a
+                                                    href="{{ route('subcategory.show', $subcategory->slug) }}"
+                                                    class="dropdown-item item-anchor"
+                                                >
+                                                    {{ $subcategory->name }}
+                                                </a>
+
+                                            </li>
+
+                                        @endforeach
+
+                                    </ul>
+
+                                @endif
+
+                            </li>
+
+                        @endforeach
+
+                    </ul>
+
+                </li>
+
+
+                {{-- PAGES --}}
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="dropdownPages"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        Pages
+                    </a>
+
+
+                    <ul
+                        class="dropdown-menu list-unstyled"
+                        aria-labelledby="dropdownPages"
+                    >
+
+                        <li>
+                            <a
+                                href="{{ route('cart.show') }}"
+                                class="dropdown-item item-anchor"
+                            >
+                                Cart
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a
+                                href="{{ route('contact') }}"
+                                class="dropdown-item item-anchor"
+                            >
+                                Contact
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a
+                                href="index.html"
+                                class="dropdown-item item-anchor"
+                            >
+                                FAQs
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a
+                                href="{{ route('blogs') }}"
+                                class="dropdown-item item-anchor"
+                            >
+                                Blog
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                {{-- PRODUCTS --}}
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{{ route('user.products') }}"
+                    >
+                        PRODUCTS
+                    </a>
+
+                </li>
+
+
+                {{-- COLLECTIONS --}}
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{{ route('user.collections') }}"
+                    >
+                        COLLECTIONS
+                    </a>
+
+                </li>
+
+
             </ul>
+
+
+            {{-- NAV ICONS --}}
 
             <div class="nav-icons">
 
-    <a
-        href="#"
-        class="search-toggle"
-        aria-label="Open search"
-    >
-        <i class="bi bi-search"></i>
-    </a>
-    
-<a 
-    href="{{ route('newsletter.index') }}" 
-    aria-label="Newsletter & Suggestions"
-    title="Newsletter & Suggestions"
->
-    <i class="bi bi-person"></i>
-</a>
 
-    
+                {{-- SEARCH --}}
 
-    <a
-        href="{{ route('cart.show') }}"
-        aria-label="Cart"
-    >
-        <i class="bi bi-bag"></i>
+                <a
+                    href="#"
+                    class="search-toggle"
+                    aria-label="Open search"
+                >
 
-        @php
-            $cartCount = collect(session('cart', []))
-                ->sum('quantity');
-        @endphp
+                    <i class="bi bi-search"></i>
 
-        @if($cartCount > 0)
-            <span
-                style="
-                    position:absolute;
-                    top:-8px;
-                    right:-10px;
-                    background:#111;
-                    color:#fff;
-                    width:18px;
-                    height:18px;
-                    border-radius:50%;
-                    font-size:9px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                "
-            >
-                {{ $cartCount }}
-            </span>
-        @endif
+                </a>
 
-    </a>
 
-</div>
+                {{-- USER / NEWSLETTER --}}
+
+                <a
+                    href="{{ route('newsletter.index') }}"
+                    aria-label="Newsletter & Suggestions"
+                    title="Newsletter & Suggestions"
+                >
+
+                    <i class="bi bi-person"></i>
+
+                </a>
+
+
+                {{-- CART --}}
+
+                <a
+                    href="{{ route('cart.show') }}"
+                    aria-label="Cart"
+                >
+
+                    <i class="bi bi-bag"></i>
+
+
+                    @php
+
+                        $cartCount = collect(session('cart', []))
+                            ->sum('quantity');
+
+                    @endphp
+
+
+                    @if($cartCount > 0)
+
+                        <span
+                            style="
+                                position:absolute;
+                                top:-8px;
+                                right:-10px;
+                                background:#111;
+                                color:#fff;
+                                width:18px;
+                                height:18px;
+                                border-radius:50%;
+                                font-size:9px;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                            "
+                        >
+
+                            {{ $cartCount }}
+
+                        </span>
+
+                    @endif
+
+                </a>
+
+
+            </div>
 
         </div>
 
     </div>
 
 </nav>
-{{-- =========================
+
+
+
+{{-- =========================================================
      SEARCH POPUP
-========================= --}}
+========================================================= --}}
 
 <div class="search-popup">
 
     <div class="search-popup-container">
+
+
+        {{-- SEARCH FORM --}}
 
         <form
             role="search"
@@ -730,15 +1339,19 @@
                 name="search"
             >
 
+
             <button
                 type="submit"
                 class="search-submit border-0 position-absolute bg-white"
                 style="top:15px;right:15px;"
             >
+
                 <i class="bi bi-search"></i>
+
             </button>
 
         </form>
+
 
 
         {{-- LIVE SEARCH RESULTS --}}
@@ -750,6 +1363,7 @@
         ></div>
 
 
+
         {{-- DEFAULT CATEGORIES --}}
 
         <div id="browseCategories">
@@ -758,7 +1372,11 @@
                 Browse Categories
             </h5>
 
+
             <ul class="cat-list">
+
+
+                {{-- ALL PRODUCTS --}}
 
                 <li class="cat-list-item">
 
@@ -769,6 +1387,8 @@
                 </li>
 
 
+                {{-- COLLECTIONS --}}
+
                 <li class="cat-list-item">
 
                     <a href="{{ route('user.collections') }}">
@@ -777,6 +1397,8 @@
 
                 </li>
 
+
+                {{-- CATEGORIES --}}
 
                 @foreach(
                     \App\Models\Category::where('status', 1)
@@ -797,6 +1419,7 @@
 
                 @endforeach
 
+
             </ul>
 
         </div>
@@ -804,6 +1427,12 @@
     </div>
 
 </div>
+
+
+
+{{-- =========================================================
+     PRODUCTS HERO
+========================================================= --}}
 
 <section class="products-hero">
 
@@ -822,7 +1451,15 @@
 </section>
 
 
+
+{{-- =========================================================
+     PRODUCTS
+========================================================= --}}
+
 <section class="container pb-5">
+
+
+    {{-- PRODUCTS TOP --}}
 
     <div class="products-top">
 
@@ -838,30 +1475,51 @@
 
         </div>
 
+
         <select class="sort-box">
 
-            <option>Sort by Latest</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-            <option>Featured</option>
+            <option>
+                Sort by Latest
+            </option>
+
+            <option>
+                Price: Low to High
+            </option>
+
+            <option>
+                Price: High to Low
+            </option>
+
+            <option>
+                Featured
+            </option>
 
         </select>
 
     </div>
 
 
+
+    {{-- PRODUCT GRID --}}
+
     <div class="row g-5">
 
+
         @forelse($products as $product)
+
 
             <div class="col-12 col-md-6 col-lg-4">
 
                 <div class="product-card">
 
-                    {{-- IMAGE --}}
+
+                    {{-- PRODUCT IMAGE --}}
+
                     <div class="product-image-wrapper">
 
-                        <a href="{{ route('product.show', $product->slug) }}">
+                        <a
+                            href="{{ route('product.show', $product->slug) }}"
+                        >
 
                             @if($product->image)
 
@@ -877,10 +1535,12 @@
                                     class="d-flex align-items-center justify-content-center"
                                     style="height:460px;"
                                 >
+
                                     <i
                                         class="bi bi-image"
                                         style="font-size:70px;color:#aaa;"
                                     ></i>
+
                                 </div>
 
                             @endif
@@ -888,7 +1548,9 @@
                         </a>
 
 
-                        {{-- SALE --}}
+
+                        {{-- SALE BADGE --}}
+
                         @if($product->discount_price)
 
                             <div class="sale-badge">
@@ -898,31 +1560,43 @@
                         @endif
 
 
+
                         {{-- WISHLIST --}}
+
                         <button
                             type="button"
                             class="wishlist-btn"
                             title="Add to Wishlist"
                         >
+
                             <i class="bi bi-heart"></i>
+
                         </button>
 
                     </div>
 
 
-                    {{-- DETAILS --}}
+
+                    {{-- PRODUCT DETAILS --}}
+
                     <div class="product-details">
 
-                        {{-- NAME --}}
+
+                        {{-- PRODUCT NAME --}}
+
                         <a
                             href="{{ route('product.show', $product->slug) }}"
                             class="product-name"
                         >
+
                             {{ $product->name }}
+
                         </a>
 
 
+
                         {{-- PRICE --}}
+
                         <div class="product-price">
 
                             @if($product->discount_price)
@@ -946,25 +1620,35 @@
                         </div>
 
 
+
                         {{-- STOCK --}}
+
                         @if($product->stock > 0)
 
                             <div class="stock-status in-stock">
+
                                 <i class="bi bi-check2"></i>
+
                                 In Stock
+
                             </div>
 
                         @else
 
                             <div class="stock-status out-stock">
+
                                 <i class="bi bi-x"></i>
+
                                 Out of Stock
+
                             </div>
 
                         @endif
 
 
-                        {{-- CART --}}
+
+                        {{-- ADD TO CART --}}
+
                         @if($product->stock > 0)
 
                             <form
@@ -974,11 +1658,13 @@
 
                                 @csrf
 
+
                                 <input
                                     type="hidden"
                                     name="product_id"
                                     value="{{ $product->product_id }}"
                                 >
+
 
                                 <input
                                     type="hidden"
@@ -986,12 +1672,16 @@
                                     value="1"
                                 >
 
+
                                 <button
                                     type="submit"
                                     class="add-cart-btn"
                                 >
+
                                     <i class="bi bi-bag"></i>
+
                                     Add To Cart
+
                                 </button>
 
                             </form>
@@ -1008,13 +1698,18 @@
 
                         @endif
 
+
                     </div>
 
                 </div>
 
             </div>
 
+
         @empty
+
+
+            {{-- NO PRODUCTS --}}
 
             <div class="col-12">
 
@@ -1025,9 +1720,11 @@
                         style="font-size:60px;color:#aaa;"
                     ></i>
 
+
                     <h3 class="mt-4">
                         No Products Found
                     </h3>
+
 
                     <p class="text-muted">
                         There are currently no products available.
@@ -1037,12 +1734,19 @@
 
             </div>
 
+
         @endforelse
+
 
     </div>
 
 </section>
 
+
+
+{{-- =========================================================
+     FOOTER
+========================================================= --}}
 
 <footer class="footer">
 
@@ -1050,27 +1754,36 @@
 
         <div class="row">
 
+
             <div class="col-md-6">
 
                 <div class="footer-brand">
                     KAIRA
                 </div>
 
+
                 <p class="mt-3">
+
                     Discover timeless fashion designed
                     for modern living.
+
                 </p>
 
             </div>
+
+
 
             <div class="col-md-6 text-md-end">
 
                 <p>
+
                     © {{ date('Y') }} Kaira.
                     All Rights Reserved.
+
                 </p>
 
             </div>
+
 
         </div>
 
@@ -1079,9 +1792,64 @@
 </footer>
 
 
+
+{{-- =========================================================
+     BOOTSTRAP
+========================================================= --}}
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
 <script>
+
 document.addEventListener('DOMContentLoaded', function () {
+
+
+    /* =========================================================
+       NAVBAR SCROLL
+    ========================================================= */
+
+    const navbar = document.querySelector('.main-navbar');
+
+
+    if (navbar) {
+
+        function handleNavbarScroll() {
+
+            if (window.scrollY > 40) {
+
+                navbar.classList.add('scrolled');
+
+                document.body.classList.add('navbar-scrolled');
+
+            } else {
+
+                navbar.classList.remove('scrolled');
+
+                document.body.classList.remove('navbar-scrolled');
+
+            }
+
+        }
+
+
+        handleNavbarScroll();
+
+
+        window.addEventListener(
+            'scroll',
+            handleNavbarScroll,
+            { passive: true }
+        );
+
+    }
+
+
+
+    /* =========================================================
+       SEARCH ELEMENTS
+    ========================================================= */
 
     const searchToggle =
         document.querySelector('.search-toggle');
@@ -1102,6 +1870,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('browseCategories');
 
 
+
     if (
         !searchToggle ||
         !searchPopup ||
@@ -1112,16 +1881,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
+
     let searchTimeout = null;
 
 
-    /* =========================
+
+    /* =========================================================
        OPEN / CLOSE SEARCH
-    ========================= */
+    ========================================================= */
 
     searchToggle.addEventListener('click', function (e) {
 
         e.preventDefault();
+
 
         searchPopup.classList.toggle('is-visible');
 
@@ -1142,8 +1914,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             searchResults.style.display = 'none';
 
+
             if (browseCategories) {
+
                 browseCategories.style.display = 'block';
+
             }
 
         }
@@ -1151,19 +1926,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    /* =========================
+
+    /* =========================================================
        LIVE SEARCH
-    ========================= */
+    ========================================================= */
 
     searchInput.addEventListener('input', function () {
+
 
         const keyword =
             this.value.trim();
 
+
         clearTimeout(searchTimeout);
 
 
-        /* Empty */
+
+        /* EMPTY */
 
         if (keyword === '') {
 
@@ -1171,24 +1950,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
             searchResults.style.display = 'none';
 
+
             if (browseCategories) {
+
                 browseCategories.style.display = 'block';
+
             }
 
             return;
         }
 
 
-        /* Hide categories */
+
+        /* HIDE CATEGORIES */
 
         if (browseCategories) {
+
             browseCategories.style.display = 'none';
+
         }
 
 
-        /* Delay request */
+
+        /* DELAY REQUEST */
 
         searchTimeout = setTimeout(function () {
+
 
             fetch(
                 "{{ route('frontend.search') }}?search=" +
@@ -1202,25 +1989,35 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
             )
+
             .then(function (response) {
 
+
                 if (!response.ok) {
+
                     throw new Error('Search failed');
+
                 }
+
 
                 return response.json();
 
             })
+
+
             .then(function (results) {
+
 
                 searchResults.innerHTML = '';
 
 
-                /* =========================
+
+                /* =================================================
                    NO RESULTS
-                ========================= */
+                ================================================= */
 
                 if (!results.length) {
+
 
                     searchResults.innerHTML = `
 
@@ -1229,13 +2026,19 @@ document.addEventListener('DOMContentLoaded', function () {
                             <i class="bi bi-search"></i>
 
                             <div>
+
                                 No results found for
-                                "<strong>${escapeHtml(keyword)}</strong>"
+
+                                "<strong>
+                                    ${escapeHtml(keyword)}
+                                </strong>"
+
                             </div>
 
                         </div>
 
                     `;
+
 
                     searchResults.style.display = 'block';
 
@@ -1243,38 +2046,52 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
 
-                /* =========================
+
+                /* =================================================
                    TITLE
-                ========================= */
+                ================================================= */
 
                 const title =
                     document.createElement('div');
 
+
                 title.className =
                     'search-suggestion-title';
 
+
                 title.innerHTML = `
+
                     Related results for
-                    "<strong>${escapeHtml(keyword)}</strong>"
+
+                    "<strong>
+                        ${escapeHtml(keyword)}
+                    </strong>"
+
                 `;
+
 
                 searchResults.appendChild(title);
 
 
-                /* =========================
+
+                /* =================================================
                    RESULTS
-                ========================= */
+                ================================================= */
 
                 results.forEach(function (item) {
+
 
                     const result =
                         document.createElement('a');
 
+
                     result.href =
                         item.url;
 
+
                     result.className =
                         'search-suggestion';
+
 
 
                     /* IMAGE */
@@ -1283,6 +2100,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
                     if (item.image) {
+
 
                         image = `
 
@@ -1294,7 +2112,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         `;
 
+
                     } else {
+
 
                         image = `
 
@@ -1307,7 +2127,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             </div>
 
                         `;
+
                     }
+
 
 
                     /* PRICE */
@@ -1321,17 +2143,20 @@ document.addEventListener('DOMContentLoaded', function () {
                         item.price !== ''
                     ) {
 
+
                         const number =
                             Number(item.price);
 
 
                         if (!Number.isNaN(number)) {
 
+
                             price = `
 
                                 <div class="search-suggestion-price">
 
                                     Rs.
+
                                     ${number.toLocaleString(
                                         'en-PK',
                                         {
@@ -1343,9 +2168,14 @@ document.addEventListener('DOMContentLoaded', function () {
                                 </div>
 
                             `;
+
                         }
+
                     }
 
+
+
+                    /* RESULT HTML */
 
                     result.innerHTML = `
 
@@ -1359,15 +2189,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             </div>
 
+
                             <div class="search-suggestion-type">
 
                                 ${escapeHtml(item.type)}
 
                             </div>
 
+
                             ${price}
 
                         </div>
+
 
                         <i class="
                             bi bi-arrow-right
@@ -1382,13 +2215,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
 
+
                 searchResults.style.display =
                     'block';
 
             })
+
+
             .catch(function (error) {
 
+
                 console.error(error);
+
 
                 searchResults.innerHTML = `
 
@@ -1402,35 +2240,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 `;
 
+
                 searchResults.style.display =
                     'block';
 
             });
+
 
         }, 250);
 
     });
 
 
-    /* =========================
+
+    /* =========================================================
        ENTER SEARCH
-    ========================= */
+    ========================================================= */
 
     if (searchForm) {
+
 
         searchForm.addEventListener(
             'submit',
             function (e) {
 
+
                 e.preventDefault();
+
 
                 const keyword =
                     searchInput.value.trim();
 
 
+
                 if (!keyword) {
                     return;
                 }
+
 
 
                 window.location.href =
@@ -1444,32 +2290,53 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    /* =========================
+
+    /* =========================================================
        ESCAPE HTML
-    ========================= */
+    ========================================================= */
 
     function escapeHtml(value) {
+
 
         const div =
             document.createElement('div');
 
+
         div.textContent =
             value ?? '';
 
+
         return div.innerHTML;
+
     }
 
+
+
+    /* =========================================================
+       ESCAPE ATTRIBUTE
+    ========================================================= */
 
     function escapeAttribute(value) {
 
+
         return String(value ?? '')
+
             .replace(/&/g, '&amp;')
+
             .replace(/"/g, '&quot;')
+
             .replace(/</g, '&lt;')
+
             .replace(/>/g, '&gt;');
+
     }
 
+
 });
+
 </script>
+
+
 </body>
+
 </html>

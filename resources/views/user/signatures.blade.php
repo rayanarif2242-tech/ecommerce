@@ -9,30 +9,23 @@
 
     <title>All Products | Kaira</title>
 
-
     {{-- Bootstrap --}}
-
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
-
     {{-- Bootstrap Icons --}}
-
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
 
-
     {{-- Fonts --}}
-
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
         rel="stylesheet"
     >
-
 
     <style>
 
@@ -40,335 +33,110 @@
             box-sizing: border-box;
         }
 
-
-        .nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-}
-
-.nav-icons a {
-    color: #111;
-    font-size: 20px;
-    text-decoration: none;
-    transition: .3s;
-    position: relative;
-}
-
-.nav-icons a:hover {
-    color: #777;
-}
-
-/* =========================
-   SEARCH POPUP
-========================= */
-
-.search-popup {
-    position: fixed;
-    top: 82px;
-    left: 0;
-    right: 0;
-
-    z-index: 9999;
-
-    background: #fff;
-
-    border-bottom: 1px solid #e5e5e5;
-
-    padding: 35px 0 40px;
-
-    display: none;
-
-    box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
-}
-
-.search-popup.is-visible {
-    display: block;
-}
-
-.search-popup-container {
-    width: min(900px, calc(100% - 40px));
-
-    margin: auto;
-}
-
-.search-popup .form-group {
-    position: relative;
-}
-
-.search-popup #search-form {
-    height: 55px;
-
-    padding-right: 60px;
-
-    font-size: 16px;
-
-    outline: none;
-
-    box-shadow: none;
-}
-
-.search-popup #search-form:focus {
-    border-color: #111 !important;
-}
-
-
-/* =========================
-   BROWSE CATEGORIES
-========================= */
-
-.search-popup .cat-list {
-    list-style: none;
-
-    padding: 0;
-
-    margin: 15px 0 0;
-}
-
-.search-popup .cat-list-item {
-    border-bottom: 1px solid #eee;
-}
-
-.search-popup .cat-list-item a {
-    display: block;
-
-    padding: 10px 0;
-
-    color: #222;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    letter-spacing: 1px;
-
-    transition: .3s;
-}
-
-.search-popup .cat-list-item a:hover {
-    color: #888;
-
-    padding-left: 5px;
-}
-
-.search-popup .cat-list-title {
-
-    margin-top: 30px;
-
-    font-size: 11px;
-
-    letter-spacing: 3px;
-
-    text-transform: uppercase;
-
-    color: #888;
-}
-
-
-/* =========================
-   LIVE SEARCH RESULTS
-========================= */
-
-#frontendSearchResults {
-
-    display: none;
-
-    margin-top: 15px;
-
-    max-height: 430px;
-
-    overflow-y: auto;
-}
-
-.search-suggestion-title {
-
-    padding: 12px 0;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
-    color: #888;
-}
-
-.search-suggestion {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    width: 100%;
-
-    padding: 12px 5px;
-
-    border-bottom: 1px solid #eee;
-
-    text-decoration: none;
-
-    color: #111;
-
-    transition: all .2s ease;
-}
-
-.search-suggestion:hover {
-
-    background: #fafafa;
-
-    padding-left: 10px;
-}
-
-.search-suggestion-image {
-
-    width: 55px;
-
-    height: 55px;
-
-    object-fit: cover;
-
-    flex-shrink: 0;
-
-    border-radius: 4px;
-
-    background: #f5f5f5;
-}
-
-.search-suggestion-image.no-image {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: #888;
-
-    font-size: 18px;
-}
-
-.search-suggestion-info {
-
-    flex: 1;
-}
-
-.search-suggestion-name {
-
-    font-size: 14px;
-
-    font-weight: 500;
-
-    color: #111;
-}
-
-.search-suggestion-type {
-
-    margin-top: 3px;
-
-    font-size: 10px;
-
-    letter-spacing: 1.5px;
-
-    text-transform: uppercase;
-
-    color: #999;
-}
-
-.search-suggestion-price {
-
-    margin-top: 4px;
-
-    font-size: 12px;
-
-    color: #777;
-}
-
-.search-arrow {
-
-    margin-right: 10px;
-
-    color: #aaa;
-}
-
-.search-no-results {
-
-    padding: 35px 10px;
-
-    text-align: center;
-
-    color: #888;
-
-    font-size: 14px;
-}
-
-.search-no-results i {
-
-    display: block;
-
-    margin-bottom: 10px;
-
-    font-size: 24px;
-}
-
-
-/* =========================
-   MOBILE SEARCH
-========================= */
-
-@media (max-width: 767px) {
-
-    .search-popup {
-
-        top: 70px;
-
-        padding: 25px 0 30px;
-    }
-
-    .search-popup-container {
-
-        width: calc(100% - 30px);
-    }
-
-}
-
+        /* =========================================================
+           BODY
+        ========================================================= */
 
         body {
             margin: 0;
+            padding-top: 82px;
             background: #fff;
             color: #111;
             font-family: 'Montserrat', sans-serif;
         }
 
 
-        /* =========================
+        /* =========================================================
            NAVBAR
-        ========================= */
+        ========================================================= */
 
         .main-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
             height: 82px;
+
+            z-index: 10000;
+
             border-bottom: 1px solid #e8e8e8;
-            background: #fff;
+
+            background: rgba(255, 255, 255, .98);
+
             display: flex;
             align-items: center;
+
+            transition:
+                top .35s ease,
+                left .35s ease,
+                right .35s ease,
+                width .35s ease,
+                height .35s ease,
+                border-radius .35s ease,
+                background .35s ease,
+                box-shadow .35s ease,
+                backdrop-filter .35s ease;
         }
 
 
+        /* =========================================================
+           NAVBAR SCROLLED / FLOATING
+        ========================================================= */
+
+        .main-navbar.scrolled {
+            top: 14px;
+            left: 28px;
+            right: 28px;
+            width: auto;
+            height: 76px;
+
+            border-bottom: 0;
+            border-radius: 28px;
+
+            background: rgba(255, 255, 255, .84);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
+        }
+
+
+        .main-navbar .container {
+            width: 100%;
+        }
+
+
+        /* =========================================================
+           BRAND
+        ========================================================= */
+
         .brand {
             font-family: 'Cormorant Garamond', serif;
+
             font-size: 34px;
             font-weight: 600;
+
             letter-spacing: 4px;
+
             color: #111;
+
             text-decoration: none;
         }
 
 
+        /* =========================================================
+           NAV LINKS
+        ========================================================= */
+
         .nav-links {
             display: flex;
+
             gap: 38px;
+
             list-style: none;
+
             margin: 0;
             padding: 0;
         }
@@ -376,10 +144,15 @@
 
         .nav-links a {
             text-decoration: none;
+
             color: #222;
+
             font-size: 14px;
+
             letter-spacing: 1.5px;
+
             text-transform: uppercase;
+
             transition: .3s;
         }
 
@@ -389,52 +162,361 @@
         }
 
 
+        /* =========================================================
+           NAV ICONS
+        ========================================================= */
+
         .nav-icons {
             display: flex;
+
             align-items: center;
+
             gap: 22px;
         }
 
 
         .nav-icons a {
+            position: relative;
+
             color: #111;
+
             font-size: 20px;
+
             text-decoration: none;
+
+            transition: .3s;
         }
 
 
-        /* =========================
+        .nav-icons a:hover {
+            color: #777;
+        }
+
+
+        /* =========================================================
+           SEARCH POPUP
+        ========================================================= */
+
+        .search-popup {
+            position: fixed;
+
+            top: 82px;
+
+            left: 0;
+            right: 0;
+
+            z-index: 9999;
+
+            background: #fff;
+
+            border-bottom: 1px solid #e5e5e5;
+
+            padding: 35px 0 40px;
+
+            display: none;
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+        }
+
+
+        .search-popup.is-visible {
+            display: block;
+        }
+
+
+        /*
+         * Search popup follows floating navbar
+         */
+
+        body.navbar-scrolled .search-popup {
+            top: 104px;
+
+            left: 28px;
+            right: 28px;
+
+            border: 1px solid rgba(0, 0, 0, .08);
+
+            border-top: none;
+
+            border-radius: 0 0 24px 24px;
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+        }
+
+
+        .search-popup-container {
+            width: min(900px, calc(100% - 40px));
+
+            margin: auto;
+        }
+
+
+        .search-popup .form-group {
+            position: relative;
+        }
+
+
+        .search-popup #search-form {
+            height: 55px;
+
+            padding-right: 60px;
+
+            font-size: 16px;
+
+            outline: none;
+
+            box-shadow: none;
+        }
+
+
+        .search-popup #search-form:focus {
+            border-color: #111 !important;
+        }
+
+
+        /* =========================================================
+           BROWSE CATEGORIES
+        ========================================================= */
+
+        .search-popup .cat-list {
+            list-style: none;
+
+            padding: 0;
+
+            margin: 15px 0 0;
+        }
+
+
+        .search-popup .cat-list-item {
+            border-bottom: 1px solid #eee;
+        }
+
+
+        .search-popup .cat-list-item a {
+            display: block;
+
+            padding: 10px 0;
+
+            color: #222;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            letter-spacing: 1px;
+
+            transition: .3s;
+        }
+
+
+        .search-popup .cat-list-item a:hover {
+            color: #888;
+
+            padding-left: 5px;
+        }
+
+
+        .search-popup .cat-list-title {
+            margin-top: 30px;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            color: #888;
+        }
+
+
+        /* =========================================================
+           LIVE SEARCH RESULTS
+        ========================================================= */
+
+        #frontendSearchResults {
+            display: none;
+
+            margin-top: 15px;
+
+            max-height: 430px;
+
+            overflow-y: auto;
+        }
+
+
+        .search-suggestion-title {
+            padding: 12px 0;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            color: #888;
+        }
+
+
+        .search-suggestion {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            width: 100%;
+
+            padding: 12px 5px;
+
+            border-bottom: 1px solid #eee;
+
+            text-decoration: none;
+
+            color: #111;
+
+            transition: all .2s ease;
+        }
+
+
+        .search-suggestion:hover {
+            background: #fafafa;
+
+            padding-left: 10px;
+        }
+
+
+        .search-suggestion-image {
+            width: 55px;
+            height: 55px;
+
+            object-fit: cover;
+
+            flex-shrink: 0;
+
+            border-radius: 4px;
+
+            background: #f5f5f5;
+        }
+
+
+        .search-suggestion-image.no-image {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #888;
+
+            font-size: 18px;
+        }
+
+
+        .search-suggestion-info {
+            flex: 1;
+        }
+
+
+        .search-suggestion-name {
+            font-size: 14px;
+
+            font-weight: 500;
+
+            color: #111;
+        }
+
+
+        .search-suggestion-type {
+            margin-top: 3px;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            color: #999;
+        }
+
+
+        .search-suggestion-price {
+            margin-top: 4px;
+
+            font-size: 12px;
+
+            color: #777;
+        }
+
+
+        .search-arrow {
+            margin-right: 10px;
+
+            color: #aaa;
+        }
+
+
+        .search-no-results {
+            padding: 35px 10px;
+
+            text-align: center;
+
+            color: #888;
+
+            font-size: 14px;
+        }
+
+
+        .search-no-results i {
+            display: block;
+
+            margin-bottom: 10px;
+
+            font-size: 24px;
+        }
+
+
+        /* =========================================================
            HERO
-        ========================= */
+        ========================================================= */
 
         .products-hero {
             text-align: center;
+
             padding-top: 55px;
+
             margin-bottom: 50px;
         }
 
 
         .products-hero small {
             display: block;
+
             font-size: 33px;
+
             letter-spacing: 3px;
+
             text-transform: uppercase;
+
             color: #111;
         }
 
 
         .products-hero p {
             max-width: 650px;
+
             margin: 15px auto 0;
+
             color: #777;
+
             font-size: 14px;
+
             line-height: 1.8;
         }
 
 
-        /* =========================
+        /* =========================================================
            PRODUCTS TOP
-        ========================= */
+        ========================================================= */
 
         .products-top {
             margin-bottom: 30px;
@@ -443,18 +525,22 @@
 
         .products-count {
             font-size: 14px;
+
             color: #777;
+
             letter-spacing: 1px;
         }
 
 
-        /* =========================
+        /* =========================================================
            PRODUCT CARD
-        ========================= */
+        ========================================================= */
 
         .product-card {
             height: 100%;
+
             background: #fff;
+
             transition: transform .3s ease;
         }
 
@@ -464,22 +550,28 @@
         }
 
 
-        /* =========================
-           IMAGE
-        ========================= */
+        /* =========================================================
+           PRODUCT IMAGE
+        ========================================================= */
 
         .product-image-wrapper {
             position: relative;
+
             overflow: hidden;
+
             background: #f4f4f4;
         }
 
 
         .product-image-wrapper img {
             width: 100%;
+
             height: 430px;
+
             object-fit: cover;
+
             display: block;
+
             transition: transform .6s ease;
         }
 
@@ -489,12 +581,13 @@
         }
 
 
-        /* =========================
+        /* =========================================================
            WISHLIST
-        ========================= */
+        ========================================================= */
 
         .wishlist-btn {
             position: absolute;
+
             top: 18px;
             right: 18px;
 
@@ -502,15 +595,18 @@
             height: 44px;
 
             border: none;
+
             border-radius: 50%;
 
-            background: rgba(255,255,255,.95);
+            background: rgba(255, 255, 255, .95);
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
             color: #111;
+
             font-size: 18px;
 
             z-index: 5;
@@ -521,13 +617,14 @@
 
         .wishlist-btn:hover {
             background: #111;
+
             color: #fff;
         }
 
 
-        /* =========================
+        /* =========================================================
            PRODUCT DETAILS
-        ========================= */
+        ========================================================= */
 
         .product-details {
             padding: 20px 2px 40px;
@@ -536,14 +633,15 @@
 
         .product-name {
             color: #111;
+
             text-decoration: none;
 
-        
-
             font-size: 24px;
+
             line-height: 1.15;
 
             letter-spacing: 1px;
+
             text-transform: uppercase;
 
             font-weight: 500;
@@ -563,27 +661,35 @@
 
         .product-description {
             font-size: 14px;
+
             line-height: 1.8;
+
             color: #777;
+
             margin-bottom: 15px;
         }
 
 
-        /* =========================
+        /* =========================================================
            PRICE
-        ========================= */
+        ========================================================= */
 
         .product-price {
             font-size: 15px;
+
             letter-spacing: 1px;
+
             color: #111;
+
             margin-bottom: 18px;
         }
 
 
         .old-price {
             color: #999;
+
             text-decoration: line-through;
+
             margin-right: 8px;
         }
 
@@ -593,14 +699,15 @@
         }
 
 
-        /* =========================
+        /* =========================================================
            VIEW PRODUCT
-        ========================= */
+        ========================================================= */
 
         .view-product-btn {
             display: inline-block;
 
             color: #111;
+
             text-decoration: none;
 
             border-bottom: 1px solid #111;
@@ -619,39 +726,47 @@
 
         .view-product-btn:hover {
             color: #777;
+
             border-color: #777;
         }
 
 
-        /* =========================
+        /* =========================================================
            FOOTER
-        ========================= */
+        ========================================================= */
 
         .footer {
             margin-top: 80px;
+
             background: #111;
+
             color: white;
+
             padding: 55px 0;
         }
 
 
         .footer-brand {
             font-family: 'Cormorant Garamond', serif;
+
             font-size: 34px;
+
             font-weight: 600;
+
             letter-spacing: 4px;
         }
 
 
         .footer p {
             color: #aaa;
+
             font-size: 14px;
         }
 
 
-        /* =========================
-           RESPONSIVE
-        ========================= */
+        /* =========================================================
+           TABLET
+        ========================================================= */
 
         @media (max-width: 991px) {
 
@@ -667,10 +782,59 @@
         }
 
 
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
         @media (max-width: 767px) {
+
+            body {
+                padding-top: 70px;
+            }
+
 
             .main-navbar {
                 height: 70px;
+            }
+
+
+            .main-navbar.scrolled {
+                top: 10px;
+
+                left: 12px;
+                right: 12px;
+
+                width: auto;
+
+                height: 64px;
+
+                border-radius: 20px;
+            }
+
+
+            /* Search popup at normal mobile position */
+
+            .search-popup {
+                top: 70px;
+
+                padding: 25px 0 30px;
+            }
+
+
+            /* Search popup follows mobile floating navbar */
+
+            body.navbar-scrolled .search-popup {
+                top: 84px;
+
+                left: 12px;
+                right: 12px;
+
+                border-radius: 0 0 20px 20px;
+            }
+
+
+            .search-popup-container {
+                width: calc(100% - 30px);
             }
 
 
@@ -681,6 +845,7 @@
 
             .products-hero {
                 padding-top: 35px;
+
                 margin-bottom: 35px;
             }
 
@@ -709,9 +874,9 @@
 <body>
 
 
-{{-- =========================
+{{-- =========================================================
      NAVBAR
-========================= --}}
+========================================================= --}}
 
 <nav class="main-navbar">
 
@@ -734,6 +899,9 @@
 
             <ul class="nav-links">
 
+
+                {{-- HOME --}}
+
                 <li>
                     <a href="{{ url('/') }}">
                         Home
@@ -741,106 +909,274 @@
                 </li>
 
 
-                <li>
-                    <a href="{{ route('signatures') }}">
+                {{-- SHOP --}}
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="dropdownShop"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
                         Shop
                     </a>
+
+
+                    <ul
+                        class="dropdown-menu list-unstyled"
+                        aria-labelledby="dropdownShop"
+                    >
+
+                        @foreach($categories as $category)
+
+                            <li class="dropdown-submenu">
+
+                                <a
+                                    href="{{ route('category.show', $category->slug) }}"
+                                    class="dropdown-item item-anchor d-flex justify-content-between align-items-center"
+                                >
+
+                                    {{ $category->name }}
+
+                                    @if($category->subCategories && $category->subCategories->count() > 0)
+
+                                        <span class="submenu-arrow">
+                                            ›
+                                        </span>
+
+                                    @endif
+
+                                </a>
+
+
+                                @if($category->subCategories && $category->subCategories->count() > 0)
+
+                                    <ul class="dropdown-menu list-unstyled">
+
+                                        @foreach($category->subCategories as $subcategory)
+
+                                            <li>
+
+                                                <a
+                                                    href="{{ route('subcategory.show', $subcategory->slug) }}"
+                                                    class="dropdown-item item-anchor"
+                                                >
+                                                    {{ $subcategory->name }}
+                                                </a>
+
+                                            </li>
+
+                                        @endforeach
+
+                                    </ul>
+
+                                @endif
+
+                            </li>
+
+                        @endforeach
+
+                    </ul>
+
                 </li>
 
 
-                <li>
-                    <a href="{{ url('/collections') }}">
-                        Collections
+                {{-- PAGES --}}
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="dropdownPages"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        Pages
                     </a>
+
+
+                    <ul
+                        class="dropdown-menu list-unstyled"
+                        aria-labelledby="dropdownPages"
+                    >
+
+                        <li>
+                            <a
+                                href="{{ route('cart.show') }}"
+                                class="dropdown-item item-anchor"
+                            >
+                                Cart
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a
+                                href="{{ route('contact') }}"
+                                class="dropdown-item item-anchor"
+                            >
+                                Contact
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a
+                                href="index.html"
+                                class="dropdown-item item-anchor"
+                            >
+                                FAQs
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a
+                                href="{{ route('blogs') }}"
+                                class="dropdown-item item-anchor"
+                            >
+                                Blog
+                            </a>
+                        </li>
+
+                    </ul>
+
                 </li>
 
 
-                <li>
-                    <a href="{{ route('blogs') }}">
-                        Blog
+                {{-- PRODUCTS --}}
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{{ route('user.products') }}"
+                    >
+                        PRODUCTS
                     </a>
+
                 </li>
 
 
-                <li>
-                    <a href="{{ route('contact') }}">
-                        Contact
+                {{-- COLLECTIONS --}}
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="{{ route('user.collections') }}"
+                    >
+                        COLLECTIONS
                     </a>
+
                 </li>
+
 
             </ul>
 
 
-            {{-- ICONS --}}
+            {{-- =================================================
+                 ICONS
+            ================================================= --}}
 
-          <div class="nav-icons">
+            <div class="nav-icons">
 
-    <a
-        href="#"
-        class="search-toggle"
-        aria-label="Open search"
-    >
-        <i class="bi bi-search"></i>
-    </a>
-    
-<a 
-    href="{{ route('newsletter.index') }}" 
-    aria-label="Newsletter & Suggestions"
-    title="Newsletter & Suggestions"
->
-    <i class="bi bi-person"></i>
-</a>
 
-    
+                {{-- SEARCH --}}
 
-    <a
-        href="{{ route('cart.show') }}"
-        aria-label="Cart"
-    >
-        <i class="bi bi-bag"></i>
+                <a
+                    href="#"
+                    class="search-toggle"
+                    aria-label="Open search"
+                >
 
-        @php
-            $cartCount = collect(session('cart', []))
-                ->sum('quantity');
-        @endphp
+                    <i class="bi bi-search"></i>
 
-        @if($cartCount > 0)
-            <span
-                style="
-                    position:absolute;
-                    top:-8px;
-                    right:-10px;
-                    background:#111;
-                    color:#fff;
-                    width:18px;
-                    height:18px;
-                    border-radius:50%;
-                    font-size:9px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                "
-            >
-                {{ $cartCount }}
-            </span>
-        @endif
+                </a>
 
-    </a>
 
-</div>
+                {{-- PROFILE / NEWSLETTER --}}
+
+                <a
+                    href="{{ route('newsletter.index') }}"
+                    aria-label="Newsletter & Suggestions"
+                    title="Newsletter & Suggestions"
+                >
+
+                    <i class="bi bi-person"></i>
+
+                </a>
+
+
+                {{-- CART --}}
+
+                <a
+                    href="{{ route('cart.show') }}"
+                    aria-label="Cart"
+                >
+
+                    <i class="bi bi-bag"></i>
+
+
+                    @php
+
+                        $cartCount = collect(session('cart', []))
+                            ->sum('quantity');
+
+                    @endphp
+
+
+                    @if($cartCount > 0)
+
+                        <span
+                            style="
+                                position:absolute;
+                                top:-8px;
+                                right:-10px;
+                                background:#111;
+                                color:#fff;
+                                width:18px;
+                                height:18px;
+                                border-radius:50%;
+                                font-size:9px;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                            "
+                        >
+                            {{ $cartCount }}
+                        </span>
+
+                    @endif
+
+                </a>
+
+
+            </div>
 
         </div>
 
     </div>
 
 </nav>
-{{-- =========================
+
+
+
+{{-- =========================================================
      SEARCH POPUP
-========================= --}}
+========================================================= --}}
 
 <div class="search-popup">
 
     <div class="search-popup-container">
+
+
+        {{-- SEARCH FORM --}}
 
         <form
             role="search"
@@ -859,12 +1195,15 @@
                 name="search"
             >
 
+
             <button
                 type="submit"
                 class="search-submit border-0 position-absolute bg-white"
                 style="top:15px;right:15px;"
             >
+
                 <i class="bi bi-search"></i>
+
             </button>
 
         </form>
@@ -883,11 +1222,16 @@
 
         <div id="browseCategories">
 
+
             <h5 class="cat-list-title">
                 Browse Categories
             </h5>
 
+
             <ul class="cat-list">
+
+
+                {{-- ALL PRODUCTS --}}
 
                 <li class="cat-list-item">
 
@@ -898,6 +1242,8 @@
                 </li>
 
 
+                {{-- COLLECTIONS --}}
+
                 <li class="cat-list-item">
 
                     <a href="{{ route('user.collections') }}">
@@ -906,6 +1252,8 @@
 
                 </li>
 
+
+                {{-- CATEGORIES --}}
 
                 @foreach(
                     \App\Models\Category::where('status', 1)
@@ -926,6 +1274,7 @@
 
                 @endforeach
 
+
             </ul>
 
         </div>
@@ -935,9 +1284,10 @@
 </div>
 
 
-{{-- =========================
+
+{{-- =========================================================
      HERO
-========================= --}}
+========================================================= --}}
 
 <section class="products-hero">
 
@@ -956,9 +1306,9 @@
 
 
 
-{{-- =========================
+{{-- =========================================================
      PRODUCTS
-========================= --}}
+========================================================= --}}
 
 <section class="container pb-5">
 
@@ -1042,6 +1392,8 @@
                         </a>
 
 
+                        {{-- DESCRIPTION --}}
+
                         @if($signature->description)
 
                             <p class="product-description">
@@ -1063,14 +1415,16 @@
 
                                 <span class="old-price">
 
-                                    Rs. {{ number_format($signature->price, 2) }}
+                                    Rs.
+                                    {{ number_format($signature->price, 2) }}
 
                                 </span>
 
 
                                 <span class="sale-price">
 
-                                    Rs. {{ number_format($signature->discount_price, 2) }}
+                                    Rs.
+                                    {{ number_format($signature->discount_price, 2) }}
 
                                 </span>
 
@@ -1078,7 +1432,8 @@
 
                                 <span class="sale-price">
 
-                                    Rs. {{ number_format($signature->price, 2) }}
+                                    Rs.
+                                    {{ number_format($signature->price, 2) }}
 
                                 </span>
 
@@ -1115,6 +1470,8 @@
         @empty
 
 
+            {{-- EMPTY STATE --}}
+
             <div class="col-12">
 
 
@@ -1128,16 +1485,12 @@
 
 
                     <h3 class="mt-4">
-
                         No Products Found
-
                     </h3>
 
 
                     <p class="text-muted">
-
                         There are currently no products available.
-
                     </p>
 
 
@@ -1155,9 +1508,9 @@
 
 
 
-{{-- =========================
+{{-- =========================================================
      FOOTER
-========================= --}}
+========================================================= --}}
 
 <footer class="footer">
 
@@ -1207,30 +1560,97 @@
 
 
 
+{{-- =========================================================
+     BOOTSTRAP JS
+========================================================= --}}
+
 <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-</script>
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+
+{{-- =========================================================
+     NAVBAR + SEARCH JS
+========================================================= --}}
 
 <script>
+
 document.addEventListener('DOMContentLoaded', function () {
+
+
+    /* =========================================================
+       NAVBAR SCROLL
+    ========================================================= */
+
+    const navbar = document.querySelector('.main-navbar');
+
+
+    if (navbar) {
+
+        function handleNavbarScroll() {
+
+            if (window.scrollY > 40) {
+
+                navbar.classList.add('scrolled');
+
+                document.body.classList.add('navbar-scrolled');
+
+            } else {
+
+                navbar.classList.remove('scrolled');
+
+                document.body.classList.remove('navbar-scrolled');
+
+            }
+
+        }
+
+
+        /* Run immediately */
+
+        handleNavbarScroll();
+
+
+        /* Run on scroll */
+
+        window.addEventListener(
+            'scroll',
+            handleNavbarScroll,
+            { passive: true }
+        );
+
+    }
+
+
+
+    /* =========================================================
+       SEARCH ELEMENTS
+    ========================================================= */
 
     const searchToggle =
         document.querySelector('.search-toggle');
 
+
     const searchPopup =
         document.querySelector('.search-popup');
+
 
     const searchForm =
         document.getElementById('frontendSearchForm');
 
+
     const searchInput =
         document.getElementById('search-form');
+
 
     const searchResults =
         document.getElementById('frontendSearchResults');
 
+
     const browseCategories =
         document.getElementById('browseCategories');
+
 
 
     if (
@@ -1239,313 +1659,420 @@ document.addEventListener('DOMContentLoaded', function () {
         !searchInput ||
         !searchResults
     ) {
+
         return;
+
     }
+
 
 
     let searchTimeout = null;
 
 
-    /* =========================
+
+    /* =========================================================
        OPEN / CLOSE SEARCH
-    ========================= */
+    ========================================================= */
 
-    searchToggle.addEventListener('click', function (e) {
+    searchToggle.addEventListener(
+        'click',
+        function (e) {
 
-        e.preventDefault();
-
-        searchPopup.classList.toggle('is-visible');
-
-
-        if (searchPopup.classList.contains('is-visible')) {
-
-            setTimeout(function () {
-
-                searchInput.focus();
-
-            }, 100);
-
-        } else {
-
-            searchInput.value = '';
-
-            searchResults.innerHTML = '';
-
-            searchResults.style.display = 'none';
-
-            if (browseCategories) {
-                browseCategories.style.display = 'block';
-            }
-
-        }
-
-    });
+            e.preventDefault();
 
 
-    /* =========================
-       LIVE SEARCH
-    ========================= */
-
-    searchInput.addEventListener('input', function () {
-
-        const keyword =
-            this.value.trim();
-
-        clearTimeout(searchTimeout);
+            searchPopup.classList.toggle(
+                'is-visible'
+            );
 
 
-        /* Empty */
+            if (
+                searchPopup.classList.contains(
+                    'is-visible'
+                )
+            ) {
 
-        if (keyword === '') {
+                setTimeout(
+                    function () {
 
-            searchResults.innerHTML = '';
+                        searchInput.focus();
 
-            searchResults.style.display = 'none';
+                    },
+                    100
+                );
 
-            if (browseCategories) {
-                browseCategories.style.display = 'block';
-            }
+            } else {
 
-            return;
-        }
-
-
-        /* Hide categories */
-
-        if (browseCategories) {
-            browseCategories.style.display = 'none';
-        }
-
-
-        /* Delay request */
-
-        searchTimeout = setTimeout(function () {
-
-            fetch(
-                "{{ route('frontend.search') }}?search=" +
-                encodeURIComponent(keyword),
-                {
-                    method: 'GET',
-
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                }
-            )
-            .then(function (response) {
-
-                if (!response.ok) {
-                    throw new Error('Search failed');
-                }
-
-                return response.json();
-
-            })
-            .then(function (results) {
+                searchInput.value = '';
 
                 searchResults.innerHTML = '';
 
+                searchResults.style.display = 'none';
 
-                /* =========================
-                   NO RESULTS
-                ========================= */
 
-                if (!results.length) {
+                if (browseCategories) {
 
-                    searchResults.innerHTML = `
+                    browseCategories.style.display =
+                        'block';
 
-                        <div class="search-no-results">
-
-                            <i class="bi bi-search"></i>
-
-                            <div>
-                                No results found for
-                                "<strong>${escapeHtml(keyword)}</strong>"
-                            </div>
-
-                        </div>
-
-                    `;
-
-                    searchResults.style.display = 'block';
-
-                    return;
                 }
 
+            }
 
-                /* =========================
-                   TITLE
-                ========================= */
-
-                const title =
-                    document.createElement('div');
-
-                title.className =
-                    'search-suggestion-title';
-
-                title.innerHTML = `
-                    Related results for
-                    "<strong>${escapeHtml(keyword)}</strong>"
-                `;
-
-                searchResults.appendChild(title);
+        }
+    );
 
 
-                /* =========================
-                   RESULTS
-                ========================= */
 
-                results.forEach(function (item) {
+    /* =========================================================
+       LIVE SEARCH
+    ========================================================= */
 
-                    const result =
-                        document.createElement('a');
-
-                    result.href =
-                        item.url;
-
-                    result.className =
-                        'search-suggestion';
+    searchInput.addEventListener(
+        'input',
+        function () {
 
 
-                    /* IMAGE */
-
-                    let image = '';
-
-
-                    if (item.image) {
-
-                        image = `
-
-                            <img
-                                src="${escapeAttribute(item.image)}"
-                                alt="${escapeAttribute(item.name)}"
-                                class="search-suggestion-image"
-                            >
-
-                        `;
-
-                    } else {
-
-                        image = `
-
-                            <div
-                                class="search-suggestion-image no-image"
-                            >
-
-                                <i class="bi bi-grid"></i>
-
-                            </div>
-
-                        `;
-                    }
+            const keyword =
+                this.value.trim();
 
 
-                    /* PRICE */
-
-                    let price = '';
+            clearTimeout(searchTimeout);
 
 
-                    if (
-                        item.price !== null &&
-                        item.price !== undefined &&
-                        item.price !== ''
-                    ) {
 
-                        const number =
-                            Number(item.price);
+            /* -------------------------------------------------
+               EMPTY SEARCH
+            ------------------------------------------------- */
+
+            if (keyword === '') {
+
+                searchResults.innerHTML = '';
+
+                searchResults.style.display = 'none';
 
 
-                        if (!Number.isNaN(number)) {
+                if (browseCategories) {
 
-                            price = `
+                    browseCategories.style.display =
+                        'block';
 
-                                <div class="search-suggestion-price">
+                }
 
-                                    Rs.
-                                    ${number.toLocaleString(
-                                        'en-PK',
-                                        {
-                                            minimumFractionDigits: 2,
-                                            maximumFractionDigits: 2
+                return;
+
+            }
+
+
+
+            /* -------------------------------------------------
+               HIDE DEFAULT CATEGORIES
+            ------------------------------------------------- */
+
+            if (browseCategories) {
+
+                browseCategories.style.display =
+                    'none';
+
+            }
+
+
+
+            /* -------------------------------------------------
+               DELAY REQUEST
+            ------------------------------------------------- */
+
+            searchTimeout = setTimeout(
+                function () {
+
+
+                    fetch(
+                        "{{ route('frontend.search') }}?search=" +
+                        encodeURIComponent(keyword),
+                        {
+                            method: 'GET',
+
+                            headers: {
+                                'Accept': 'application/json',
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        }
+                    )
+
+
+                    .then(
+                        function (response) {
+
+                            if (!response.ok) {
+
+                                throw new Error(
+                                    'Search failed'
+                                );
+
+                            }
+
+
+                            return response.json();
+
+                        }
+                    )
+
+
+                    .then(
+                        function (results) {
+
+
+                            searchResults.innerHTML = '';
+
+
+
+                            /* ---------------------------------
+                               NO RESULTS
+                            --------------------------------- */
+
+                            if (!results.length) {
+
+                                searchResults.innerHTML = `
+
+                                    <div class="search-no-results">
+
+                                        <i class="bi bi-search"></i>
+
+                                        <div>
+
+                                            No results found for
+
+                                            "<strong>
+                                                ${escapeHtml(keyword)}
+                                            </strong>"
+
+                                        </div>
+
+                                    </div>
+
+                                `;
+
+
+                                searchResults.style.display =
+                                    'block';
+
+
+                                return;
+
+                            }
+
+
+
+                            /* ---------------------------------
+                               RESULT TITLE
+                            --------------------------------- */
+
+                            const title =
+                                document.createElement('div');
+
+
+                            title.className =
+                                'search-suggestion-title';
+
+
+                            title.innerHTML = `
+
+                                Related results for
+
+                                "<strong>
+                                    ${escapeHtml(keyword)}
+                                </strong>"
+
+                            `;
+
+
+                            searchResults.appendChild(title);
+
+
+
+                            /* ---------------------------------
+                               RESULTS
+                            --------------------------------- */
+
+                            results.forEach(
+                                function (item) {
+
+
+                                    const result =
+                                        document.createElement('a');
+
+
+                                    result.href =
+                                        item.url;
+
+
+                                    result.className =
+                                        'search-suggestion';
+
+
+
+                                    /* IMAGE */
+
+                                    let image = '';
+
+
+                                    if (item.image) {
+
+                                        image = `
+
+                                            <img
+                                                src="${escapeAttribute(item.image)}"
+                                                alt="${escapeAttribute(item.name)}"
+                                                class="search-suggestion-image"
+                                            >
+
+                                        `;
+
+                                    } else {
+
+                                        image = `
+
+                                            <div
+                                                class="search-suggestion-image no-image"
+                                            >
+
+                                                <i class="bi bi-grid"></i>
+
+                                            </div>
+
+                                        `;
+
+                                    }
+
+
+
+                                    /* PRICE */
+
+                                    let price = '';
+
+
+                                    if (
+                                        item.price !== null &&
+                                        item.price !== undefined &&
+                                        item.price !== ''
+                                    ) {
+
+
+                                        const number =
+                                            Number(item.price);
+
+
+                                        if (!Number.isNaN(number)) {
+
+                                            price = `
+
+                                                <div class="search-suggestion-price">
+
+                                                    Rs.
+
+                                                    ${number.toLocaleString(
+                                                        'en-PK',
+                                                        {
+                                                            minimumFractionDigits: 2,
+                                                            maximumFractionDigits: 2
+                                                        }
+                                                    )}
+
+                                                </div>
+
+                                            `;
+
                                         }
-                                    )}
+
+                                    }
+
+
+
+                                    /* RESULT HTML */
+
+                                    result.innerHTML = `
+
+                                        ${image}
+
+                                        <div class="search-suggestion-info">
+
+                                            <div class="search-suggestion-name">
+
+                                                ${escapeHtml(item.name)}
+
+                                            </div>
+
+                                            <div class="search-suggestion-type">
+
+                                                ${escapeHtml(item.type)}
+
+                                            </div>
+
+                                            ${price}
+
+                                        </div>
+
+                                        <i class="
+                                            bi bi-arrow-right
+                                            search-arrow
+                                        "></i>
+
+                                    `;
+
+
+                                    searchResults.appendChild(result);
+
+                                }
+                            );
+
+
+
+                            searchResults.style.display =
+                                'block';
+
+                        }
+                    )
+
+
+                    .catch(
+                        function (error) {
+
+
+                            console.error(error);
+
+
+                            searchResults.innerHTML = `
+
+                                <div class="search-no-results">
+
+                                    <i class="bi bi-exclamation-circle"></i>
+
+                                    Search could not be completed.
 
                                 </div>
 
                             `;
+
+
+                            searchResults.style.display =
+                                'block';
+
                         }
-                    }
+                    );
 
 
-                    result.innerHTML = `
+                },
+                250
+            );
 
-                        ${image}
-
-                        <div class="search-suggestion-info">
-
-                            <div class="search-suggestion-name">
-
-                                ${escapeHtml(item.name)}
-
-                            </div>
-
-                            <div class="search-suggestion-type">
-
-                                ${escapeHtml(item.type)}
-
-                            </div>
-
-                            ${price}
-
-                        </div>
-
-                        <i class="
-                            bi bi-arrow-right
-                            search-arrow
-                        "></i>
-
-                    `;
+        }
+    );
 
 
-                    searchResults.appendChild(result);
 
-                });
-
-
-                searchResults.style.display =
-                    'block';
-
-            })
-            .catch(function (error) {
-
-                console.error(error);
-
-                searchResults.innerHTML = `
-
-                    <div class="search-no-results">
-
-                        <i class="bi bi-exclamation-circle"></i>
-
-                        Search could not be completed.
-
-                    </div>
-
-                `;
-
-                searchResults.style.display =
-                    'block';
-
-            });
-
-        }, 250);
-
-    });
-
-
-    /* =========================
+    /* =========================================================
        ENTER SEARCH
-    ========================= */
+    ========================================================= */
 
     if (searchForm) {
 
@@ -1553,14 +2080,18 @@ document.addEventListener('DOMContentLoaded', function () {
             'submit',
             function (e) {
 
+
                 e.preventDefault();
+
 
                 const keyword =
                     searchInput.value.trim();
 
 
                 if (!keyword) {
+
                     return;
+
                 }
 
 
@@ -1575,21 +2106,30 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    /* =========================
+
+    /* =========================================================
        ESCAPE HTML
-    ========================= */
+    ========================================================= */
 
     function escapeHtml(value) {
 
         const div =
             document.createElement('div');
 
+
         div.textContent =
             value ?? '';
 
+
         return div.innerHTML;
+
     }
 
+
+
+    /* =========================================================
+       ESCAPE ATTRIBUTE
+    ========================================================= */
 
     function escapeAttribute(value) {
 
@@ -1598,10 +2138,14 @@ document.addEventListener('DOMContentLoaded', function () {
             .replace(/"/g, '&quot;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
+
     }
 
 });
+
 </script>
+
+
 </body>
 
 </html>

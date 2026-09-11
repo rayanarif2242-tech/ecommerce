@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Signature;
 use App\Models\SubCategory;
 use App\Models\Collection;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -47,12 +48,6 @@ class CartController extends Controller
 
         $id = 'product_' . $product->product_id;
 
-        /*
-        |--------------------------------------------------------------------------
-        | Check Existing Cart Quantity
-        |--------------------------------------------------------------------------
-        */
-
         $existingQuantity = isset($cart[$id])
             ? (int) $cart[$id]['quantity']
             : 0;
@@ -63,12 +58,6 @@ class CartController extends Controller
                 'You can only add up to ' . $product->stock . ' item(s) of this product.'
             );
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Add / Update Session Cart
-        |--------------------------------------------------------------------------
-        */
 
         if (isset($cart[$id])) {
 
@@ -88,20 +77,9 @@ class CartController extends Controller
             ];
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | IMPORTANT:
-        | DO NOT CHANGE DATABASE STOCK HERE
-        |--------------------------------------------------------------------------
-        */
-
+        // IMPORTANT:
+        // Do not change database stock here.
         session()->put('cart', $cart);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Stay On Product Page
-        |--------------------------------------------------------------------------
-        */
 
         return back()->with(
             'success',
@@ -148,12 +126,6 @@ class CartController extends Controller
 
         $id = 'signature_' . $signature->signature_id;
 
-        /*
-        |--------------------------------------------------------------------------
-        | Check Existing Cart Quantity
-        |--------------------------------------------------------------------------
-        */
-
         $existingQuantity = isset($cart[$id])
             ? (int) $cart[$id]['quantity']
             : 0;
@@ -164,12 +136,6 @@ class CartController extends Controller
                 'You can only add up to ' . $signature->stock . ' item(s) of this signature.'
             );
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Add / Update Session Cart
-        |--------------------------------------------------------------------------
-        */
 
         if (isset($cart[$id])) {
 
@@ -187,12 +153,7 @@ class CartController extends Controller
             ];
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | DO NOT CHANGE DATABASE STOCK
-        |--------------------------------------------------------------------------
-        */
-
+        // Do not change database stock.
         session()->put('cart', $cart);
 
         return back()->with(
@@ -240,12 +201,6 @@ class CartController extends Controller
 
         $id = 'subcategory_' . $subCategory->subcategory_id;
 
-        /*
-        |--------------------------------------------------------------------------
-        | Check Existing Cart Quantity
-        |--------------------------------------------------------------------------
-        */
-
         $existingQuantity = isset($cart[$id])
             ? (int) $cart[$id]['quantity']
             : 0;
@@ -256,12 +211,6 @@ class CartController extends Controller
                 'You can only add up to ' . $subCategory->stock . ' item(s) of this subcategory.'
             );
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Add / Update Session Cart
-        |--------------------------------------------------------------------------
-        */
 
         if (isset($cart[$id])) {
 
@@ -282,12 +231,7 @@ class CartController extends Controller
             ];
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | DO NOT CHANGE DATABASE STOCK
-        |--------------------------------------------------------------------------
-        */
-
+        // Do not change database stock.
         session()->put('cart', $cart);
 
         return back()->with(
@@ -317,12 +261,6 @@ class CartController extends Controller
 
         $quantity = (int) $request->quantity;
 
-        /*
-        |--------------------------------------------------------------------------
-        | Check Collection Stock
-        |--------------------------------------------------------------------------
-        */
-
         if ((int) $collection->stock <= 0) {
             return back()->with(
                 'error',
@@ -341,12 +279,6 @@ class CartController extends Controller
 
         $id = 'collection_' . $collection->collection_id;
 
-        /*
-        |--------------------------------------------------------------------------
-        | Check Existing Cart Quantity
-        |--------------------------------------------------------------------------
-        */
-
         $existingQuantity = isset($cart[$id])
             ? (int) $cart[$id]['quantity']
             : 0;
@@ -357,12 +289,6 @@ class CartController extends Controller
                 'You can only add up to ' . $collection->stock . ' item(s) of this collection.'
             );
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Add / Update Session Cart
-        |--------------------------------------------------------------------------
-        */
 
         if (isset($cart[$id])) {
 
@@ -382,12 +308,7 @@ class CartController extends Controller
             ];
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | DO NOT CHANGE DATABASE STOCK
-        |--------------------------------------------------------------------------
-        */
-
+        // Do not change database stock.
         session()->put('cart', $cart);
 
         return back()->with(
@@ -405,9 +326,36 @@ class CartController extends Controller
 
     public function show()
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Get Cart From Session
+        |--------------------------------------------------------------------------
+        */
+
         $cart = session()->get('cart', []);
 
-        return view('user.cart', compact('cart'));
+        /*
+        |--------------------------------------------------------------------------
+        | Get Categories For Navbar
+        |--------------------------------------------------------------------------
+        |
+        | cart.blade.php uses:
+        |
+        | @foreach($categories as $category)
+        |
+        | Therefore we must send $categories to the view.
+        |
+        */
+
+        $categories = Category::with('subCategories')
+            ->where('status', 1)
+            ->orderBy('sort_order', 'asc')
+            ->get();
+
+        return view(
+            'user.cart',
+            compact('cart', 'categories')
+        );
     }
 
 
@@ -582,9 +530,10 @@ class CartController extends Controller
             }
         }
 
+
         /*
         |--------------------------------------------------------------------------
-        | Increase Session Cart Quantity Only
+        | Increase Session Quantity Only
         |--------------------------------------------------------------------------
         */
 
@@ -621,8 +570,7 @@ class CartController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | IMPORTANT:
-        | No Database Stock Change
+        | Session Only
         |--------------------------------------------------------------------------
         */
 
@@ -645,12 +593,6 @@ class CartController extends Controller
         if (!isset($cart[$id])) {
             return redirect()->route('cart.show');
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Remove From Session Only
-        |--------------------------------------------------------------------------
-        */
 
         unset($cart[$id]);
 

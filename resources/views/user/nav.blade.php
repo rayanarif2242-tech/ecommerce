@@ -87,7 +87,7 @@
    
 
     /* Premium rounded shape */
-    border-radius: 28px;
+    border-radius: 40px;
 
     /* Very subtle border */
     border: 1px solid rgba(0, 0, 0, 0.06);
@@ -111,7 +111,7 @@
 
 .kaira-navbar.scrolled {
 
-    background: rgba(255, 255, 255, 0.68) !important;
+    background: rgba(141, 139, 139, 0.68) !important;
 
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);

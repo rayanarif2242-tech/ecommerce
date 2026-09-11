@@ -444,5 +444,5 @@ Route::get('/varieties/{variety}', [IndexController::class, 'showVariety'])
 Route::get('/stripe/success', [StripeController::class, 'success'])
     ->name('stripe.success');
 
-Route::get('/stripe/cancel', [StripeController::class, 'cancel'])
+Route::get('/stripe/cancel/{order_id}', [StripeController::class, 'cancel'])
     ->name('stripe.cancel');

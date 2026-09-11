@@ -1073,35 +1073,101 @@
                 </li>
 
 
-                <li>
-                    <a href="{{ route('signatures') }}">
-                        Shop
-                    </a>
+              
+                  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle"
+       href="#"
+       id="dropdownShop"
+       data-bs-toggle="dropdown"
+       aria-haspopup="true"
+       aria-expanded="false">
+        Shop
+    </a>
+
+    <ul class="dropdown-menu list-unstyled"
+        aria-labelledby="dropdownShop">
+
+        @foreach($categories as $category)
+
+            <li class="dropdown-submenu">
+
+                <a href="{{ route('category.show', $category->slug) }}"
+                   class="dropdown-item item-anchor d-flex justify-content-between align-items-center">
+
+                    {{ $category->name }}
+
+                    @if($category->subCategories && $category->subCategories->count() > 0)
+                        <span class="submenu-arrow">›</span>
+                    @endif
+
+                </a>
+
+                @if($category->subCategories && $category->subCategories->count() > 0)
+
+                    <ul class="dropdown-menu list-unstyled">
+
+                        @foreach($category->subCategories as $subcategory)
+
+                            <li>
+                                <a href="{{ route('subcategory.show', $subcategory->slug) }}"
+                                   class="dropdown-item item-anchor">
+                                    {{ $subcategory->name }}
+                                </a>
+                            </li>
+
+                        @endforeach
+
+                    </ul>
+
+                @endif
+
+            </li>
+
+        @endforeach
+
+    </ul>
+</li>
+              
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdownPages" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">Pages</a>
+                  <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownPages">
+                    
+                    <li>
+                      <a href="{{ route('cart.show') }}" class="dropdown-item item-anchor">Cart </a>
+                    </li>
+                   
+                   
+                    <li>
+                      <a href="{{ route('contact') }}" class="dropdown-item item-anchor">
+    Contact
+</a>
+                    </li>
+                   
+                    <li>
+                      <a href="index.html" class="dropdown-item item-anchor">FAQs </a>
+                    </li>
+                      <li>
+    <a
+        
+        href="{{ route('blogs') }}"class="dropdown-item item-anchor"
+    >
+        Blog
+    </a>
+</li>
+                   
+                   
+                   
+                  </ul>
+     
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('user.products') }}">PRODUCTS</a>
                 </li>
-
-
-                <li>
-                    <a href="{{ url('/collections') }}">
-                        Collections
-                    </a>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('user.collections') }}">COLLECTIONS</a>
                 </li>
-
-
-                <li>
-                    <a href="{{ route('blogs') }}">
-                        Blog
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="{{ url('/') }}#contact">
-                        Contact
-                    </a>
-                </li>
-
-            </ul>
-
+              </ul>
+            
 
             {{-- ICONS --}}
 
